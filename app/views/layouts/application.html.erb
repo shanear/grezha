@@ -10,11 +10,30 @@
 <body>
 
 <header class="clearfix">
-<%= link_to "Daughters of Bulgaria", root_path, :class => "title" %>
-<div class="login-info">
-  Not Logged In
-</div>
+  <%= link_to "Daughters of Bulgaria", root_path, :class => "title" %>
+
+  <div class="login-info">
+    <% if logged_in? %>
+      <%= current_user.name %> | <%= link_to "Logout", logout_path, method: "delete" %>
+    <% else %>
+      Not Logged In
+    <% end %>
+  </div>
 </header>
+
+<div id="flash">
+  <% if flash[:alert] %>
+    <div class="alert">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+</div>
 
 <div id="content">
   <%= yield %>

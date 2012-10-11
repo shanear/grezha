@@ -34,6 +34,21 @@ header {
   }
 }
 
+div#flash {
+  width: 800px;
+  margin: 0 auto 10px auto;
+  text-align: center;
+  font-weight: bold;
+
+  .alert {
+    color: $bulgarian-red;
+  }
+
+  .notice {
+    color: $bulgarian-green;
+  }
+}
+
 div#content {
   width: 800px;
   margin: auto;
