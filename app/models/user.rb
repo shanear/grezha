@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  SALT_SPICE = ENV['SALT_SPICE']
+
   attr_accessor :password
   attr_accessible :email, :name, :password
 
@@ -25,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   def encrypt_password
-    self.salt = Digest::SHA2.hexdigest("#{Time.now.utc}--rolltide")
+    self.salt = Digest::SHA2.hexdigest("#{Time.now.utc}--#{SALT_SPICE}")
     self.encrypted_password = encrypt(password)
   end
 
