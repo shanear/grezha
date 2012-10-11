@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<div class="contact-profile">
+  <div class="options">
+    <%= link_to 'Edit', edit_contact_path(@contact) %> |
+    <%= link_to 'Back', contacts_path %>
+  </div>
+  <div class="picture">
+    <%= contact_picture_tag(@contact) %>
+  </div>
+  <div class="basic-info" style="width:580px; float:right;">
+    <h1><%= @contact.name %></h1>
+    <p><b>Birthday:</b> <%= @contact.birthday.to_formatted_s(:birthday) %></p>
+    <%= format_long_text(@contact.bio) %>
+  </div>
+</div>
+
+

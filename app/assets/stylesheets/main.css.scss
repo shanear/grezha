@@ -1,0 +1,45 @@
+$bulgarian-green: #00966E;
+$bulgarian-red: #D62612;
+$dark-grey: #333;
+
+body {
+ font-family: 'Droid Sans', sans-serif;
+ color: $dark-grey;
+ font-size: 14px;
+
+ a {
+   color: $dark-grey;
+ }
+}
+
+header {
+  width: 800px;
+  padding: 5px;
+  margin: 0 auto 10px auto;
+  color: $bulgarian-red;
+  border-bottom: 2px solid $bulgarian-red;
+  line-height: 20px;
+  vertical-align: center;
+
+  a.title {
+    font-size: 20px;
+    color: $bulgarian-green;
+    font-family: 'Pacifico', sans-serif;
+    float: left;
+    text-decoration: none;
+  }
+
+  .login-info {
+    float: right;
+  }
+}
+
+div#content {
+  width: 800px;
+  margin: auto;
+
+  h1 {
+    padding: 10px 0;
+    font-size: 22px;
+  }
+}

@@ -1,0 +1,12 @@
+<% @contacts.each do |contact| %>
+  <a href="<%= contact_path(contact) %>" class="contact-row clearfix">
+    <div class="picture">
+      <%= contact_picture_tag(contact, :thumb) %>
+    </div>
+    <div class="name">
+      <%= contact.name %>
+    </div>
+  </a>
+<% end %>
+<br/><br/>
+<%= link_to 'Add Contact', new_contact_path %>

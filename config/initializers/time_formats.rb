@@ -1,0 +1,1 @@
+Date::DATE_FORMATS[:birthday] = "%B %e"
