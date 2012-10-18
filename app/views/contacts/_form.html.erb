@@ -12,21 +12,43 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
-    <%= f.label :bio %><br />
+    <%= f.label :city, "From City" %>
+    <%= f.text_field :city %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bio %>
     <%= f.text_area :bio %>
   </div>
+
   <div class="field">
-    <%= f.label :birthday %><br />
-    <%= f.date_select :birthday, :order => [:month, :day] %>
+    <%= f.label :last_seen %>
+    <%= f.date_select :last_seen %>
   </div>
+
   <div class="field">
-    <%= f.label :picture %><br />
+    <span id="birthday-fields">
+      <%= f.label :birthday %>
+      <%= f.date_select :birthday, :order => [:month, :day] %>
+    </span>
+
+    <span class="option">
+      <%= f.hidden_field :birthday, :value => nil, :id => "unknown-birthday-field" %>
+      <%= check_box_tag :birthday_unknown, "1", (!@contact.new_record? && !@contact.birthday) %>
+      <%= label_tag :birthday_unknown, "unknown", :class => "sub" %>
+    </span>
+  </div>
+
+  <div class="field">
+    <%= f.label :picture %>
     <%= f.file_field :picture %>
   </div>
+
   <div class="actions">
     <%= f.submit "Save" %> <%= link_to "Cancel", contacts_path %>
   </div>

@@ -34,6 +34,11 @@ header {
   }
 }
 
+h2 {
+  margin: 10px 0;
+  font-size: 24px;
+}
+
 div#flash {
   width: 800px;
   margin: 0 auto 10px auto;
@@ -57,4 +62,8 @@ div#content {
     padding: 10px 0;
     font-size: 22px;
   }
+}
+
+input[type = "checkbox"] {
+  margin: 0;
 }

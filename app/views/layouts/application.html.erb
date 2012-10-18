@@ -6,6 +6,18 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <script>
+    // Run the Javascript associated with this page
+    jQuery(function() {
+      window.App = new (Daughters["<%= params[:controller].titlecase %>"] || Daughters.Base)
+        (<%= @bootstrap_data %>);
+
+      if (typeof App["<%= params[:action] %>"] === 'function') {
+        return App["<%= params[:action] %>"].call();
+      }
+    });
+  </script>
 </head>
 <body>
 
@@ -14,7 +26,7 @@
 
   <div class="login-info">
     <% if logged_in? %>
-      <%= current_user.name %> | <%= link_to "Logout", logout_path, method: "delete" %>
+      <%= current_user.name %> -  <%= link_to "Logout", logout_path, method: "delete" %>
     <% else %>
       Not Logged In
     <% end %>

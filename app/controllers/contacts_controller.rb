@@ -1,18 +1,23 @@
 class ContactsController < ApplicationController
   before_filter :require_logged_in
-  # GET /contacts
-  # GET /contacts.json
+
   def index
-    @contacts = Contact.all
+    @contacts = Contact.scoped
+
+    if(@birthday_month = params[:birthday_month])
+      @contacts = @contacts.with_birthday_month(@birthday_month)
+    else
+      @contacts = @contacts.order('LOWER(name) asc')
+    end
+
+    @contacts = @contacts.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @contacts }
     end
   end
 
-  # GET /contacts/1
-  # GET /contacts/1.json
   def show
     @contact = Contact.find(params[:id])
 
@@ -22,8 +27,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  # GET /contacts/new
-  # GET /contacts/new.json
   def new
     @contact = Contact.new
 
@@ -33,13 +36,10 @@ class ContactsController < ApplicationController
     end
   end
 
-  # GET /contacts/1/edit
   def edit
     @contact = Contact.find(params[:id])
   end
 
-  # POST /contacts
-  # POST /contacts.json
   def create
     @contact = Contact.new(params[:contact])
 
@@ -54,8 +54,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  # PUT /contacts/1
-  # PUT /contacts/1.json
   def update
     @contact = Contact.find(params[:id])
 
@@ -70,8 +68,6 @@ class ContactsController < ApplicationController
     end
   end
 
-  # DELETE /contacts/1
-  # DELETE /contacts/1.json
   def destroy
     @contact = Contact.find(params[:id])
     @contact.destroy

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :length => { :within => 6..40 }
 
   before_save :normalize_email
-  before_save :encrypt_password
+  before_save :encrypt_password, :if => :password
   before_save :generate_remember_token
 
   def has_password?(password)
