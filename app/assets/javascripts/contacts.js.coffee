@@ -36,4 +36,3 @@ class Daughters.Contacts extends Daughters.Base
 
     update_birthday()
     $unknown_birthday.change(update_birthday)
-

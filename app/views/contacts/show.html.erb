@@ -27,11 +27,26 @@
 
   <div class="basic-info">
     <h1><%= format_name(@contact) %></h1>
-    <p><b>From:</b> <%= @contact.city || "Unknown" %></p>
-    <p><b>Birthday:</b> <%= format_birthday(@contact) %></p>
+
+    <% if @contact.city? %>
+      <p><b>From:</b> <%= @contact.city %></p>
+    <% end %>
+
+    <% if @contact.birthday? %>
+      <p><b>Birthday:</b> <%= format_birthday(@contact) %></p>
+    <% end %>
+
     <% if @contact.last_seen %>
       <p><b>Last Seen:</b> <%= @contact.last_seen.to_formatted_s(:long) %></p>
     <% end %>
+
+    <% if @contact.children.any? %>
+      <p>
+        <b>Children:</b>
+        <%= children_list(@contact) %>
+      </p>
+    <% end %>
+
     <%= format_long_text(@contact.bio) %>
   </div>
 </div>

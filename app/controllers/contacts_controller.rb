@@ -29,6 +29,7 @@ class ContactsController < ApplicationController
 
   def new
     @contact = Contact.new
+    5.times { @contact.children.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,6 +39,7 @@ class ContactsController < ApplicationController
 
   def edit
     @contact = Contact.find(params[:id])
+    5.times { @contact.children.build }
   end
 
   def create

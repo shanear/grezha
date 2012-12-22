@@ -49,6 +49,16 @@
     <%= f.file_field :picture %>
   </div>
 
+  <h2>Children</h2>
+  <div class="field child-fields">
+    <%= f.fields_for :children do |child_fields| %>
+      <div>
+        Name: <%= child_fields.text_field :name %>
+        Age: <%= child_fields.text_field :age, size: 10 %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Save" %> <%= link_to "Cancel", contacts_path %>
   </div>
