@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html <%= manifest_tag %> >
 <head>
-  <title>Jeremiah 29:11</title>
+  <title>Jeremiah</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -21,7 +21,7 @@
 <body>
 
 <header class="clearfix">
-  <%= link_to "Jeremiah 29:11", root_path, :class => "title" %>
+  <%= link_to "Jeremiah", root_path, :class => "title" %>
 
   <div class="login-info">
     <% if logged_in? %>
