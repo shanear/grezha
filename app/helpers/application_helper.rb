@@ -9,4 +9,10 @@ module ApplicationHelper
 
     output.gsub(/\n/, "<br/>").html_safe
   end
+
+  def manifest_tag
+    if Rails.env.production?
+      "manifest = '/application.manifest'".html_safe
+    end
+  end
 end

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html manifest="/application.manifest">
+<head>
+  <title>Jeremiah oogh</title>
+  <link href="offline.css" media="all" rel="stylesheet" type="text/css">
+  <%= csrf_meta_tags %>
+</head>
+<body id="offline">
+
+<header>
+  Jeremiah
+</header>
+
+<div id="content">
+  <%= render @contacts %>
+</div>
+
+</body>
+</html>
