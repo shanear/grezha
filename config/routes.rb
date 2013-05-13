@@ -5,6 +5,7 @@ Daughters::Application.routes.draw do
   match "/login", to: "sessions#new"
   match "/logout", to: "sessions#destroy"
 
+  match "/app", to: "offline#app"
   match "/application.manifest", to: "offline#manifest",
     format: :appcache
 
