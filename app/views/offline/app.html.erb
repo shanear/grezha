@@ -7,12 +7,10 @@
   <%= csrf_meta_tags %>
 
   <script>
-    $(function(){
-      new App({el: $("#app")});
-    });
+    $(function() { window.app.start() });
   </script>
 </head>
-<body>
+<body id="app">
 
 <header class="clearfix">
   <%= link_to "Jeremiah", root_path, :class => "title" %>
@@ -26,7 +24,9 @@
   </div>
 </header>
 
-<div id="app">
+<div id="content">
+  <ul id="contacts">
+  </ul>
 </div>
 
 </body>
