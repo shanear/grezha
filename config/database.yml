@@ -1,14 +1,13 @@
 development:
   adapter: postgresql
   database: daughters_development
-  password: passwd
+  username: srussell
   pool: 5
   timeout: 5000
 
 test:
   adapter: postgresql
   username: srussell
-  password: passwd
   database: daughters_test
   pool: 5
   timeout: 5000
@@ -16,6 +15,6 @@ test:
 production:
   adapter: postgresql
   database: daughters_production
-  password: passwd
+  username: srussell
   pool: 5
   timeout: 5000
