@@ -21,12 +21,15 @@ header {
   line-height: 20px;
   vertical-align: center;
 
-  a.title {
-    font-size: 20px;
-    color: $bulgarian-green;
-    font-family: 'AmericanTypewriter-Bold', sans-serif;
+  h1 {
     float: left;
-    text-decoration: none;
+
+    a {
+      font-size: 22px;
+      color: $bulgarian-green;
+      font-family: 'Redressed', sans-serif;
+      text-decoration: none;
+    }
   }
 
   .login-info {
@@ -51,6 +54,28 @@ div#flash {
 
   .notice {
     color: $bulgarian-green;
+  }
+}
+
+nav {
+  float: left;
+  margin-left: 10px;
+
+  ul {
+    display: inline-block;
+
+    li {
+      padding-left: 10px;
+      display: inline;
+
+      a  {
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: $bulgarian-green;
+      }
+    }
   }
 }
 

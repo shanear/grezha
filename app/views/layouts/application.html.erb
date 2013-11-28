@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html <%= manifest_tag %> >
 <head>
-  <title>Jeremiah</title>
+  <title>Grezha</title>
+  <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -21,11 +22,25 @@
 <body>
 
 <header class="clearfix">
-  <%= link_to "Jeremiah", root_path, :class => "title" %>
+  <h1>
+    <%= link_to "Grezha", root_path, :class => "title" %>
+  </h1>
+
+  <nav>
+    <ul>
+      <li>
+        <%= link_to "Contacts", contacts_path %>
+      </li>
+      <li>
+        <%= link_to "Birthdays", 
+                    contacts_path(birthday_month: Date.today.month) %>
+      </li>
+    </ul>
+  </nav>
 
   <div class="login-info">
     <% if logged_in? %>
-      <%= current_user.name %> -  <%= link_to "Logout", logout_path, method: "delete" %>
+      <%= current_user.name %> - <%= link_to "Logout", logout_path, method: "delete" %>
     <% else %>
       Not Logged In
     <% end %>

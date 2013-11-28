@@ -1,13 +1,3 @@
-<div class="sorting-options">
-  Sort By:
-  <span class="option">
-    <%= link_to "Name",  contacts_path %>
-  </span>
-  <span class="option">
-    <%= link_to "Birthday", contacts_path(:birthday_month => Date.today.month) %>
-  </span>
-</div>
-
 <% if @birthday_month %>
   <h2><%= Date::MONTHNAMES[@birthday_month.to_i] %> Birthdays</h2>
 
