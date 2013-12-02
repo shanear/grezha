@@ -5,6 +5,8 @@ Daughters::Application.routes.draw do
   get "/login", to: "sessions#new"
   get "/logout", to: "sessions#destroy"
 
+  get "/app", to: "offline#app"
+
   get "/application.manifest", to: "offline#manifest",
     format: :appcache
 

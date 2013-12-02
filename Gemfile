@@ -16,6 +16,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'ember-rails'
 gem 'jquery-rails'
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
