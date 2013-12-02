@@ -2,10 +2,10 @@ Daughters::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :contacts
 
-  match "/login", to: "sessions#new"
-  match "/logout", to: "sessions#destroy"
+  get "/login", to: "sessions#new"
+  get "/logout", to: "sessions#destroy"
 
-  match "/application.manifest", to: "offline#manifest",
+  get "/application.manifest", to: "offline#manifest",
     format: :appcache
 
   # The priority is based upon order of creation:
