@@ -1,8 +1,6 @@
 class Child < ActiveRecord::Base
   AGE_UNKNOWN_YEAR = 1
 
-  attr_accessible :name, :age
-
   belongs_to :contact
 
   validates_presence_of :name

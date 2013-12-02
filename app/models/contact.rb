@@ -1,6 +1,4 @@
 class Contact < ActiveRecord::Base
-  attr_accessible :bio, :birthday, :name, :picture, :city, :last_seen, :children_attributes
-
   has_many :children
 
   accepts_nested_attributes_for :children, reject_if: ->(a) { a[:name].blank? }

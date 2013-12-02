@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   PEPPER = ENV['SALT_SPICE']
 
   attr_accessor :password
-  attr_accessible :email, :name, :password
 
   # TODO: validate email
   validates :password, :presence => true, :length => { :within => 6..40 }

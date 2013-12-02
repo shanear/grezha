@@ -43,7 +43,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(params[:contact])
+    @contact = Contact.new(contact_params)
 
     respond_to do |format|
       if @contact.save
@@ -60,7 +60,7 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
 
     respond_to do |format|
-      if @contact.update_attributes(params[:contact])
+      if @contact.update_attributes(contact_params)
         format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
         format.json { head :no_content }
       else
@@ -78,5 +78,14 @@ class ContactsController < ApplicationController
       format.html { redirect_to contacts_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def contact_params
+    params.require(:contact).permit(
+      :bio, :birthday, :name, :picture, :city, :last_seen,
+      children_attributes: [:name, :age]
+    )
   end
 end
