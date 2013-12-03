@@ -97,3 +97,67 @@ div#content {
 input[type = "checkbox"] {
   margin: 0;
 }
+
+div#ember-app {
+  #content {
+    width: 560px;
+    float: right;
+  }
+
+  #sidebar {
+    width: 240px;
+    float: left;
+    background-color: lighten($bulgarian-green, 65);
+    border-radius: 10px;
+  }
+
+  .contact-panel {
+    padding: 0 10px;
+
+    p {
+      margin-top: 5px;
+    }
+
+    .info {
+      width: 360px;
+      float: right;
+      padding: 10px;
+    }
+
+    .avatar {
+      height: 140px;
+      float: left;
+      margin: 10px;
+    }
+  }
+
+  .contact-form {
+    padding: 0 10px;
+  }
+
+  ul.contacts {
+    padding: 10px;
+    list-style-type: none;
+
+    li.new-contact {
+      font-weight: bold;
+    }
+
+    a.active {
+      background-color: lighten($bulgarian-green, 68);
+    }
+
+    li.contact, li.new-contact {
+      a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        //border-bottom: 1px solid lighten($bulgarian-green, 10);
+      }
+
+      a:hover {
+        background-color: lighten($bulgarian-green, 68);
+      }
+    }
+  }
+}

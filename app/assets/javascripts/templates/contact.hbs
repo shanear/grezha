@@ -1,0 +1,30 @@
+<div class="contact-panel">
+  <img src="assets/no_picture_medium.png" class="avatar">
+
+  <div class="info">
+    <h1>{{name}}</h1>
+
+    {{#if city}}
+      <p>
+        <b>From:</b> {{city}}
+      </p>
+    {{/if}}
+
+    {{#if birthday}}
+      <p>
+        <b>Birthday:</b> {{formatDayOfYear birthday}}
+      </p>
+    {{/if}}
+
+    {{#if last_seen}}
+      <p>
+        <b>Last Seen:</b> {{formatDate last_seen}}
+      </p>
+    {{/if}}
+
+    <br/>
+
+    <p class="bio">{{bio}}</p>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<div id="sidebar">
+  <ul class="contacts">
+    {{#each}}
+      <li class="contact">
+        {{#link-to 'contact' this}}
+          {{name}}
+        {{/link-to}}
+      </li>
+    {{/each}}
+
+    <li class="new-contact">
+      {{#link-to 'contacts.new'}}
+        Add Contact
+      {{/link-to}}
+    </li>
+  </ul>
+</div>
+
+<div id="content">
+  {{outlet}}
+</div>
