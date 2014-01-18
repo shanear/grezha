@@ -1,0 +1,39 @@
+<div class="contact-panel">
+  <div class="clearfix">
+    <img src="assets/no_picture_medium.png" class="avatar">
+
+    <div class="top-info">
+      <h3>{{name}}</h3>
+
+      <div class="options">
+        {{#link-to 'contact.edit' model}}Edit{{/link-to}}
+      </div>
+
+        <p>
+          <b>From:</b>
+          {{#if city}}
+            {{city}}
+          {{/if}}
+        </p>
+
+        <p>
+          <b>Birthday:</b>
+          {{#if model.birthday}}
+            {{formatDayOfYear birthday}}
+          {{/if}}
+        </p>
+
+        <p>
+          <b>Last Seen:</b>
+          {{#if lastSeen}}
+            {{formatDate lastSeen}}
+          {{/if}}
+        </p>
+    </div>
+  </div>
+
+  <div class="bio">
+    {{bio}}
+  </div>
+</div>
+

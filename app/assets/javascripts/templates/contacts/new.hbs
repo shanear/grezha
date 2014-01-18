@@ -1,19 +1,22 @@
-<div class="contact-form">
-  <h1>New Contact!</h1>
+<form class="contact-form">
+  <h2>Add Contact</h2>
 
-  <label for="name">Name:</label><br/>
-  {{input type="text" id="name" value=name}}
+  <div class="form-group">
+    <label for="name">Name:</label>
+    {{input type="text" id="name" class="form-control" value=name}}
+  </div>
 
-  <br/>
-  <br/>
+  <div class="form-group">
+    <label for="name">From City:</label>
+    {{input type="text" id="city" class="form-control" value=city}}
+  </div>
 
-  <label for="name">From City:</label><br/>
-  {{input type="text" id="city" value=city}}
-
-  <br/>
-  <br/>
+  <div class="form-group">
+    <label for="name">Birthday:</label>
+    {{date-picker id="birthday" class="form-control" value=birthday}}
+  </div>
 
   <a href="#" {{action "createContact"}}>
     Create Contact
   </a>
-</div>
+</form>
