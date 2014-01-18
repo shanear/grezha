@@ -3,17 +3,23 @@ $bulgarian-red: #D62612;
 $dark-grey: #333;
 
 body {
- font-family: 'HelveticaNeue', sans-serif;
- color: $dark-grey;
- font-size: 14px;
+  font-family: 'HelveticaNeue', sans-serif;
+  color: $dark-grey;
+  font-size: 14px;
 
- a {
-   color: $dark-grey;
- }
+  a {
+    color: $dark-grey;
+  }
+
+  a:hover {
+    color: lighten($bulgarian-green, 5);
+    text-decoration: none;
+  }
 }
 
 header {
   width: 800px;
+  height: auto;
   padding: 5px;
   margin: 0 auto 10px auto;
   color: $bulgarian-red;
@@ -22,13 +28,19 @@ header {
   vertical-align: center;
 
   h1 {
+    font-size: 22px;
+    line-height: 25px;
+    margin: 0px;
     float: left;
 
     a {
-      font-size: 22px;
       color: $bulgarian-green;
       font-family: 'Redressed', sans-serif;
       text-decoration: none;
+    }
+
+    a:hover {
+      color: lighten($bulgarian-green, 10);
     }
   }
 
@@ -63,17 +75,18 @@ nav {
 
   ul {
     display: inline-block;
+    margin: 0px;
 
     li {
+      line-height: 25px;
       padding-left: 10px;
-      display: inline;
+      display: inline-block;
 
       a  {
         text-decoration: none;
       }
 
       a:hover {
-        color: $bulgarian-green;
       }
     }
   }
@@ -102,6 +115,16 @@ div#ember-app {
   #content {
     width: 560px;
     float: right;
+
+    h2 {
+      margin: 0;
+      margin-bottom: 10px;
+      padding: 0px;
+    }
+
+    input {
+      width: 100%;
+    }
   }
 
   #sidebar {
@@ -112,15 +135,19 @@ div#ember-app {
   }
 
   .contact-panel {
-    padding: 0 10px;
+    padding: 10px;
 
-    p {
-      margin-top: 5px;
+    h3 {
+      margin-top: 0;
     }
 
-    .info {
+    .top-info {
       width: 360px;
       float: right;
+      padding: 10px;
+    }
+
+    .bio {
       padding: 10px;
     }
 
@@ -137,6 +164,7 @@ div#ember-app {
 
   ul.contacts {
     padding: 10px;
+    margin: 0;
     list-style-type: none;
 
     li.new-contact {
