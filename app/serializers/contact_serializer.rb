@@ -1,3 +1,3 @@
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :birthday, :bio, :city, :last_seen
 end
