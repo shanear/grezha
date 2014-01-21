@@ -24,4 +24,8 @@
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create(rootElement: '#ember-app')
 
+App.ApplicationAdapter = DS.ActiveModelAdapter.extend(
+  {namespace: "api/v1"}
+)
+
 #= require_tree .
