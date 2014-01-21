@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 gem 'pg', '0.14.1'
 
-
+#this is a comment
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
