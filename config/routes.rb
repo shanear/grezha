@@ -10,6 +10,13 @@ Daughters::Application.routes.draw do
   get "/application.manifest", to: "offline#manifest",
     format: :appcache
 
+  namespace :api do
+    namespace :v1 do
+      resources :contacts, only: [:index, :show],
+        defaults: { format: "json" }
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

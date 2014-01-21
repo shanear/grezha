@@ -1,2 +1,7 @@
-App.Store = DS.Store.extend
-  adapter: 'DS.FixtureAdapter'
+App.Store = DS.Store.extend {
+  # Override the default adapter with the `DS.ActiveModelAdapter` which
+  # is built to work nicely with the ActiveModel::Serializers gem.
+  adapter: DS.RESTAdapter.create {
+    namespace: "api/v1"
+  }
+}
