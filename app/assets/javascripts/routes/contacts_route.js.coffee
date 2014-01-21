@@ -1,3 +1,3 @@
 App.ContactsRoute = Ember.Route.extend
   model: ->
-    this.get('store').find('contact')
+    @get('store').find('contact')
