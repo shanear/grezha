@@ -21,6 +21,7 @@ group :assets do
 end
 
 gem 'ember-rails'
+gem 'ember-source', '~> 1.3.1.1'
 gem 'jquery-rails'
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
