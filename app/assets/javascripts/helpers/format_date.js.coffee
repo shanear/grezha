@@ -1,5 +1,5 @@
-Handlebars.registerHelper 'formatDate', (date) ->
-  return moment().format('MMMM Do YYYY')
+Ember.Handlebars.helper 'formatDate', (date) ->
+  return moment(date).format('MMMM Do YYYY')
 
-Handlebars.registerHelper 'formatDayOfYear', (date) ->
-  return moment().format('MMMM Do')
+Ember.Handlebars.helper 'formatDayOfYear', (date) ->
+  return moment(date).format('MMMM Do')
