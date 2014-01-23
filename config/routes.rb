@@ -14,6 +14,7 @@ Daughters::Application.routes.draw do
     namespace :v1 do
       resources :contacts, only: [:index, :show],
         defaults: { format: "json" }
+      resources :contacts, only: [:create]
     end
   end
 

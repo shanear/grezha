@@ -1,4 +1,5 @@
 class Api::V1::ContactsController < ApplicationController
+
   respond_to :json
 
   def index
@@ -8,4 +9,16 @@ class Api::V1::ContactsController < ApplicationController
   def show
     respond_with Contact.find(params[:id])
   end
+
+  def create
+  	contact = Contact.create(create_contact_params)
+  	contact.save()
+  end
+
+  private
+
+  def create_contact_params
+  	params.required(:contact).permit(:name, :city, :bio, :last_seen, :birthday)
+  end
+
 end
