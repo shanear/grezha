@@ -1,9 +1,10 @@
 App.Contact = DS.Model.extend
-  name: DS.attr('string'),
-  city: DS.attr('string'),
-  bio: DS.attr('string'),
-  lastSeen: DS.attr('date'),
+  name: DS.attr('string')
+  city: DS.attr('string')
+  bio: DS.attr('string')
+  lastSeen: DS.attr('date')
   birthday: DS.attr('date')
+  pictureUrl: DS.attr('string')
 
 App.Contact.FIXTURES = [
   {

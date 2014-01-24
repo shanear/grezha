@@ -1,5 +1,11 @@
 <div id="sidebar">
   <ul class="contacts">
+    <li class="new-contact">
+      {{#link-to 'contacts.new'}}
+        Add Contact
+      {{/link-to}}
+    </li>
+
     {{#each}}
       <li class="contact">
         {{#link-to 'contact' this}}
@@ -7,15 +13,9 @@
         {{/link-to}}
       </li>
     {{/each}}
-
-    <li class="new-contact">
-      {{#link-to 'contacts.new'}}
-        Add Contact
-      {{/link-to}}
-    </li>
   </ul>
 </div>
 
-<div id="content">
+<div id="main-panel">
   {{outlet}}
 </div>

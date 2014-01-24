@@ -1,14 +1,16 @@
 <div class="contact-panel">
   <div class="clearfix">
-    <img src="assets/no_picture_medium.png" class="avatar">
+    <div class="avatar clearfix">
+      <img {{bind-attr src=pictureUrl}}></img>
+      {{image-uploader resource="contacts" resourceId=id action="changeImage"}}
+    </div>
 
     <div class="top-info">
-      <h3>{{name}}</h3>
-
       <div class="options">
         {{#link-to 'contact.edit' model}}Edit{{/link-to}}
       </div>
 
+      <h3>{{name}}</h3>
         <p>
           <b>From:</b>
           {{#if city}}

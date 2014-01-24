@@ -12,6 +12,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery-fileupload/basic
 #= require_tree ../../../vendor/assets/javascripts/.
 #= require handlebars
 #= require ember

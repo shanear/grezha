@@ -10,6 +10,16 @@ Daughters::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Paperclip storage
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      access_key_id: ENV["S3_ACCESS_KEY_ID"],
+      secret_access_key: ENV["S3_SECRET_ACCESS_KEY"],
+      bucket: "daughters_development"
+    }
+  }
+
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 

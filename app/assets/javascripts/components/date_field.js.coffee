@@ -3,7 +3,10 @@ App.DateFieldComponent = Ember.TextField.extend
 
   dateText: ((key, value) ->
     if value == undefined
-      moment( @get("date") ).format('MM/DD/YYYY')
+      if(date = @get("date"))
+        date.format('MM/DD/YYYY')
+      else
+        ""
 
     else
       date = moment(value)
@@ -17,5 +20,5 @@ App.DateFieldComponent = Ember.TextField.extend
 
   applyDatePicker: (->
     @$().datepicker().on "changeDate", (e) =>
-      @set("date", e.date)
+      @set("date", moment(e.date) )
   ).on("didInsertElement")
