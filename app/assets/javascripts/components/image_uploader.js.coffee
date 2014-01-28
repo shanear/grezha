@@ -9,7 +9,7 @@ App.ImageUploaderComponent = Ember.Component.extend
     @$('input').fileupload
       dataType: 'json'
       start: (e, data)=>
-        @sendAction('action', "assets/loading.gif")
+        @sendAction('action', "/assets/loading.gif")
       done: (e, data) =>
         @sendAction('action', data.result.imageUrl)
   ).on("didInsertElement")
