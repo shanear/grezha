@@ -12,7 +12,7 @@ Daughters::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :contacts, only: [:index, :show, :create],
+      resources :contacts, only: [:index, :show, :create, :update],
           defaults: { format: "json" } do
         post 'upload_image', on: :member
       end

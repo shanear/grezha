@@ -1,3 +1,11 @@
 <h2>Edit Contact</h2>
 
-{{partial "contact/form"}}
+<form class="contact-form">
+
+	{{partial "contact/form"}}
+
+	<button class="btn btn-default" {{action "saveContact"}}>
+		Save Contact
+	</button>
+
+</form>
