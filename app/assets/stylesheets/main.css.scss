@@ -135,6 +135,17 @@ div#ember-app {
     border-radius: 10px;
   }
 
+  .searchbar {
+    position: relative;
+  }
+  
+  .searchbar i {
+    position: absolute;
+    right: 0px;
+    padding: 8px;
+    pointer-events: none;
+  }
+
   .contact-panel {
     h3 {
       margin-top: 0;

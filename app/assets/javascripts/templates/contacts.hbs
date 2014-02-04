@@ -1,8 +1,9 @@
 <div id="sidebar">
   <ul class="contacts">
-    <li class="search">
-      {{input type="text" value=filterQuery}}
-      {{searchFilter}}
+    <li class="searchbar">
+        <i class="icon-search"></i>
+        {{input type="text" value=filterQuery}}
+        {{searchFilter}}
     </li>
 
     {{#each filteredContacts}}
