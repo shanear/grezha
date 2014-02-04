@@ -31,6 +31,9 @@ gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
 gem 'heroku'
 
+group :development, :test do
+  gem 'jasmine', '~>2.0.0'
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
