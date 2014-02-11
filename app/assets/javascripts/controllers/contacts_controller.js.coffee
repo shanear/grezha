@@ -3,5 +3,5 @@ App.ContactsController = Ember.ArrayController.extend
 
   filteredContacts: (->
     this.filter (contact)=>
-      ~contact.get('name').indexOf this.filterQuery
+      ~contact.get('name').toUpperCase().indexOf this.filterQuery.toUpperCase()
   ).property('@each.name', 'filterQuery')
