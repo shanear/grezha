@@ -1,24 +1,20 @@
 App.DateFieldComponent = Ember.TextField.extend
   classNames: ["form-control"]
 
-  dateText: ((key, value) ->
-    if value == undefined
-      if(date = @get("date"))
-        date.format('MM/DD/YYYY')
-      else
-        ""
-
-    else
-      date = moment(value)
-      if date.isValid?
-        @set "date", date
-      else
-        @set "date", null
-  ).property()
-
-  valueBinding: "dateText"
-
   applyDatePicker: (->
     @$().datepicker().on "changeDate", (e) =>
-      @set("date", moment(e.date) )
+      @set("date", e.date)
   ).on("didInsertElement")
+
+  date: ((key, date) ->
+    if date
+      console.log(date)
+      @set('value', moment(date).format("MM/DD/YYYY"))
+    else
+      value = @get('value')
+      if value
+        date = moment(value).toDate()
+      else
+        date = null
+    date
+  ).property('value')
