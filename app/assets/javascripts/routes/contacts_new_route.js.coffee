@@ -1,2 +1,3 @@
 App.ContactsNewRoute = Ember.Route.extend
-  model: -> {}
+  model: (params)->
+    @set('name', params.name)

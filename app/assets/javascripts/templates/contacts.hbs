@@ -15,8 +15,8 @@
     {{/each}}
 
     <li class="new-contact">
-      {{#link-to 'contacts.new'}}
-        Add Contact
+      {{#link-to 'contacts.new' newContactText }}
+        Add {{newContactText}}
       {{/link-to}}
     </li>
   </ul>

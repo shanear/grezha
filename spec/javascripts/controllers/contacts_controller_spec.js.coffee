@@ -31,7 +31,17 @@ describe 'App.ContactsController', ->
 
       expect(contacts[0].get('name') == "badazz seansie").toBeTruthy()
     
+  describe 'newContactText', ->
 
+    it 'should not be undefined', ->
+      expect(typeof(@controller.get('newContactText')) == 'undefined').toBeFalsy()
 
+    it 'is "Contact" when filterQuery is ""', ->
+      @controller.set('filterQuery', "")
+      expect(@controller.get('newContactText') == "Contact").toBeTruthy()
+
+    it 'is equal to filterQuery when filterQuery is defined', ->
+      @controller.set('filterQuery', "basketball jones")
+      expect(@controller.get('newContactText') == @controller.get('filterQuery')).toBeTruthy()
 
   
