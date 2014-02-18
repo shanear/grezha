@@ -33,6 +33,9 @@ gem 'heroku'
 
 group :development, :test do
   gem 'jasmine', '~>2.0.0'
+  gem 'rspec-rails', '~>2.13.0'
+  gem 'factory_girl_rails', '~>4.2.1'
+  gem 'timecop', '~>0.7.1'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

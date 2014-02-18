@@ -1,0 +1,35 @@
+<div id="birthdays">
+  <h1>Recent Birthdays</h1>
+  <% if @recent.empty? %>
+    There have been no birthdays recently.
+  <% end %>
+
+  <% @recent.each do |contact| %>
+    <div class="contact clearfix">
+      <div class="name">
+        <%= contact.name %>
+      </div>
+
+      <div class="birthday">
+        <%= format_birthday(contact) %>
+      </div>
+    </div>
+  <% end %>
+
+  <h1>Upcoming Birthdays</h1>
+  <% if @upcoming.empty? %>
+    There are no upcoming birthdays.
+  <% end %>
+
+  <% @upcoming.each do |contact| %>
+    <div class="contact clearfix">
+      <div class="name">
+        <%= contact.name %>
+      </div>
+
+      <div class="birthday">
+        <%= format_birthday(contact) %>
+      </div>
+    </div>
+  <% end %>
+</div>

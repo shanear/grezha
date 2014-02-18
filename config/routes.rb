@@ -1,9 +1,12 @@
 Daughters::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
-  resources :contacts
+
+  resources :contacts do
+    get 'birthdays', on: :collection
+  end
 
   get "/login", to: "sessions#new"
-  get "/logout", to: "sessions#destroy"
+  delete "/logout", to: "sessions#destroy"
 
   get "/app", to: "offline#app"
 

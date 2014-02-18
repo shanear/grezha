@@ -18,6 +18,11 @@ class ContactsController < ApplicationController
     end
   end
 
+  def birthdays
+    @recent = Contact.with_recent_birthday
+    @upcoming = Contact.with_upcoming_birthday
+  end
+
   def show
     @contact = Contact.find(params[:id])
 

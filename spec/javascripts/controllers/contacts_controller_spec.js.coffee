@@ -6,7 +6,7 @@ describe 'App.ContactsController', ->
     @store = App.__container__.lookup('store:main')
 
     Ember.run =>
-      @controller.set('model', 
+      @controller.set('model',
         [@store.createRecord('contact', {
           name: "badazz seansie"
         }),
@@ -24,13 +24,13 @@ describe 'App.ContactsController', ->
       contacts = @controller.get('filteredContacts')
 
       expect(contacts[0].get('name') == "badazz seansie").toBeTruthy()
-    
+
     it 'filterQuery is not case sensitive', ->
       @controller.set('filterQuery', "Seansie")
       contacts = @controller.get('filteredContacts')
 
       expect(contacts[0].get('name') == "badazz seansie").toBeTruthy()
-    
+
   describe 'newContactText', ->
 
     it 'should not be undefined', ->
@@ -44,4 +44,3 @@ describe 'App.ContactsController', ->
       @controller.set('filterQuery', "basketball jones")
       expect(@controller.get('newContactText') == @controller.get('filterQuery')).toBeTruthy()
 
-  
