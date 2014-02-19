@@ -30,7 +30,6 @@ gem 'ember-data-source', '~> 1.0.0.beta.5'
 
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
-gem 'heroku'
 
 group :development, :test do
   gem 'jasmine', '~>2.0.0'
