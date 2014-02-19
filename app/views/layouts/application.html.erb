@@ -23,17 +23,16 @@
 
 <header class="clearfix">
   <h1>
-    <%= link_to "Grezha", root_path, :class => "title" %>
+    <%= link_to "Grezha", app_path, :class => "title" %>
   </h1>
 
   <nav>
     <ul>
       <li>
-        <%= link_to "Contacts", contacts_path %>
+        <%= link_to "Contacts", app_path %>
       </li>
       <li>
-        <%= link_to "Birthdays", 
-                    contacts_path(birthday_month: Date.today.month) %>
+        <%= link_to "Birthdays", birthdays_contacts_path %>
       </li>
     </ul>
   </nav>
