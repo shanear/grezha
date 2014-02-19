@@ -87,6 +87,7 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    kgio (2.9.2)
     less (2.4.0)
       commonjs (~> 0.2.7)
     less-rails (2.4.2)
@@ -126,6 +127,7 @@ GEM
       activesupport (= 4.0.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    raindrops (0.13.0)
     rake (10.1.1)
     ref (1.0.5)
     rspec-core (2.13.0)
@@ -173,6 +175,13 @@ GEM
     uglifier (2.3.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicorn (4.8.2)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
+    unicorn-rails (1.1.0)
+      rack
+      unicorn
     uuidtools (2.1.4)
 
 PLATFORMS
@@ -198,3 +207,4 @@ DEPENDENCIES
   timecop (~> 0.7.1)
   twitter-bootstrap-rails (~> 2.2.8)
   uglifier (>= 1.0.3)
+  unicorn-rails
