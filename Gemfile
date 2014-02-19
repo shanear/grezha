@@ -14,10 +14,6 @@ group :assets do
 
   gem "therubyracer", "~> 0.12.0"
   gem "less-rails", "~> 2.4.2"
-  gem 'twitter-bootstrap-rails', '~> 2.2.8'
-
-  gem 'jquery-rails', '~> 3.0.4'
-  gem 'jquery-fileupload-rails', '~> 0.4.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -28,6 +24,11 @@ end
 gem 'ember-rails', '~> 0.14.1'
 gem 'ember-source', '~> 1.3.1.1'
 gem 'ember-data-source', '~> 1.0.0.beta.5'
+
+gem 'jquery-rails', '~> 3.0.4'
+gem 'jquery-fileupload-rails', '~> 0.4.1'
+
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
 
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
