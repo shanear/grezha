@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def manifest_tag
     if Rails.env.production?
-      "manifest = '/application.manifest'".html_safe
+      "" #"manifest = '/application.manifest'".html_safe
     end
   end
 end
