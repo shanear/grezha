@@ -111,6 +111,12 @@ input[type = "checkbox"] {
   margin: 0;
 }
 
+#loader img {
+  display: block;
+  margin: 0px auto;
+  height: 400px;
+}
+
 div#ember-app {
   #main-panel {
     padding: 10px;

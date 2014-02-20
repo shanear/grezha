@@ -22,7 +22,11 @@
 #= require app
 
 # for more details see: http://emberjs.com/guides/application/
-window.App = Ember.Application.create(rootElement: '#ember-app')
+window.App = Ember.Application.create(
+  rootElement: '#ember-app'
+  ready: ->
+    $("#loader").hide()
+)
 
 App.ApplicationAdapter = DS.ActiveModelAdapter.extend(
   {namespace: "api/v1"}
