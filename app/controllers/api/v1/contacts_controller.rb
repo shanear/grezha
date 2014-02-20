@@ -4,7 +4,7 @@ class Api::V1::ContactsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Contact.order('LOWER(name) asc').all
+    respond_with Contact.order('LOWER(name) asc')
   end
 
   def show
