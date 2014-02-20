@@ -6,33 +6,21 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-
-  <script>
-    // Run the Javascript associated with this page
-    jQuery(function() {
-      window.App = new (Daughters["<%= params[:controller].titlecase %>"] || Daughters.Base)
-        (<%= @bootstrap_data %>);
-
-      if (typeof App["<%= params[:action] %>"] === 'function') {
-        return App["<%= params[:action] %>"].call();
-      }
-    });
-  </script>
 </head>
 <body>
 
 <header class="clearfix">
   <h1>
-    <%= link_to "Grezha", app_path, :class => "title" %>
+    <%= link_to "Grezha", root_path, :class => "title" %>
   </h1>
 
   <nav>
     <ul>
       <li>
-        <%= link_to "Contacts", app_path %>
+        <%= link_to "Contacts", root_path %>
       </li>
       <li>
-        <%= link_to "Birthdays", birthdays_contacts_path %>
+        <%= link_to "Birthdays", birthdays_path %>
       </li>
     </ul>
   </nav>
@@ -45,20 +33,6 @@
     <% end %>
   </div>
 </header>
-
-<div id="flash">
-  <% if flash[:alert] %>
-    <div class="alert">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
-
-  <% if flash[:notice] %>
-    <div class="notice">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-</div>
 
 <div id="content">
   <%= yield %>

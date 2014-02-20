@@ -20,7 +20,6 @@
 #= require twitter/bootstrap
 #= require_self
 #= require app
-#= require base
 
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create(rootElement: '#ember-app')
