@@ -5,15 +5,10 @@ gem 'rails', '4.0.1'
 gem 'pg', '0.14.1'
 gem 'unicorn-rails'
 
-#this is a comment
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 4.0.1'
-  gem 'coffee-rails', '~> 4.0.1'
-
   gem "therubyracer", "~> 0.12.0"
-  gem "less-rails", "~> 2.4.2"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -28,6 +23,9 @@ gem 'ember-data-source', '~> 1.0.0.beta.5'
 gem 'jquery-rails', '~> 3.0.4'
 gem 'jquery-fileupload-rails', '~> 0.4.1'
 
+gem 'sass-rails',   '~> 4.0.1'
+gem 'coffee-rails', '~> 4.0.1'
+gem "less-rails", "~> 2.4.2"
 gem 'twitter-bootstrap-rails', '~> 2.2.8'
 
 gem 'paperclip', '~> 3.2'
