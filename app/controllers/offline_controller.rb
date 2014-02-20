@@ -1,4 +1,6 @@
 class OfflineController < ApplicationController
+  before_filter :require_logged_in
+
   def app
   end
 
