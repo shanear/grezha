@@ -1,3 +1,32 @@
-// Place all the styles related to the sessions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$bulgarian-green: #00966E;
+
+div#login {
+  width: 40%;
+  margin: 0px auto;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: lighten($bulgarian-green, 65);
+
+  h1 {
+    margin: 0px;
+    padding-top: 0px;
+  }
+
+  form {
+    margin: 0px;
+  }
+
+  input[type=text], input[type=password] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    height: 30px;
+    width: 100%;
+  }
+
+  #sub {
+
+    text-align: center;
+  }
+}

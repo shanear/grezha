@@ -1,103 +1,21 @@
-$bulgarian-green: #00966E;
-$bulgarian-red: #D62612;
-$dark-grey: #333;
-
-div.contact-profile {
+div#birthdays {
   h1 {
-    font-size: 20px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
   }
 
-  .picture {
-    width: 200px;
-    float: left;
-  }
+  .contact {
+    margin: 0 auto;
 
-  .basic-info {
-    width: 580px;
-    float: right;
-  }
+    .name {
+      float: left;
+    }
 
-  .confirm-delete {
-    display: none;
-    padding: 10px;
-    margin: 5px 0px;
-    background-color: lighten($bulgarian-red, 40%);
-    border-radius: 5px;
-
-  }
-
-  .options {
-    width: 100%;
-    text-align: right;
-  }
-
-  p {
-    margin-bottom: 10px;
-  }
-}
-
-.option {
-  padding-left: 10px;
-
-  .field & {
-    padding-left: 15px;
-  }
-}
-
-.field {
-  margin-bottom: 15px;
-
-  label {
-    padding-bottom: 3px;
-    display: block;
-
-    &.sub {
-      display: inline;
-      font-size: 12px;
-      line-height: 14px;
-      vertical-align: top;
-      font-style: italic;
+    .birthday {
+      float: left;
+      padding-left: 10px;
+      color: #aaa;
     }
   }
-
-  input[type="file"] {
-    line-height: 25px;
-  }
 }
 
-.actions {
-  border-top: 1px solid $bulgarian-red;
-  padding-top: 10px;
-  width: 100%;
-}
-
-.sorting-options {
-  width: 100%;
-  text-align: right;
-}
-
-a.contact-row {
-  display: block;
-  font-size: 20px;
-  text-decoration: none;
-  width: 100%;
-  border-bottom: 1px solid $bulgarian-red;
-
-  .name {
-    padding-left: 10px;
-    line-height: 60px;
-    vertical-align: center;
-    float: left;
-  }
-
-  .picture {
-    padding: 5px;
-    height: 50px;
-    float: left;
-  }
-
-  &:hover {
-    color: $dark-grey;
-    background-color: lighten($bulgarian-green, 60%);
-  }
-}

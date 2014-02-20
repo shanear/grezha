@@ -15,14 +15,12 @@
   </h1>
 
   <nav>
-    <ul>
-      <li>
-        <%= link_to "Contacts", root_path %>
-      </li>
-      <li>
-        <%= link_to "Birthdays", birthdays_path %>
-      </li>
-    </ul>
+    <% if logged_in? %>
+      <ul>
+        <li> <%= link_to "Contacts", root_path %> </li>
+        <li> <%= link_to "Birthdays", birthdays_path %> </li>
+      </ul>
+    <% end %>
   </nav>
 
   <div class="login-info">
