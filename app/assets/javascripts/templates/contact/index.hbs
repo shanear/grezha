@@ -37,5 +37,15 @@
   <div class="bio">
     {{bio}}
   </div>
+
+  <div class="connections">
+  <h4>Connections</h4>
+  {{#each connections}}
+    <p>
+      <b>On {{date}}</b>
+      {{note}}
+    </p>
+  {{/each}}
+  </div>
 </div>
 

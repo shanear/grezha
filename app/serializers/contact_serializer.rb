@@ -1,6 +1,9 @@
 class ContactSerializer < ActiveModel::Serializer
   attributes :id, :name, :birthday, :bio, :city, :last_seen, :picture_url
 
+  embed :ids, include: true
+  has_many :connections
+
   def attributes
     hash = super
     # Adding 12 hours to date is a hacky way to avoid parsing wrong date because of timezones

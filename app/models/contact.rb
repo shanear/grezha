@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  has_many :connections
+
   has_attached_file :picture,
     styles: { medium: "200", thumb: "50x50#" }
 

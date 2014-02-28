@@ -5,6 +5,7 @@ App.Contact = DS.Model.extend
   lastSeen: DS.attr('date')
   birthday: DS.attr('date')
   pictureUrl: DS.attr('string')
+  connections: DS.hasMany('connection')
 
 App.Contact.FIXTURES = [
   {
