@@ -14,13 +14,14 @@ class Api::V1::ContactsController < ApplicationController
   def update
     @contact = Contact.find(params[:id])
     @contact.update_attributes(create_contact_params)
-    respond_with @contact
+
+    render json: @contact
   end
 
   def create
   	@contact = Contact.create(create_contact_params)
   	@contact.save()
-    respond_with @contact
+    render json: @contact
   end
 
   def upload_image
