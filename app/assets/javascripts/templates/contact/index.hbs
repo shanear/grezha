@@ -39,13 +39,29 @@
   </div>
 
   <div class="connections">
-  <h4>Connections</h4>
-  {{#each connections}}
-    <p>
-      <b>On {{date}}</b>
-      {{note}}
+    <h4>Add Connection</h4>
+    <p class="add-connection-form">
+      {{date-field id="newConnectionDate" date=newConnection.date}}
+      {{textarea id="newConnectionNote" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
+
+      <button class="btn btn-default" {{action "addConnection"}}>
+        Save
+      </button>
     </p>
-  {{/each}}
+
+    <h4>Past Connections</h4>
+
+    {{#each sortedConnections}}
+      <div class="connection clearfix">
+        <div class="date">
+          <div class="day">{{formatShortDate date}}</div>
+          <div class="year">{{formatYear date}}</div>
+        </div>
+        <div class="note">{{breaklines note}}</div>
+      </div>
+    {{else}}
+      <p> There are no connections for this person. </p>
+    {{/each}}
   </div>
 </div>
 

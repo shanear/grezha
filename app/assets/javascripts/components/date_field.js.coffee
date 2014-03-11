@@ -8,7 +8,6 @@ App.DateFieldComponent = Ember.TextField.extend
 
   date: ((key, date) ->
     if date
-      console.log(date)
       @set('value', moment(date).format("MM/DD/YYYY"))
     else
       value = @get('value')

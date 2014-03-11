@@ -105,6 +105,11 @@ div#content {
     padding: 5px 0;
     font-size: 20px;
   }
+
+  h4 {
+    color: #777;
+    font-size: 16px;
+  }
 }
 
 input[type = "checkbox"] {
@@ -153,18 +158,20 @@ div#ember-app {
   }
 
   .contact-panel {
+    margin: 10px;
+
     h3 {
       margin-top: 0;
     }
 
     .top-info {
-      width: 360px;
+      width: 350px;
       float: right;
       padding: 10px;
     }
 
     .bio {
-      padding: 10px;
+      padding: 20px;
     }
 
     .options {
@@ -172,7 +179,7 @@ div#ember-app {
     }
 
     .avatar {
-      margin: 10px;
+      margin: 10px 10px 10px 0;
       width: 140px;
       float: left;
       text-align: center;
@@ -239,6 +246,36 @@ div#ember-app {
       width: 100%;
       height: 100%;
       opacity: 0;
+    }
+  }
+
+  .add-connection-form {
+    margin-bottom: 40px;
+  }
+
+  .connection {
+    margin: 10px 10px 10px 0px;
+
+    .date {
+      background-color: lighten($bulgarian-green, 65);
+      border-radius:  10px;
+      padding: 10px;
+      float: left;
+
+      .day {
+        font-size: 120%;
+        text-align: center;
+      }
+
+      .year {
+        font-size: 80%;
+        text-align: center;
+      }
+    }
+
+    .note {
+      float: left;
+      padding: 10px;
     }
   }
 }
