@@ -18,7 +18,5 @@ App.Contact = DS.Model.extend
       @get('createdAt')
   ).property('connections.@each.isLoaded')
 
-  sortedConnections: (->
-    @get('connections').toArray().sort (a, b)->
-      b.get('date') - a.get('date')
-  ).property('connections.@each.isLoaded')
+  sortedConnections: Ember.computed.sort 'connections', (a, b)->
+    b.get('date') - a.get('date')
