@@ -1,5 +1,5 @@
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :created_at, :name, :birthday, :bio, :city, :last_seen, :picture_url
+  attributes :id, :created_at, :name, :birthday, :bio, :city, :picture_url
 
   embed :ids, include: true
   has_many :connections
