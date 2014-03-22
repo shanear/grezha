@@ -11,6 +11,6 @@ class Api::V1::ConnectionsController < ApplicationController
   private
 
   def create_connection_params
-  	params.required(:connection).permit(:contact_id, :note, :date)
+  	params.required(:connection).permit(:contact_id, :note, :occurred_at)
   end
 end

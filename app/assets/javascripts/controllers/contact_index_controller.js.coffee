@@ -1,5 +1,5 @@
 App.ContactIndexController = Ember.ObjectController.extend
-  newConnection: { date: new Date(), note: "" }
+  newConnection: { occurredAt: new Date(), note: "" }
 
   actions:
     addConnection: ()->
@@ -10,7 +10,7 @@ App.ContactIndexController = Ember.ObjectController.extend
       newConnection.set('contact', @get('model'))
 
       newConnection.save().then =>
-        @set('newConnection.date', new Date())
+        @set('newConnection.occurredAt', new Date())
         @set('newConnection.note', "")
 
     changeImage: (url)->

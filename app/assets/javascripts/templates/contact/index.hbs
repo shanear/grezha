@@ -41,7 +41,7 @@
   <div class="connections">
     <h4>Add Connection</h4>
     <p class="add-connection-form">
-      {{date-field id="newConnectionDate" date=newConnection.date}}
+      {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
       {{textarea id="newConnectionNote" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
 
       <button class="btn btn-default" {{action "addConnection"}}>
@@ -54,8 +54,8 @@
     {{#each sortedConnections}}
       <div class="connection clearfix">
         <div class="date">
-          <div class="day">{{formatShortDate date}}</div>
-          <div class="year">{{formatYear date}}</div>
+          <div class="day">{{formatShortDate occurredAt}}</div>
+          <div class="year">{{formatYear occurredAt}}</div>
         </div>
         <div class="note">{{breaklines note}}</div>
       </div>
