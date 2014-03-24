@@ -143,13 +143,9 @@ div#ember-app {
     float: left;
     background-color: lighten($bulgarian-green, 65);
     border-radius: 10px;
-    overflow-x:hidden;
-    height:800px;
   }
 
   .searchbar {
-    padding:10px;
-    margin:0;
     position: relative;
   }
   
@@ -198,34 +194,20 @@ div#ember-app {
     padding: 0 10px;
   }
 
-  new-contact {
-      font-weight: bold;
-      a {
-        display: block;
-        padding: 10px;
-        text-decoration: none;
-        //border-bottom: 1px solid lighten($bulgarian-green, 10);
-      }
-
-      a:hover {
-        background-color: lighten($bulgarian-green, 68);
-      }
-  }
-
   ul.contacts {
     padding: 10px;
     margin: 0;
     list-style-type: none;
-    height:800px;
-    overflow-y:overlay;
-
-    overflow-x:hidden;
+    
+    li.new-contact {
+      font-weight: bold;
+    }
 
     a.active {
       background-color: lighten($bulgarian-green, 68);
     }
 
-    li.contact {
+    li.contact, li.new-contact {
       a {
         display: block;
         padding: 10px;
