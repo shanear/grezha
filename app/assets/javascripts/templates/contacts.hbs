@@ -1,10 +1,12 @@
-<div id="sidebar">
-  <ul class="contacts">
-    <li class="searchbar">
+<div id="sidebar" class='pre-scrollable'>
+  <div class="searchbar">
         <i class="icon-search"></i>
         {{input type="text" value=filterQuery}}
         {{searchFilter}}
-    </li>
+  </div>
+
+  <ul class="contacts">
+    
 
     {{#each filteredContacts}}
       <li class="contact">
@@ -14,13 +16,16 @@
       </li>
     {{/each}}
 
-    <li class="new-contact">
-      {{#link-to 'contacts.new' newContactText }}
+    
+  </ul>
+
+<div class="new-contact">
+      {{#link-to 'contacts.new' filterQuery }}
         Add {{newContactText}}
       {{/link-to}}
-    </li>
-  </ul>
+  </div>
 </div>
+
 
 <div id="main-panel">
   {{outlet}}

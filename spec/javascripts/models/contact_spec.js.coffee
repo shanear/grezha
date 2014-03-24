@@ -41,6 +41,23 @@ describe 'App.Contact', ->
           expect(@contact.get("sortedConnections")[2])
             .toBe(oldest)
 
+  describe 'isValid', ->
+    it 'returns true if the contact\'s name has characters', ->
+      Ember.run =>
+        @contact.set('name', 'a valid name')
+        expect(@contact.isValid()).toBeTruthy()
 
+    it 'returns false if the contact\'s name is an empty string', ->
+      Ember.run =>
+        @contact.set('name', '')
+        expect(@contact.isValid()).toBeFalsy()
 
+    it 'returns false if the contact\'s name consists of whitespace', ->
+      Ember.run =>
+        @contact.set('name', '    ')
+        expect(@contact.isValid()).toBeFalsy()
 
+    it 'returns false if the contact\'s name is undefined', ->
+      Ember.run =>
+        @contact.set('name', undefined)
+        expect(@contact.isValid()).toBeFalsy()

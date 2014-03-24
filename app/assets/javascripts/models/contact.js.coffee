@@ -20,3 +20,19 @@ App.Contact = DS.Model.extend
 
   sortedConnections: Ember.computed.sort 'connections', (a, b)->
     b.get('date') - a.get('date')
+
+  errors: []
+
+  isValid: ->
+    errors = []
+
+    if @get('name') == undefined
+      errors.push 'Name is undefined'
+    else if (@get('name').replace /[ ]/g, '').length < 1
+      errors.push 'Name is blank'
+    
+    if errors.length > 0
+      @set('errors', errors)
+      return false
+    return true
+
