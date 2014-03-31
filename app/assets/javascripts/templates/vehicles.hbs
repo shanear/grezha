@@ -1,5 +1,27 @@
-<h3>These are the vehicles!</h3>
+<div id="sidebar">
+  <ul class="vehicles">
+    <li class="searchbar">
+        <i class="icon-search"></i>
+        {{input type="text" value=filterQuery}}
+        {{searchFilter}}
+    </li>
 
-{{#each}}
-  {{license_plate}}
-{{/each}}
+    {{#each filteredCollection}}
+      <li class="contact">
+        {{#linkTo 'vehicles'}}
+          {{licensePlate}}
+        {{/linkTo}}
+      </li>
+    {{/each}}
+
+    <li class="new-contact">
+      {{#linkTo 'vehicles'}}
+        Add {{newModelText}}
+      {{/linkTo}}
+    </li>
+  </ul>
+</div>
+
+<div id="main-panel">
+  {{outlet}}
+</div>

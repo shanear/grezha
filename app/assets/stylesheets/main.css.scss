@@ -194,12 +194,12 @@ div#ember-app {
     padding: 0 10px;
   }
 
-  ul.contacts {
+  ul.contacts, ul.vehicles {
     padding: 10px;
     margin: 0;
     list-style-type: none;
-    
-    li.new-contact {
+
+    li.new-contact, li.new-vehicle {
       font-weight: bold;
     }
 
@@ -207,7 +207,7 @@ div#ember-app {
       background-color: lighten($bulgarian-green, 68);
     }
 
-    li.contact, li.new-contact {
+    li.contact, li.new-contact, li.vehicle, li.new-vehicle {
       a {
         display: block;
         padding: 10px;
