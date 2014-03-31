@@ -1,4 +1,6 @@
 App.Router.map () ->
+  @resource 'vehicles'
+
   @resource 'contacts', ->
     @route 'new'
     @route 'new', { path: "/new/:name" }
