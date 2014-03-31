@@ -6,7 +6,7 @@
         {{searchFilter}}
     </li>
 
-    {{#each filteredContacts}}
+    {{#each filteredCollection}}
       <li class="contact">
         {{#link-to 'contact' this}}
           {{name}}
@@ -16,7 +16,7 @@
 
     <li class="new-contact">
       {{#link-to 'contacts.new' filterQuery }}
-        Add {{newContactText}}
+        Add {{newModelText}}
       {{/link-to}}
     </li>
   </ul>
