@@ -30,7 +30,7 @@ App.Contact = DS.Model.extend
       errors.push 'Name is undefined'
     else if (@get('name').replace /[ ]/g, '').length < 1
       errors.push 'Name is blank'
-    
+
     if errors.length > 0
       @set('errors', errors)
       return false
