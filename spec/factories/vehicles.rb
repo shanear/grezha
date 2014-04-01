@@ -2,8 +2,11 @@
 
 FactoryGirl.define do
   factory :vehicle do
-    license_number "MyString"
-    notes "MyText"
-    used_by "MyString"
+    sequence :license_plate do |n|
+      "#{n} AR"
+    end
+
+    notes "Some stuff"
+    used_by "person"
   end
 end

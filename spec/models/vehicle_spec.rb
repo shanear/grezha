@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe Vehicle do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should validate uniqueness of license plate" do
+    @vehicle = FactoryGirl.create(:vehicle)
+    @duplicate_vehicle = FactoryGirl.build(:vehicle,
+      license_plate: @vehicle.license_plate)
+
+    @duplicate_vehicle.should_not be_valid
+  end
 end
