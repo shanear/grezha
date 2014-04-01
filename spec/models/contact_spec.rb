@@ -3,9 +3,9 @@ require "spec_helper"
 describe Contact do
   context ".with_recent_birthday" do
     it "returns contacts with birthdays up to 14 days ago" do
-      Timecop.freeze(Time.new(2014, 1, 1)) do
+      Timecop.freeze(DateTime.new(2014, 1, 1)) do
         recent = FactoryGirl.create(:contact, birthday: Time.now - 13.days)
-        not_recent = FactoryGirl.create(:contact, birthday: Time.now - 15.days)
+        not_recent = FactoryGirl.create(:contact, birthday: Time.now - 16.days)
         upcoming = FactoryGirl.create(:contact, birthday: Time.now + 1.day)
 
         recent_contacts = Contact.with_recent_birthday
@@ -19,11 +19,13 @@ describe Contact do
 
   context ".with_upcoming_birthday" do
     it "returns contacts with birthdays up to 14 days ago" do
-      Timecop.freeze(Time.new(2013, 12, 31)) do
-        current = FactoryGirl.create(:contact, birthday: Time.now)
-        upcoming = FactoryGirl.create(:contact, birthday: Time.now + 1.day)
-        not_upcoming = FactoryGirl.create(:contact, birthday: Time.now + 15.days)
-        recent = FactoryGirl.create(:contact, name: "recent", birthday: Time.now - 1.day)
+      Timecop.freeze(DateTime.new(2013, 12, 31)) do
+        puts Contact.count
+
+        current = FactoryGirl.create(:contact, name: "current", birthday: Time.now)
+        upcoming = FactoryGirl.create(:contact, name: "upcoming", birthday: Time.now + 1.day)
+        not_upcoming = FactoryGirl.create(:contact, name: "not upcoming", birthday: Time.now + 15.days)
+        recent = FactoryGirl.create(:contact, name: "recent", birthday: Time.now - 2.days)
 
         recent_contacts = Contact.with_upcoming_birthday
 
