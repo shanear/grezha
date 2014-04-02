@@ -8,15 +8,15 @@ involved in prostitution & sex trafficking.
 * Also record information about vehicles you see in the field.
 
 
-= Getting Started
+== Getting Started
 
 Grezha is build using Ruby on Rails, Ember.js, and PostgreSQL. You can setup the
 project by installing PostgreSQL, RVM, and following the standard rails setup
 process.
 
 
-= Contribution and Use
+== Think you could use Grezha for your Organization?
 
 If you're interested in helping or think Grezha would be helpful to your
-organization, please contact shane1337@gmail.com
+organization, let me know! Send me a shoutout at shane1337@gmail.com
 
