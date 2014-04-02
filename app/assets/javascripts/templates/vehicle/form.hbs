@@ -1,0 +1,23 @@
+  <div>
+    {{#each errors}}
+      <li>{{this}}</li>
+    {{/each}}
+  </div>
+
+  <div class="form-group">
+    <label for="licensePlate">license plate number:</label>
+    {{input type="text" id="licensePlate" class="form-control" value=licensePlate}}
+  </div>
+
+  <div class="form-group">
+    <label for="usedBy">driven by:</label>
+    {{input type="text" id="usedBy" class="form-control" placeholder="Who uses or drives this car?" value=usedBy}}
+  </div>
+
+  <div class="form-group">
+    <label for="notes">notes:</label>
+    {{textarea id="notes" class="form-control" value=notes}}
+  </div>
+
+  <br/>
+

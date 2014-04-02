@@ -1,5 +1,6 @@
 App.Router.map () ->
   @resource 'vehicles', ->
+    @route 'new'
     @resource 'vehicle', { path: "/:vehicle_id" }, ->
       @route 'edit'
 

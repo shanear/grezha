@@ -8,16 +8,16 @@
 
     {{#each filteredCollection}}
       <li class="contact">
-        {{#linkTo 'vehicle' this}}
+        {{#link-to 'vehicle' this}}
           {{licensePlate}}
-        {{/linkTo}}
+        {{/link-to}}
       </li>
     {{/each}}
 
-    <li class="new-contact">
-      {{#linkTo 'vehicles'}}
-        Add {{newModelText}}
-      {{/linkTo}}
+    <li class="new-vehicle">
+      {{#link-to 'vehicles.new'}}
+        Add Vehicle
+      {{/link-to}}
     </li>
   </ul>
 </div>
