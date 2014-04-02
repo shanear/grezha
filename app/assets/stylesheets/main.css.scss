@@ -156,6 +156,21 @@ div#ember-app {
     pointer-events: none;
   }
 
+  .vehicle-panel {
+    margin: 10px;
+
+    h3 {
+      margin: 0px 0px 0px 0px;
+    }
+
+    .used-by {
+      color: #aaa;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+  }
+
   .contact-panel {
     margin: 10px;
 
