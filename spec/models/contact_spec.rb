@@ -20,8 +20,6 @@ describe Contact do
   context ".with_upcoming_birthday" do
     it "returns contacts with birthdays up to 14 days ago" do
       Timecop.freeze(DateTime.new(2013, 12, 31)) do
-        puts Contact.count
-
         current = FactoryGirl.create(:contact, name: "current", birthday: Time.now)
         upcoming = FactoryGirl.create(:contact, name: "upcoming", birthday: Time.now + 1.day)
         not_upcoming = FactoryGirl.create(:contact, name: "not upcoming", birthday: Time.now + 15.days)
