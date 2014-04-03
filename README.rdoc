@@ -10,7 +10,7 @@ involved in prostitution & sex trafficking.
 
 == Getting Started
 
-Grezha is build using Ruby on Rails, Ember.js, and PostgreSQL. You can setup the
+Grezha is built using Ruby on Rails, Ember.js, and PostgreSQL. You can setup the
 project by installing PostgreSQL, RVM, and following the standard rails setup
 process.
 
