@@ -4,6 +4,12 @@
 <form class="vehicle-form">
   {{partial "vehicle/form"}}
 
+  <div class="cancel">
+    {{#link-to 'vehicles'}}
+      cancel
+    {{/link-to}}
+  </div>
+
   <button class="btn btn-default" {{action "createVehicle"}}>
     Save Vehicle
   </button>

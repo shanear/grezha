@@ -4,8 +4,13 @@
 
 	{{partial "contact/form"}}
 
+  <div class="cancel">
+    {{#link-to 'contact' this}}
+      cancel
+    {{/link-to}}
+  </div>
+
 	<button class="btn btn-default" {{action "saveContact"}}>
 		Save Contact
 	</button>
-
 </form>

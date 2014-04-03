@@ -3,6 +3,12 @@
 <form class="contact-form">
   {{partial "contact/form"}}
 
+  <div class="cancel">
+    {{#link-to 'contacts'}}
+      cancel
+    {{/link-to}}
+  </div>
+
   <button class="btn btn-default" {{action "createContact"}}>
     Save Contact
   </button>
