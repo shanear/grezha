@@ -15,7 +15,7 @@ project by installing PostgreSQL, RVM, and following the standard rails setup
 process.
 
 
-== Think you could use Grezha for your Organization?
+== Want to use it?
 
 If you're interested in helping or think Grezha would be helpful to your
 organization, let me know! Send me a shoutout at shane1337@gmail.com
