@@ -8,7 +8,11 @@
   </h3>
 
   <div class="used-by">
-    driven by {{usedBy}}
+    {{#if usedBy}}
+      driven by {{usedBy}}
+    {{else}}
+      unknown driver
+    {{/if}}
   </div>
 
   <div class="notes">

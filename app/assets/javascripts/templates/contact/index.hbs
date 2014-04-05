@@ -15,6 +15,8 @@
           <b>from:</b>
           {{#if city}}
             {{city}}
+          {{else}}
+            unknown
           {{/if}}
         </p>
 
@@ -22,6 +24,8 @@
           <b>birthday:</b>
           {{#if birthday}}
             {{formatDayOfYear birthday}}
+          {{else}}
+            unknown
           {{/if}}
         </p>
 
