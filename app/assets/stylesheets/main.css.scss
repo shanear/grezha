@@ -122,6 +122,13 @@ input[type = "checkbox"] {
   height: 400px;
 }
 
+.spinner {
+  margin: 0px auto 20px;
+  height: 50px;
+  width: 50px;
+  background: lighten($bulgarian-green, 65) url(asset-path("greenspin.gif", image)) no-repeat center center;
+}
+
 div#ember-app {
   #main-panel {
     padding: 10px;

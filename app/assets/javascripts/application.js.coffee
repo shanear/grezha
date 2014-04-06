@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-fileupload/basic
+#= require ./preload
 #= require_tree ../../../vendor/assets/javascripts/.
 #= require handlebars
 #= require ember
@@ -24,8 +25,6 @@
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create(
   rootElement: '#ember-app'
-  ready: ->
-    $("#loader").hide()
 )
 
 App.ApplicationAdapter = DS.ActiveModelAdapter.extend(
