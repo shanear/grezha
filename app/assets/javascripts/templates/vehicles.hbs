@@ -6,6 +6,12 @@
         {{searchFilter}}
     </li>
 
+    <li class="new-vehicle">
+      {{#link-to 'vehicles.new'}}
+        Add Vehicle
+      {{/link-to}}
+    </li>
+
     {{#each filteredCollection}}
       <li class="contact">
         {{#link-to 'vehicle' this}}
@@ -13,12 +19,6 @@
         {{/link-to}}
       </li>
     {{/each}}
-
-    <li class="new-vehicle">
-      {{#link-to 'vehicles.new'}}
-        Add Vehicle
-      {{/link-to}}
-    </li>
   </ul>
 </div>
 
