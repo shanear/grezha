@@ -9,27 +9,29 @@
 </head>
 <body>
 
-<header class="clearfix">
-  <h1>
-    <%= link_to "Grezha", root_path, :class => "title" %>
-  </h1>
+<header>
+  <div id="topbar" class="clearfix">
+    <h1>
+      <%= link_to "Grezha", root_path, :class => "title" %>
+    </h1>
 
-  <nav>
-    <% if logged_in? %>
-      <ul>
-        <li> <%= link_to "Contacts", root_path + "#/contacts" %> </li>
-        <li> <%= link_to "Vehicles", root_path + "#/vehicles" %> </li>
-        <li> <%= link_to "Birthdays", birthdays_path %> </li>
-      </ul>
-    <% end %>
-  </nav>
+    <nav>
+      <% if logged_in? %>
+        <ul>
+          <li> <%= link_to "Contacts", root_path + "#/contacts" %> </li>
+          <li> <%= link_to "Vehicles", root_path + "#/vehicles" %> </li>
+          <li> <%= link_to "Birthdays", birthdays_path %> </li>
+        </ul>
+      <% end %>
+    </nav>
 
-  <div class="login-info">
-    <% if logged_in? %>
-      <%= current_user.name %> - <%= link_to "Logout", logout_path, method: "delete" %>
-    <% else %>
-      Not Logged In
-    <% end %>
+    <div class="login-info">
+      <% if logged_in? %>
+        <%= current_user.name %> - <%= link_to "Logout", logout_path, method: "delete" %>
+      <% else %>
+        Not Logged In
+      <% end %>
+    </div>
   </div>
 </header>
 

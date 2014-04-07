@@ -2,6 +2,10 @@ $bulgarian-green: #00966E;
 $bulgarian-red: #D62612;
 $dark-grey: #333;
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'HelveticaNeue', sans-serif;
   color: $dark-grey;
@@ -18,34 +22,45 @@ body {
 }
 
 header {
-  width: 800px;
-  height: auto;
-  padding: 5px;
-  margin: 0 auto 10px auto;
-  color: $bulgarian-red;
-  border-bottom: 2px solid $bulgarian-red;
-  line-height: 20px;
-  vertical-align: center;
+  height: 60px;
+  width: 90%;
+  max-width: 800px;
+  left: 50%;
+  position:fixed;
 
-  h1 {
-    font-size: 22px;
-    line-height: 25px;
-    margin: 0px;
-    float: left;
+  #topbar {
+    position: relative;
+    left: -50%;
+    background-color: white;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    padding: 15px 5px 5px 5px;
+    color: $bulgarian-red;
+    border-bottom: 2px solid $bulgarian-red;
+    line-height: 20px;
+    vertical-align: center;
 
-    a {
-      color: $bulgarian-green;
-      font-family: 'Redressed', sans-serif;
-      text-decoration: none;
+    h1 {
+      font-size: 22px;
+      line-height: 25px;
+      margin: 0px;
+      float: left;
+
+      a {
+        color: $bulgarian-green;
+        font-family: 'Redressed', sans-serif;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: lighten($bulgarian-green, 10);
+      }
     }
 
-    a:hover {
-      color: lighten($bulgarian-green, 10);
+    .login-info {
+      float: right;
     }
-  }
-
-  .login-info {
-    float: right;
   }
 }
 
@@ -95,6 +110,7 @@ nav {
 div#content {
   width: 800px;
   margin: auto;
+  padding-top: 50px;
 
   h1 {
     padding: 10px 0;
@@ -123,7 +139,7 @@ input[type = "checkbox"] {
 }
 
 .spinner {
-  margin: 0px auto 20px;
+  margin: 70px auto 20px;
   height: 50px;
   width: 50px;
   background: lighten($bulgarian-green, 65) url(asset-path("greenspin.gif", image)) no-repeat center center;
@@ -146,10 +162,22 @@ div#ember-app {
   }
 
   #sidebar {
+    position: fixed;
+    top: 60px;
+    bottom: 10px;
     width: 240px;
     float: left;
     background-color: lighten($bulgarian-green, 65);
     border-radius: 10px;
+
+    overflow: scroll;
+  }
+
+  .controls {
+    position: fixed;
+    padding: 10px 0 20px;
+    margin: 0 10px;
+    background-color: inherit;
   }
 
   .searchbar {
@@ -161,6 +189,11 @@ div#ember-app {
     right: 0px;
     padding: 8px;
     pointer-events: none;
+  }
+
+  .new-contact, .new-vehicle {
+    font-weight: bold;
+    padding: 10px 10px 0 10px;
   }
 
   .vehicle-panel {
@@ -224,25 +257,22 @@ div#ember-app {
     float: right;
   }
 
+
   ul.contacts, ul.vehicles {
     padding: 10px;
-    margin: 0;
+    margin: 80px 0 0 0;
     list-style-type: none;
-
-    li.new-contact, li.new-vehicle {
-      font-weight: bold;
-    }
+    overflow: scroll;
 
     a.active {
       background-color: lighten($bulgarian-green, 68);
     }
 
-    li.contact, li.new-contact, li.vehicle, li.new-vehicle {
+    li.contact, li.vehicle {
       a {
         display: block;
         padding: 10px;
         text-decoration: none;
-        //border-bottom: 1px solid lighten($bulgarian-green, 10);
       }
 
       a:hover {

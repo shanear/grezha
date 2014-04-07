@@ -1,17 +1,19 @@
 <div id="sidebar">
-  <ul class="vehicles">
-    <li class="searchbar">
+  <div class="controls">
+    <div class="searchbar">
         <i class="icon-search"></i>
         {{input type="text" value=filterQuery}}
         {{searchFilter}}
-    </li>
+    </div>
 
-    <li class="new-vehicle">
+    <div class="new-vehicle">
       {{#link-to 'vehicles.new'}}
         Add Vehicle
       {{/link-to}}
-    </li>
+    </div>
+  </div>
 
+  <ul class="vehicles">
     {{#each filteredCollection}}
       <li class="contact">
         {{#link-to 'vehicle' this}}
