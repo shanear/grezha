@@ -1,8 +1,4 @@
-<div>
-  {{#each errors}}
-    <li>{{this}}</li>
-  {{/each}}
-</div>
+
 <div class="form-group">
   <label for="name">Name:</label>
   {{input type="text" id="name" class="form-control" value=name}}
@@ -24,4 +20,11 @@
 </div>
 
 <br/>
-
+<div class='errors'>
+  <ul>
+    {{#each errors}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+</div>
+<br/>

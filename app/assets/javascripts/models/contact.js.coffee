@@ -25,14 +25,11 @@ App.Contact = DS.Model.extend
 
   isValid: ->
     errors = []
+    if @get('name') == undefined || (@get('name').replace /[ ]/g, '').length < 1
+      errors.push 'Name cannot be blank.'
 
-    if @get('name') == undefined
-      errors.push 'Name is undefined'
-    else if (@get('name').replace /[ ]/g, '').length < 1
-      errors.push 'Name is blank'
-
+    @set('errors', errors);    
     if errors.length > 0
-      @set('errors', errors)
       return false
     return true
 
