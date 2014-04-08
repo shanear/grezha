@@ -4,4 +4,4 @@ App.ContactIndexView = Ember.View.extend
     @$("img").error =>
       @get('controller.model').reload()
 
-  templateName: 'contact/index'
+  layoutName: 'contact/index'

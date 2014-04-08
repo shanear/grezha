@@ -1,5 +1,5 @@
 App.ImageUploaderComponent = Ember.Component.extend
-  templateName: "components/image-uploader"
+  layoutName: "components/image-uploader"
 
   uploadUrl: (->
     "/api/v1/#{@get('resource')}/#{@get('resourceId')}/upload_image"
