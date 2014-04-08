@@ -338,3 +338,10 @@ div#ember-app {
     }
   }
 }
+
+.errors ul {
+  margin:0px;
+  padding:0px;
+  list-style-type: none;
+  color:red;
+}
