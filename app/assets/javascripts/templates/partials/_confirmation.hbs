@@ -1,0 +1,16 @@
+{{#if confirmation.show}}
+  <div id="confirmation" class="clearfix">
+    <h4>{{confirmation.heading}}</h4>
+    <p>{{confirmation.content}}</p>
+
+    <div class="actions">
+      <button class="btn btn-default" {{action "confirmationAction"}}>
+        {{confirmation.button}}
+      </button>
+
+      <a href class="cancel" {{action "cancelConfirmation"}}> cancel
+      </a>
+    </div>
+  </div>
+{{/if}}
+

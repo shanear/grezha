@@ -1,4 +1,4 @@
-App.VehicleEditRoute = Ember.Route.extend
+App.VehicleEditRoute = App.BaseRoute.extend
   model: (params)->
     @modelFor('vehicle')
 

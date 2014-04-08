@@ -23,6 +23,13 @@ class Api::V1::VehiclesController < ApplicationController
     respond_with Vehicle.find(params[:id])
   end
 
+  def destroy
+    @vehicle = Vehicle.find(params[:id])
+    @vehicle.destroy
+
+    render json: {}
+  end
+
   private
 
   def create_vehicle_params

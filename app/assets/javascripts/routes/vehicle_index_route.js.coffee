@@ -1,3 +1,3 @@
-App.VehicleIndexRoute = Ember.Route.extend
+App.VehicleIndexRoute = App.BaseRoute.extend
   model: (params)->
     @modelFor("vehicle")

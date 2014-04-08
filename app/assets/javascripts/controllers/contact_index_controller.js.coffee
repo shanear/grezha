@@ -1,8 +1,20 @@
-App.ContactIndexController = Ember.ObjectController.extend
+App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
+  needs: "contacts"
   newConnection: { occurredAt: new Date(), note: "" }
 
   actions:
-    addConnection: ()->
+    deleteContact: ->
+      @set 'confirmation',
+        heading: "Are you sure?"
+        content: "Are you sure you want to delete this contact? It will be gone forever!"
+        show: true
+        button: "Delete"
+        action: =>
+          @get('model').deleteRecord()
+          @get('model').save()
+          @transitionToRoute('contacts')
+
+    addConnection: ->
       return if !@get('newConnection.note')
 
       newConnection = @store.createRecord('connection',

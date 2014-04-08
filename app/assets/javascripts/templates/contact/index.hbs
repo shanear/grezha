@@ -1,4 +1,6 @@
 <div class="contact-panel">
+  {{partial "partials/confirmation"}}
+
   <div class="clearfix">
     <div class="avatar clearfix">
       <img {{bind-attr src=pictureUrl}}></img>
@@ -8,6 +10,7 @@
     <div class="top-info">
       <div class="options">
         {{#link-to 'contact.edit' model}}Edit{{/link-to}}
+        <a href {{action "deleteContact"}}>Delete</a>
       </div>
 
       <h3>{{name}}</h3>

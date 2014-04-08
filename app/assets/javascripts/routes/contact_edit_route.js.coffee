@@ -1,7 +1,6 @@
-App.ContactEditRoute = Ember.Route.extend
+App.ContactEditRoute = App.BaseRoute.extend
   model: (params)->
     @modelFor('contact')
 
   deactivate: ->
     @currentModel.rollback()
-    console.log(@currentModel.get('name'))

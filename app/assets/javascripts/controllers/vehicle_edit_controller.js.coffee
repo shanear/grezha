@@ -1,9 +1,7 @@
 App.VehicleEditController = Ember.ObjectController.extend
-
   errors: []
 
   actions:
-
     saveVehicle: ->
       vehicle = @get('model')
       if vehicle.isValid()

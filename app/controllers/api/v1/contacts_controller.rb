@@ -24,6 +24,13 @@ class Api::V1::ContactsController < ApplicationController
     render json: @contact
   end
 
+  def destroy
+    @contact = Contact.find(params[:id])
+    @contact.destroy
+
+    render json: {}
+  end
+
   def upload_image
     @contact = Contact.find(params[:id])
     @contact.update_attributes(picture: params[:image])

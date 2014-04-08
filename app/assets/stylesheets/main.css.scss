@@ -41,6 +41,10 @@ header {
     line-height: 20px;
     vertical-align: center;
 
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+
     h1 {
       font-size: 22px;
       line-height: 25px;
@@ -132,12 +136,6 @@ input[type = "checkbox"] {
   margin: 0;
 }
 
-#loader img {
-  display: block;
-  margin: 0px auto;
-  height: 400px;
-}
-
 .spinner {
   margin: 70px auto 20px;
   height: 50px;
@@ -147,9 +145,10 @@ input[type = "checkbox"] {
 
 div#ember-app {
   #main-panel {
-    padding: 10px;
+    padding: 10px 0 10px 10px;
     width: 540px;
     float: right;
+
     h2 {
       margin: 0;
       margin-bottom: 10px;
@@ -158,6 +157,21 @@ div#ember-app {
 
     input, textarea {
       width: 100%;
+    }
+  }
+
+  #confirmation {
+    width: 100%;
+    background-color: lighten($bulgarian-green, 65);
+    border-radius: 10px;
+    padding: 20px;
+
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+
+    h4 {
+      margin-top: 0;
     }
   }
 
@@ -205,6 +219,10 @@ div#ember-app {
 
     .options {
       float: right;
+
+      a {
+        margin-left: 10px;
+      }
     }
 
     .used-by {
@@ -234,6 +252,10 @@ div#ember-app {
 
     .options {
       float: right;
+
+      a {
+        margin-left: 10px;
+      }
     }
 
     .avatar {

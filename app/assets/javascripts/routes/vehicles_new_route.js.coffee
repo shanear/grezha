@@ -1,3 +1,3 @@
-App.VehiclesNewRoute = Ember.Route.extend
+App.VehiclesNewRoute = App.BaseRoute.extend
   model: ()->
     {}

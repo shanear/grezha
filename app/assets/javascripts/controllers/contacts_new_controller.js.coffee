@@ -1,5 +1,4 @@
 App.ContactsNewController = Ember.ObjectController.extend
-
   errors: []
 
   isContactUnique: (contact)->
@@ -15,7 +14,6 @@ App.ContactsNewController = Ember.ObjectController.extend
     
 
   actions:
-
     createContact: ->
       @set('errors', [])
       newContact = @store.createRecord('contact', @get('model'))

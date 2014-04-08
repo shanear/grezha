@@ -1,9 +1,7 @@
 App.ContactEditController = Ember.ObjectController.extend
-
   errors: []
 
   actions:
-
     saveContact: ->
       contact = @get('model')
       if contact.isValid()
