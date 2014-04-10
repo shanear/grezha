@@ -1,4 +1,4 @@
 App.BaseRoute = Ember.Route.extend
-  setupController: (controller, post)->
-    this._super(controller, post);
+  setupController: (controller, model)->
+    @_super(controller, model);
     controller.reset() if controller.reset?

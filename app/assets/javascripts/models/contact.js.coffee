@@ -27,9 +27,20 @@ App.Contact = DS.Model.extend
     errors = []
     if @get('name') == undefined || (@get('name').replace /[ ]/g, '').length < 1
       errors.push 'Name cannot be blank.'
+    else if @isDuplicate()
+      errors.push "That name already exists."
 
     @set('errors', errors);    
-    if errors.length > 0
+    if @get('errors').length > 0
       return false
     return true
 
+
+  isDuplicate: ->
+    contacts = @store.all('contact')
+    i = 0
+    while i < contacts.get('length')
+      if(contacts.objectAt(i).get('name') == @get('name'))
+        return true
+      i++
+    return false
