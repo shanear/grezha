@@ -7,7 +7,7 @@ App.ContactsNewController = Ember.ObjectController.extend
   actions:
     createContact: ->
       newContact = @store.createRecord('contact', @get('model'))
-      if newContact.isValid() 
+      if newContact.isValid()
         newContact.save().then (contact)=>
           @transitionToRoute('contact', contact)
       else

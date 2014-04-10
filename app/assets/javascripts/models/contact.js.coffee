@@ -40,7 +40,8 @@ App.Contact = DS.Model.extend
     contacts = @store.all('contact')
     i = 0
     while i < contacts.get('length')
-      if(contacts.objectAt(i).get('name') == @get('name'))
+      contact = contacts.objectAt(i)
+      if(contact.get('id') != @get('id') && contact.get('name') == @get('name'))
         return true
       i++
     return false
