@@ -359,6 +359,15 @@ div#ember-app {
       padding: 10px;
     }
   }
+
+  #not-found {
+    text-align: center;
+
+    h4 {
+      margin-top: 40px;
+      color: $bulgarian-green;
+    }
+  }
 }
 
 .errors ul {

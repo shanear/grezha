@@ -3,6 +3,7 @@ App.FilterByQuery = Ember.Mixin.create
 
   filteredCollection: (->
     @filter (model)=>
+      model.get(@get('filterBy')) &&
       ~model.get(@get('filterBy')).toUpperCase().indexOf this.filterQuery.toUpperCase()
   ).property('@each.name', 'filterQuery')
 
