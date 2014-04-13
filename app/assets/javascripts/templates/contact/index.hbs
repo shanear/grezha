@@ -65,13 +65,7 @@
     <h4>Past Connections</h4>
 
     {{#each sortedConnections}}
-      <div class="connection clearfix">
-        <div class="date">
-          <div class="day">{{formatShortDate occurredAt}}</div>
-          <div class="year">{{formatYear occurredAt}}</div>
-        </div>
-        <div class="note">{{breaklines note}}</div>
-      </div>
+      {{connection-panel connection=this}}
     {{else}}
       <p> There are no connections for this person. </p>
     {{/each}}

@@ -1,0 +1,16 @@
+{{partial "partials/confirmation"}}
+
+<div class="connection clearfix">
+  <div class="date">
+    <div class="day">{{formatShortDate connection.occurredAt}}</div>
+    <div class="year">{{formatYear connection.occurredAt}}</div>
+  </div>
+  <div class="note">{{breaklines connection.note}}</div>
+
+  <div class="options">
+    <a href {{action "deleteConnection"}}>
+      <i class="icon-trash"></i>
+      Delete
+    </a>
+  </div>
+</div>
