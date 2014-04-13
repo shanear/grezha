@@ -1,4 +1,5 @@
 $bulgarian-green: #00966E;
+$light-bulgarian-green: #e3fff7;
 $bulgarian-red: #D62612;
 $dark-grey: #333;
 
@@ -99,7 +100,7 @@ div#content {
   margin: 70px auto 20px;
   height: 50px;
   width: 50px;
-  background: lighten($bulgarian-green, 65) url(asset-path("greenspin.gif", image)) no-repeat center center;
+  background: $light-bulgarian-green url(asset-path("greenspin.gif", image)) no-repeat center center;
 }
 
 div#ember-app {
@@ -110,7 +111,7 @@ div#ember-app {
 
   #confirmation {
     width: 100%;
-    background-color: lighten($bulgarian-green, 65);
+    background-color: $light-bulgarian-green;
     border-radius: 10px;
     padding: 20px;
 
@@ -130,7 +131,7 @@ div#ember-app {
     top: $header-height + $usual-buffer;
     bottom: $usual-buffer;
     width: 240px;
-    background-color: lighten($bulgarian-green, 65);
+    background-color: $light-bulgarian-green;
     border-radius: $usual-buffer;
 
     .controls {
@@ -236,7 +237,7 @@ div#ember-app {
     }
 
     .avatar {
-      background-color: lighten($bulgarian-green, 65);
+      background-color: $light-bulgarian-green;
       margin: $usual-buffer;
       margin-left: 0px;
       width: 140px;
@@ -310,7 +311,7 @@ div#ember-app {
     margin-left: 0px;
 
     .date {
-      background-color: lighten($bulgarian-green, 65);
+      background-color: $light-bulgarian-green;
       border-radius: $usual-buffer;
       padding: $usual-buffer;
       float: left;
