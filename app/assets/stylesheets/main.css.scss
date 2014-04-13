@@ -2,6 +2,9 @@ $bulgarian-green: #00966E;
 $bulgarian-red: #D62612;
 $dark-grey: #333;
 
+$header-height: 50px;
+$usual-buffer: 10px;
+
 html, body {
   height: 100%;
 }
@@ -9,7 +12,6 @@ html, body {
 body {
   font-family: 'HelveticaNeue', sans-serif;
   color: $dark-grey;
-  font-size: 14px;
 
   a {
     color: $dark-grey;
@@ -21,119 +23,76 @@ body {
   }
 }
 
+input[type = "checkbox"] {
+  margin: 0;
+}
+
+
 header {
-  height: 60px;
+  // Fix the header in the center
+  position: fixed;
+  left: 50%;
   width: 90%;
   max-width: 800px;
-  left: 50%;
-  position:fixed;
+  min-width: 450px;
 
   #topbar {
     position: relative;
     left: -50%;
-    background-color: white;
+    display: table;
     width: 100%;
-    max-width: 800px;
-    height: auto;
-    padding: 15px 5px 5px 5px;
+    height: $header-height;
+
+    background-color: white;
     color: $bulgarian-red;
+    padding-bottom: 5px;
     border-bottom: 2px solid $bulgarian-red;
-    line-height: 20px;
-    vertical-align: center;
 
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;
+    .logo {
+      display: table-cell;
+      vertical-align: bottom;
 
-    h1 {
-      font-size: 22px;
-      line-height: 25px;
-      margin: 0px;
-      float: left;
-
-      a {
-        color: $bulgarian-green;
+      h1 {
         font-family: 'Redressed', sans-serif;
-        text-decoration: none;
-      }
+        font-size: 2em;
+        margin: 0px;
+        margin-right: $usual-buffer * 2;
 
-      a:hover {
-        color: lighten($bulgarian-green, 10);
+        a { color: $bulgarian-green; }
+        a:hover { color: lighten($bulgarian-green, 10); }
       }
     }
 
-    .login-info {
-      float: right;
-    }
-  }
-}
+    nav {
+      width: 100%;
+      display: table-cell;
+      vertical-align: bottom;
 
-h2 {
-  margin: 10px 0;
-  font-size: 24px;
-}
+      font-size: 1.1em;
 
-div#flash {
-  width: 800px;
-  margin: 0 auto 10px auto;
-  text-align: center;
-  font-weight: bold;
+      ul {
+        display: inline-block;
+        margin: 0px;
 
-  .alert {
-    color: $bulgarian-red;
-  }
-
-  .notice {
-    color: $bulgarian-green;
-  }
-}
-
-nav {
-  float: left;
-  margin-left: 10px;
-
-  ul {
-    display: inline-block;
-    margin: 0px;
-
-    li {
-      line-height: 25px;
-      padding-left: 10px;
-      display: inline-block;
-
-      a  {
-        text-decoration: none;
+        li {
+          padding-left: $usual-buffer;
+          display: inline-block;
+        }
       }
 
-      a:hover {
+      .login-info {
+        float: right;
       }
     }
   }
 }
 
 div#content {
-  width: 800px;
+  padding-top: $header-height;
   margin: auto;
-  padding-top: 50px;
-
-  h1 {
-    padding: 10px 0;
-    font-size: 22px;
-  }
-
-  h2 {
-    padding: 5px 0;
-    font-size: 20px;
-  }
-
-  h4 {
-    color: #777;
-    font-size: 16px;
-  }
-}
-
-input[type = "checkbox"] {
-  margin: 0;
+  width: 90%;
+  max-width: 800px;
+  min-width: 450px;
 }
 
 .spinner {
@@ -144,20 +103,9 @@ input[type = "checkbox"] {
 }
 
 div#ember-app {
-  #main-panel {
-    padding: 10px 0 10px 10px;
-    width: 540px;
-    float: right;
-
-    h2 {
-      margin: 0;
-      margin-bottom: 10px;
-      padding: 0px;
-    }
-
-    input, textarea {
-      width: 100%;
-    }
+  h2, h3 {
+    margin: 0px;
+    margin-bottom: $usual-buffer * 2;
   }
 
   #confirmation {
@@ -166,110 +114,134 @@ div#ember-app {
     border-radius: 10px;
     padding: 20px;
 
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;
-
     h4 {
       margin-top: 0;
     }
   }
 
+  #main-panel {
+    padding: $usual-buffer * 2;
+    width: 540px;
+    float: right;
+  }
+
   #sidebar {
     position: fixed;
-    top: 60px;
-    bottom: 10px;
+    top: $header-height + $usual-buffer;
+    bottom: $usual-buffer;
     width: 240px;
-    float: left;
     background-color: lighten($bulgarian-green, 65);
-    border-radius: 10px;
+    border-radius: $usual-buffer;
 
-    overflow: scroll;
+    .controls {
+      height: 100px;
+      padding: $usual-buffer;
+
+      .new-contact, .new-vehicle {
+        font-weight: bold;
+        padding: 10px 10px 0 10px;
+      }
+
+      .searchbar {
+        position: relative;
+
+        i.fa {
+          position: absolute;
+          right: 0px;
+          padding: $usual-buffer;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .searchlist {
+      position: absolute;
+      width: 100%;
+      top: 90px;
+      bottom: 10px;
+      overflow-y: scroll;
+
+      ul.contacts, ul.vehicles {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        padding: $usual-buffer;
+        padding-top: 0px;
+        list-style-type: none;
+
+        a.active {
+          background-color: lighten($bulgarian-green, 68);
+        }
+
+        li.contact, li.vehicle {
+          a {
+            width: 100%;
+            padding: $usual-buffer;
+            display: block;
+            text-decoration: none;
+          }
+
+          a:hover {
+            background-color: lighten($bulgarian-green, 68);
+          }
+        }
+      }
+    }
   }
 
-  .controls {
-    position: fixed;
-    padding: 10px 0 20px;
-    margin: 0 10px;
-    background-color: inherit;
-  }
-
-  .searchbar {
-    position: relative;
-  }
-
-  .searchbar i {
-    position: absolute;
-    right: 0px;
-    padding: 8px;
-    pointer-events: none;
-  }
-
-  .new-contact, .new-vehicle {
-    font-weight: bold;
-    padding: 10px 10px 0 10px;
-  }
   .options {
+    float: right;
+
     a {
       color: #aaa;
+      margin-left: $usual-buffer;
     }
+
+    a:hover { color: lighten($bulgarian-green, 5); }
+  }
+
+  .errors ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+    color: $bulgarian-red;
+  }
+
+  .cancel {
+    float: right;
   }
 
   .vehicle-panel {
-    margin: 10px;
-
     h3 {
-      margin: 0px 0px 0px 0px;
-    }
-
-    .options {
-      float: right;
-
-      a {
-        margin-left: 10px;
-      }
+      margin: 0px;
     }
 
     .used-by {
       color: #aaa;
-      font-size: 20px;
+      font-size: 1.4em;
       font-weight: bold;
       margin-bottom: 25px;
     }
   }
 
   .contact-panel {
-    margin: 10px;
-
-    h3 {
-      margin-top: 0;
-    }
-
     .top-info {
       width: 350px;
       float: right;
-      padding: 10px;
+      padding: $usual-buffer;
     }
 
     .bio {
-      padding: 20px;
-    }
-
-    .options {
-      float: right;
-
-      a {
-        margin-left: 10px;
-      }
+      padding: $usual-buffer;
     }
 
     .avatar {
       background-color: lighten($bulgarian-green, 65);
-      margin: 10px 10px 10px 0;
+      margin: $usual-buffer;
+      margin-left: 0px;
       width: 140px;
       float: left;
       text-align: center;
-      font-size: 90%;
 
       img {
         height: 140px;
@@ -277,42 +249,10 @@ div#ember-app {
     }
   }
 
-  .contact-form {
-    padding: 0 10px;
-  }
-
-  .cancel {
-    float: right;
-  }
-
-
-  ul.contacts, ul.vehicles {
-    padding: 10px;
-    margin: 80px 0 0 0;
-    list-style-type: none;
-    overflow: scroll;
-
-    a.active {
-      background-color: lighten($bulgarian-green, 68);
-    }
-
-    li.contact, li.vehicle {
-      a {
-        display: block;
-        padding: 10px;
-        text-decoration: none;
-      }
-
-      a:hover {
-        background-color: lighten($bulgarian-green, 68);
-      }
-    }
-  }
-
   .file-upload-contatiner {
     background-color: white;
     position: relative;
-    font-size: 10px;
+    font-size: .7em;
     color: #999;
     margin-top: -5px;
 
@@ -342,12 +282,13 @@ div#ember-app {
   }
 
   .connection {
-    margin: 10px 10px 10px 0px;
+    margin: $usual-buffer;
+    margin-left: 0px;
 
     .date {
       background-color: lighten($bulgarian-green, 65);
-      border-radius:  10px;
-      padding: 10px;
+      border-radius: $usual-buffer;
+      padding: $usual-buffer;
       float: left;
 
       .day {
@@ -363,7 +304,7 @@ div#ember-app {
 
     .note {
       float: left;
-      padding: 10px;
+      padding: $usual-buffer;
     }
   }
 
@@ -377,9 +318,3 @@ div#ember-app {
   }
 }
 
-.errors ul {
-  margin:0px;
-  padding:0px;
-  list-style-type: none;
-  color:red;
-}

@@ -12,9 +12,11 @@
 
 <header>
   <div id="topbar" class="clearfix">
-    <h1>
-      <%= link_to "Grezha", root_path, :class => "title" %>
-    </h1>
+    <div class="logo">
+      <h1>
+        <%= link_to "Grezha", root_path, :class => "title" %>
+      </h1>
+    </div>
 
     <nav>
       <% if logged_in? %>
@@ -24,15 +26,16 @@
           <li> <%= link_to "Birthdays", birthdays_path %> </li>
         </ul>
       <% end %>
+
+      <div class="login-info">
+        <% if logged_in? %>
+          <%= current_user.name %> - <%= link_to "Logout", logout_path, method: "delete" %>
+        <% else %>
+          Not Logged In
+        <% end %>
+      </div>
     </nav>
 
-    <div class="login-info">
-      <% if logged_in? %>
-        <%= current_user.name %> - <%= link_to "Logout", logout_path, method: "delete" %>
-      <% else %>
-        Not Logged In
-      <% end %>
-    </div>
   </div>
 </header>
 

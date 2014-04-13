@@ -16,13 +16,13 @@ gem 'ember-rails', '~> 0.14.1'
 gem 'ember-source', '~> 1.4.0'
 gem 'ember-data-source', '~> 1.0.0.beta.5'
 
+gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails', '~> 3.0.4'
 gem 'jquery-fileupload-rails', '~> 0.4.1'
 
 gem 'sass-rails',   '~> 4.0.1'
-gem 'coffee-rails', '~> 4.0.1'
-gem "less-rails", "~> 2.4.2"
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
+gem 'bootstrap-sass', '~> 3.1.1.0'
+gem 'font-awesome-sass', '~> 4.0.3.1'
 
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'

@@ -10,11 +10,11 @@
     <div class="top-info">
       <div class="options">
         {{#link-to 'contact.edit' model}}
-          <i class="icon-pencil"></i>
+          <i class="fa fa-pencil"></i>
           Edit
         {{/link-to}}
         <a href {{action "deleteContact"}}>
-          <i class="icon-trash"></i>
+          <i class="fa fa-trash-o"></i>
           Delete
         </a>
       </div>
@@ -53,14 +53,19 @@
 
   <div class="connections">
     <h4>Add Connection</h4>
-    <p class="add-connection-form">
-      {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
-      {{textarea id="newConnectionNote" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
+    <div class="add-connection-form">
+      <div class="form-group">
+        {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
+      </div>
+
+      <div class="form-group">
+        {{textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
+      </div>
 
       <button class="btn btn-default" {{action "addConnection"}}>
         Save
       </button>
-    </p>
+    </div>
 
     <h4>Past Connections</h4>
 
