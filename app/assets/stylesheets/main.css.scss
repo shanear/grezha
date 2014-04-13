@@ -282,6 +282,29 @@ div#ember-app {
     margin-bottom: 40px;
   }
 
+  .connections-header {
+    margin-bottom: $usual-buffer;
+
+    .left {
+      float: left;
+      line-height: 3.5em;
+      height: 3.5em;
+      vertical-align: bottom;
+
+      h4 {
+        margin: 0px;
+        display: inline-block;
+      }
+    }
+
+    .right {
+      float: right;
+      line-height: 3.5em;
+      height: 3.5em;
+      vertical-align: bottom;
+    }
+  }
+
   .connection {
     margin: $usual-buffer;
     margin-left: 0px;

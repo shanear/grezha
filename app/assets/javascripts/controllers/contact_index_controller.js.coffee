@@ -14,7 +14,13 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
           @get('model').save()
           @transitionToRoute('contacts')
 
-    addConnection: ->
+    newConnection: ->
+      @set('addingConnection', true)
+
+    cancelNewConnection: ->
+      @set('addingConnection', false)
+
+    saveConnection: ->
       return if !@get('newConnection.note')
 
       newConnection = @store.createRecord('connection',
@@ -24,6 +30,7 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
       newConnection.save().then =>
         @set('newConnection.occurredAt', new Date())
         @set('newConnection.note', "")
+        @set('addingConnection', false)
 
     changeImage: (url)->
       @set('model.pictureUrl', url)

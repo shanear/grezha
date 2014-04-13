@@ -52,22 +52,39 @@
   </div>
 
   <div class="connections">
-    <h4>Add Connection</h4>
-    <div class="add-connection-form">
-      <div class="form-group">
-        {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
-      </div>
 
-      <div class="form-group">
-        {{textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
+    <div class="connections-header clearfix">
+      <div class="right">
+        {{#if addingConnection}}
+          <button class="btn btn-link" {{action "cancelNewConnection"}}>
+            Cancel
+          </button>
+        {{else}}
+          <button class="btn btn-default" {{action "newConnection"}}>
+            New Connection
+          </button>
+        {{/if}}
       </div>
-
-      <button class="btn btn-default" {{action "addConnection"}}>
-        Save
-      </button>
+      <div class="left">
+        <h4>Past Connections</h4>
+      </div>
     </div>
 
-    <h4>Past Connections</h4>
+    {{#if addingConnection}}
+      <div class="add-connection-form">
+        <div class="form-group">
+          {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
+        </div>
+
+        <div class="form-group">
+          {{focused-textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
+        </div>
+
+        <button class="btn btn-default" {{action "saveConnection"}}>
+          Save Connection
+        </button>
+      </div>
+    {{/if}}
 
     {{#each sortedConnections}}
       {{connection-panel connection=this}}
