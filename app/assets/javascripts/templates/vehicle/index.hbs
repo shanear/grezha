@@ -2,8 +2,14 @@
   {{partial "partials/confirmation"}}
 
   <div class="options">
-    {{#link-to 'vehicle.edit' model}}Edit{{/link-to}}
-    <a href {{action "deleteVehicle"}}>Delete</a>
+    {{#link-to 'vehicle.edit' model}}
+      <i class="icon-pencil"></i>
+      Edit
+    {{/link-to}}
+    <a href {{action "deleteVehicle"}}>
+      <i class="icon-trash"></i>
+      Delete
+    </a>
   </div>
 
   <h3>

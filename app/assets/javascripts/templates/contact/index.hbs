@@ -9,8 +9,14 @@
 
     <div class="top-info">
       <div class="options">
-        {{#link-to 'contact.edit' model}}Edit{{/link-to}}
-        <a href {{action "deleteContact"}}>Delete</a>
+        {{#link-to 'contact.edit' model}}
+          <i class="icon-pencil"></i>
+          Edit
+        {{/link-to}}
+        <a href {{action "deleteContact"}}>
+          <i class="icon-trash"></i>
+          Delete
+        </a>
       </div>
 
       <h3>{{name}}</h3>
