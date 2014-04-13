@@ -17,10 +17,6 @@ module ContactsHelper
     end
   end
 
-  def contact_picture_tag(contact, size = :medium)
-    image_tag(contact.picture.exists? ? contact.picture.url(size) : "no_picture_#{size}.png")
-  end
-
   def children_list(contact)
     @contact.children.collect(&:to_s).join(", ")
   end

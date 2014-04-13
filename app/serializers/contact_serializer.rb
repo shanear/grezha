@@ -6,6 +6,6 @@ class ContactSerializer < ActiveModel::Serializer
 
   def picture_url
     _helpers = ActionController::Base.helpers
-    object.picture.exists? ? object.picture.url(:medium) : _helpers.image_path("no_picture_medium.png")
+    object.picture.exists? ? object.picture.url(:medium) : _helpers.image_path("default-contact.png")
   end
 end

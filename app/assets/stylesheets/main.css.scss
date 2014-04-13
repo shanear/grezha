@@ -259,6 +259,7 @@ div#ember-app {
     }
 
     .avatar {
+      background-color: lighten($bulgarian-green, 65);
       margin: 10px 10px 10px 0;
       width: 140px;
       float: left;
@@ -304,6 +305,7 @@ div#ember-app {
   }
 
   .file-upload-contatiner {
+    background-color: white;
     position: relative;
     font-size: 10px;
     color: #999;
