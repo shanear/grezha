@@ -22,7 +22,9 @@
       <% if logged_in? %>
         <ul>
           <li> <%= link_to "Contacts", root_path + "#/contacts" %> </li>
-          <li> <%= link_to "Vehicles", root_path + "#/vehicles" %> </li>
+          <% unless Rails.env.demo? %>
+            <li> <%= link_to "Vehicles", root_path + "#/vehicles" %> </li>
+          <% end %>
           <li> <%= link_to "Birthdays", birthdays_path %> </li>
         </ul>
       <% end %>
