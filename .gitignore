@@ -23,6 +23,9 @@
 #ignore database.yml 
 /config/database.yml
 
+.ruby-version
+.ruby-gemset
+
 .env
 
 *.DS_Store
