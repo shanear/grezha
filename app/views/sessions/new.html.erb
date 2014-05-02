@@ -1,3 +1,16 @@
+<script>
+  // If logged out, clear any cached app data
+  // TODO: store localforage configuration in one place. Currently it's also in SyncAdapter.
+  localforage.config({
+    name        : 'grezha',
+    version     : 1.0,
+    storeName   : 'sync',
+    description : 'locally cached data for Grezha'
+  });
+
+  localforage.clear();
+</script>
+
 <div id="login">
   <h3>Log In</h3>
    <%= form_for(:session, url: sessions_path, class: "form-horizontal") do |f| %>

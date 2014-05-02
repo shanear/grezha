@@ -20,6 +20,7 @@
 #= require_tree ../../../vendor/assets/javascripts/.
 
 #= require_self
+#= require sync_adapter
 #= require_tree ./mixins
 #= require_tree ./models
 #= require_tree ./controllers
@@ -33,8 +34,4 @@
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create(
   rootElement: '#ember-app'
-)
-
-App.ApplicationAdapter = DS.ActiveModelAdapter.extend(
-  {namespace: "api/v1"}
 )
