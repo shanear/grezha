@@ -11,8 +11,11 @@ module ApplicationHelper
   end
 
   def manifest_tag
-    if Rails.env.production?
-      "" #"manifest = '/application.manifest'".html_safe
+    # Implement cache manifest in the demo, hold on releasing to production
+    if Rails.env.demo?
+      "manifest = '/application.manifest'".html_safe
+    else
+      ""
     end
   end
 end

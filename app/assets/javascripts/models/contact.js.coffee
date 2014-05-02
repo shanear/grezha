@@ -6,7 +6,9 @@ App.Contact = DS.Model.extend
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
   )
-  pictureUrl: DS.attr('string')
+  pictureUrl: DS.attr('string',
+    defaultValue: -> AssetPaths.defaultContactAvatar
+  )
   connections: DS.hasMany('connection')
 
   lastSeen: (->
