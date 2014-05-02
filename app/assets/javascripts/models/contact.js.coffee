@@ -32,7 +32,7 @@ App.Contact = DS.Model.extend
     else if @isDuplicate()
       errors.push "That name already exists."
 
-    @set('errors', errors);    
+    @set('errors', errors);
     if @get('errors').length > 0
       return false
     return true
