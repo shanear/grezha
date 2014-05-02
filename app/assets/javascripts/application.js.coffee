@@ -14,12 +14,21 @@
 #= require jquery_ujs
 #= require jquery-fileupload/basic
 #= require ./preload
-#= require_tree ../../../vendor/assets/javascripts/.
 #= require handlebars
 #= require ember
 #= require ember-data
+#= require_tree ../../../vendor/assets/javascripts/.
+
 #= require_self
-#= require app
+#= require_tree ./mixins
+#= require_tree ./models
+#= require_tree ./controllers
+#= require_tree ./views
+#= require_tree ./helpers
+#= require_tree ./components
+#= require_tree ./templates
+#= require_tree ./routes
+#= require ./router
 
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create(
@@ -29,5 +38,3 @@ window.App = Ember.Application.create(
 App.ApplicationAdapter = DS.ActiveModelAdapter.extend(
   {namespace: "api/v1"}
 )
-
-#= require_tree .
