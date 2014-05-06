@@ -15,7 +15,7 @@ App.Contact = DS.Model.extend
     latestConnection = @get('sortedConnections')[0]
 
     if(latestConnection)
-      latestConnection.get('date')
+      latestConnection.get('occurredAt')
     else
       @get('createdAt')
   ).property('connections.@each.isLoaded')
