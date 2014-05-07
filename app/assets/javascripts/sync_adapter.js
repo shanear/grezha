@@ -22,6 +22,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
       self._localSync(type, payload);
       return payload;
     }).catch(function(error) {
+      App.set('online', false);
       // Don't returned cached data for now.
       // return localforage.getItem(type.typeKey);
     });

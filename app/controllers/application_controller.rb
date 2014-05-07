@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
+  def ping
+    render json: { status: :alive }
+  end
+
   def login(user)
     cookies.permanent[:remember_token] = user.remember_token
     @current_user = user

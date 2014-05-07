@@ -109,6 +109,19 @@ div#ember-app {
     margin-bottom: $usual-buffer * 2;
   }
 
+  .disabled-control {
+    a:not(.btn) {
+      visibility: hidden;
+    }
+
+    .btn {
+      color: #eee;
+      border-color: #eee;
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
   #confirmation {
     width: 100%;
     background-color: $light-bulgarian-green;
@@ -135,12 +148,11 @@ div#ember-app {
     border-radius: $usual-buffer;
 
     .controls {
-      height: 100px;
+      height: 90px;
       padding: $usual-buffer;
 
       .new-contact, .new-vehicle {
-        font-weight: bold;
-        padding: 10px 10px 0 10px;
+        padding: 10px 0px 0 0px;
       }
 
       .searchbar {
@@ -158,9 +170,10 @@ div#ember-app {
     .searchlist {
       position: absolute;
       width: 100%;
-      top: 90px;
+      top: 100px;
       bottom: 10px;
       overflow-y: scroll;
+      border-top: 1px solid $bulgarian-green;
 
       ul.contacts, ul.vehicles {
         position: absolute;
@@ -284,7 +297,9 @@ div#ember-app {
   }
 
   .connections-header {
-    margin-bottom: $usual-buffer;
+    border-top: 1px $bulgarian-green solid;
+    padding-top: $usual-buffer;
+    margin: $usual-buffer 0;
 
     .left {
       float: left;
@@ -329,6 +344,10 @@ div#ember-app {
 
     .note {
       float: left;
+      padding: $usual-buffer;
+    }
+
+    .options {
       padding: $usual-buffer;
     }
   }

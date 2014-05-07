@@ -6,11 +6,11 @@
       {{searchFilter}}
     </div>
 
-    <div class="new-contact">
-      {{#link-to 'contacts.new' filterQuery }}
+    {{#control-group name='new-contact'}}
+      {{#link-to 'contacts.new' filterQuery class="btn btn-default"}}
         Add {{newModelText}}
       {{/link-to}}
-    </div>
+    {{/control-group}}
   </div>
 
   <div class="searchlist">

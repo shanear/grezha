@@ -7,10 +7,10 @@
   </div>
   <div class="note">{{breaklines connection.note}}</div>
 
-  <div class="options">
+  {{#control-group name="options"}}
     <a href {{action "deleteConnection"}}>
       <i class="fa fa-trash-o"></i>
       Delete
     </a>
-  </div>
+  {{/control-group}}
 </div>

@@ -21,7 +21,7 @@
 #= require moment/moment
 #= require localforage/dist/localforage
 
-#= require_self
+#= require ember_app
 #= require sync_adapter
 #= require_tree ./mixins
 #= require_tree ./models
@@ -32,8 +32,4 @@
 #= require_tree ./templates
 #= require_tree ./routes
 #= require ./router
-
-# for more details see: http://emberjs.com/guides/application/
-window.App = Ember.Application.create(
-  rootElement: '#ember-app'
-)
+#= require_self

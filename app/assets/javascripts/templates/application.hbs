@@ -21,7 +21,11 @@
 
       <div class="login-info">
         {{App.currentUser}} -
-        <a data-method="delete" href="/logout" rel="nofollow">Logout</a>
+        {{#if App.online}}
+          <a data-method="delete" href="/logout" rel="nofollow">Logout</a>
+        {{else}}
+          Offline
+        {{/if}}
       </div>
     </nav>
   </div>

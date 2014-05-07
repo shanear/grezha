@@ -1,7 +1,7 @@
 <div class="vehicle-panel">
   {{partial "partials/confirmation"}}
 
-  <div class="options">
+  {{#control-group name="options"}}
     {{#link-to 'vehicle.edit' model}}
       <i class="fa fa-pencil"></i>
       Edit
@@ -10,7 +10,7 @@
       <i class="fa fa-trash-o"></i>
       Delete
     </a>
-  </div>
+  {{/control-group}}
 
   <h3>
     #{{licensePlate}}

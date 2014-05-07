@@ -6,11 +6,11 @@
         {{searchFilter}}
     </div>
 
-    <div class="new-vehicle">
-      {{#link-to 'vehicles.new'}}
+    {{#control-group name='new-vehicle'}}
+      {{#link-to 'vehicles.new' class="btn btn-default"}}
         Add Vehicle
       {{/link-to}}
-    </div>
+    {{/control-group}}
   </div>
 
   <div class="searchlist">
