@@ -1,0 +1,32 @@
+<header>
+  <div id="topbar" class="clearfix">
+    <div class="logo">
+      <h1>
+        {{#link-to 'contacts' class="title"}}
+          Grezha
+        {{/link-to}}
+      </h1>
+    </div>
+
+    <nav>
+      <ul>
+        <li>{{#link-to 'contacts'}} Contacts {{/link-to}}</li>
+
+        {{#unless App.isDemo}}
+          <li> {{#link-to 'vehicles'}} Vehicles {{/link-to}} </li>
+        {{/unless}}
+
+        <li><a href="/birthdays">Birthdays</a></li>
+      </ul>
+
+      <div class="login-info">
+        {{App.currentUser}} -
+        <a data-method="delete" href="/logout" rel="nofollow">Logout</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div id="content">
+  {{outlet}}
+</div>
