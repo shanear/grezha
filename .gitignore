@@ -28,8 +28,6 @@ vendor/assets/javascripts/bower_components/
 vendor/assets/javascripts/bower.json
 vendor/assets/javascripts/.bowerrc
 
-node_modules/
-
 .ruby-version
 .ruby-gemset
 
