@@ -28,13 +28,12 @@ gem 'font-awesome-sass', '~> 4.0.3.1'
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
 
-gem 'bower-rails'
-
 group :development, :test do
   gem 'jasmine', '~>2.0.0'
   gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'timecop', '~>0.7.1'
+  gem 'bower-rails'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
