@@ -4,7 +4,7 @@ CACHE MANIFEST
 CACHE:
 http://fonts.googleapis.com/css?family=Redressed
 
-<% if Rails.env.production? %>
+<% if Rails.env.production? || Rails.env.demo? %>
   <%= asset_path("application.css") %>
   <%= asset_path("application.js") %>
 
