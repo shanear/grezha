@@ -20,8 +20,13 @@
 # Ignore compiled assets
 /public/assets
 
-#ignore database.yml 
+# Ignore database.yml
 /config/database.yml
+
+# Ignore bower compiled assets
+vendor/assets/javascripts/bower_components/
+vendor/assets/javascripts/bower.json
+vendor/assets/javascripts/.bowerrc
 
 .ruby-version
 .ruby-gemset
@@ -29,3 +34,4 @@
 .env
 
 *.DS_Store
+*swp

@@ -28,6 +28,8 @@ gem 'font-awesome-sass', '~> 4.0.3.1'
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
 
+gem 'bower-rails'
+
 group :development, :test do
   gem 'jasmine', '~>2.0.0'
   gem 'rspec-rails', '~> 2.14.2'
