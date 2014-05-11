@@ -62,6 +62,6 @@ module Daughters
         '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
         '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
       ]
-    end
+    end)
 
   end
