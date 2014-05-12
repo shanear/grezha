@@ -17,6 +17,8 @@
 # Ignore paperclip uploads
 /public/system
 
+vendor/assets/javascripts/bower_components/
+
 # Ignore compiled assets
 /public/assets
 
