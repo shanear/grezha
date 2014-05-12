@@ -49,7 +49,7 @@ module Daughters
 
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.paths << Rails.root.join("vendor", "assets", "bower_components")
+    config.assets.paths << Rails.root.join("vendor", "assets", "javascripts", "bower_components")
 
     # We don't want the default of everything that isn't js or css, because it pulls too many things in
     config.assets.precompile.shift
