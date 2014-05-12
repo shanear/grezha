@@ -18,6 +18,8 @@
 #= require ember
 #= require ember-data
 #= require_tree ../../../vendor/assets/javascripts/.
+#= require moment/moment
+#= require localforage/dist/localforage
 
 #= require_self
 #= require sync_adapter
