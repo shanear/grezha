@@ -23,9 +23,6 @@
 # Ignore database.yml
 /config/database.yml
 
-# Ignore bower compiled assets
-vendor/assets/javascripts/bower_components/
-
 .ruby-version
 .ruby-gemset
 
