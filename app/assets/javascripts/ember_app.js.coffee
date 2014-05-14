@@ -13,6 +13,7 @@ Application.initializer
     ), 10000
 
 # Load (and cache) all primary models on application load
+### This is experimental, don't do it for now
 Application.initializer
   name: "preload"
   after: "store"
@@ -20,6 +21,7 @@ Application.initializer
     store = container.lookup("store:main")
     store.all(App.Contact)
     store.all(App.Vehicle)
+###
 
 window.App = Application.create
   rootElement: '#ember-app'
