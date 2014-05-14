@@ -1,7 +1,0 @@
-{
-  "name": "dsl-generated dependencies",
-  "dependencies": {
-    "localforage": "0.6.2",
-    "moment": "2.4.0"
-  }
-}

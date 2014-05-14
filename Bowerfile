@@ -1,4 +1,0 @@
-assets_path 'assets/javascripts'
-
-asset "localforage", "0.6.2"
-asset "moment", "2.4.0"

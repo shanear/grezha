@@ -35,7 +35,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl_rails', '~> 4.4.1'
   gem 'timecop', '~>0.7.1'
-  gem 'bower-rails'
 end
 
 #### Bower assets
