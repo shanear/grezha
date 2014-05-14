@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
+
 ruby "1.9.3"
 
 gem 'rails', '4.0.1'
@@ -35,17 +37,10 @@ group :development, :test do
   gem 'timecop', '~>0.7.1'
   gem 'bower-rails'
 end
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+#### Bower assets
+# To include a bower library, use the form:
+# gem 'rails-assets-BOWER_LIBRARY_NAME'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+gem 'rails-assets-localforage', '~>0.6.2'
+gem 'rails-assets-moment', '~>2.4.0'
