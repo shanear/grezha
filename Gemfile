@@ -43,3 +43,4 @@ end
 
 gem 'rails-assets-localforage', '~>0.6.2'
 gem 'rails-assets-moment', '~>2.4.0'
+gem 'rails-assets-jquery.cookie', '~>1.4.1'

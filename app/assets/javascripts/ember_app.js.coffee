@@ -1,16 +1,18 @@
 Application = Ember.Application.extend
-  state: 'up'
   online: true
   readonly: Ember.computed.not('online')
+  loggedIn: (-> $.cookie('remember_token') != undefined).property()
 
 Application.initializer
   name: "start connectivity checks"
   initialize: (container, application)->
-    setInterval (->
+    checkConnection = ->
       ping = Ember.$.get('/ping')
       ping.done -> application.set('online', true)
       ping.fail -> application.set('online', false)
-    ), 10000
+
+    checkConnection()
+    setInterval checkConnection, 10000
 
 # Load (and cache) all primary models on application load
 ### This is experimental, don't do it for now

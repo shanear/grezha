@@ -1,0 +1,11 @@
+<div id="login">
+  <h4>You have logged out</h4>
+
+  <p>
+    {{#if App.online}}
+      <a href="/login">Click here to login</a>
+    {{else}}
+      You cannot login again until you return online.
+    {{/if}}
+  </p>
+</div>

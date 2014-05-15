@@ -3,6 +3,8 @@ Daughters::Application.routes.draw do
 
   get    "/login", to: "sessions#new"
   delete "/logout", to: "sessions#destroy"
+  get    "/logout", to: "sessions#destroy"
+
   get    "/birthdays", to: "contacts#birthdays"
   get    "/ping", to: "application#ping", defaults: { format: "json" }
 

@@ -1,4 +1,6 @@
 App.Router.map () ->
+  @route 'logout'
+
   @resource 'vehicles', ->
     @route 'new'
     @resource 'vehicle', { path: "/:vehicle_id" }, ->

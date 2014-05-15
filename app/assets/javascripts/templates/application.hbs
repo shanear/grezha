@@ -16,15 +16,20 @@
           <li> {{#link-to 'vehicles'}} Vehicles {{/link-to}} </li>
         {{/unless}}
 
-        <li><a href="/birthdays">Birthdays</a></li>
+        {{#if App.online}}
+          <li><a href="/birthdays">Birthdays</a></li>
+        {{/if}}
       </ul>
 
       <div class="login-info">
-        {{App.currentUser}} -
-        {{#if App.online}}
-          <a data-method="delete" href="/logout" rel="nofollow">Logout</a>
+        {{#unless App.online}}
+          Offline -
+        {{/unless}}
+
+        {{#if App.loggedIn}}
+          {{App.currentUser}} - {{logout-button}}
         {{else}}
-          Offline
+          Logged out
         {{/if}}
       </div>
     </nav>

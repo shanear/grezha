@@ -20,6 +20,7 @@
 #= require_tree ../../../vendor/assets/javascripts/.
 #= require moment
 #= require localforage
+#= require jquery.cookie
 
 #= require ember_app
 #= require sync_adapter
