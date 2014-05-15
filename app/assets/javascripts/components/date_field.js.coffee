@@ -1,19 +1,15 @@
-App.DateFieldComponent = Ember.TextField.extend
+App.DateFieldComponent = Ember.Component.extend
   classNames: ["form-control"]
+  days: [1..31]
+  months: [1..12]
+  years: [2014..1950]
 
-  applyDatePicker: (->
-    @$().datepicker().on "changeDate", (e) =>
-      @set("date", e.date)
-  ).on("didInsertElement")
+  date: ((key, value, previousValue)->
+    if arguments.length > 1 && value
+      @set('selectedMonth', value.getMonth() + 1)
+      @set('selectedYear', value.getFullYear())
+      @set('selectedDay', value.getDate())
 
-  date: ((key, date) ->
-    if date
-      @set('value', moment(date).format("MM/DD/YYYY"))
-    else
-      value = @get('value')
-      if value
-        date = moment(value).toDate()
-      else
-        date = null
-    date
-  ).property('value')
+    if @get('selectedMonth') && @get("selectedDay")
+      new Date(@get('selectedYear'), @get('selectedMonth') - 1, @get('selectedDay'))
+  ).property("selectedMonth", "selectedYear", "selectedDay")
