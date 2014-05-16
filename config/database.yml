@@ -1,0 +1,17 @@
+common: &common
+  adapter: postgresql
+  username: grezha
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *common
+  database: grezha_development
+
+test:
+  <<: *common
+  database: grezha_test
+
+production:
+  <<: *common
+  database: grezha_production
