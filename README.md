@@ -1,4 +1,5 @@
 # Grezha
+![build status](https://travis-ci.org/shanear/grezha.svg)
 
 Grezha is a field note taking application for rescuing and caring for people
 involved in prostitution & sex trafficking.
