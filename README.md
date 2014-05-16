@@ -1,4 +1,4 @@
-== Grezha
+# Grezha
 
 Grezha is a field note taking application for rescuing and caring for people
 involved in prostitution & sex trafficking.
@@ -8,13 +8,13 @@ involved in prostitution & sex trafficking.
 * Also record information about vehicles you see in the field.
 
 
-== Getting Started
+## Getting Started
 
 Grezha is built using Ruby on Rails, Ember.js, and PostgreSQL. You can setup the
 project by installing PostgreSQL, RVM, and following the standard rails setup
 process.
 
-==== Database Setup
+### Database Setup
 
 First install PostgreSQL. You can install it easily via homebrew:
 
@@ -27,15 +27,20 @@ TODO: instructions on how to start postgreSQL.
 Once PostgreSQL is setup, you should open a database session with the admin user and
 create the application user, `grezha`:
 
-```SQL
+```sql
 CREATE USER grezha CREATEDB;
 ```
 
-Then you can run the command `rake db:create` in the application directory. Then setup
-the database tables via `rake db:schema:load`. You can optionally add seed data by
-running `rake db:seed` after that.
+Then you can create the databases, load the tables, and load some seed data by running
+the commands:
 
-== Want to use it?
+```
+rake db:create
+rake db:schema:load
+rake db:seed
+```
+
+## Want to use it?
 
 If you're interested in helping or think Grezha would be helpful to your
 organization, let me know! Send me a shoutout at shane1337@gmail.com
