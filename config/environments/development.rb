@@ -38,5 +38,4 @@ Daughters::Application.configure do
   config.eager_load = false
 
   config.ember.variant = :development
-
 end

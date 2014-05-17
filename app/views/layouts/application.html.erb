@@ -4,7 +4,13 @@
   <title>Grezha</title>
   <link href='http://fonts.googleapis.com/css?family=Redressed' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <script>
+    <%= yield :javascript_setup %>
+  </script>
+
   <%= javascript_include_tag "application" %>
+
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
 </head>

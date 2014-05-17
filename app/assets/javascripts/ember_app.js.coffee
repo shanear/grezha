@@ -14,6 +14,14 @@ Application.initializer
     checkConnection()
     setInterval checkConnection, 10000
 
+
+Application.initializer
+  name: "configuration"
+  initialize: (container, application)->
+    application.set('isDemo', EmberConfiguration.isDemo)
+    application.set('currentUser', EmberConfiguration.currentUser)
+
+
 # Load (and cache) all primary models on application load
 ### This is experimental, don't do it for now
 Application.initializer
@@ -26,5 +34,5 @@ Application.initializer
 ###
 
 window.App = Application.create
-  rootElement: '#ember-app'
+  rootElement: EmberConfiguration.rootElement
 

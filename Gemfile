@@ -34,7 +34,8 @@ group :development, :test do
   gem 'jasmine', '~>2.0.0'
   gem 'rspec-rails', '~> 2.14.2'
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'timecop', '~>0.7.1'
+  gem 'timecop', '~> 0.7.1'
+  gem 'teaspoon', '~> 0.8.0'
 end
 
 #### Bower assets
@@ -44,3 +45,4 @@ end
 gem 'rails-assets-localforage', '~>0.6.2'
 gem 'rails-assets-moment', '~>2.4.0'
 gem 'rails-assets-jquery.cookie', '~>1.4.1'
+gem 'rails-assets-ember-qunit', '~>0.1.8'

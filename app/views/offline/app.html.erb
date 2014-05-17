@@ -1,14 +1,12 @@
-<script>
+<% content_for :javascript_setup do %>
 
-App.initializer({
-  name: "setupData",
-  initialize: function(container, application) {
-    application.set('isDemo', <%= Rails.env.demo? %>);
-    application.set('currentUser', '<%= current_user.name %>');
-  }
-});
+  window.EmberConfiguration = {
+    rootElement: "#ember-app",
+    isDemo: <%= Rails.env.demo? %>,
+    currentUser: '<%= current_user.name %>'
+  };
 
-</script>
+<% end %>
 
 <div id="ember-app" class="clearfix">
 </div>
