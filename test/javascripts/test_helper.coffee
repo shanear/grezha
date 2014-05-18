@@ -28,3 +28,5 @@
 # may get better load performance if you require the specific files that are being used in the test that tests them.
 #= require support/setup
 #= require application
+#= require ember-qunit/dist/globals/main
+#= require support/ember_setup
