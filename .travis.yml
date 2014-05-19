@@ -1,7 +1,13 @@
 language: ruby
 rvm:
-  - "1.9.3"
-
+- 1.9.3
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database grezha_travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database grezha_travis_ci_test;' -U postgres
+deploy:
+  provider: heroku
+  api_key:
+    secure: BqVkLlG6mnKupVTU+jdz2dVRI9V+HF9mBlhUtRW2doz9STsBlXeTOaCHrOb/0l4K29myrvzP3Xz9wgHk1Ms7EGObLni+IKacZIu997HuOMZ606/iwnUJAULgkZhxEpt9gCVTAS+07JzLxhtV91kgiiuicNHhvSgKCFVWFjh2Bos=
+  app: grezha-demo
+  on:
+    repo: shanear/grezha
