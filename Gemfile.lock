@@ -54,7 +54,7 @@ GEM
     coffee-script-source (1.6.3)
     diff-lcs (1.2.5)
     dotenv (0.10.0)
-    ember-data-source (1.0.0.beta.5)
+    ember-data-source (1.0.0.beta.7)
       ember-source
     ember-rails (0.14.1)
       active_model_serializers
@@ -65,7 +65,7 @@ GEM
       handlebars-source
       jquery-rails (>= 1.0.17)
       railties (>= 3.1)
-    ember-source (1.4.0)
+    ember-source (1.5.1.1)
       handlebars-source (~> 1.0)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -213,9 +213,9 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass (~> 3.1.1.0)
   coffee-rails (~> 4.0.1)
-  ember-data-source (~> 1.0.0.beta.5)
+  ember-data-source (~> 1.0.0.beta.7)
   ember-rails (~> 0.14.1)
-  ember-source (~> 1.4.0)
+  ember-source (~> 1.5.1)
   factory_girl_rails (~> 4.4.1)
   font-awesome-sass (~> 4.0.3.1)
   foreman
