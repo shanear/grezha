@@ -29,4 +29,7 @@
 #= require support/setup
 #= require application
 #= require ember-qunit/dist/globals/main
+#= require FakeXMLHttpRequest
+#= require route-recognizer
+#= require pretender
 #= require support/ember_setup

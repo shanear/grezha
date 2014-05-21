@@ -2,10 +2,11 @@ var forEach = Ember.EnumerableUtils.forEach;
 
 App.SyncAdapter = DS.ActiveModelAdapter.extend({
   namespace: "api/v1",
+  databaseName: "grezha",
 
   init: function() {
     localforage.config({
-      name        : 'grezha',
+      name        : this.get('databaseName'),
       version     : 1.0,
       storeName   : 'sync',
       description : 'locally cached data for Grezha'
