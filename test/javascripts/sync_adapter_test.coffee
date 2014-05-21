@@ -33,11 +33,37 @@ module "SyncAdapter",
 
     window.server = new Pretender()
 
+    stop()
+    localforage.clear -> start()
 
-asyncTest "finds records from api", ->
-  stubGet "/clients", { clients: [{id: 1, name: "Shane Train"}] }
 
+asyncTest "Stores records in localstorage for offline", ->
+  expect(2)
+
+  stubGet "/clients", {}, 404
   Ember.run ->
-    store.find('client').then (clients)->
-      equal(clients.get('length'), 1, "One client should be returned from the API")
-      start()
+    store.find('client').then ->
+      ok(false, "Find should fail when API unavailable")
+
+
+  stubGet "/clients", { clients: [{id: 1, name: "Shane Train"}] }, 200
+  onlineClients = null
+  Ember.run ->
+    onlineClients = store.find('client')
+    onlineClients.then ->
+      equal(onlineClients.get('length'), 1, "Records should be returned from the API")
+
+
+  onlineClients.then ->
+    stubGet "/clients", {}, 404
+    Ember.run ->
+      offlineClients = store.find('client')
+
+      offlineClients.then ->
+        equal(offlineClients.get('length'), 1, "Records should be cached correctly")
+        start()
+
+      offlineClients.catch ->
+        ok(false, "Find should succeed when records are cached")
+        start()
+

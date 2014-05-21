@@ -19,19 +19,27 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
     var promise = this._super(store, type, sinceToken),
         self = this;
 
-    return promise.then(function(payload) {
-      self._localSync(type, payload);
-      return payload;
-    }).catch(function(error) {
-      App.set('online', false);
-      // Don't returned cached data for now.
-      // return localforage.getItem(type.typeKey);
-    });
-  },
+    return Promise.cast(promise, "SyncAdapter: making localforage calls")
+      .then(function(payload) {
+        return new Promise(function(resolve, reject) {
+          localforage.setItem(
+            type.typeKey,
+            Ember.copy(payload, true),
+            resolve(payload)
+          );
+        });
 
-  _localSync: function(type, payload) {
-    localforage.setItem(type.typeKey, Ember.copy(payload, true));
-  }
+      }).catch(function(error) {
+        App.set('online', false);
+
+        return new Promise(function(resolve, reject) {
+          localforage.getItem(type.typeKey, function(value) {
+            if(value) resolve(value);
+            else      reject("No locally cached data");
+          });
+        });
+      });
+  },
 });
 
 App.ApplicationAdapter = App.SyncAdapter;
