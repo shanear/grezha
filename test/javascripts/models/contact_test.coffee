@@ -1,9 +1,14 @@
+store = contact = null
+
 moduleForModel 'contact', 'Contact Model',
-  {needs: ['model:connection']}
+  needs: ['model:connection']
+  setup: ->
+    store = @store()
+    Ember.run ->
+      contact = store.createRecord('contact', name: "Ms McGrethory")
 
 
 test 'isValid', ->
-  contact = @subject(name: "Leeroy McDinkins")
   ok(contact.isValid(), "Contact is valid by default")
 
   Ember.run -> contact.set("name", "")
@@ -11,11 +16,10 @@ test 'isValid', ->
 
 
 test 'isDuplicate', ->
-  contact = @subject(name: "Samantha Stoops")
   equal(contact.isDuplicate(), false, "Contact isn't duplicate by default")
 
   Ember.run ->
-    contact.get("store").createRecord('contact', {name: "Fran"})
+    store.createRecord('contact', name: "Fran")
     contact.set("name", "Fran")
 
   ok(contact.isDuplicate(), "Contact is duplicate when it has same name as another Contact")
