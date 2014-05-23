@@ -2,13 +2,17 @@
   {{view Ember.Select
   content=days
   selection=selectedDay
-  prompt="DD"}}
+  prompt="Day"}}
+
   {{view Ember.Select
-  content=months
-  selection=selectedMonth
-  prompt="MM"}}
+    content=months
+    optionValuePath="content.id"
+    optionLabelPath="content.name"
+    value=selectedMonth
+    prompt="Month"}}
+
   {{view Ember.Select
   content=years
   selection=selectedYear
-  prompt="YYYY"}}
+  prompt="Year"}}
 </div>
