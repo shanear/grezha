@@ -5,12 +5,20 @@ Application = Ember.Application.extend
 
 Application.initializer
   name: "start connectivity checks"
+  after: "store"
   initialize: (container, application)->
+    store = container.lookup('store:main')
+
     checkConnection = ->
       ping = Ember.$.get('/ping')
-      ping.done -> application.set('online', true)
       ping.fail -> application.set('online', false)
 
+      ping.done ->
+        if application.get('online') == false
+          application.set('online', true)
+          store.syncRecords()
+
+    store.syncRecords()
     checkConnection()
     setInterval checkConnection, 10000
 

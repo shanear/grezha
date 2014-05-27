@@ -10,7 +10,7 @@ class Api::V1::VehiclesController < ApplicationController
   end
 
   def update
-    @vehicle = Vehicle.find(params[:id])
+    @vehicle = find_vehicle(params[:id])
     @vehicle.update_attributes(create_vehicle_params)
     render json: @vehicle
   end
@@ -20,11 +20,11 @@ class Api::V1::VehiclesController < ApplicationController
   end
 
   def show
-    respond_with Vehicle.find(params[:id])
+    respond_with find_vehicle(params[:id])
   end
 
   def destroy
-    @vehicle = Vehicle.find(params[:id])
+    @vehicle = find_vehicle(params[:id])
     @vehicle.destroy
 
     render json: {}
@@ -32,7 +32,16 @@ class Api::V1::VehiclesController < ApplicationController
 
   private
 
+  def find_vehicle(id)
+    if remote_id?(id)
+      Vehicle.where(remote_id: id).first!
+    else
+      Vehicle.find(id)
+    end
+  end
+
   def create_vehicle_params
-    params.required(:vehicle).permit(:license_plate, :used_by, :notes)
+    params[:vehicle][:remote_id] = params[:vehicle][:id]
+    params.required(:vehicle).permit(:remote_id, :license_plate, :used_by, :notes)
   end
 end

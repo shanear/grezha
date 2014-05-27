@@ -8,11 +8,11 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def show
-    respond_with Contact.find(params[:id])
+    respond_with find_contact(params[:id])
   end
 
   def update
-    @contact = Contact.find(params[:id])
+    @contact = find_contact(params[:id])
     @contact.update_attributes(create_contact_params)
 
     render json: @contact
@@ -25,14 +25,14 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def destroy
-    @contact = Contact.find(params[:id])
+    @contact = find_contact(params[:id])
     @contact.destroy
 
     render json: {}
   end
 
   def upload_image
-    @contact = Contact.find(params[:id])
+    @contact = find_contact(params[:id])
     @contact.update_attributes(picture: params[:image])
 
     render json: { imageUrl: @contact.picture.url(:medium) }
@@ -40,7 +40,16 @@ class Api::V1::ContactsController < ApplicationController
 
   private
 
+  def find_contact(id)
+    if remote_id?(id)
+      Contact.where(remote_id: id).first!
+    else
+      Contact.find(id)
+    end
+  end
+
   def create_contact_params
-  	params.required(:contact).permit(:name, :city, :bio, :birthday)
+    params[:contact][:remote_id] = params[:contact][:id]
+  	params.required(:contact).permit(:remote_id, :name, :city, :bio, :birthday)
   end
 end

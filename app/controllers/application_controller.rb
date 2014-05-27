@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def remote_id?(id)
+    id =~ /[A-Za-z0-9]{8}/
+  end
+
   private
 
   def require_logged_in

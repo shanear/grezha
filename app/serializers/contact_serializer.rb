@@ -1,8 +1,12 @@
 class ContactSerializer < ActiveModel::Serializer
   attributes :id, :created_at, :name, :birthday, :bio, :city, :picture_url
 
-  embed :ids, include: true
-  has_many :connections
+  def id
+    object.remote_id
+  end
+
+  embed :id, include: true
+  has_many :connections, embed_key: :remote_id
 
   def picture_url
     _helpers = ActionController::Base.helpers

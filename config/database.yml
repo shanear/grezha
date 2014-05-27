@@ -15,3 +15,7 @@ test:
 production:
   <<: *common
   database: grezha_production
+
+demo:
+  <<: *common
+  database: grezha_demo

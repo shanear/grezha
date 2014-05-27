@@ -3,10 +3,12 @@ window.stubGet = (url, json, code = 200)->
     result = JSON.stringify(json)
     return [code, {"Content-Type" : "application/json"}, result]
 
+
 module "SyncAdapter",
   setup: ->
     window.Client = DS.Model.extend
-      name: DS.attr('string')
+      name: DS.attr('string'),
+      unsyncedChanges: DS.attr('number')
 
     adapter = App.SyncAdapter.extend
       namespace: ""
@@ -71,7 +73,7 @@ asyncTest "Stores records in localforage for offline", ->
 
 
 asyncTest "Records added while offline are saved in localforage", ->
-  expect(3)
+  expect(5)
 
   # Setup a base local storage of 0 clients
   setupStep = new Ember.RSVP.Promise (resolve, reject)->
@@ -100,12 +102,20 @@ asyncTest "Records added while offline are saved in localforage", ->
           equal(fetchedClient.get('name'), 'something',
               "Cached record attribute should match saved record")
 
-          start()
-
-      clientSave.catch ->
+      clientSave.catch (error)->
         ok(false, "Record should save successfully while offline")
-        start()
 
+  syncOnlineStep = saveOfflineStep.then ->
+    server.post "/clients", (request)->
+      ok(true, "Record should be synced online")
+      [200, {"Content-Type" : "application/json"}, request.requestBody]
+
+    store.syncRecords().then ->
+      store.unloadAll('client')
+      store.find('client').then (result)->
+        client = result.toArray()[0]
+        equal(client.get('unsyncedChanges'), 0, "Added client should be marked as synced")
+        start()
 
 
 asyncTest "Records added while online are saved online and cached offline", ->
@@ -121,7 +131,7 @@ asyncTest "Records added while online are saved online and cached offline", ->
     server.post "/clients", (request)->
       ok(true, "Record should save online")
       response = JSON.parse(request.requestBody)
-      response["client"]["id"] = 74
+      response["client"]["name"] = "New Name"
       [200, {"Content-Type" : "application/json"}, JSON.stringify(response)]
 
     Ember.run ->
@@ -136,7 +146,7 @@ asyncTest "Records added while online are saved online and cached offline", ->
         findClients.then (result)->
           clients = result.toArray()
           equal(clients.get('length'), 1, "Records should be saved offline and online")
-          equal(clients[0].get('id'), 74, "Record should retain values given from server")
+          equal(clients[0].get('name'), "New Name", "Record should retain values given from server")
           start()
 
         findClients.catch ->
