@@ -2,8 +2,6 @@ var forEach = Ember.EnumerableUtils.forEach,
     Promise = Ember.RSVP.Promise,
     inflector = Ember.Inflector.inflector;
 
-
-
 App.SyncAdapter = DS.ActiveModelAdapter.extend({
   namespace: "api/v1",
   databaseName: "grezha",
@@ -224,7 +222,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
 });
 
 // TODO: not sure if this is the right way to do this... but whatever
-DS.Store.reopen({
+App.Store = DS.Store.extend({
   adapter: App.SyncAdapter,
   syncRecords: function() {
     return this.get('defaultAdapter').syncRecords()

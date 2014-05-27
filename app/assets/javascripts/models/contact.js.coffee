@@ -20,8 +20,8 @@ App.Contact = DS.Model.extend
       @get('createdAt')
   ).property('connections.@each.isLoaded')
 
-  sortedConnections: Ember.computed.sort 'connections', (a, b)->
-    b.get('date') - a.get('date')
+  connectionsSortBy: ['occuredAt:desc']
+  sortedConnections: Ember.computed.sort('connections', 'connectionsSortBy')
 
   errors: []
 
