@@ -11,6 +11,11 @@ class Api::V1::ConnectionsController < ApplicationController
   private
 
   def create_connection_params
-  	params.required(:connection).permit(:contact_id, :note, :occurred_at)
+    params[:connection][:remote_id] = params[:connection][:id]
+
+    contact = Contact.where(remote_id: params[:connection][:contact_id]).first
+    params[:connection][:contact_id] = contact.id
+
+  	params.required(:connection).permit(:remote_id, :contact_id, :note, :occurred_at)
   end
 end
