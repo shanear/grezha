@@ -3,6 +3,10 @@ window.stubGet = (url, json, code = 200)->
     result = JSON.stringify(json)
     return [code, {"Content-Type" : "application/json"}, result]
 
+App.initializer
+  name: "clear outstanding changes"
+  before: "start connectivity checks"
+  initialize: -> localforage.setItem("changes", [])
 
 module "SyncAdapter",
   setup: ->

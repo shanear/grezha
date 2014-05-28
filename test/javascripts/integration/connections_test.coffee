@@ -7,12 +7,18 @@ App.Contact.FIXTURES = []
 App.Connection.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
+
 module "Connections Integration Tests",
   setup: ->
+    # set the login cookie
+    $.cookie('remember_token', "get logged in")
+
     Ember.run ->
       store = App.__container__.lookup("store:main")
       contact = store.createRecord('contact', name: "Ms McGrethory")
-  teardown: -> App.reset()
+
+  teardown: ->
+    App.reset()
 
 test "this works", ->
   visit("/contacts/" + contact.get("id"))

@@ -70,7 +70,7 @@ Teaspoon.configure do |config|
     #suite.boot_partial = "boot"
 
     # Partial to be rendered in the body tag of the runner. You can define your own to create a custom body structure.
-    #suite.body_partial = "body"
+    suite.body_partial = "/body"
 
     # Assets to be ignored when generating coverage reports. Accepts an array of filenames or regular expressions. The
     # default excludes assets from vendor, gems and support libraries.<br/><br/>
