@@ -29,4 +29,5 @@ test "Create a connection", ->
   click("#save-connection")
 
   andThen ->
-    equal(find(".connection .note").text(), "roll tide.")
+    equal(find(".connection .note").text(), "roll tide.",
+      "A newly created connection should appear")

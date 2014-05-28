@@ -4,4 +4,8 @@ class ConnectionSerializer < ActiveModel::Serializer
   def id
     object.remote_id
   end
+
+  def contact_id
+    object.contact && object.contact.remote_id
+  end
 end

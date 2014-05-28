@@ -9,7 +9,7 @@ App.Contact = DS.Model.extend
   pictureUrl: DS.attr('string',
     defaultValue: -> AssetPaths.defaultContactAvatar
   )
-  connections: DS.hasMany('connection')
+  connections: DS.hasMany('connection', async: true)
 
   lastSeen: (->
     latestConnection = @get('sortedConnections')[0]
@@ -20,11 +20,10 @@ App.Contact = DS.Model.extend
       @get('createdAt')
   ).property('connections.@each.isLoaded')
 
-  connectionsSortBy: ['occuredAt:desc']
+  connectionsSortBy: ['occurredAt:desc']
   sortedConnections: Ember.computed.sort('connections', 'connectionsSortBy')
 
   errors: []
-
   isValid: ->
     errors = []
     if @get('name') == undefined || (@get('name').replace /[ ]/g, '').length < 1
@@ -36,7 +35,6 @@ App.Contact = DS.Model.extend
     if @get('errors').length > 0
       return false
     return true
-
 
   isDuplicate: ->
     contacts = @store.all('contact')

@@ -8,6 +8,10 @@ class Api::V1::ConnectionsController < ApplicationController
     render json: @connection
   end
 
+  def index
+    respond_with Connection.all
+  end
+
   private
 
   def create_connection_params

@@ -25,23 +25,28 @@ test 'isDuplicate', ->
   ok(contact.isDuplicate(), "Contact is duplicate when it has same name as another Contact")
 
 
-test 'sortedConnections', ->
-  Ember.run ->
-    equal(contact.get('sortedConnections').length, 0,
-      "sortedConnections should be empty when no connections")
+asyncTest 'sortedConnections', ->
+  setup = Ember.run -> contact.get('connections')
 
-  Ember.run ->
-    store.createRecord('connection',
-      note: "occurs second", occuredAt: new Date(2014, 9, 7), contact: contact)
-    store.createRecord('connection',
-      note: "occurs first", occuredAt: new Date(2014, 9, 6), contact: contact)
-    store.createRecord('connection',
-      note: "occurs third", occuredAt: new Date(2014, 9, 8), contact: contact)
+  setup.then ->
+    Ember.run ->
+      equal(contact.get('sortedConnections').length, 0,
+        "sortedConnections should be empty when no connections")
 
-    connections = contact.get('sortedConnections')
+      connections = contact.get('connections')
+      connections.pushObject store.createRecord('connection',
+        note: "occurs second", occurredAt: new Date(2014, 9, 7), contact: contact)
+      connections.pushObject store.createRecord('connection',
+        note: "occurs first", occurredAt: new Date(2014, 9, 6), contact: contact)
+      connections.pushObject store.createRecord('connection',
+        note: "occurs third", occurredAt: new Date(2014, 9, 8), contact: contact)
 
-    equal(connections.length, 3, "There should be 3 sortedConnections")
-    deepEqual(
-      [connections[0].get('note'), connections[1].get('note'), connections[2].get('note')],
-      ["occurs third", "occurs second", "occurs first"],
-      "sortedConnections should be in reverse time order")
+    Ember.run ->
+      sortedConnections = contact.get('sortedConnections')
+      equal(sortedConnections.length, 3, "There should be 3 sortedConnections")
+      deepEqual(
+        sortedConnections.mapBy('note'),
+        ["occurs third", "occurs second", "occurs first"],
+        "sortedConnections should be in reverse time order")
+
+    start()

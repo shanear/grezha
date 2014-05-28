@@ -28,6 +28,8 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
       newConnection.set('contact', @get('model'))
 
       newConnection.save().then =>
+        @get('connections').pushObject newConnection
+
         @set('newConnection.occurredAt', new Date())
         @set('newConnection.note', "")
         @set('addingConnection', false)

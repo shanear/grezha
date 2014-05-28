@@ -21,7 +21,7 @@ Daughters::Application.routes.draw do
       resources :vehicles, only: [:index, :create, :update, :destroy],
         defaults: { format: "json" }
 
-      resources :connections, only: [:create],
+      resources :connections, only: [:create, :index],
                           defaults: { format: "json" }
     end
   end

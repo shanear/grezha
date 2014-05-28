@@ -5,7 +5,7 @@ class ContactSerializer < ActiveModel::Serializer
     object.remote_id
   end
 
-  embed :id, include: true
+  embed :id
   has_many :connections, embed_key: :remote_id
 
   def picture_url
