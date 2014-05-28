@@ -222,9 +222,13 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
 });
 
 // TODO: not sure if this is the right way to do this... but whatever
-App.Store = DS.Store.extend({
-  adapter: App.SyncAdapter,
+DS.Store.reopen({
   syncRecords: function() {
-    return this.get('defaultAdapter').syncRecords()
+    var adapter = this.get('defaultAdapter');
+    if(adapter && adapter.syncRecords) {
+      return this.get('defaultAdapter').syncRecords();
+    }
   }
 });
+
+App.Store = DS.Store.extend({ adapter: App.SyncAdapter });

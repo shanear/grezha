@@ -61,7 +61,7 @@
           </button>
         {{else}}
           {{#control-group}}
-            <button class="btn btn-default" {{action "newConnection"}}>
+            <button id="add-connection" class="btn btn-default" {{action "newConnection"}}>
               Add Connection
             </button>
           {{/control-group}}
@@ -82,7 +82,7 @@
           {{focused-textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
         </div>
 
-        <button class="btn btn-default" {{action "saveConnection"}}>
+        <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
           Save Connection
         </button>
       </div>
