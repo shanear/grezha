@@ -8,6 +8,8 @@ App.Connection.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
 
+# TODO: This is the first integration test, and sort of a trial run
+#       standardize the setup for future integration tests
 module "Connections Integration Tests",
   setup: ->
     # set the login cookie
@@ -20,7 +22,7 @@ module "Connections Integration Tests",
   teardown: ->
     App.reset()
 
-test "this works", ->
+test "Create a connection", ->
   visit("/contacts/" + contact.get("id"))
   click("#add-connection")
   fillIn("#newConnectionNote", "roll tide.")
