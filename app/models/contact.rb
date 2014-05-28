@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  include RemoteSynced
+
   has_many :connections, dependent: :destroy
 
   has_attached_file :picture,

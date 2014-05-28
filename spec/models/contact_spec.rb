@@ -1,6 +1,15 @@
 require "spec_helper"
 
 describe Contact do
+  context ".create" do
+    context "when no remote_id is provided" do
+      it "automatically populates it with a valid id" do
+        contact = Contact.create(name: "Nick Saban")
+        expect(contact.remote_id).to match(/[A-Za-z0-9]{8}/)
+      end
+    end
+  end
+
   context ".with_recent_birthday" do
     it "returns contacts with birthdays up to 14 days ago" do
       Timecop.freeze(DateTime.new(2014, 1, 1)) do
