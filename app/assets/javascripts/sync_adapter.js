@@ -68,30 +68,19 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
   },
 
   findMany: function(store, type, ids) {
-    if(this.get('featuresEnabled') === "edge") {
-      // Shortcut findMany to findAll for now for caching purposes
-      return this.findAll(store, type);
-    }
-    else {
-      return this._super(store, type, ids);
-    }
+    return this.findAll(store, type);
   },
 
   createRecord: function(store, type, record) {
     var promise = this._super(store, type, record),
         self = this;
 
-    if(this.get('featuresEnabled') === "edge") {
-      return Promise.cast(promise, "SyncAdapter: saving record " + type.typeKey)
-        .then(function(payload) {
-          return self._cacheRecord(type, payload);
-        }).catch(function(error) {
-          return self._addLocalRecord(store, type, record);
-        });
-    }
-    else {
-      return promise;
-    }
+    return Promise.cast(promise, "SyncAdapter: saving record " + type.typeKey)
+      .then(function(payload) {
+        return self._cacheRecord(type, payload);
+      }).catch(function(error) {
+        return self._addLocalRecord(store, type, record);
+      });
   },
 
   generateIdForRecord: function() {
