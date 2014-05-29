@@ -9,6 +9,9 @@ http://fonts.googleapis.com/css?family=Redressed
   <%= asset_path("application.js") %>
 
 <% else %>
+  <%# This is a bit of janky way to setup asset paths for development
+    # mode. We can try and find something more elegant, but I honestly
+    # don't care, because its development mode. %>
   /assets/fontawesome-webfont.eot?v=4.0.3
   /assets/fontawesome-webfont.woff?v=4.0.3
   /assets/fontawesome-webfont.ttf?v=4.0.3
@@ -17,7 +20,7 @@ http://fonts.googleapis.com/css?family=Redressed
   <% Rails.application.assets.each_logical_path do |asset_path| %>
     <% if Rails.application.assets.content_type_of(asset_path) =~ /image/ %>
       /assets/<%= asset_path %>
-    <% else %>
+    <% elsif (asset_path =~ /.*\..*/) && !asset_path.include?(".json") %>
       /assets/<%= asset_path %>?body=1
     <% end %>
   <% end %>
