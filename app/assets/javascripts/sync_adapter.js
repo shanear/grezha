@@ -21,6 +21,8 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
   // Go through each of the changes and apply them to the server.
   // When completed successfully, associated records are marked as
   // unsynced.
+  // Changes are executed syncronously so that they don't error
+  // if they are temporaly depenedent.
   // TODO: When a change is unsuccessful, what should happen?
   syncRecords: function() {
     var self = this;
@@ -29,26 +31,14 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
       localforage.getItem("changes", function(changes) {
         if(!changes) return resolve();
 
-        changePromises = [];
-
+        var lastChange = Promise.resolve(true);
         changes.forEach(function(change) {
-          var payload = change['payload'],
-              action = change['action'],
-              recordId = change['record_id'],
-              recordType = change['record_type'];
-
-          if(!(payload && action && recordId && recordType))
-            return false;
-
-          commitChange = self.ajax(self.buildURL(recordType), "POST", { data: payload });
-          commitChange = commitChange.then(function(response) {
-            return self._resolveChange(recordType, recordId);
+          lastChange = lastChange.then(function() {
+            return self._commitChange(change);
           });
-
-          changePromises.push(commitChange);
         });
 
-        Ember.RSVP.all(changePromises).then(function() {
+        lastChange.then(function() {
           localforage.setItem("changes", [], resolve);
         });
       });
@@ -188,6 +178,8 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
         if(!records) reject("There are no locally stored records for this type");
 
         var recordsKey = inflector.pluralize(recordType);
+
+        records[recordsKey] = records[recordsKey] || []
         var recordsWithId = records[recordsKey].filter(function(record) {
             return record["id"] == recordId;
           });
@@ -208,6 +200,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
         records = records || { }
 
         // Remove the record with the matching id
+        records[recordsKey] = records[recordsKey] || []
         records[recordsKey] = records[recordsKey].filter(function(record) {
             return record["id"] != recordId;
           })
@@ -215,6 +208,26 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
 
         localforage.setItem(recordType, records, resolve);
       });
+    });
+  },
+
+  // Commits a change to server
+  // Returns a promise that resovles when the change completed
+  _commitChange: function(change) {
+    var self = this;
+        payload = change['payload'],
+        action = change['action'],
+        recordId = change['record_id'],
+        recordType = change['record_type'];
+
+    if(!(payload && action && recordId && recordType)) {
+      return Promise.reject("Change was missing required attributes");
+    }
+
+    commitChange = this.ajax(this.buildURL(recordType), "POST", { data: payload });
+
+    return commitChange.then(function(response) {
+      return self._resolveChange(recordType, recordId);
     });
   },
 
@@ -231,7 +244,6 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
   }
 });
 
-// TODO: not sure if this is the right way to do this... but whatever
 DS.Store.reopen({
   syncRecords: function() {
     var adapter = this.get('defaultAdapter');
