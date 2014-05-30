@@ -19,6 +19,7 @@
 #= require ember-data
 #= require_tree ../../../vendor/assets/javascripts/.
 #= require moment
+#= require_self
 #= require localforage
 #= require jquery.cookie
 
@@ -33,4 +34,8 @@
 #= require_tree ./templates
 #= require_tree ./routes
 #= require ./router
-#= require_self
+
+# This fixes an issue where localforage breaks because Promise isn't defined.
+# The issue only happens when the assets were minified on Safari. Probably worth
+# revisiting at some point.
+window.Promise = Ember.RSVP.Promise
