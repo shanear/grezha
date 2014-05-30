@@ -5,7 +5,7 @@ ruby "1.9.3"
 
 gem 'rails', '4.0.1'
 gem 'pg', '0.14.1'
-gem 'unicorn-rails'
+gem 'unicorn-rails', '1.1.0'
 gem 'foreman'
 
 # Gems used only for assets and not required

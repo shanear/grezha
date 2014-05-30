@@ -38,4 +38,7 @@
 # This fixes an issue where localforage breaks because Promise isn't defined.
 # The issue only happens when the assets were minified on Safari. Probably worth
 # revisiting at some point.
+# TODO: This issue is fixed on the edge version of localforage.
+#       The next update >0.8.1 should handle it.
+#       When the update is made, take the pre-load out of test_helper.rb as well
 window.Promise = Ember.RSVP.Promise unless window.Promise

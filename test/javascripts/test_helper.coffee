@@ -27,6 +27,10 @@
 # You can require your own javascript files here. By default this will include everything in application, however you
 # may get better load performance if you require the specific files that are being used in the test that tests them.
 #= require support/setup
+
+# TODO: We pre-include localforage to deal with the Safari bug, remove this when its fixed
+#= require localforage
+
 #= require application
 #= require ember-qunit/dist/globals/main
 #= require FakeXMLHttpRequest
