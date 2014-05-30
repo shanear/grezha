@@ -38,4 +38,4 @@
 # This fixes an issue where localforage breaks because Promise isn't defined.
 # The issue only happens when the assets were minified on Safari. Probably worth
 # revisiting at some point.
-window.Promise = Ember.RSVP.Promise
+window.Promise = Ember.RSVP.Promise unless window.Promise
