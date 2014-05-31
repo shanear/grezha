@@ -34,8 +34,6 @@ test "Create and delete a connection", ->
 
   visit("/contacts/" + contact.get("id"))
   click(".delete-connection")
-  andThen ->
-    console.log "where we at"
   click(".confirm")
 
   andThen ->
