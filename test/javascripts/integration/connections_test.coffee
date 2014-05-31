@@ -22,7 +22,7 @@ module "Connections Integration Tests",
   teardown: ->
     App.reset()
 
-test "Create a connection", ->
+test "Create and delete a connection", ->
   visit("/contacts/" + contact.get("id"))
   click("#add-connection")
   fillIn("#newConnectionNote", "roll tide.")
@@ -31,3 +31,13 @@ test "Create a connection", ->
   andThen ->
     equal(find(".connection .note").text(), "roll tide.",
       "A newly created connection should appear")
+
+  visit("/contacts/" + contact.get("id"))
+  click(".delete-connection")
+  andThen ->
+    console.log "where we at"
+  click(".confirm")
+
+  andThen ->
+    equal(find(".connection .note").length, 0,
+      "A connection should not show up after being deleted")

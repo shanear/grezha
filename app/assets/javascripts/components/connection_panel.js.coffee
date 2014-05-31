@@ -9,5 +9,6 @@ App.ConnectionPanelComponent = Ember.Component.extend App.HasConfirmation,
         show: true
         button: "Delete"
         action: =>
+          @get('connection.contact.connections').removeObject @get('connection')
           @get('connection').deleteRecord()
           @get('connection').save()
