@@ -1,4 +1,4 @@
 window.EmberConfiguration =
-  rootElement: "#testbox",
+  rootElement: "#ember-testing",
   isDemo: false,
   currentUser: 'Tester Man'
