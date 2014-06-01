@@ -1,4 +1,4 @@
-moduleForComponent("date-field")
+moduleForComponent("date-field", "Date Field Component")
 
 
 test "Default date", ->

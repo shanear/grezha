@@ -96,15 +96,13 @@ asyncTest "Records added while offline are saved in localforage", ->
         stubGet "/clients", {}, 404
         store.unloadAll('client')
 
-        store.find('client').then (result)->
-          clients = result.toArray()
-          equal(clients.get('length'), 1, "Records should be saved offline")
-
-          fetchedClient = clients[0]
+        store.find('client', clientId).then (fetchedClient)->
           equal(fetchedClient.get('id'), clientId,
               "Cached record id should match saved record")
           equal(fetchedClient.get('name'), 'something',
               "Cached record attribute should match saved record")
+          equal(fetchedClient.get('isRemoteSynced'), false,
+              "Locally stored record shouldn't be marked as synced")
 
       clientSave.catch (error)->
         ok(false, "Record should save successfully while offline")
@@ -115,10 +113,9 @@ asyncTest "Records added while offline are saved in localforage", ->
       [200, {"Content-Type" : "application/json"}, request.requestBody]
 
     store.syncRecords().then ->
-      store.unloadAll('client')
       store.find('client').then (result)->
         client = result.toArray()[0]
-        equal(client.get('unsyncedChanges'), 0, "Added client should be marked as synced")
+        equal(client.get('isRemoteSynced'), true, "Added client should be marked as synced")
         start()
 
 

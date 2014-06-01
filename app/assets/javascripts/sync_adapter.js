@@ -24,7 +24,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
   // Changes are executed syncronously so that they don't error
   // if they are temporaly depenedent.
   // TODO: When a change is unsuccessful, what should happen?
-  syncRecords: function() {
+  syncRecords: function(store) {
     var self = this;
 
     return new Promise(function(resolve, reject) {
@@ -34,7 +34,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
         var lastChange = Promise.resolve(true);
         changes.forEach(function(change) {
           lastChange = lastChange.then(function() {
-            return self._commitChange(change);
+            return self._commitChange(store, change);
           });
         });
 
@@ -69,6 +69,22 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
 
   findMany: function(store, type, ids) {
     return this.findAll(store, type);
+  },
+
+  find: function(store, type, id) {
+    var promise = this._super(store, type, id),
+        self = this;
+
+    return promise.catch(function(error) {
+      App.set('online', false);
+
+      return self._fetchLocalRecord(type.typeKey, id).then(function(result) {
+        var data = {}
+        data[type.typeKey] = result
+
+        return data;
+      });
+    });
   },
 
   createRecord: function(store, type, record) {
@@ -202,7 +218,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
 
   // Commits a change to server
   // Returns a promise that resovles when the change completed
-  _commitChange: function(change) {
+  _commitChange: function(store, change) {
     var self = this;
         payload = change['payload'],
         action = change['action'],
@@ -216,28 +232,42 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
     commitChange = this.ajax(this.buildURL(recordType), "POST", { data: payload });
 
     return commitChange.then(function(response) {
-      return self._resolveChange(recordType, recordId);
+      return self._resolveChange(store, recordType, recordId);
     });
   },
 
   // Decrements the number of unsynced changes recorded for a record
-  _resolveChange: function(recordType, recordId) {
+  _resolveChange: function(store, recordType, recordId) {
     var self = this;
 
     return this._fetchLocalRecord(recordType, recordId).then(function(recordData) {
       if(recordData["unsynced_changes"] && recordData["unsynced_changes"] > 0)
         recordData["unsynced_changes"] -= 1;
 
-      return self._saveLocalRecord(recordType, recordData);
+      return self._saveLocalRecord(recordType, recordData).then(function(result) {
+        store.find(recordType, recordId).then(function(model) {
+          model.reload();
+        })
+
+        return result;
+      });
     });
   }
+});
+
+// Add remote sync properties to models.
+DS.Model.reopen({
+  unsyncedChanges: DS.attr("number"),
+  isRemoteSynced: function(){
+    return !(this.get('unsyncedChanges') > 0)
+  }.property("unsyncedChanges")
 });
 
 DS.Store.reopen({
   syncRecords: function() {
     var adapter = this.get('defaultAdapter');
     if(adapter && adapter.syncRecords) {
-      return this.get('defaultAdapter').syncRecords();
+      return this.get('defaultAdapter').syncRecords(this);
     }
   }
 });

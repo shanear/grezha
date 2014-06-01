@@ -18,11 +18,11 @@ Daughters::Application.routes.draw do
         post 'upload_image', on: :member
       end
 
-      resources :vehicles, only: [:index, :create, :update, :destroy],
-        defaults: { format: "json" }
+      resources :vehicles, except: [:new, :edit],
+          defaults: { format: "json" }
 
-      resources :connections, only: [:create, :index, :destroy],
-                          defaults: { format: "json" }
+      resources :connections, except: [:new, :edit, :update],
+          defaults: { format: "json" }
     end
   end
 

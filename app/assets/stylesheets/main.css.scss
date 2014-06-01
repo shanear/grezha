@@ -239,6 +239,15 @@ div#ember-app {
     }
   }
 
+  .control-bar {
+    width: 100%;
+
+    .status {
+      float: left;
+      color: #aaa;
+    }
+  }
+
   .contact-panel {
     .top-info {
       width: 350px;

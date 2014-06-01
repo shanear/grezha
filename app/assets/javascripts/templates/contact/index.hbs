@@ -1,4 +1,22 @@
 <div class="contact-panel">
+  <div class="control-bar clearfix">
+    <div class="status">
+      {{#unless isRemoteSynced}}
+        Unsynced
+      {{/unless}}
+    </div>
+    {{#control-group name="options"}}
+      {{#link-to 'contact.edit' model}}
+        <i class="fa fa-pencil"></i>
+        Edit
+      {{/link-to}}
+      <a href {{action "deleteContact"}}>
+        <i class="fa fa-trash-o"></i>
+        Delete
+      </a>
+    {{/control-group}}
+  </div>
+
   {{partial "partials/confirmation"}}
 
   <div class="clearfix">
@@ -8,16 +26,6 @@
     </div>
 
     <div class="top-info">
-      {{#control-group name="options"}}
-        {{#link-to 'contact.edit' model}}
-          <i class="fa fa-pencil"></i>
-          Edit
-        {{/link-to}}
-        <a href {{action "deleteContact"}}>
-          <i class="fa fa-trash-o"></i>
-          Delete
-        </a>
-      {{/control-group}}
 
       <h3>{{name}}</h3>
         <p>
