@@ -37,6 +37,7 @@ header {
   width: 96%;
   max-width: 800px;
   min-width: 450px;
+  z-index: 10;
 
   #topbar {
     position: relative;
@@ -280,6 +281,11 @@ div#ember-app {
     font-size: .7em;
     color: #999;
     margin-top: -5px;
+    z-index: 1;
+
+    &.disabled-control {
+      display: none;
+    }
 
     &:hover {
       .fake-uploader {
