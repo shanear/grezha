@@ -34,7 +34,7 @@ header {
   // Fix the header in the center
   position: fixed;
   left: 50%;
-  width: 90%;
+  width: 96%;
   max-width: 800px;
   min-width: 450px;
 
@@ -92,7 +92,7 @@ header {
 div#content {
   padding-top: $header-height;
   margin: auto;
-  width: 90%;
+  width: 96%;
   max-width: 800px;
   min-width: 450px;
 }
@@ -135,16 +135,17 @@ div#ember-app {
   }
 
   #main-panel {
-    padding: $usual-buffer * 2;
-    width: 540px;
-    float: right;
+    padding: $usual-buffer;
+    padding-left: 240px + ($usual-buffer * 2);
+    min-width: 240px;
+    width: 100%;
   }
 
   #sidebar {
     position: fixed;
     top: $header-height + $usual-buffer;
     bottom: $usual-buffer;
-    width: 240px;
+    min-width: 240px;
     background-color: $light-bulgarian-green;
     border-radius: $usual-buffer;
 
@@ -250,8 +251,7 @@ div#ember-app {
 
   .contact-panel {
     .top-info {
-      width: 350px;
-      float: right;
+      float: left;
       padding: $usual-buffer;
     }
 
@@ -336,6 +336,7 @@ div#ember-app {
     margin-left: 0px;
 
     .date {
+      width: 80px;
       background-color: $light-bulgarian-green;
       border-radius: $usual-buffer;
       padding: $usual-buffer;
@@ -353,8 +354,8 @@ div#ember-app {
     }
 
     .note {
-      float: left;
-      padding: $usual-buffer;
+      padding-right: $usual-buffer;
+      padding-left: 80px + $usual-buffer;
     }
 
     .options {

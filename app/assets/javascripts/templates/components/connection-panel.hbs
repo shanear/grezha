@@ -5,12 +5,14 @@
     <div class="day">{{formatShortDate connection.occurredAt}}</div>
     <div class="year">{{formatYear connection.occurredAt}}</div>
   </div>
-  <div class="note">{{breaklines connection.note}}</div>
+  <div class="note">
+    {{breaklines connection.note}}
 
-  {{#control-group name="options"}}
-    <button class="btn btn-link delete-connection" {{action "deleteConnection"}}>
-      <i class="fa fa-trash-o"></i>
-      Delete
-    </button>
-  {{/control-group}}
+    {{#control-group name="options"}}
+      <button class="btn btn-link delete-connection" {{action "deleteConnection"}}>
+        <i class="fa fa-trash-o"></i>
+        Delete
+      </button>
+    {{/control-group}}
+  </div>
 </div>

@@ -1,16 +1,24 @@
 <div class="vehicle-panel">
-  {{partial "partials/confirmation"}}
+  <div class="control-bar clearfix">
+    <div class="status">
+      {{#unless isRemoteSynced}}
+        Unsynced
+      {{/unless}}
+    </div>
 
-  {{#control-group name="options"}}
-    {{#link-to 'vehicle.edit' model}}
-      <i class="fa fa-pencil"></i>
-      Edit
-    {{/link-to}}
-    <a href {{action "deleteVehicle"}}>
-      <i class="fa fa-trash-o"></i>
-      Delete
-    </a>
-  {{/control-group}}
+    {{#control-group name="options"}}
+      {{#link-to 'vehicle.edit' model}}
+        <i class="fa fa-pencil"></i>
+        Edit
+      {{/link-to}}
+      <a href {{action "deleteVehicle"}}>
+        <i class="fa fa-trash-o"></i>
+        Delete
+      </a>
+    {{/control-group}}
+  </div>
+
+  {{partial "partials/confirmation"}}
 
   <h3>
     #{{licensePlate}}
