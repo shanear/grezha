@@ -11,7 +11,7 @@ class Api::V1::VehiclesController < ApplicationController
 
   def update
     @vehicle = find_vehicle(params[:id])
-    @vehicle.update_attributes(create_vehicle_params)
+    @vehicle.update_attributes(create_vehicle_params.except(:remote_id))
     render json: @vehicle
   end
 

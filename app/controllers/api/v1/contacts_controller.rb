@@ -13,7 +13,7 @@ class Api::V1::ContactsController < ApplicationController
 
   def update
     @contact = find_contact(params[:id])
-    @contact.update_attributes(create_contact_params)
+    @contact.update_attributes(create_contact_params.except(:remote_id))
 
     render json: @contact
   end
