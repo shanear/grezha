@@ -24,12 +24,13 @@ module "Connections Integration Tests",
 
 test "Create and delete a connection", ->
   visit("/contacts/" + contact.get("id"))
+
   click("#add-connection")
   fillIn("#newConnectionNote", "roll tide.")
   click("#save-connection")
 
   andThen ->
-    equal(find(".connection .note").text(), "roll tide.",
+    ok(/roll tide/.test(find(".connection .note").text()),
       "A newly created connection should appear")
 
   visit("/contacts/" + contact.get("id"))
