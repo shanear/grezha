@@ -91,11 +91,10 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
       .then(function(payload) {
         return self._cacheRecord(type, payload);
       }).catch(function(error) {
-        // Offline errors don't have a status code
-        if(error.status == 404 || !error.status) {
-          return self._addLocalRecord(store, type, record);
+        if(error.status == 500 || error instanceof DS.InvalidError) {
+          return Promise.reject(error);
         }
-        return Promise.reject(error);
+        return self._addLocalRecord(store, type, record);
       });
   },
 

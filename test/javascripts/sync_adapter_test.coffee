@@ -212,6 +212,7 @@ asyncTest "Invalid records on server dont store locally while online", ->
       saveClient = client.save()
       saveClient.then ->
         ok(false, "Records shouldnt save on server error")
+        start()
 
       saveClient.catch (error)->
         store.unloadAll('client')
