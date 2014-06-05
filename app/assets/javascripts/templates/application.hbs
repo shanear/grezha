@@ -26,6 +26,12 @@
           Offline -
         {{/unless}}
 
+        {{#unless App.isProduction}}
+          <span class="environment">
+            {{App.environment}} -
+          </span>
+        {{/unless}}
+
         {{#if App.loggedIn}}
           {{App.currentUser}} - {{logout-button}}
         {{else}}

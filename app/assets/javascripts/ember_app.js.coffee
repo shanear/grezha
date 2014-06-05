@@ -26,7 +26,10 @@ Application.initializer
 Application.initializer
   name: "configuration"
   initialize: (container, application)->
-    application.set('isDemo', EmberConfiguration.isDemo)
+    env = EmberConfiguration.environment
+    application.set('environment', env)
+    application.set('isProduction', (env == "production"))
+    application.set('isDemo', (env == "demo"))
     application.set('currentUser', EmberConfiguration.currentUser)
 
 

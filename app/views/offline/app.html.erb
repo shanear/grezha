@@ -2,7 +2,7 @@
 
   window.EmberConfiguration = {
     rootElement: "#ember-app",
-    isDemo: <%= Rails.env.demo? %>,
+    environment: "<%= Rails.env %>",
     currentUser: '<%= current_user.name %>'
   };
 
