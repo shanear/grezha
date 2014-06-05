@@ -1,8 +1,6 @@
 App.DateFieldComponent = Ember.Component.extend
-  classNames: ["form-control"]
   days: [1..31]
 
-  selectedMonth: 1
   months: [
     {id : 1
     name : "Jan"},

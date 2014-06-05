@@ -124,6 +124,12 @@ div#ember-app {
     }
   }
 
+  .date-field {
+    display:inline;
+    width:auto;
+    margin-right: .5em;
+  }
+
   #confirmation {
     width: 100%;
     background-color: $light-bulgarian-green;
