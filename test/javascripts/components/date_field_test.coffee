@@ -5,7 +5,7 @@ test "Default date", ->
   dateField = @subject()
 
   ok(!dateField.get("selectedYear"))
-  equal(dateField.get("selectedMonth"), 1)
+  equal(dateField.get("selectedMonth"))
   ok(!dateField.get("selectedDay"))
 
 
