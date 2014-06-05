@@ -1,9 +1,3 @@
-  <div>
-    {{#each errors}}
-      <li>{{this}}</li>
-    {{/each}}
-  </div>
-
   <div class="form-group">
     <label for="licensePlate">license plate number:</label>
     {{input type="text" id="licensePlate" class="form-control" value=licensePlate}}
@@ -19,5 +13,10 @@
     {{textarea id="notes" class="form-control" value=notes rows="10"}}
   </div>
 
-  <br/>
-
+{{#if errors.length}}
+  <ul class="errors">
+    {{#each errors}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

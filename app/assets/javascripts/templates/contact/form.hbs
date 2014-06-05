@@ -1,4 +1,3 @@
-
 <div class="form-group">
   <label for="name">name:</label>
   {{input type="text" id="name" class="form-control" value=name}}
@@ -19,12 +18,10 @@
   {{textarea id="bio" class="form-control" value=bio rows="10"}}
 </div>
 
-<br/>
-<div class='errors'>
-  <ul>
+{{#if errors.length}}
+  <ul class="errors">
     {{#each errors}}
       <li>{{this}}</li>
     {{/each}}
   </ul>
-</div>
-<br/>
+{{/if}}

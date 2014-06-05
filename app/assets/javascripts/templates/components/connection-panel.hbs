@@ -5,8 +5,8 @@
     <div class="day">{{formatShortDate connection.occurredAt}}</div>
     <div class="year">{{formatYear connection.occurredAt}}</div>
   </div>
-  <div class="note">
-    {{breaklines connection.note}}
+  <div class="body">
+    <div class="note">{{breaklines connection.note}}</div>
 
     {{#control-group name="options"}}
       <button class="btn btn-link delete-connection" {{action "deleteConnection"}}>

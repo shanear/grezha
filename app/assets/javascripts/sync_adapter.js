@@ -38,9 +38,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
           });
         });
 
-        lastChange.then(function() {
-          localforage.setItem("changes", [], resolve);
-        });
+        return lastChange.then(resolve);
       });
     });
   },
@@ -54,8 +52,6 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
         return self._cacheRecords(payload, type);
 
       }).catch(function(error) {
-        // TODO: going offline isn't the only reason this could fail.
-        //       need to assess the possibilities
         App.set('online', false);
 
         return new Promise(function(resolve, reject) {
@@ -95,7 +91,10 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
       .then(function(payload) {
         return self._cacheRecord(type, payload);
       }).catch(function(error) {
-        return self._addLocalRecord(store, type, record);
+        if(error.status == 404) {
+          return self._addLocalRecord(store, type, record);
+        }
+        return Promise.reject(error);
       });
   },
 
@@ -136,16 +135,36 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
   // This way the changes can easily be applied to the server when
   // returning back online.
   _addLocalChange: function(recordType, recordId, action, payload) {
+    var self = this;
+
     return new Promise(function(resolve, reject) {
       localforage.getItem("changes", function(changes) {
         if(!changes) changes = [];
 
         changes.push({
+          id: self.generateIdForRecord(),
           action: action,
           record_type: recordType,
           record_id: recordId,
           payload: payload
         });
+
+        localforage.setItem("changes", changes, resolve);
+      });
+    });
+  },
+
+
+  _removeChange: function(changeId) {
+    var self = this;
+
+    return new Promise(function(resolve, reject) {
+      localforage.getItem("changes", function(changes) {
+        if(!changes) changes = [];
+
+        var changes = changes.filter(function(change) {
+            return change["id"] != changeId;
+          });
 
         localforage.setItem("changes", changes, resolve);
       });
@@ -232,25 +251,31 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
     commitChange = this.ajax(this.buildURL(recordType), "POST", { data: payload });
 
     return commitChange.then(function(response) {
-      return self._resolveChange(store, recordType, recordId);
+      return self._resolveChangeOnRecord(store, change);
     });
   },
 
   // Decrements the number of unsynced changes recorded for a record
-  _resolveChange: function(store, recordType, recordId) {
-    var self = this;
+  _resolveChangeOnRecord: function(store, change) {
+    var self = this,
+        recordId = change['record_id'],
+        recordType = change['record_type'];
 
-    return this._fetchLocalRecord(recordType, recordId).then(function(recordData) {
+    return this._removeChange(change["id"]).then(function() {
+      return self._fetchLocalRecord(recordType, recordId);
+
+    }).then(function(recordData) {
       if(recordData["unsynced_changes"] && recordData["unsynced_changes"] > 0)
         recordData["unsynced_changes"] -= 1;
 
-      return self._saveLocalRecord(recordType, recordData).then(function(result) {
-        store.find(recordType, recordId).then(function(model) {
-          model.reload();
-        })
+      return self._saveLocalRecord(recordType, recordData);
 
-        return result;
-      });
+    }).then(function(record) {
+      store.find(recordType, recordId).then(function(model) {
+        model.reload();
+      })
+
+      return record;
     });
   }
 });

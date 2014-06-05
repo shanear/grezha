@@ -223,9 +223,10 @@ div#ember-app {
     a:hover { color: lighten($bulgarian-green, 5); }
   }
 
-  .errors ul {
+  ul.errors  {
     margin: 0px;
     padding: 0px;
+    margin-bottom: $usual-buffer;
     list-style-type: none;
     color: $bulgarian-red;
   }
@@ -365,7 +366,7 @@ div#ember-app {
       }
     }
 
-    .note {
+    .body {
       padding-right: $usual-buffer;
       padding-left: 80px + $usual-buffer;
     }

@@ -5,14 +5,22 @@ class Api::V1::VehiclesController < ApplicationController
 
   def create
     @vehicle = Vehicle.create(create_vehicle_params)
-    @vehicle.save()
-    render json: @vehicle
+
+    if @vehicle.save()
+      render json: @vehicle
+    else
+      render json: { errors: @vehicle.errors }, status: 422
+    end
   end
 
   def update
     @vehicle = find_vehicle(params[:id])
-    @vehicle.update_attributes(create_vehicle_params.except(:remote_id))
-    render json: @vehicle
+
+    if @vehicle.update_attributes(create_vehicle_params.except(:remote_id))
+      render json: @vehicle
+    else
+      render json: { errors: @vehicle.errors }, status: 422
+    end
   end
 
   def index

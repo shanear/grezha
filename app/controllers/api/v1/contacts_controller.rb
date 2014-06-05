@@ -13,15 +13,22 @@ class Api::V1::ContactsController < ApplicationController
 
   def update
     @contact = find_contact(params[:id])
-    @contact.update_attributes(create_contact_params.except(:remote_id))
 
-    render json: @contact
+    if @contact.update_attributes(create_contact_params.except(:remote_id))
+      render json: @contact
+    else
+      render json: { errors: @contact.errors }, status: 422
+    end
   end
 
   def create
-  	@contact = Contact.create(create_contact_params)
-  	@contact.save()
-    render json: @contact
+  	@contact = Contact.new(create_contact_params)
+
+    if @contact.save()
+      render json: @contact
+    else
+      render json: { errors: @contact.errors }, status: 422
+    end
   end
 
   def destroy

@@ -4,8 +4,12 @@ class Api::V1::ConnectionsController < ApplicationController
 
   def create
   	@connection = Connection.create(create_connection_params)
-  	@connection.save()
-    render json: @connection
+
+    if @connection.save()
+      render json: @connection
+    else
+      render json: { errors: @connection.errors }, status: 422
+    end
   end
 
   def show
