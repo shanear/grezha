@@ -1,17 +1,17 @@
 <div class="form-group">
   {{view Ember.Select
     class="form-control date-field"
-    content=days
-    selection=selectedDay
-    prompt="Day"}}
-
-  {{view Ember.Select
-    class="form-control date-field"
     content=months
     optionValuePath="content.id"
     optionLabelPath="content.name"
     value=selectedMonth
     prompt="Month"}}
+
+  {{view Ember.Select
+    class="form-control date-field"
+    content=days
+    selection=selectedDay
+    prompt="Day"}}
 
   {{view Ember.Select
     class="form-control date-field"
