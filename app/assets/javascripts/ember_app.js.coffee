@@ -31,6 +31,7 @@ Application.initializer
     application.set('isProduction', (env == "production"))
     application.set('isDemo', (env == "demo"))
     application.set('currentUser', EmberConfiguration.currentUser)
+    application.set('organization', EmberConfiguration.organization)
 
 
 # Load (and cache) all primary models on application load

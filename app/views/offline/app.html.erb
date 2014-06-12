@@ -1,9 +1,10 @@
 <% content_for :javascript_setup do %>
 
   window.EmberConfiguration = {
-    rootElement: "#ember-app",
-    environment: "<%= Rails.env %>",
-    currentUser: '<%= current_user.name %>'
+    rootElement: '#ember-app',
+    environment: '<%= Rails.env %>',
+    currentUser: '<%= current_user.name %>',
+    organization: '<%= current_user.organization.name %>'
   };
 
 <% end %>
