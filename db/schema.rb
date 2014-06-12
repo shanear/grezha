@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612020706) do
+ActiveRecord::Schema.define(version: 20140612021545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 20140612020706) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "occurred_at"
-    t.string   "remote_id",   limit: 8, null: false
+    t.string   "remote_id",       limit: 8, null: false
+    t.integer  "organization_id"
   end
 
   add_index "connections", ["remote_id"], name: "index_connections_on_remote_id", unique: true, using: :btree
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140612020706) do
     t.string   "city"
     t.date     "last_seen"
     t.string   "remote_id",            limit: 8, null: false
+    t.integer  "organization_id"
   end
 
   add_index "contacts", ["remote_id"], name: "index_contacts_on_remote_id", unique: true, using: :btree
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 20140612020706) do
     t.string   "encrypted_password"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "organization_id"
   end
 
   create_table "vehicles", force: true do |t|
@@ -66,7 +69,8 @@ ActiveRecord::Schema.define(version: 20140612020706) do
     t.string   "used_by"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remote_id",     limit: 8, null: false
+    t.string   "remote_id",       limit: 8, null: false
+    t.integer  "organization_id"
   end
 
   add_index "vehicles", ["remote_id"], name: "index_vehicles_on_remote_id", unique: true, using: :btree
