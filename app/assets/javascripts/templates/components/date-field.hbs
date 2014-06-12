@@ -1,6 +1,6 @@
 <div class="form-group">
   {{view Ember.Select
-    class="form-control date-field"
+    class="form-control date-field selected-month"
     content=months
     optionValuePath="content.id"
     optionLabelPath="content.name"
@@ -8,13 +8,13 @@
     prompt="Month"}}
 
   {{view Ember.Select
-    class="form-control date-field"
+    class="form-control date-field selected-day"
     content=days
     selection=selectedDay
     prompt="Day"}}
 
   {{view Ember.Select
-    class="form-control date-field"
+    class="form-control date-field selected-year"
     content=years
     selection=selectedYear
     prompt="Year"}}

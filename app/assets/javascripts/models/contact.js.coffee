@@ -9,19 +9,24 @@ App.Contact = DS.Model.extend
   pictureUrl: DS.attr('string',
     defaultValue: -> AssetPaths.defaultContactAvatar
   )
+
   connections: DS.hasMany('connection', async: true)
 
+  sortedConnections: (->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      content: @get('connections')
+      sortProperties: ['occurredAt']
+      sortAscending: false
+  ).property('connections.@each')
+
   lastSeen: (->
-    latestConnection = @get('sortedConnections')[0]
+    latestConnection = @get('sortedConnections.lastObject')
 
     if(latestConnection)
       latestConnection.get('occurredAt')
     else
       @get('createdAt')
-  ).property('connections.@each.isLoaded')
-
-  connectionsSortBy: ['occurredAt:desc']
-  sortedConnections: Ember.computed.sort('connections', 'connectionsSortBy')
+  ).property('connections.@each')
 
   errors: []
   isValid: ->

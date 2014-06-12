@@ -30,7 +30,7 @@ asyncTest 'sortedConnections', ->
 
   setup.then ->
     Ember.run ->
-      equal(contact.get('sortedConnections').length, 0,
+      equal(contact.get('sortedConnections.length'), 0,
         "sortedConnections should be empty when no connections")
 
       connections = contact.get('connections')
@@ -43,7 +43,7 @@ asyncTest 'sortedConnections', ->
 
     Ember.run ->
       sortedConnections = contact.get('sortedConnections')
-      equal(sortedConnections.length, 3, "There should be 3 sortedConnections")
+      equal(sortedConnections.get('length'), 3, "There should be 3 sortedConnections")
       deepEqual(
         sortedConnections.mapBy('note'),
         ["occurs third", "occurs second", "occurs first"],
