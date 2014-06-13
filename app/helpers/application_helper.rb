@@ -11,11 +11,11 @@ module ApplicationHelper
   end
 
   def manifest_tag
-    # Implement cache manifest in the demo, hold on releasing to production
-    if Rails.env.demo?
-      "manifest = '/application.manifest'".html_safe
-    else
+      # Offline cahcing is annoying while developing, enable if testing needed
+    if Rails.env.development?
       ""
+    else
+      "manifest = '/application.manifest'".html_safe
     end
   end
 end
