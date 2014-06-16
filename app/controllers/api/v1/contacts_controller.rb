@@ -4,7 +4,7 @@ class Api::V1::ContactsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Contact.order('LOWER(name) asc')
+    respond_with contacts.order('LOWER(name) asc')
   end
 
   def show
@@ -22,7 +22,7 @@ class Api::V1::ContactsController < ApplicationController
   end
 
   def create
-  	@contact = Contact.new(create_contact_params)
+  	@contact = contacts.new(create_contact_params)
 
     if @contact.save()
       render json: @contact
@@ -47,11 +47,15 @@ class Api::V1::ContactsController < ApplicationController
 
   private
 
+  def contacts
+    Contact.where(organization_id: current_user.organization_id)
+  end
+
   def find_contact(id)
     if remote_id?(id)
-      Contact.where(remote_id: id).first!
+      contacts.where(remote_id: id).first!
     else
-      Contact.find(id)
+      contacts.find(id)
     end
   end
 

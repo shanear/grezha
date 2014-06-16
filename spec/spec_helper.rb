@@ -41,4 +41,7 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+
+  config.include Requests::JsonHelpers, :type => :controller
+  config.include AuthHelpers, :type => :controller
 end

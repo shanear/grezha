@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   belongs_to :organization
 
   # TODO: validate email
+  # TODO: only validate password on create
   validates :password, :presence => true, :length => { :within => 6..40 }
 
   before_save :normalize_email
