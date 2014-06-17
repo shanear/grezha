@@ -13,7 +13,7 @@ describe Api::V1::ConnectionsController do
     }
 
     let(:other_connection) {
-      FactoryGirl.create(:connection, note: "Cheers", organization_id: 17)
+      FactoryGirl.create(:connection, note: "Cheers", organization_id: organization.id + 1)
     }
 
     describe "GET #index" do

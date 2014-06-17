@@ -12,7 +12,7 @@ describe Api::V1::VehiclesController do
     }
 
     let(:other_vehicle) {
-      FactoryGirl.create(:vehicle, license_plate: "XYZ789", organization_id: 3)
+      FactoryGirl.create(:vehicle, license_plate: "XYZ789", organization_id: organization.id + 1)
     }
 
     describe "GET #index" do

@@ -12,7 +12,7 @@ describe Api::V1::ContactsController do
     }
 
     let(:other_contact) {
-      FactoryGirl.create(:contact, name: "Other person", organization_id: 3)
+      FactoryGirl.create(:contact, name: "Other person", organization_id: organization.id + 1)
     }
 
     describe "GET #index" do
