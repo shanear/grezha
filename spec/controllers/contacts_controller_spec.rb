@@ -60,7 +60,7 @@ describe Api::V1::ContactsController do
 
       it "fails if contact not in organization" do
         expect {
-          put :update, id: other_contact.id, format: :json
+          put :update, id: other_contact.id, contact: { name: "New Billy" }, format: :json
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end

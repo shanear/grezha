@@ -4,7 +4,7 @@ class Api::V1::VehiclesController < ApplicationController
   respond_to :json
 
   def create
-    @vehicle = Vehicle.create(create_vehicle_params)
+    @vehicle = vehicles.new(create_vehicle_params)
 
     if @vehicle.save()
       render json: @vehicle
@@ -24,7 +24,7 @@ class Api::V1::VehiclesController < ApplicationController
   end
 
   def index
-    respond_with Vehicle.all
+    respond_with vehicles
   end
 
   def show
@@ -40,11 +40,15 @@ class Api::V1::VehiclesController < ApplicationController
 
   private
 
+  def vehicles
+    Vehicle.where(organization_id: current_user.organization_id)
+  end
+
   def find_vehicle(id)
     if remote_id?(id)
-      Vehicle.where(remote_id: id).first!
+      vehicles.where(remote_id: id).first!
     else
-      Vehicle.find(id)
+      vehicles.find(id)
     end
   end
 

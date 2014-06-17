@@ -3,7 +3,7 @@ class Api::V1::ConnectionsController < ApplicationController
   respond_to :json
 
   def create
-  	@connection = Connection.create(create_connection_params)
+  	@connection = connections.create(create_connection_params)
 
     if @connection.save()
       render json: @connection
@@ -17,7 +17,7 @@ class Api::V1::ConnectionsController < ApplicationController
   end
 
   def index
-    respond_with Connection.all
+    respond_with connections
   end
 
   def destroy
@@ -29,19 +29,25 @@ class Api::V1::ConnectionsController < ApplicationController
 
   private
 
+  def connections
+    Connection.where(organization_id: current_user.organization_id)
+  end
+
   def find_connection(id)
     if remote_id?(id)
-      Connection.where(remote_id: id).first!
+      connections.where(remote_id: id).first!
     else
-      Connection.find(id)
+      connections.find(id)
     end
   end
 
   def create_connection_params
     params[:connection][:remote_id] = params[:connection][:id]
 
-    contact = Contact.where(remote_id: params[:connection][:contact_id]).first
-    params[:connection][:contact_id] = contact.id
+    if remote_id?(params[:connection][:contact_id])
+      contact = Contact.where(remote_id: params[:connection][:contact_id]).first
+      params[:connection][:contact_id] = contact.id
+    end
 
   	params.required(:connection).permit(:remote_id, :contact_id, :note, :occurred_at)
   end
