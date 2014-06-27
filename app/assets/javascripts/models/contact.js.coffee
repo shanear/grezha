@@ -20,7 +20,7 @@ App.Contact = DS.Model.extend
   ).property('connections.@each')
 
   lastSeen: (->
-    latestConnection = @get('sortedConnections.lastObject')
+    latestConnection = @get('sortedConnections.firstObject')
 
     if(latestConnection)
       latestConnection.get('occurredAt')
