@@ -63,10 +63,10 @@ test "Update last seen", ->
   click("#add-connection")
   fillIn("#newConnectionNote", "go warriors.")
   fillIn(".selected-day", "2")
-  fillIn(".selected-month", "2")
+  fillIn(".selected-month", "1")
   fillIn(".selected-year", "2013")
   click("#save-connection")
 
   andThen ->
-    ok(/February 2nd 2013/.test(find("#last-seen").text()),
+    ok(/January 2nd 2013/.test(find("#last-seen").text()),
        "Last seen should be equal to date of the most recent connection")
