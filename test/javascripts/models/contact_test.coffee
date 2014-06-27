@@ -63,8 +63,5 @@ asyncTest 'last seen connection', ->
       connections.pushObject store.createRecord('connection',
         note: "occurs first", occurredAt: new Date(2014, 9, 6), contact: contact)
     Ember.run ->
-
-      sortedConnections = contact.get('sortedConnections')
-      equal(sortedConnections.get('length'), 2, "There should be 2 sortedConnections")
       deepEqual(contact.get('lastSeen'), new Date(2014, 9, 7), "uses the last seen date from connections " +contact.get('lastSeen'))
   start()
