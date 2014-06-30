@@ -3,6 +3,7 @@ App.Router.map () ->
 
   @resource 'vehicles', ->
     @route 'new'
+    @route 'new', { path: "/new/:name" }
     @resource 'vehicle', { path: "/:vehicle_id" }, ->
       @route 'edit'
 
