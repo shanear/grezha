@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20140612021545) do
     t.string   "name"
     t.text     "bio"
     t.datetime "birthday"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 20140612021545) do
     t.string   "remember_token"
     t.string   "salt"
     t.string   "encrypted_password"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "organization_id"
   end
 
