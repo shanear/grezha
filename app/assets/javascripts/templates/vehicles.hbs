@@ -2,7 +2,7 @@
   <div class="controls">
     <div class="searchbar">
         <i class="fa fa-search"></i>
-        {{input type="text" class="form-control" value=filterQuery}}
+        {{input type="text" class="form-control" id="vehicle-search" value=filterQuery}}
         {{searchFilter}}
     </div>
 
@@ -16,7 +16,7 @@
   <div class="searchlist">
     <ul class="vehicles">
       {{#each filteredCollection}}
-        <li class="contact">
+        <li class="vehicle">
           {{#link-to 'vehicle' this}}
             {{licensePlate}}
           {{/link-to}}
