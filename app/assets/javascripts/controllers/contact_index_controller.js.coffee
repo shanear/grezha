@@ -20,19 +20,20 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     cancelNewConnection: ->
       @set('addingConnection', false)
 
+
     saveConnection: ->
-      return if !@get('newConnection.note')
-
-      newConnection = @store.createRecord('connection',
-        @get('newConnection'))
+      newConnection = @store.createRecord('connection', @get('newConnection'))
       newConnection.set('contact', @get('model'))
+      
+      if newConnection.isValid()
+        newConnection.save().then =>
+          @get('connections').pushObject newConnection
 
-      newConnection.save().then =>
-        @get('connections').pushObject newConnection
-
-        @set('newConnection.occurredAt', new Date())
-        @set('newConnection.note', "")
-        @set('addingConnection', false)
+          @set('newConnection.occurredAt', new Date())
+          @set('newConnection.note', "")
+          @set('addingConnection', false)
+      else
+        @set('errors', newConnection.get('errors'))
 
     changeImage: (url)->
       @set('model.pictureUrl', url)

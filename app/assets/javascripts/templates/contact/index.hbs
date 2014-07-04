@@ -92,6 +92,13 @@
           Save Connection
         </button>
       </div>
+      {{#if errors.length}}
+        <ul class="errors">
+        {{#each errors}}
+          <li>{{this}}</li>
+        {{/each}}
+        </ul>
+      {{/if}}
     {{/if}}
 
     {{#each sortedConnections}}

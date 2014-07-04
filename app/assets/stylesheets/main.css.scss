@@ -236,6 +236,11 @@ div#ember-app {
     color: $bulgarian-red;
   }
 
+  ul.connection_errors  {
+    list-style-type: none;
+    color: $bulgarian-red;
+  }
+
   .cancel {
     float: right;
   }
@@ -321,7 +326,7 @@ div#ember-app {
   }
 
   .add-connection-form {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .connections-header {
