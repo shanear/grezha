@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612021545) do
+ActiveRecord::Schema.define(version: 20140704020145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,20 @@ ActiveRecord::Schema.define(version: 20140612021545) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "relationships", force: true do |t|
+    t.string   "remote_id",         limit: 8, null: false
+    t.string   "name"
+    t.string   "contact_id"
+    t.string   "contact_info"
+    t.string   "relationship_type"
+    t.string   "organization_id"
+    t.string   "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "relationships", ["remote_id"], name: "index_relationships_on_remote_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
