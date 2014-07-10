@@ -1,0 +1,39 @@
+{{partial "partials/confirmation"}}
+
+<div class="relationship clearfix">
+  <div class="body">
+  <dl>
+  	<dt>
+  		Name
+  	</dt>
+  	<dd>
+  	  {{relationship.name}}
+  	</dd>
+  	  	<dt>
+  	  	  		  		Type
+  	</dt>
+  	<dd>
+  	  {{relationship.relationshipType}}
+  	</dd>
+  	  	<dt>
+  	  	Contact Information
+  	</dt>
+  	<dd>
+  	  {{relationship.contactInfo}}
+  	</dd>
+  	  	<dt>
+  	  	Notes
+  	</dt>
+  	<dd>
+  	  {{relationship.notes}}
+  	</dd>
+  </dl>
+    
+    {{#control-group name="options"}}
+      <button class="btn btn-link delete-connection" {{action "deleteRelationship"}}>
+        <i class="fa fa-trash-o"></i>
+        Delete
+      </button>
+    {{/control-group}}
+  </div>
+</div>

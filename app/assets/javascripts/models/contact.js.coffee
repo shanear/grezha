@@ -11,6 +11,14 @@ App.Contact = DS.Model.extend
   )
 
   connections: DS.hasMany('connection', async: true)
+  relationships: DS.hasMany('relationship', async: true)
+
+  sortedRelationships: (->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      content: @get('relationships')
+      sortProperties: ['name']
+      sortAscending: false
+  ).property('relationships.@each')
 
   sortedConnections: (->
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,

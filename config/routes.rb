@@ -18,6 +18,9 @@ Daughters::Application.routes.draw do
         post 'upload_image', on: :member
       end
 
+       resources :relationships, except: [:new, :edit],
+          defaults: { format: "json" }
+
       resources :vehicles, except: [:new, :edit],
           defaults: { format: "json" }
 

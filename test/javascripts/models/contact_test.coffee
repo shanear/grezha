@@ -1,7 +1,7 @@
 store = contact = null
 
 moduleForModel 'contact', 'Contact Model',
-  needs: ['model:connection']
+  needs: ['model:connection', 'model:relationship']
   setup: ->
     store = @store()
     Ember.run ->
@@ -50,6 +50,22 @@ asyncTest 'sortedConnections', ->
         "sortedConnections should be in reverse time order")
 
     start()
+
+one = undefined
+
+test "can have relationships", ->
+  relationships = []
+  relLength = "meh"
+  Ember.run ->
+    relationships = contact.get('relationships')
+  Ember.run ->
+    relationships.pushObject store.createRecord('relationship', contact : contact, notes: "something")
+  Ember.run ->
+    relLength = contact.get('relationships.length')
+  andThen ->
+    Ember.run ->
+      equal(relLength, 1, "length should be " + relLength)
+
 
 asyncTest 'last seen connection', ->
   setup = Ember.run -> contact.get('connections')

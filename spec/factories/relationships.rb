@@ -12,5 +12,6 @@ FactoryGirl.define do
     notes "MyText"
     organization_id 1
     relationship_type "Officer"
+    name "Some Name"
   end
 end

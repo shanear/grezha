@@ -41,6 +41,7 @@ describe 'App.Contact', ->
           expect(@contact.get("sortedConnections")[2])
             .toBe(oldest)
 
+
   describe 'isValid', ->
     it 'returns true if the contact\'s name has characters', ->
       Ember.run =>

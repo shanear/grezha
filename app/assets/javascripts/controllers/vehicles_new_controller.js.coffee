@@ -8,7 +8,7 @@ App.VehiclesNewController = Ember.ObjectController.extend
       if newVehicle.isValid()
         newVehicle.save().then(
           (contact)=>
-            @transitionToRoute('vehicle', vehicle)
+            @transitionToRoute('vehicle', newVehicle)
           ,(error)=>
             @set('errors', ["Something went wrong on the server, please try again later."]))
       else

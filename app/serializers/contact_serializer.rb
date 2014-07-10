@@ -7,6 +7,7 @@ class ContactSerializer < ActiveModel::Serializer
 
   embed :id
   has_many :connections, embed_key: :remote_id
+  has_many :relationships, embed_key: :remote_id
 
   def picture_url
     _helpers = ActionController::Base.helpers

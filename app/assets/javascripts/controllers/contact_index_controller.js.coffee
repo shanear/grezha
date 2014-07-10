@@ -1,6 +1,7 @@
 App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
   newConnection: { occurredAt: new Date(), note: "" }
+  newRelationship: {}
 
   actions:
     deleteContact: ->
@@ -19,6 +20,22 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
 
     cancelNewConnection: ->
       @set('addingConnection', false)
+
+    newRelationship: ->
+      @set('addingRelationship', true)
+
+    cancelNewRelationship: ->
+      @set('addingRelationship', false)
+
+    saveRelationship: ->
+      newRelationship = @store.createRecord('relationship', @get('newRelationship'))
+      newRelationship.set('contact', @get('model'))
+      console.log(newRelationship.get('contactInfo'))
+      console.log(newRelationship.get('name'))
+      newRelationship.save().then =>
+        @get('relationships').pushObject newRelationship
+        @set('addingRelationship', false)
+        @set('newRelationship', {})
 
 
     saveConnection: ->
