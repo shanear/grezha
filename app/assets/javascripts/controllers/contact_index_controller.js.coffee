@@ -30,8 +30,6 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     saveRelationship: ->
       newRelationship = @store.createRecord('relationship', @get('newRelationship'))
       newRelationship.set('contact', @get('model'))
-      console.log(newRelationship.get('contactInfo'))
-      console.log(newRelationship.get('name'))
       newRelationship.save().then =>
         @get('relationships').pushObject newRelationship
         @set('addingRelationship', false)

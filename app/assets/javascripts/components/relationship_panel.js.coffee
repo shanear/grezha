@@ -3,7 +3,7 @@ App.RelationshipPanelComponent = Ember.Component.extend App.HasConfirmation,
 
   actions:
     deleteRelationship: ->
-      @set 'relationship',
+      @set 'confirmation',
         heading: "Are you sure?"
         content: "Are you sure you want to delete this relationship? It will be gone forever!"
         show: true
