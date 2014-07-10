@@ -128,11 +128,7 @@
         </div>
       </div>
 
-          {{#each relationships}}
-       {{relationship-panel relationship=this}}
-    {{else}}
-       <p> There are no relationships for this person. </p>
-    {{/each}}
+
 
 
     {{#if addingRelationship}}
@@ -165,6 +161,11 @@
         </ul>
       {{/if}}
     {{/if}}
+     {{#each relationships}}
+       {{relationship-panel relationship=this}}
+    {{else}}
+       <p> There are no relationships for this person. </p>
+    {{/each}}
 
     
   </div>
