@@ -5,6 +5,7 @@ store = contact = null
 #       for more realistic coverage
 App.Contact.FIXTURES = []
 App.Connection.FIXTURES = []
+App.Relationship.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
 
@@ -20,6 +21,20 @@ module "Contact Page Integration Tests",
 
   teardown: ->
     App.reset()
+
+test "Create and delete a relationship", ->
+  visit("/contacts/" + contact.get("id"))
+  click("#add-relationship")
+  fillIn("#newRelationshipName", "Bob Hope")
+  fillIn("#newRelationshipNote", "Notes")
+  fillIn("#newRelationshipType", "Officer")
+  fillIn("#newRelationshipContactInfo", "111-1111-1111")
+  click("#save-relationship")
+  andThen ->
+    ok(/Officer/.test(find(".relationship .relationshipType").text()), 
+      "A newly created relationship should appear")
+  click(".delete-relationship")
+  click(".confirm")
 
 
 test "Create and delete a connection", ->

@@ -118,7 +118,7 @@
               Cancel
             </button>
           {{else}}
-            <button id="add-connection" class="btn btn-default" {{action "newRelationship"}}>
+            <button id="add-relationship" class="btn btn-default" {{action "newRelationship"}}>
               Add Relationship
             </button>
           {{/if}}
@@ -142,7 +142,7 @@
           {{focused-textarea id="newRelationshipNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newRelationship.notes"}}
         </div>
         <div class="form-group">
-         {{focused-textarea id="relationshipContactInfo" class="form-control" placeholder="Contact Info" valueBinding="newRelationship.contactInfo"}}
+         {{focused-textarea id="newRelationshipContactInfo" class="form-control" placeholder="Contact Info" valueBinding="newRelationship.contactInfo"}}
         </div>
 
          <div class="form-group">

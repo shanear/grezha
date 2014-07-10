@@ -4,6 +4,7 @@ store = contact = null
 #       for more realistic coverage
 App.Contact.FIXTURES = []
 App.Connection.FIXTURES = []
+App.Relationship.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
 module "Contact Index Page integration tests", 
