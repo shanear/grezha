@@ -48,7 +48,6 @@ class Api::V1::ConnectionsController < ApplicationController
       contact = Contact.where(remote_id: params[:connection][:contact_id]).first
       params[:connection][:contact_id] = contact.id
     end
-
   	params.required(:connection).permit(:remote_id, :contact_id, :note, :occurred_at)
   end
 end
