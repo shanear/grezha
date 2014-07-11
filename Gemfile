@@ -8,8 +8,7 @@ gem 'rails', '4.0.1'
 gem 'pg', '0.14.1'
 gem 'unicorn-rails', '1.1.0'
 gem 'foreman'
-
-
+gem 'haml'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

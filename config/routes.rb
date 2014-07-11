@@ -1,5 +1,6 @@
 Daughters::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
+  resources :users
 
   get    "/login", to: "sessions#new"
   delete "/logout", to: "sessions#destroy"
