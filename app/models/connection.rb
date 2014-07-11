@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: connections
+#
+#  id              :integer          not null, primary key
+#  note            :text
+#  contact_id      :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  occurred_at     :datetime
+#  remote_id       :string(8)        not null
+#  organization_id :integer
+#
+
 class Connection < ActiveRecord::Base
   include RemoteSynced
 

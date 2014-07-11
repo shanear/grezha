@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)
+#  bio                  :text
+#  birthday             :datetime
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  picture_file_name    :string(255)
+#  picture_content_type :string(255)
+#  picture_file_size    :integer
+#  picture_updated_at   :datetime
+#  city                 :string(255)
+#  last_seen            :date
+#  remote_id            :string(8)        not null
+#  organization_id      :integer
+#
+
 class Contact < ActiveRecord::Base
   include RemoteSynced
 
