@@ -9,8 +9,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    User.create!(user_params)
-    redirect_to users_path
+    new_user = User.new(user_params)
+    if new_user.valid? && new_user.save
+      redirect_to users_path
+    else
+      @errors = new_user.errors
+      redirect_to new_user_path
+    end
   end
 
   private
