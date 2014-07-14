@@ -1,10 +1,12 @@
 .row
-  .col-sm-12.center
+  .col-sm-1
+  .col-sm-11.center
     %h2
     user management page
     = current_user.organization.name
 .row
-  = button_to 'New', new_user_path, {:method => 'get'}
+  .col-sm-1
+    = button_to 'New', new_user_path, {:method => 'get'}
 .row
   .col-sm-2 &nbsp;
   .col-sm-10
