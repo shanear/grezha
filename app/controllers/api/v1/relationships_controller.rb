@@ -27,16 +27,15 @@ class Api::V1::RelationshipsController < ApplicationController
     respond_with json: {}
   end
 
+  private
+
   def find_relationship(id)
-  	  if remote_id?(id)
+      if remote_id?(id)
       relationships.where(remote_id: id).first!
     else
       relationships.find(id)
     end
   end
-
-
-  private
 
   def relationships
     Relationship.where(organization_id: current_user.organization_id)
