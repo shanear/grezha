@@ -56,7 +56,8 @@ describe UsersController do
 
       it "should assign errors if bad user" do
         post :create, invalid_password_user
-        expect(assigns :errors).to have(1).items
+        expect(flash[:errors]).to have(1).items
+        expect(flash[:errors]).to eq Hash[password: ["is too short (minimum is 6 characters)"]]
       end
 
 

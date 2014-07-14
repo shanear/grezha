@@ -13,8 +13,7 @@ class UsersController < ApplicationController
     if new_user.valid? && new_user.save
       redirect_to users_path
     else
-      @errors = new_user.errors
-      redirect_to new_user_path
+      redirect_to new_user_path, :flash => {:errors => new_user.errors.messages}
     end
   end
 
