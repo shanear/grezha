@@ -13,7 +13,8 @@
   <% if flash[:errors] %>
     <div class="errors">
       <% flash[:errors].each do |type, message| %>
-        <p><%= message %></p>
+
+        <p><%= type %> : <%= message %></p>
       <% end %>
     </div>
   <% end %>

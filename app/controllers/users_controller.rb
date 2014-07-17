@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = flash[:user] == nil ? User.new : User.new(JSON.parse(flash[:user]))
+    @roles = [["Admin","Admin"],[ "User","User"]]
   end
 
   def create
@@ -14,7 +15,8 @@ class UsersController < ApplicationController
     if new_user.valid? && new_user.save
       redirect_to users_path
     else
-      redirect_to new_user_path, :flash => {:errors => new_user.errors.messages}
+      new_user.password = ""
+      redirect_to new_user_path, :flash => {:errors => new_user.errors.messages, :user => new_user.to_json}
     end
   end
 

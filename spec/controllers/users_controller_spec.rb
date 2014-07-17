@@ -31,6 +31,11 @@ describe UsersController do
       get :new
       expect(assigns :user).not_to be_nil
     end
+
+    it "should show available roles" do
+      get :new
+      expect(assigns :roles).to eq [["Admin","Admin"],[ "User","User"]]
+    end
   end
 
   describe "POST #create" do
@@ -38,7 +43,7 @@ describe UsersController do
     let(:organization_one) {Organization.create!(name: "Awesome Possum Club")}
     let(:user_one) {FactoryGirl.create(:user, name: 'user_one', organization_id: organization_one.id)}
     let(:user_json) {Hash[user: Hash[name: 'some_name', password: 'default_password', email: 'default@email.com']]}
-    let(:invalid_password_user) {Hash[user: Hash[name: 'some_name', password: 'pass', email: 'default@email.com']]}
+    let(:invalid_password_user) {Hash[user: Hash[name: 'some_name', password: 'secr', email: 'default@email.com']]}
 
 
       it 'should create a user' do
@@ -58,6 +63,13 @@ describe UsersController do
         post :create, invalid_password_user
         expect(flash[:errors]).to have(1).items
         expect(flash[:errors]).to eq Hash[password: ["is too short (minimum is 6 characters)"]]
+      end
+
+      it "should fill in user properties except password if bad user" do
+        post :create, invalid_password_user
+        expect(flash[:user]).not_to be_nil
+        expect(flash[:user]).to include("some_name")
+        expect(flash[:user]).to_not include("secr")
       end
 
 
