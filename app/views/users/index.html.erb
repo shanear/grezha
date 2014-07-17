@@ -1,0 +1,31 @@
+<div id="top-panel" class="clearfix">
+  <div class="left">
+    <h3>Users</h3>
+  </div>
+
+  <div class="right">
+    <%= button_to 'New User', new_user_path, {class: "btn btn-default", method: :get} %>
+  </div>
+</div>
+
+<div id="main-panel">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Active?</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%=h user.name %></td>
+          <td><%=h user.email %></td>
+          <td class="green">Yes</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

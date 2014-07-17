@@ -54,6 +54,7 @@ header {
     .logo {
       display: table-cell;
       vertical-align: bottom;
+      white-space: nowrap;
 
       h1 {
         font-family: 'Redressed', sans-serif;
@@ -102,6 +103,34 @@ div#content {
   max-width: 800px;
   min-width: 450px;
 }
+
+#main-panel {
+  padding: $usual-buffer;
+  &.skinny { width: 26em; }
+}
+
+#top-panel {
+  display: table;
+  width: 100%;
+  padding: $usual-buffer;
+  margin-top: $usual-buffer;
+
+  h3 {
+    margin: 0px;
+    display: inline;
+  }
+
+  .left, .right {
+    display: table-cell;
+    vertical-align: bottom;
+  }
+
+  .left { float: left; }
+  .right { float: right; }
+}
+
+.green { color: $bulgarian-green; }
+label { text-transform: lowercase; }
 
 .spinner {
   margin: 70px auto 20px;
