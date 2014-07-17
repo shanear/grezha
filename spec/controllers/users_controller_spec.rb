@@ -42,7 +42,7 @@ describe UsersController do
 
     let(:organization_one) {Organization.create!(name: "Awesome Possum Club")}
     let(:user_one) {FactoryGirl.create(:user, name: 'user_one', organization_id: organization_one.id)}
-    let(:user_json) {Hash[user: Hash[name: 'some_name', password: 'default_password', email: 'default@email.com']]}
+    let(:user_json) {Hash[user: Hash[name: 'some_name', role: "role", password: 'default_password', email: 'default@email.com']]}
     let(:invalid_password_user) {Hash[user: Hash[name: 'some_name', password: 'secr', email: 'default@email.com']]}
 
 
@@ -51,6 +51,7 @@ describe UsersController do
         new_user = User.where(name: 'some_name').first
         expect(new_user).to_not be_nil
         expect(new_user.organization_id).to eq user_one.organization_id
+        expect(new_user.role).to eq "role"
       end
 
       it "should redirect to new if bad user" do

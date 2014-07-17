@@ -75,8 +75,8 @@ ActiveRecord::Schema.define(version: 20140715014033) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organization_id"
-    t.string   "role"
-    t.boolean  "active"
+    t.string   "role",               default: "Admin"
+    t.boolean  "active",             default: true
   end
 
   create_table "vehicles", force: true do |t|

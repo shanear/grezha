@@ -35,6 +35,10 @@
       <%= f.text_field :password, class: "form-control" %>
     </div>
 
+    <div class="form-group">
+      <%= f.select :role, @roles %>
+    </div>
+
     <%= f.submit class: "btn btn-default" %>
   <% end %>
 </div>

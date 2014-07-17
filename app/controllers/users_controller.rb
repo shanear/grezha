@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    user = params.required(:user).permit(:name, :password, :email)
+    user = params.required(:user).permit(:name, :password, :email, :role)
     user[:organization_id] = current_user.organization_id
     user
   end
