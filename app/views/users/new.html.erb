@@ -13,7 +13,7 @@
   <% if flash[:errors] && !flash[:errors].empty? %>
     <div class="errors">
       <% key = flash[:errors].keys.first %>
-      <p> <%= key %> <%= flash[:errors][kea].first %> </p>
+      <p> <%= key %> <%= flash[:errors][key].first %> </p>
     </div>
   <% end %>
 
