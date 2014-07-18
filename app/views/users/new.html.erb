@@ -10,12 +10,10 @@
 </div>
 
 <div id="main-panel" class="skinny">
-  <% if flash[:errors] %>
+  <% if flash[:errors] && !flash[:errors].empty? %>
     <div class="errors">
-      <% flash[:errors].each do |type, message| %>
-
-        <p><%= type %> : <%= message %></p>
-      <% end %>
+      <% key = flash[:errors].keys.first %>
+      <p> <%= key %> <%= flash[:errors][kea].first %> </p>
     </div>
   <% end %>
 

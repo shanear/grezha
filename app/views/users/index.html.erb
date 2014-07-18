@@ -16,6 +16,7 @@
         <th>Email</th>
         <th>Active?</th>
         <th>Role </th>
+        <th> </th>
       </tr>
     </thead>
 
@@ -24,8 +25,15 @@
         <tr>
           <td><%=h user.name %></td>
           <td><%=h user.email %></td>
-          <td class="green">Yes</td>
-          <td><%=h user.role %></td>
+          <% if user.active %>
+            <td class="green">
+          <% else %>
+            <td class="red">
+            <% end %>
+            <%= user.active %>
+            </td>
+            <td><%=h user.role %></td>
+            <td> <%= link_to "edit", edit_user_url(user) %> </td>
         </tr>
       <% end %>
     </tbody>
