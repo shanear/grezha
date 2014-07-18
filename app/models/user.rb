@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
 
   # TODO: validate email
   # TODO: only validate password on create
-  validates :password, :presence => true, :length => { :within => 6..40 }
+  validates :password, :presence => true, :length => { :within => 6..40 }, :on => :create
+  validates_presence_of :name, :email
 
   before_save :normalize_email
   before_save :encrypt_password, :if => :password

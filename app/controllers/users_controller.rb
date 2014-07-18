@@ -21,9 +21,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    if @user.update(user_edit_params)
+      render :index
+    else
+      render :edit
+    end
   end
 
   private
@@ -32,5 +39,9 @@ class UsersController < ApplicationController
     user = params.required(:user).permit(:name, :password, :email, :role)
     user[:organization_id] = current_user.organization_id
     user
+  end
+
+  def user_edit_params
+    params.require(:user).permit(:name, :email, :role)
   end
 end
