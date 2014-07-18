@@ -33,7 +33,12 @@
         {{/unless}}
 
         {{#if App.loggedIn}}
-          {{App.currentUser}} - {{App.organization}} - {{logout-button}}
+          {{App.currentUser}} -
+          <a href="/users">
+            {{App.organization}}
+            <i class="fa fa-cog"></i> -
+          </a>
+          {{logout-button}}
         {{else}}
           Logged out
         {{/if}}
