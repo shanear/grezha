@@ -21,6 +21,7 @@ class Relationship < ActiveRecord::Base
 	validates :relationship_type, presence: true
 	validates :contact, presence: true
 	validate :contact_organization_matches
+
   private
 
   # TODO: if this triggers, it means we might be getting hacked.
@@ -31,6 +32,4 @@ class Relationship < ActiveRecord::Base
       errors.add(:contact, "must have the same organization")
     end
   end
-
-
 end

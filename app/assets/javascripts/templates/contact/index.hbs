@@ -140,13 +140,13 @@
         </div>
 
         <div class="form-group">
-          <label for="newRelationshipType" class="col-sm-3 control-label">relationship type</label>
+          <label for="newRelationshipType" class="col-sm-3 control-label">relationship</label>
 
           <div class="col-sm-9">
             {{input type="text"
                 id="newRelationshipType"
                 class="form-control"
-                valueBinding="newRelationship.type"
+                valueBinding="newRelationship.relationshipType"
                 placeholder="father, social worker, etc."}}
           </div>
         </div>
@@ -166,7 +166,7 @@
           <label for="newRelationshipNote" class="col-sm-3 control-label">notes</label>
 
           <div class="col-sm-9">
-            {{focused-textarea id="newRelationshipNote"
+            {{textarea id="newRelationshipNote"
               class="form-control"
               placeholder="Any additional notes about their relationship?"
               valueBinding="newRelationship.notes"}}
@@ -182,15 +182,16 @@
 
       {{#if errors.length}}
         <ul class="errors">
-        {{#each errors}}
-          <li>{{this}}</li>
-        {{/each}}
+          {{#each errors}}
+            <li>{{this}}</li>
+          {{/each}}
         </ul>
       {{/if}}
 
     {{/if}}
-     {{#each relationships}}
-       {{relationship-panel relationship=this}}
+
+    {{#each relationships}}
+      {{relationship-panel relationship=this}}
     {{else}}
        <p> There are no relationships for this person. </p>
     {{/each}}

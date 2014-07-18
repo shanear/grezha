@@ -132,7 +132,7 @@ div#content {
 }
 
 .green { color: $bulgarian-green; }
-label { font-variant: small-caps; }
+label { text-transform: lowercase; }
 
 .spinner {
   margin: 70px auto 20px;
