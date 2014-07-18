@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     (user && user.has_password?(password)) ? user : nil
   end
 
+  def self.roles
+    ["user", "admin"]
+  end
+
   private
 
   def normalize_email
