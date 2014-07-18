@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 $bulgarian-green: #00966E;
 $light-bulgarian-green: #e3fff7;
 $bulgarian-red: #D62612;
@@ -130,7 +132,7 @@ div#content {
 }
 
 .green { color: $bulgarian-green; }
-label { text-transform: lowercase; }
+label { font-variant: small-caps; }
 
 .spinner {
   margin: 70px auto 20px;
@@ -354,11 +356,13 @@ div#ember-app {
     }
   }
 
-  .add-connection-form {
+  .add-model-form {
+    @include clearfix;
     margin-bottom: 20px;
   }
 
-  .connections-header {
+  .section-header {
+    @include clearfix;
     border-top: 1px $bulgarian-green solid;
     padding-top: $usual-buffer;
     margin: $usual-buffer 0;
@@ -381,6 +385,10 @@ div#ember-app {
       height: 3.5em;
       vertical-align: bottom;
     }
+  }
+
+  .save-button {
+    float: right;
   }
 
   .connection {

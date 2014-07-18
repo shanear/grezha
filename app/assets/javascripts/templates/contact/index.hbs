@@ -60,8 +60,7 @@
   </div>
 
   <div class="connections">
-
-    <div class="connections-header clearfix">
+    <div class="section-header">
       <div class="right">
         {{#if addingConnection}}
           <button class="btn btn-link" {{action "cancelNewConnection"}}>
@@ -73,13 +72,14 @@
           </button>
         {{/if}}
       </div>
+
       <div class="left">
         <h4>Connections</h4>
       </div>
     </div>
 
     {{#if addingConnection}}
-      <div class="add-connection-form">
+      <div class="add-model-form">
         <div class="form-group">
           {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
         </div>
@@ -88,71 +88,98 @@
           {{focused-textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
         </div>
 
-        <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
-          Save Connection
-        </button>
+        <div class="save-button">
+          <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
+            Save Connection
+          </button>
+        </div>
       </div>
+
       {{#if errors.length}}
         <ul class="errors">
-        {{#each errors}}
-          <li>{{this}}</li>
-        {{/each}}
+          {{#each errors}}
+            <li>{{this}}</li>
+          {{/each}}
         </ul>
       {{/if}}
     {{/if}}
 
 
-{{#each sortedConnections}}
+    {{#each sortedConnections}}
       {{connection-panel connection=this}}
     {{else}}
       <p> There are no connections for this person. </p>
     {{/each}}
 
-
-
-
-  <div class="connections-header clearfix">
-        <div class="right">
-          {{#if addingRelationship}}
-            <button class="btn btn-link" {{action "cancelNewRelationship"}}>
-              Cancel
-            </button>
-          {{else}}
-            <button id="add-relationship" class="btn btn-default" {{action "newRelationship"}}>
-              Add Relationship
-            </button>
-          {{/if}}
-        </div>
-        <div class="left">
-          <h4>Relationships</h4>
-        </div>
+    <div class="section-header">
+      <div class="right">
+        {{#if addingRelationship}}
+          <button class="btn btn-link" {{action "cancelNewRelationship"}}>
+            Cancel
+          </button>
+        {{else}}
+          <button id="add-relationship" class="btn btn-default" {{action "newRelationship"}}>
+            Add Relationship
+          </button>
+        {{/if}}
       </div>
 
-
-
+      <div class="left">
+        <h4>Relationships</h4>
+      </div>
+    </div>
 
     {{#if addingRelationship}}
-      <div class="add-connection-form">
-        
+      <div class="form-horizontal add-model-form">
         <div class="form-group">
-         {{focused-textarea id="newRelationshipName" class="form-control" placeholder="Name" valueBinding="newRelationship.name"}}
+          <label for="newRelationshipName" class="col-sm-3 control-label">name</label>
+
+          <div class="col-sm-9">
+            {{input type="text" id="newRelationshipName" class="form-control" valueBinding="newRelationship.name"}}
+          </div>
         </div>
 
         <div class="form-group">
-          {{focused-textarea id="newRelationshipNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newRelationship.notes"}}
+          <label for="newRelationshipType" class="col-sm-3 control-label">relationship type</label>
+
+          <div class="col-sm-9">
+            {{input type="text"
+                id="newRelationshipType"
+                class="form-control"
+                valueBinding="newRelationship.type"
+                placeholder="father, social worker, etc."}}
+          </div>
         </div>
+
         <div class="form-group">
-         {{focused-textarea id="newRelationshipContactInfo" class="form-control" placeholder="Contact Info" valueBinding="newRelationship.contactInfo"}}
+          <label for="newRelationshipContactInfo" class="col-sm-3 control-label">contact info</label>
+
+          <div class="col-sm-9">
+            {{textarea id="newRelationshipContactInfo"
+              class="form-control"
+              valueBinding="newRelationship.contactInfo"
+              placeholder="phone number, email, etc."}}
+          </div>
         </div>
 
-         <div class="form-group">
-         {{focused-textarea id="newRelationshipType" class="form-control" placeholder="Relationship Type" valueBinding="newRelationship.relationshipType"}}
+        <div class="form-group">
+          <label for="newRelationshipNote" class="col-sm-3 control-label">notes</label>
+
+          <div class="col-sm-9">
+            {{focused-textarea id="newRelationshipNote"
+              class="form-control"
+              placeholder="Any additional notes about their relationship?"
+              valueBinding="newRelationship.notes"}}
+          </div>
         </div>
 
-        <button id="save-relationship" class="btn btn-default" {{action "saveRelationship"}}>
-          Save Relationship
-        </button>
+        <div class="save-button">
+          <button id="save-relationship" class="btn btn-default " {{action "saveRelationship"}}>
+            Save
+          </button>
+        </div>
       </div>
+
       {{#if errors.length}}
         <ul class="errors">
         {{#each errors}}
@@ -160,14 +187,13 @@
         {{/each}}
         </ul>
       {{/if}}
+
     {{/if}}
      {{#each relationships}}
        {{relationship-panel relationship=this}}
     {{else}}
        <p> There are no relationships for this person. </p>
     {{/each}}
-
-    
   </div>
 </div>
 
