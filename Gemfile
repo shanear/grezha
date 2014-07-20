@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
-ruby "1.9.3"
+ruby "2.1.2"
 
 gem 'annotate'
 gem 'rails', '4.0.1'
