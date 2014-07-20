@@ -6,22 +6,23 @@ App.Vehicle.FIXTURES = []
 App.Connection.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
-module "Contact Index Page integration tests", 
+module "Contact Index Page integration tests",
   setup: ->
     $.cookie('remember_token', 'get logged in')
     Ember.run ->
       store = App.__container__.lookup("store:main")
-      store.createRecord("vehicle", 
+      store.createRecord("vehicle",
         licensePlate: "123", usedBy: "Sketch dude", notes: "Dude looks so sketch")
-      store.createRecord("vehicle", 
+      store.createRecord("vehicle",
         licensePlate: "234", usedBy: "Other Sketch Dude")
-      store.createRecord("vehicle", 
+      store.createRecord("vehicle",
         licensePlate: "99432", usedBy: "Other Other Sketch Dude")
+
   teardown: ->
     App.reset()
 
-test "should list all vehicles", ->
 
+test "should list all vehicles", ->
   visit("/vehicles")
   andThen ->
     equal(currentPath(), "vehicles.index", "should be" + currentPath())
@@ -44,7 +45,6 @@ test "should add a new vehicle if name filled out", ->
   andThen ->
     equal(find(".vehicle").length, 1, "Should show one vehicle in the side")
     ok(find(".vehicle-panel").text().indexOf("Some Dude") > -1, "Should display the newly inputted vehicle on the side")
-
 
 test "should not add a new vehicle if name not filled out", ->
   visit("/vehicles")

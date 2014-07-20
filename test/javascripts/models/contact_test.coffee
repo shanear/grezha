@@ -14,6 +14,14 @@ test 'isValid', ->
   Ember.run -> contact.set("name", "")
   equal(contact.isValid(), false, "Contact isn't valid with empty name")
 
+  Ember.run -> contact.set("name", "    ")
+  equal(contact.isValid(), false, "Contact isn't valid with whitespace name")
+
+  Ember.run -> contact.set("name", undefined)
+  equal(contact.isValid(), false, "Contact isn't valid with undefined name")
+
+  Ember.run -> contact.set("name", "Shanze")
+  equal(contact.isValid(), true, "Contact is valid with name")
 
 test 'isDuplicate', ->
   equal(contact.isDuplicate(), false, "Contact isn't duplicate by default")
@@ -51,7 +59,6 @@ asyncTest 'sortedConnections', ->
 
     start()
 
-one = undefined
 
 test "can have relationships", ->
   relationships = []
