@@ -31,6 +31,8 @@ input[type = "checkbox"] {
   margin: 0;
 }
 
+.left { float: left; }
+.right { float: right; }
 
 header {
   // Fix the header in the center
@@ -126,9 +128,6 @@ div#content {
     display: table-cell;
     vertical-align: bottom;
   }
-
-  .left { float: left; }
-  .right { float: right; }
 }
 
 .green { color: $bulgarian-green; }
@@ -359,16 +358,19 @@ div#ember-app {
   .add-model-form {
     @include clearfix;
     margin-bottom: 20px;
+    padding: $usual-buffer;
+    background-color: $light-bulgarian-green;
+    border-radius: $usual-buffer;
   }
 
   .section-header {
     @include clearfix;
-    border-top: 1px $bulgarian-green solid;
-    padding-top: $usual-buffer;
-    margin: $usual-buffer 0;
+    padding: 0 $usual-buffer;
+    background-color: $light-bulgarian-green;
+    border-radius: $usual-buffer;
+    margin: $usual-buffer * 3  0 $usual-buffer 0 ;
 
-    .left {
-      float: left;
+    .left, .right {
       line-height: 3.5em;
       height: 3.5em;
       vertical-align: bottom;
@@ -378,13 +380,6 @@ div#ember-app {
         display: inline-block;
       }
     }
-
-    .right {
-      float: right;
-      line-height: 3.5em;
-      height: 3.5em;
-      vertical-align: bottom;
-    }
   }
 
   .save-button {
@@ -393,7 +388,7 @@ div#ember-app {
 
   .connection {
     margin: $usual-buffer;
-    margin-left: 0px;
+    margin-top: $usual-buffer * 2;
 
     .date {
       width: 80px;
@@ -417,9 +412,26 @@ div#ember-app {
       padding-right: $usual-buffer;
       padding-left: 80px + $usual-buffer;
     }
+  }
 
-    .options {
-      padding: $usual-buffer;
+  .relationship {
+    padding: $usual-buffer;
+
+    .summary {
+      @include clearfix;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 1.3em;
+    }
+
+    .type {
+      color: #999;
+    }
+
+    .info {
+      display: none;
     }
   }
 

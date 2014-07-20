@@ -1,34 +1,22 @@
 {{partial "partials/confirmation"}}
 
-<div class="relationship clearfix">
-  <div class="body">
-  <dl>
-  	<dt>
-  		Name
-  	</dt>
-  	<dd>
-  	  {{relationship.name}}
-  	</dd>
-  	  	<dt>
-  	  	  		  		Type
-  	</dt>
-  	<dd class="relationshipType">
-  	  {{relationship.relationshipType}}
-  	</dd>
-  	  	<dt>
-  	  	Contact Information
-  	</dt>
-  	<dd>
-  	  {{relationship.contactInfo}}
-  	</dd>
-  	  	<dt>
-  	  	Notes
-  	</dt>
-  	<dd>
-  	  {{relationship.notes}}
-  	</dd>
-  </dl>
-    
+<div class="relationship">
+  <div class="summary">
+    <div class="left">
+      <div class="name">{{relationship.name}}</div>
+      <div class="type">{{relationship.relationshipType}}</div>
+    </div>
+
+    <div class="right">
+      {{breaklines relationship.contactInfo}}
+    </div>
+  </div>
+
+  <div class="info">
+    <div class="notes">
+      {{breaklines relationship.notes}}
+    </div>
+
     {{#control-group name="options"}}
       <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
         <i class="fa fa-trash-o"></i>

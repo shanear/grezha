@@ -30,6 +30,7 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     saveRelationship: ->
       newRelationship = @store.createRecord('relationship', @get('newRelationship'))
       newRelationship.set('contact', @get('model'))
+
       newRelationship.save().then =>
         @get('relationships').pushObject newRelationship
         @set('addingRelationship', false)
@@ -39,7 +40,7 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     saveConnection: ->
       newConnection = @store.createRecord('connection', @get('newConnection'))
       newConnection.set('contact', @get('model'))
-      
+
       if newConnection.isValid()
         newConnection.save().then =>
           @get('connections').pushObject newConnection
