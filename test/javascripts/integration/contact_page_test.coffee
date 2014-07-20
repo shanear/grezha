@@ -31,7 +31,7 @@ test "Create and delete a relationship", ->
   fillIn("#newRelationshipContactInfo", "111-1111-1111")
   click("#save-relationship")
   andThen ->
-    ok(/Officer/.test(find(".relationship .relationshipType").text()), 
+    ok(/Officer/.test(find(".relationship .type").text()),
       "A newly created relationship should appear")
   click(".delete-relationship")
   click(".confirm")
