@@ -1,0 +1,43 @@
+<div id="top-panel" class="clearfix">
+  <div class="left">
+    <h3>Edit User</h3>
+  </div>
+
+  <div class="right">
+    <%= button_to 'Cancel', users_path, {class: "btn btn-link", method: :get} %>
+  </div>
+</div>
+
+<div id="main-panel" class="skinny">
+  <% if @user.errors.any? %>
+    <div class="errors">
+      <%= @user.errors.full_messages.first %>
+    </div>
+  <% end %>
+
+  <%= form_for @user do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <% if current_user == @user %>
+        <%= f.text_field :name %>
+      <% else %>
+        <%= @user.name %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <% if current_user == @user %>
+        <%= f.text_field :email %>
+      <% else %>
+        <%= @user.email %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.select :role, User.roles %>
+    </div>
+
+    <%= f.submit class: "btn btn-default" %>
+  <% end %>
+</div>

@@ -4,15 +4,28 @@ describe UsersController do
 
   let(:organization_one) {Organization.create!(name: "Awesome Possum Club")}
   let(:organization_two) {Organization.create!(name: "Less Awesome Possum Club")}
-  let!(:user_one) {FactoryGirl.create(:user, name: 'user_one', organization_id: organization_one.id)}
+  let!(:user_one) {FactoryGirl.create(:user, name: 'user_one', organization_id: organization_one.id, role: "admin")}
   let!(:user_two) {FactoryGirl.create(:user, name: 'user_two', organization_id: organization_one.id)}
   let!(:user_three) {FactoryGirl.create(:user, name: 'user_three', organization_id: organization_two.id)}
+  let!(:nonadmin_user) {FactoryGirl.create(:user, name: 'user_three', organization_id: organization_two.id)}
 
   before do
     auth_with_user(user_one)
   end
 
+
+
   describe "GET #index" do
+    context "authorization" do
+      before do
+          auth_with_user(nonadmin_user)
+      end
+      it "should not show list of users if not admin" do
+        
+        expect(get :index).to redirect_to "/"
+      end
+    end
+
 
     it 'should return users associated with current users organization' do
       get :index

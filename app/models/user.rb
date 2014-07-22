@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     ["user", "admin"]
   end
 
+  def admin?
+    return self.role.to_sym == :admin
+  end
+
   private
 
   def normalize_email

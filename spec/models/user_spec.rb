@@ -14,4 +14,13 @@ describe User do
     User.new(password: "111").should have(1).errors_on(:password)
   end
 
+  context :admin do
+    it "verifies a role of admin" do
+      User.new(role: "admin").should be_admin
+    end
+    it "verifies a role of user" do
+      User.new(role: "user").should_not be_admin
+    end
+  end
+
 end

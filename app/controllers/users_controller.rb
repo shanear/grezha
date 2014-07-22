@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   layout "setup"
+  before_filter :require_logged_in
+  before_filter :require_admin
 
   def index
     @users = User.where(:organization_id => current_user.organization_id)
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_edit_params)
-      render :index
+      redirect_to users_path
     else
       render :edit
     end
@@ -36,6 +38,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
+    puts current_user
     user = params.required(:user).permit(:name, :password, :email, :role)
     user[:organization_id] = current_user.organization_id
     user

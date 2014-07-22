@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     @current_user = nil
   end
 
+  def admin?
+    @current_user.admin?
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -30,6 +34,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def require_admin
+    redirect_to(root_path) unless admin?
+  end
 
   def require_logged_in
     redirect_to(login_path) unless logged_in?
