@@ -27,6 +27,14 @@ App.Contact = DS.Model.extend
       sortAscending: false
   ).property('connections.@each')
 
+  status: (->
+    latestConnection = @get('lastSeen')
+    if(latestConnection? && latestConnection>= moment().subtract('months', '6').toDate())
+      return 'active'
+    else
+      return 'inactive'
+  ).property('connections.@each')
+
   lastSeen: (->
     latestConnection = @get('sortedConnections.firstObject')
 

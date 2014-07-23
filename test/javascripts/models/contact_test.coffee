@@ -32,6 +32,25 @@ test 'isDuplicate', ->
 
   ok(contact.isDuplicate(), "Contact is duplicate when it has same name as another Contact")
 
+test "active status", ->
+  setup = Ember.run -> contact.get('connections')
+  todaysDate = moment()
+  Ember.run ->
+    connections = contact.get('connections')
+    connections.pushObject store.createRecord('connection'
+      note: "occurs second", occurredAt: todaysDate.toDate(), contact: contact)
+    connections.pushObject store.createRecord('connection',
+      note: "occurs first", occurredAt: todaysDate.toDate(), contact: contact)
+  equal(contact.get("status"), "active", "Contact is active if a date before six months ")
+
+test "inactive status", ->
+  setup = Ember.run -> contact.get('connections')
+  todaysDate = moment()
+  Ember.run ->
+    connections = contact.get('connections')
+    connections.pushObject store.createRecord('connection'
+      note: "occurs second", occurredAt: todaysDate.subtract('months', 7).toDate(), contact: contact)
+  equal(contact.get("status"), "inactive", "Contact is inactive if no date before six months ")
 
 asyncTest 'sortedConnections', ->
   setup = Ember.run -> contact.get('connections')
@@ -40,7 +59,6 @@ asyncTest 'sortedConnections', ->
     Ember.run ->
       equal(contact.get('sortedConnections.length'), 0,
         "sortedConnections should be empty when no connections")
-
       connections = contact.get('connections')
       connections.pushObject store.createRecord('connection',
         note: "occurs second", occurredAt: new Date(2014, 9, 7), contact: contact)
