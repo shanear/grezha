@@ -29,7 +29,7 @@ App.Contact = DS.Model.extend
 
   status: (->
     latestConnection = @get('lastSeen')
-    if(latestConnection? && latestConnection>= moment().subtract('months', '6').toDate())
+    if(latestConnection>= moment().subtract('months', '6').toDate())
       return 'active'
     else
       return 'inactive'
