@@ -4,7 +4,6 @@ class Api::V1::ContactsController < ApplicationController
   respond_to :json
 
   def index
-    puts "current_user #{current_user}"
     test = contacts.order('LOWER(name) asc')
     respond_with test
   end
