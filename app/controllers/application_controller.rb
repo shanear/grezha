@@ -40,6 +40,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_logged_in
+    puts "redirecting"
     redirect_to(login_path) unless logged_in?
   end
 
