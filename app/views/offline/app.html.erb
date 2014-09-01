@@ -4,6 +4,7 @@
     rootElement: '#ember-app',
     environment: '<%= Rails.env %>',
     currentUser: '<%= current_user.name %>',
+    isAdmin: <%= current_user.admin? %>,
     organization: '<%= current_user.organization.name %>'
   };
 
