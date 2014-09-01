@@ -2,10 +2,11 @@ App.Connection = DS.Model.extend
   contact: DS.belongsTo('contact')
   note: DS.attr('string')
   occurredAt: DS.attr('date')
+  mode: DS.attr('string')
 
   foo: ->
     alert "wtf"
-  
+
   errors: []
   isValid: ->
     errors = []

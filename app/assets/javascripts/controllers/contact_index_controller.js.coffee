@@ -2,6 +2,8 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
   newConnection: { occurredAt: new Date(), note: "" }
   newRelationship: {}
+  modes: ['In Person', 'Email', 'Phone']
+  defaultMode: 'In Person'
 
   actions:
     deleteContact: ->

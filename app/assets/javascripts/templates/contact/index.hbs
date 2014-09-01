@@ -180,6 +180,13 @@
           {{focused-textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
         </div>
 
+        <div class="form-group">
+          {{view Ember.Select
+            content=modes
+            id="mode"
+            value=newConnection.mode}}
+        </div>
+
         <div class="save-button">
           <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
             Save Connection

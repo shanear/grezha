@@ -1,5 +1,5 @@
 store = contact = null
-
+# TODO: rename this page and contact_index_page
 # Set the store to a fixture adapter for now
 # TODO: consider using a Pretender server & use sync adapter
 #       for more realistic coverage
@@ -36,7 +36,6 @@ test "Create and delete a relationship", ->
   click(".delete-relationship")
   click(".confirm")
 
-
 test "Create and delete a connection", ->
   visit("/contacts/" + contact.get("id"))
 
@@ -56,6 +55,16 @@ test "Create and delete a connection", ->
     equal(find(".connection .note").length, 0,
       "A connection should not show up after being deleted")
 
+test "Create a connection with a specific meeting type", ->
+  visit("/contacts/" + contact.get("id"))
+  click("#add-connection")
+  fillIn("#newConnectionNote", "random notes")
+  fillIn("#mode", "In Person")
+  click("#save-connection")
+
+  andThen ->
+    ok(/In Person/.test(find(".connection .mode").text()), 
+      "should display connection mode")
 
 test "Update last seen", ->
   visit("/contacts/" + contact.get("id"))
