@@ -165,7 +165,6 @@ div#ember-app {
     margin-right: .5em;
   }
 
-
   .connection-top-row {
     .connection-date-span {
       display: inline-block;
@@ -179,6 +178,7 @@ div#ember-app {
       width: auto;
     }
   }
+
 
   #confirmation {
     width: 100%;
@@ -405,27 +405,37 @@ div#ember-app {
     margin: $usual-buffer;
     margin-top: $usual-buffer * 2;
 
-    .date {
-      width: 80px;
-      background-color: $light-bulgarian-green;
-      border-radius: $usual-buffer;
-      padding: $usual-buffer;
-      float: left;
-
-      .day {
-        font-size: 120%;
-        text-align: center;
-      }
-
-      .year {
-        font-size: 80%;
-        text-align: center;
-      }
-    }
-
     .body {
       padding-right: $usual-buffer;
       padding-left: 80px + $usual-buffer;
+    }
+
+    .connection-info-panel {
+      float: left;
+      width: 80px;
+
+      .mode {
+        text-align: center;
+        padding-top: 0.5em;
+        color: #999;
+        font-size: 110%;
+      }
+
+      .date {
+        background-color: $light-bulgarian-green;
+        border-radius: $usual-buffer;
+        padding: $usual-buffer;
+
+        .day {
+          font-size: 120%;
+          text-align: center;
+        }
+
+        .year {
+          font-size: 80%;
+          text-align: center;
+        }
+      }
     }
   }
 
