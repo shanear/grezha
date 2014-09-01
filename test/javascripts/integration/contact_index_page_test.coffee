@@ -29,7 +29,7 @@ test "creates a new contact", ->
   visit("/contacts/")
   fillIn("#contact-search", "Anna Bobana")
   click(".new-contact > a")
-  click(".save-button")
+  click("#save-contact")
   andThen ->
     equal(currentPath(), "contacts.contact.index", "should be" + currentPath())
     equal("Anna Bobana", find("h3#contact-name").text(), "name should display in header")
@@ -42,7 +42,7 @@ test "creates a new contact with full information", ->
   click(".new-contact > a")
   fillIn("#city", "Lake Forest")
   fillIn("#bio", "just wants to be king of the pirates")
-  click(".save-button")
+  click("#save-contact")
   andThen ->
     equal("Ion Worris", find("h3#contact-name").text(), "name should display in header")
     ok(find(".top-info").text().indexOf("Lake Forest") > -1, "should find the city in the top info")
