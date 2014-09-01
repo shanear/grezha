@@ -165,6 +165,21 @@ div#ember-app {
     margin-right: .5em;
   }
 
+
+  .connection-top-row {
+    .connection-date-span {
+      display: inline-block;
+    }
+    .connection-mode-span {
+      float: right;
+    }
+
+    .connection-mode {
+      display: inline;
+      width: auto;
+    }
+  }
+
   #confirmation {
     width: 100%;
     background-color: $light-bulgarian-green;
