@@ -1,5 +1,5 @@
 class ConnectionSerializer < ActiveModel::Serializer
-  attributes :id, :note, :occurred_at, :contact_id
+  attributes :id, :note, :occurred_at, :contact_id, :mode
 
   def id
     object.remote_id

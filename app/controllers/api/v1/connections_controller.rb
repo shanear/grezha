@@ -3,7 +3,7 @@ class Api::V1::ConnectionsController < ApplicationController
   respond_to :json
 
   def create
-  	@connection = connections.create(create_connection_params)
+    @connection = connections.create(create_connection_params)
 
     if @connection.save()
       render json: @connection
@@ -48,6 +48,6 @@ class Api::V1::ConnectionsController < ApplicationController
       contact = Contact.where(remote_id: params[:connection][:contact_id]).first
       params[:connection][:contact_id] = contact.id
     end
-  	params.required(:connection).permit(:remote_id, :contact_id, :note, :occurred_at)
+    params.required(:connection).permit(:remote_id, :contact_id, :note, :occurred_at, :mode)
   end
 end

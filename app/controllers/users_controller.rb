@@ -38,7 +38,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    puts current_user
     user = params.required(:user).permit(:name, :password, :email, :role)
     user[:organization_id] = current_user.organization_id
     user

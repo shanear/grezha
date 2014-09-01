@@ -10,6 +10,7 @@ FactoryGirl.define do
     association :contact, factory: :contact, strategy: :build
 
     note "MyText"
+    mode "MyMode"
     occurred_at "2014-02-21"
     organization_id 1
   end

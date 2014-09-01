@@ -9,7 +9,7 @@ describe Api::V1::ConnectionsController do
     let(:contact) { connection.contact }
 
     let(:connection) {
-      FactoryGirl.create(:connection, note: "Cowabunga", organization_id: organization.id)
+      FactoryGirl.create(:connection, note: "Cowabunga", mode: "Email", organization_id: organization.id)
     }
 
     let(:other_connection) {
@@ -31,6 +31,7 @@ describe Api::V1::ConnectionsController do
       it "returns connection data" do
         get :show, id: connection.id, format: :json
         expect(json["connection"]["note"]).to eq("Cowabunga")
+        expect(json["connection"]["mode"]).to eq("Email")
       end
 
       it "fails if contact not in organization" do
@@ -42,10 +43,11 @@ describe Api::V1::ConnectionsController do
 
     describe "POST #create" do
       it "creates a new connection in user's organization with a remote id" do
-        post :create, connection: { note: "Howey", contact_id: contact.id }
+        post :create, connection: { note: "Howey", mode: "In Person", contact_id: contact.id}
 
         new_connection = Connection.last
         expect(new_connection.note).to eq("Howey")
+        expect(new_connection.mode).to eq("In Person")
         expect(new_connection.remote_id).to match(/[a-zA-Z0-9]{8}/)
         expect(new_connection.organization_id).to eq(organization.id)
       end
