@@ -6,7 +6,7 @@ User.create(
   name: "Admin",
   email: "admin@admin.com",
   password: "password",
-  organization_id: organization.id
+  organization_id: organization.id,
   role: "admin"
 )
 
