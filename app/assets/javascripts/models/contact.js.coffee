@@ -3,6 +3,7 @@ App.Contact = DS.Model.extend
   city: DS.attr('string')
   bio: DS.attr('string')
   birthday: DS.attr('date')
+  phone: DS.attr('string')
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
   )
