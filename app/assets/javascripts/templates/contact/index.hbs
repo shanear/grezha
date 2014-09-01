@@ -20,41 +20,42 @@
   {{partial "partials/confirmation"}}
 
   <div class="clearfix">
-    <div class="avatar clearfix">
-      <img {{bind-attr src=pictureUrl}}></img>
-      {{image-uploader resource="contacts" resourceId=id action="changeImage"}}
-    </div>
+    <!-- TODO: add the picture field to as a custom feature
+      <div class="avatar clearfix">
+        <img {{bind-attr src=pictureUrl}}></img>
+        {{image-uploader resource="contacts" resourceId=id action="changeImage"}}
+      </div>
+    -->
 
-    <div class="top-info">
+      <div class="top-info">
+        <h3 id="contact-name">{{name}}</h3>
 
-      <h3 id="contact-name">{{name}}</h3>
-        <p>
-          <b>from:</b>
-          {{#if city}}
-            {{city}}
-          {{else}}
-            unknown
-          {{/if}}
-        </p>
+        <div class="attributes">
+          <p>
+            <span class="field-label">from</span>
+            {{#if city}}
+              {{city}}
+            {{else}}
+              unknown
+            {{/if}}
+          </p>
 
-        <p>
-          <b>birthday:</b>
-          {{#if birthday}}
-            {{formatBirthday birthday}}
-          {{else}}
-            unknown
-          {{/if}}
-        </p>
+          <p>
+            <span class="field-label">birthday</span>
+            {{#if birthday}}
+              {{formatBirthday birthday}}
+            {{else}}
+              unknown
+            {{/if}}
+          </p>
 
-        <p id="last-seen">
-          <b>last seen:</b>
-          {{#if lastSeen}}
-            {{formatDate lastSeen}}
-          {{/if}}
-        </p>
-        <p id="active">
-          {{status}}
-        </p>
+          <p id="last-seen">
+            <span class="field-label">last seen</span>
+            {{#if lastSeen}}
+              {{formatDate lastSeen}}
+            {{/if}}
+          </p>
+        </div>
     </div>
   </div>
 

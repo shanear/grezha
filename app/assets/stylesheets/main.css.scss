@@ -314,8 +314,13 @@ div#ember-app {
 
   .contact-panel {
     .top-info {
-      float: left;
       padding: $usual-buffer;
+
+      .field-label {
+        color: #999;
+        width: 70px;
+        display: inline-block;
+      }
     }
 
     .bio {
