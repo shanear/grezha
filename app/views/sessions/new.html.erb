@@ -41,5 +41,10 @@
 
       <%= f.submit "Sign in", class: "btn btn-default" %>
     <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert"><%= flash[:alert] %></div>
+    <% end %>
+
   </div>
 </div>

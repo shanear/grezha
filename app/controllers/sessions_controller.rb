@@ -9,10 +9,9 @@ class SessionsController < ApplicationController
     if user = User.authenticate(params[:session][:email], params[:session][:password])
       login user
 
-      flash[:notice] = "Logged in!"
       redirect_to root_path
     else
-      flash[:alert] = "Username and password did not match"
+      flash[:alert] = "Incorrect username or password. Please contact your administrator if cannot login."
       render 'new'
     end
   end
