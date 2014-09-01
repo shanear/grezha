@@ -3,11 +3,8 @@ App.Connection = DS.Model.extend
   note: DS.attr('string')
   occurredAt: DS.attr('date')
   mode: DS.attr('string')
-
-  foo: ->
-    alert "wtf"
-
   errors: []
+
   isValid: ->
     errors = []
     if @get('note') == undefined || (@get('note').replace /[ ]/g, '').length < 1

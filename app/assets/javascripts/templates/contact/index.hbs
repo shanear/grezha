@@ -86,6 +86,14 @@
 
     {{#if addingRelationship}}
       <div class="form-horizontal add-model-form">
+        {{#if relationshipErrors.length}}
+          <ul class="errors">
+            {{#each relationshipErrors}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
+
         <div class="form-group">
           <label for="newRelationshipName" class="col-sm-3 control-label">name</label>
 
@@ -173,6 +181,14 @@
 
     {{#if addingConnection}}
       <div class="add-model-form">
+        {{#if connectionErrors.length}}
+          <ul class="errors">
+            {{#each connectionErrors}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
+
         <div class="connection-top-row">
           <div class="form-group connection-date-span">
             {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
@@ -197,14 +213,6 @@
           </button>
         </div>
       </div>
-
-      {{#if errors.length}}
-        <ul class="errors">
-          {{#each errors}}
-            <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      {{/if}}
     {{/if}}
 
 

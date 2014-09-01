@@ -33,10 +33,14 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
       newRelationship = @store.createRecord('relationship', @get('newRelationship'))
       newRelationship.set('contact', @get('model'))
 
-      newRelationship.save().then =>
-        @get('relationships').pushObject newRelationship
-        @set('addingRelationship', false)
-        @set('newRelationship', {})
+      if newRelationship.isValid()
+        newRelationship.save().then =>
+          @get('relationships').pushObject newRelationship
+          @set('addingRelationship', false)
+          @set('newRelationship', {})
+
+      else
+        @set('relationshipErrors', newRelationship.get('errors'))
 
 
     saveConnection: ->
@@ -51,7 +55,7 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
           @set('newConnection.note', "")
           @set('addingConnection', false)
       else
-        @set('errors', newConnection.get('errors'))
+        @set('connectionErrors', newConnection.get('errors'))
 
     changeImage: (url)->
       @set('model.pictureUrl', url)
