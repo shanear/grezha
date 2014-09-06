@@ -167,67 +167,6 @@
     {{/each}}
   </div>
 
-  <div class="connections">
-    <div class="section-header">
-      <div class="right">
-        {{#if addingConnection}}
-          <button class="btn btn-link" {{action "cancelNewConnection"}}>
-            Cancel
-          </button>
-        {{else}}
-          <button id="add-connection" class="btn btn-default" {{action "newConnection"}}>
-            Add Connection
-          </button>
-        {{/if}}
-      </div>
-
-      <div class="left">
-        <h4>Connections</h4>
-      </div>
-    </div>
-
-    {{#if addingConnection}}
-      <div class="add-model-form">
-        {{#if connectionErrors.length}}
-          <ul class="errors">
-            {{#each connectionErrors}}
-              <li>{{this}}</li>
-            {{/each}}
-          </ul>
-        {{/if}}
-
-        <div class="connection-top-row">
-          <div class="form-group connection-date-span">
-            {{date-field id="newConnectionDate" date=newConnection.occurredAt}}
-          </div>
-          <div class="form-group connection-mode-span">
-            {{view Ember.Select
-              class="form-control connection-mode"
-              content=modes
-              id="mode"
-              value=newConnection.mode}}
-          </div>
-        </div>
-
-        <div class="form-group">
-          {{focused-textarea id="newConnectionNote" class="form-control" placeholder="Where? What happened? Any thing they need?" valueBinding="newConnection.note"}}
-        </div>
-
-
-        <div class="save-button">
-          <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
-            Save Connection
-          </button>
-        </div>
-      </div>
-    {{/if}}
-
-
-    {{#each sortedConnections}}
-      {{connection-panel connection=this}}
-    {{else}}
-      <p> There are no connections for this person. </p>
-    {{/each}}
-  </div>
+  {{connection-new contact=model store=store}}
 </div>
 
