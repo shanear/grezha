@@ -35,6 +35,9 @@ test "Create and delete a relationship", ->
       "A newly created relationship should appear")
   click(".delete-relationship")
   click(".confirm")
+  andThen ->
+    equal(find(".relationship .type").length, 0, 
+      "A relationship should not show up after being deleted " + find(".relationship .type").length)
 
 test "Create and delete a connection", ->
   visit("/contacts/" + contact.get("id"))

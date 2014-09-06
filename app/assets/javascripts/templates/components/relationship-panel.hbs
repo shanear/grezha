@@ -9,19 +9,20 @@
 
     <div class="right">
       {{breaklines relationship.contactInfo}}
+        {{#control-group name="options"}}
+          <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
+            <i class="fa fa-trash-o"></i>
+            Delete
+          </button>
+        {{/control-group}}
     </div>
   </div>
 
-  <div class="info">
+  <div class="body">
     <div class="notes">
       {{breaklines relationship.notes}}
     </div>
 
-    {{#control-group name="options"}}
-      <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
-        <i class="fa fa-trash-o"></i>
-        Delete
-      </button>
-    {{/control-group}}
+  
   </div>
 </div>
