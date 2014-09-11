@@ -12,9 +12,9 @@
       <ul>
         <li>{{#link-to 'contacts'}} Contacts {{/link-to}}</li>
 
-        {{#unless App.isDemo}}
+        {{#feature 'vehicles'}}
           <li> {{#link-to 'vehicles'}} Vehicles {{/link-to}} </li>
-        {{/unless}}
+        {{/feature}}
 
         {{#if App.online}}
           <li><a href="/birthdays">Birthdays</a></li>

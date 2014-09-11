@@ -32,6 +32,7 @@ Application.initializer
     application.set('isDemo', (env == "demo"))
     application.set('currentUser', EmberConfiguration.currentUser)
     application.set('organization', EmberConfiguration.organization)
+    application.set('organizationId', EmberConfiguration.organizationId)
     application.set('isAdmin', EmberConfiguration.isAdmin)
 
 
