@@ -34,6 +34,13 @@ input[type = "checkbox"] {
 .left { float: left; }
 .right { float: right; }
 
+.alert {
+  background-color: lighten($bulgarian-red, 40);
+  padding: $usual-buffer;
+  border-radius: 5px;
+}
+
+
 header {
   // Fix the header in the center
   position: fixed;

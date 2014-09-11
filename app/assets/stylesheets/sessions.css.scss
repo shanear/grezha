@@ -1,8 +1,14 @@
 $bulgarian-green: #00966E;
+$usual-buffer: 10px;
+
+.alert.login {
+  width: 40%;
+  margin: $usual-buffer auto;
+}
 
 div#login {
   width: 40%;
-  margin: 50px auto;
+  margin: 50px auto 0;
   border-radius: 10px;
   padding: 20px;
   background-color: lighten($bulgarian-green, 65);

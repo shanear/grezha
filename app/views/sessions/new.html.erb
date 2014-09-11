@@ -27,12 +27,13 @@
 </header>
 
 <div id="content">
+
   <div id="login">
     <h3>Log In</h3>
      <%= form_for(:session, url: sessions_path, class: "form-horizontal") do |f| %>
 
       <div class="form-group">
-        <%= f.text_field :email, placeholder: "Email" %>
+        <%= f.text_field :email, value: params[:session][:email], placeholder: "Email" %>
       </div>
 
       <div class="form-group">
@@ -41,10 +42,9 @@
 
       <%= f.submit "Sign in", class: "btn btn-default" %>
     <% end %>
-
-    <% if flash[:alert] %>
-      <div class="alert"><%= flash[:alert] %></div>
-    <% end %>
-
   </div>
+
+  <% if flash[:alert] %>
+     <div class="alert login"><%= flash[:alert] %></div>
+  <% end %>
 </div>
