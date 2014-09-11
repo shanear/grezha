@@ -1,15 +1,10 @@
 store = contact = null
-# TODO: rename this page and contact_index_page
-# Set the store to a fixture adapter for now
-# TODO: consider using a Pretender server & use sync adapter
-#       for more realistic coverage
 App.Contact.FIXTURES = []
 App.Connection.FIXTURES = []
 App.Relationship.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
-
-module "Contact Page Integration Tests",
+module "Connections Integration Tests",
   setup: ->
     # set the login cookie
     $.cookie('remember_token', "get logged in")
@@ -21,23 +16,6 @@ module "Contact Page Integration Tests",
 
   teardown: ->
     App.reset()
-
-test "Create and delete a relationship", ->
-  visit("/contacts/" + contact.get("id"))
-  click("#add-relationship")
-  fillIn("#newRelationshipName", "Bob Hope")
-  fillIn("#newRelationshipNote", "Notes")
-  fillIn("#newRelationshipType", "Officer")
-  fillIn("#newRelationshipContactInfo", "111-1111-1111")
-  click("#save-relationship")
-  andThen ->
-    ok(/Officer/.test(find(".relationship .type").text()),
-      "A newly created relationship should appear")
-  click(".delete-relationship")
-  click(".confirm")
-  andThen ->
-    equal(find(".relationship .type").length, 0, 
-      "A relationship should not show up after being deleted " + find(".relationship .type").length)
 
 test "Create and delete a connection", ->
   visit("/contacts/" + contact.get("id"))

@@ -75,7 +75,7 @@ test "shows only people with matching string in name", ->
   fillIn("#contact-search", "Cat")
   andThen ->
     equal(find(".contact").length, 2, "Should show matching on name")
-    
+
 test "matching people on name should not care if matching on first or last name", ->
   Ember.run ->
     contact = store.createRecord('contact',
