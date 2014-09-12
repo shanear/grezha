@@ -4,6 +4,7 @@ App.Contact = DS.Model.extend
   bio: DS.attr('string')
   birthday: DS.attr('date')
   phone: DS.attr('string')
+  cdcrId: DS.attr('string')
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
   )
@@ -52,6 +53,10 @@ App.Contact = DS.Model.extend
       errors.push 'Name cannot be blank.'
     else if @isDuplicate()
       errors.push "That name already exists."
+
+    if App.hasFeature('cdcrId')
+      if @get('cdcrId') == undefined || (@get('cdcrId').replace /[ ]/g, '').length < 1
+        errors.push 'CDCR id cannot be blank.'
 
     @set('errors', errors);
     if @get('errors').length > 0

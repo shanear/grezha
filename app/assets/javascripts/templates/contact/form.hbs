@@ -3,6 +3,13 @@
   {{input type="text" id="name" class="form-control" value=name}}
 </div>
 
+{{#feature 'cdcrId'}}
+  <div class="form-group">
+    <label for="cdcr-id">cdcr #:</label>
+    {{input type="text" id="cdcr-id" class="form-control" value=cdcrId}}
+  </div>
+{{/feature}}
+
 <div class="form-group">
   <label for="city">from city:</label>
   {{input type="text" id="city" class="form-control" value=city}}

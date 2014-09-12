@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906225455) do
+ActiveRecord::Schema.define(version: 20140912151722) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20140906225455) do
     t.string   "name"
     t.text     "bio"
     t.datetime "birthday"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140906225455) do
     t.string   "remote_id",            limit: 8, null: false
     t.integer  "organization_id"
     t.string   "phone"
+    t.string   "cdcr_id"
   end
 
   add_index "contacts", ["remote_id"], name: "index_contacts_on_remote_id", unique: true, using: :btree
@@ -74,8 +75,8 @@ ActiveRecord::Schema.define(version: 20140906225455) do
     t.string   "remember_token"
     t.string   "salt"
     t.string   "encrypted_password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "organization_id"
     t.string   "role",               default: "Admin"
     t.boolean  "active",             default: true

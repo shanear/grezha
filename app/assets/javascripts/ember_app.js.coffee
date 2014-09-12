@@ -35,6 +35,13 @@ Application.initializer
     application.set('organizationId', EmberConfiguration.organizationId)
     application.set('isAdmin', EmberConfiguration.isAdmin)
 
+    application.set('hasFeature', (featureName)->
+      return true if App.organizationId == '2'
+      return true if featureName == 'vehicles' && App.organizationId == '1'
+      return true if featureName == 'cdcrId' && App.organizationId == '3'
+      return false
+    )
+
 
 # Load (and cache) all primary models on application load
 ### This is experimental, don't do it for now

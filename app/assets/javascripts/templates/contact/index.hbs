@@ -30,6 +30,16 @@
       <div class="top-info">
         <h3 id="contact-name">{{name}}</h3>
 
+        {{#feature 'cdcrId'}}
+          <div class="contact-id">
+            {{#if cdcrId}}
+              cdcr: {{cdcrId}}
+            {{else}}
+              <span class="warning">missing cdcr id</span>
+            {{/if}}
+          </div>
+        {{/feature}}
+
         <div class="attributes">
           <p>
             <span class="field-label">from</span>

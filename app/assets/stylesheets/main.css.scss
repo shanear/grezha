@@ -40,6 +40,10 @@ input[type = "checkbox"] {
   border-radius: 5px;
 }
 
+.warning {
+  color: lighten($bulgarian-red, 30);
+}
+
 
 header {
   // Fix the header in the center
@@ -320,14 +324,27 @@ div#ember-app {
   }
 
   .contact-panel {
+    h3 {
+      margin: 0px;
+    }
+
     .top-info {
       padding: $usual-buffer;
+
+      .attributes {
+        margin-top: $usual-buffer * 2;
+      }
 
       .field-label {
         color: #999;
         width: 70px;
         display: inline-block;
       }
+    }
+
+    .contact-id {
+      color: #aaa;
+      font-size: 110%;
     }
 
     .bio {
