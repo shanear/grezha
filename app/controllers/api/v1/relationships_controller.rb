@@ -3,7 +3,7 @@ class Api::V1::RelationshipsController < ApplicationController
   respond_to :json
 
   def create
-  	@relationship = relationships.create(create_connection_params)
+  	@relationship = relationships.create(create_relationship_params)
     if @relationship.save()
       render json: @relationship
     else
@@ -11,6 +11,15 @@ class Api::V1::RelationshipsController < ApplicationController
     end
   end
 
+  def update
+    @relationship = find_relationship(params[:id])
+
+    if @relationship.update_attributes(create_relationship_params.except(:remote_id))
+      render json: @relationship
+    else
+      render json: { errors: @relationship.errors }, status: 422
+    end
+  end
 
   def show
     respond_with find_relationship(params[:id])
@@ -41,7 +50,12 @@ class Api::V1::RelationshipsController < ApplicationController
     Relationship.where(organization_id: current_user.organization_id)
   end
 
-  def create_connection_params
+  def edit_relationship_param
+        params.required(:relationship).permit(:remote_id, :contact_id, :notes, :name, :contact_info, :relationship_type, :organization_id)
+
+  end
+
+  def create_relationship_params
     params[:relationship][:remote_id] = params[:relationship][:id]
 
     if remote_id?(params[:relationship][:contact_id])

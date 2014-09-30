@@ -39,6 +39,15 @@ describe Api::V1::RelationshipsController do
 
       end
 
+      describe "PUT #update" do
+        it "updates a relationship with information" do 
+          put :update, id: relationship.id, relationship: { name: "Howey", contact_id: contact.id, relationship_type: "father"}
+          relationship_modified = Relationship.find_by_id(relationship.id)
+          expect(relationship_modified.name).to eq("Howey")
+          expect(relationship_modified.relationship_type).to eq("father")
+        end
+      end
+
       describe "POST #create" do
         it "creates a new connection in user's organization with a remote id" do
           post :create, relationship: { name: "Howey", contact_id: contact.id , relationship_type: "officer"}
@@ -46,6 +55,7 @@ describe Api::V1::RelationshipsController do
           expect(new_relationship.name).to eq("Howey")
           expect(new_relationship.remote_id).to match(/[a-zA-Z0-9]{8}/)
           expect(new_relationship.organization_id).to eq(organization.id)
+          expect(new_relationship.relationship_type).to eq("officer")
         end
       end
 

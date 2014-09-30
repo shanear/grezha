@@ -5,6 +5,9 @@
     <div class="left">
       <div class="name">{{relationship.name}}</div>
       <div class="type">{{relationship.relationshipType}}</div>
+      {{#link-to 'relationship.edit' relationship }}
+          edit
+      {{/link-to}}
     </div>
 
     <div class="right">
