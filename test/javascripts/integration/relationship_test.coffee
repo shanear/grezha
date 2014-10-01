@@ -7,7 +7,6 @@ App.Connection.FIXTURES = []
 App.Relationship.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
-
 module "Relationship Integration Test",
   setup: ->
     # set the login cookie
