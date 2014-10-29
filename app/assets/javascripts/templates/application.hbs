@@ -9,7 +9,7 @@
     </div>
 
     <nav>
-      <ul>
+      <ul class="links">
         <li>{{#link-to 'contacts'}} Contacts {{/link-to}}</li>
 
         {{#feature 'vehicles'}}
@@ -23,28 +23,43 @@
 
       <div class="login-info">
         {{#unless App.online}}
-          Offline -
+          <div class="offline">
+            Offline -
+          </div>
         {{/unless}}
 
         {{#unless App.isProduction}}
-          <span class="environment">
-            {{App.environment}} -
-          </span>
+          <div class="environment">
+            {{App.environment}}
+          </div>
         {{/unless}}
 
         {{#if App.loggedIn}}
-          {{App.currentUser}} -
-          {{#if App.isAdmin}}
+          <div class="organization">
+            {{#if App.isAdmin}}
               <a href="/users">
-                  {{App.organization}}
-                  <i class="fa fa-cog"></i>
+                {{App.organization}}
+                <i class="fa fa-cog"></i>
               </a>
-          {{else}}
-              {{App.organization}} -
-          {{/if}}
-          {{logout-button}}
+            {{else}}
+              {{App.organization}}
+            {{/if}}
+          </div>
+
+          <div class="dropdown">
+            <a data-toggle="dropdown" id href="#">
+              {{App.currentUser}} <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <!-- <li class="divider"></li> -->
+              <li> {{logout-button}} </li>
+            </ul>
+          </div>
         {{else}}
-          Logged out
+          <div class="logged-out">
+            Logged out
+          </div>
         {{/if}}
       </div>
     </nav>

@@ -62,7 +62,6 @@ header {
     height: $header-height;
 
     background-color: white;
-    color: $bulgarian-red;
     padding-bottom: 5px;
     border-bottom: 2px solid $bulgarian-red;
 
@@ -82,9 +81,13 @@ header {
       }
     }
 
-    .environment {
+    .environment, .organization {
       color: $bulgarian-green;
       text-transform: capitalize;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     nav {
@@ -94,7 +97,7 @@ header {
 
       font-size: 1.1em;
 
-      ul {
+      ul.links  {
         display: inline-block;
         margin: 0px;
 
@@ -106,6 +109,11 @@ header {
 
       .login-info {
         float: right;
+
+        > div {
+          padding-left: 1em;
+          float: left;
+        }
       }
     }
   }

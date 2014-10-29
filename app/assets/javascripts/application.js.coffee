@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require jquery-fileupload/basic
+#= require bootstrap-sprockets
 #= require ./image_assets
 #= require handlebars
 #= require ember

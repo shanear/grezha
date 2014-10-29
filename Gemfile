@@ -25,7 +25,7 @@ gem 'jquery-rails', '~> 3.0.4'
 gem 'jquery-fileupload-rails', '~> 0.4.1'
 
 gem 'sass-rails',   '~> 4.0.1'
-gem 'bootstrap-sass', '~> 3.1.1.0'
+gem 'bootstrap-sass', '~> 3.2.0.2'
 gem 'font-awesome-sass', '~> 4.0.3.1'
 
 gem 'paperclip', '~> 3.2'
