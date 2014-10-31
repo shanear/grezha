@@ -24,7 +24,7 @@
       <div class="login-info">
         {{#unless App.online}}
           <div class="offline">
-            Offline -
+            Offline
           </div>
         {{/unless}}
 
@@ -46,12 +46,13 @@
             {{/if}}
           </div>
 
-          <div class="dropdown">
+          <div {{bind-attr class=":dropdown App.online:online:offline"}}>
             <a data-toggle="dropdown" id href="#">
               {{App.currentUser}} <span class="caret"></span>
             </a>
 
-            <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dLabel">
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li class="reset-password"><a href="/reset-password">Reset Password</a></li>
               <!-- <li class="divider"></li> -->
               <li> {{logout-button}} </li>
             </ul>
@@ -69,3 +70,9 @@
 <div id="content">
   {{outlet}}
 </div>
+
+{{#if App.alertText}}
+  <div id="alert">
+    <p> {{App.alertText}} </p>
+  </div>
+{{/if}}

@@ -9,6 +9,10 @@
     organizationId: '<%= current_user.organization.id %>'
   };
 
+  <% if flash[:notice] %>
+    window.EmberConfiguration['alert'] = '<%= flash[:notice] %>';
+  <% end %>
+
 <% end %>
 
 <div id="ember-app" class="clearfix">

@@ -6,6 +6,9 @@ Daughters::Application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get    "/logout", to: "sessions#destroy"
 
+  get    "/reset-password", to: "account#reset_password"
+  patch  "/reset-password", to: "account#reset_password"
+
   get    "/birthdays", to: "contacts#birthdays"
   get    "/ping", to: "application#ping", defaults: { format: "json" }
 

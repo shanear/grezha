@@ -6,16 +6,18 @@ $usual-buffer: 10px;
   margin: $usual-buffer auto;
 }
 
-div#login {
+div#account-box {
   width: 40%;
-  margin: 50px auto 0;
+  margin: 10px auto 0;
   border-radius: 10px;
   padding: 20px;
   background-color: lighten($bulgarian-green, 65);
 
   h3 {
+    text-align: center;
+    font-weight: normal;
     margin: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding-top: 0px;
   }
 
@@ -32,8 +34,12 @@ div#login {
     width: 100%;
   }
 
-  #sub {
+  .cancel-link {
+    display: inline-block;
+    float: right;
+  }
 
+  #sub {
     text-align: center;
   }
 }

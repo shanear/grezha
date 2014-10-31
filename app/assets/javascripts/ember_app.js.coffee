@@ -3,6 +3,10 @@ Application = Ember.Application.extend
   readonly: Ember.computed.not('online')
   loggedIn: (-> $.cookie('remember_token') != undefined).property()
 
+  setAlert: (text)->
+    @set('alertText', text);
+    setTimeout (=> @set('alertText', null) ), 5000
+
 Application.initializer
   name: "start connectivity checks"
   after: "store"
@@ -22,7 +26,6 @@ Application.initializer
     checkConnection()
     setInterval checkConnection, 10000
 
-
 Application.initializer
   name: "configuration"
   initialize: (container, application)->
@@ -41,6 +44,9 @@ Application.initializer
       return true if featureName == 'cdcrId' && App.organizationId == '3'
       return false
     )
+
+    if EmberConfiguration.alert
+      application.setAlert(EmberConfiguration.alert)
 
 
 # Load (and cache) all primary models on application load

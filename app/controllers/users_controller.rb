@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   layout "setup"
+
   before_filter :require_logged_in
   before_filter :require_admin
 

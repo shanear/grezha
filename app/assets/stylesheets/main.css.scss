@@ -107,6 +107,12 @@ header {
         }
       }
 
+      .offline .reset-password a {
+        pointer-events: none;
+        cursor: default;
+        color: #aaa;
+      }
+
       .login-info {
         float: right;
 
@@ -119,12 +125,25 @@ header {
   }
 }
 
+
 div#content {
   padding-top: $header-height;
   margin: auto;
   width: 96%;
   max-width: 800px;
   min-width: 450px;
+
+  .logo {
+    h1 {
+      text-align: center;
+      font-family: 'Redressed', sans-serif;
+      font-size: 3.5em;
+      margin: 0px;
+
+      a { color: $bulgarian-green; }
+      a:hover { color: lighten($bulgarian-green, 10); }
+    }
+  }
 }
 
 #main-panel {
@@ -504,3 +523,29 @@ div#ember-app {
   }
 }
 
+#alert {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 240px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: lighten($bulgarian-green, 65);
+  color: #999;
+
+  p {
+    margin-left: 20px;
+    margin-bottom: 0;
+
+    &::before {
+      content: "";
+      border-radius: 5px;
+      width: 0px;
+      height: 0px;
+      border: 5px solid $bulgarian-green;
+      margin-left: -20px;
+      margin-top: 5px;
+      float: left;
+    }
+  }
+}

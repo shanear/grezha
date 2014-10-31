@@ -16,17 +16,18 @@
 class User < ActiveRecord::Base
   PEPPER = ENV['SALT_SPICE']
 
-  attr_accessor :password
+  attr_accessor :password, :password_confirmation
   belongs_to :organization
 
   # TODO: validate email
-  # TODO: only validate password on create
-  validates :password, :presence => true, :length => { :within => 6..40 }, :on => :create
   validates_presence_of :name, :email
+  validates :password, presence: true,
+                       confirmation: true,
+                       length: { :within => 6..40 }
 
+  before_create :generate_remember_token
   before_save :normalize_email
   before_save :encrypt_password, :if => :password
-  before_save :generate_remember_token
 
   def has_password?(password)
     encrypted_password == encrypt(password)
