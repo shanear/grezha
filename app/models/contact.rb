@@ -23,6 +23,7 @@ class Contact < ActiveRecord::Base
 
   has_many :connections, dependent: :destroy
   has_many :relationships, dependent: :destroy
+  belongs_to :user
 
   has_attached_file :picture,
     styles: { medium: "200", thumb: "50x50#" }

@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :password, :password_confirmation
   belongs_to :organization
+  has_many :contacts
 
   # TODO: validate email
   validates_presence_of :name, :email
