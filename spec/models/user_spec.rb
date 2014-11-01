@@ -37,6 +37,27 @@ describe User do
     end
   end
 
+  context "#generate_password_reset" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it "saves a password reset token to user" do
+      user.generate_password_reset
+      user.save!
+
+      user.reset_password_token.should_not be_nil
+    end
+
+    it "clears the token when the user is saved again" do
+      user.generate_password_reset
+      user.save!
+
+      user.name = "Shane"
+      user.save!
+
+      user.reset_password_token.should be_nil
+    end
+  end
+
   context :admin do
     it "verifies a role of admin" do
       User.new(role: "admin").should be_admin

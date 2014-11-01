@@ -38,6 +38,8 @@ group :development, :test do
   gem 'timecop', '~> 0.7.1'
   gem 'teaspoon', '~> 0.8.0'
 
+  gem 'letter_opener', '~> 1.2.0'
+
   gem 'rails-assets-ember-qunit', '~>0.1.8'
   gem 'rails-assets-pretender'
 end

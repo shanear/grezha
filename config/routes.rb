@@ -7,7 +7,10 @@ Daughters::Application.routes.draw do
   get    "/logout", to: "sessions#destroy"
 
   get    "/reset-password", to: "account#reset_password"
+  get    "/reset-password/:token", to: "account#reset_password"
   patch  "/reset-password", to: "account#reset_password"
+  get    "/forgot-password", to: "account#forgot_password"
+  post   "/forgot-password", to: "account#forgot_password"
 
   get    "/birthdays", to: "contacts#birthdays"
   get    "/ping", to: "application#ping", defaults: { format: "json" }

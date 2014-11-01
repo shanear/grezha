@@ -38,4 +38,6 @@ Daughters::Application.configure do
   config.eager_load = false
 
   config.ember.variant = :development
+
+  config.action_mailer.delivery_method = :letter_opener
 end

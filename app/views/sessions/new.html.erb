@@ -29,10 +29,15 @@
       </div>
 
       <%= f.submit "Sign in", class: "btn btn-default" %>
+      <%= link_to "Forgot Password?", "/forgot-password", class: "alternate-link btn btn-link" %>
     <% end %>
   </div>
 
   <% if flash[:alert] %>
      <div class="alert login"><%= flash[:alert] %></div>
+  <% end %>
+
+  <% if flash[:notice] %>
+     <div class="notice login"><%= flash[:notice] %></div>
   <% end %>
 </div>

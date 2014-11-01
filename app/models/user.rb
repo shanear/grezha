@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
                        :if => :password
 
   before_create :generate_remember_token
+  before_save :clear_reset_password_token
   before_save :normalize_email
   before_save :encrypt_password, :if => :password
 
@@ -47,6 +48,10 @@ class User < ActiveRecord::Base
     return self.role.to_sym == :admin
   end
 
+  def generate_password_reset
+    self.reset_password_token = SecureRandom.urlsafe_base64
+  end
+
   private
 
   def normalize_email
@@ -60,6 +65,12 @@ class User < ActiveRecord::Base
 
   def generate_remember_token
     self.remember_token = SecureRandom.urlsafe_base64
+  end
+
+  def clear_reset_password_token
+    unless self.reset_password_token_changed?
+      self.reset_password_token = nil
+    end
   end
 
   def encrypt(string)
