@@ -21,9 +21,10 @@ class User < ActiveRecord::Base
 
   # TODO: validate email
   validates_presence_of :name, :email
-  validates :password, presence: true,
-                       confirmation: true,
-                       length: { :within => 6..40 }
+  validates :password, presence: true, on: :create
+  validates :password, confirmation: true,
+                       length: { :within => 6..40 },
+                       :if => :password
 
   before_create :generate_remember_token
   before_save :normalize_email

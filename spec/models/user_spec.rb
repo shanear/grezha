@@ -18,7 +18,8 @@ describe User do
     let(:user) { FactoryGirl.create(:user) }
 
     it "should allow changes" do
-      user.update(name: "Verne").should be_true
+      found_user = User.find(user.id)
+      found_user.update(name: "Verne").should be_true
     end
 
     it "allows password changes" do

@@ -13,19 +13,16 @@ describe UsersController do
     auth_with_user(user_one)
   end
 
-
-
   describe "GET #index" do
     context "authorization" do
       before do
           auth_with_user(nonadmin_user)
       end
+
       it "should not show list of users if not admin" do
-        
         expect(get :index).to redirect_to "/"
       end
     end
-
 
     it 'should return users associated with current users organization' do
       get :index
@@ -69,12 +66,10 @@ describe UsersController do
   end
 
   describe "GET #edit" do
-
     it 'should return assigned user' do
       get :edit, id: user_two.id
       expect(assigns :user).to eq user_two
     end
-
   end
 
   describe "POST #update" do

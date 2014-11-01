@@ -15,6 +15,7 @@ class AccountController < ApplicationController
   private
 
   def reset_password_params
+    params[:user][:password] ||= ""
     params.require(:user).permit(:password, :password_confirmation)
   end
 end
