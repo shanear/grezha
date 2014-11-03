@@ -44,6 +44,8 @@ group :development, :test do
   gem 'rails-assets-pretender'
 end
 
+gem 'rails_12factor', group: :production
+
 #### Bower assets
 # To include a bower library, use the form:
 # gem 'rails-assets-BOWER_LIBRARY_NAME'
