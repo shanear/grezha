@@ -41,7 +41,7 @@ Application.initializer
     application.set('hasFeature', (featureName)->
       return true if App.organizationId == '2'
       return true if featureName == 'vehicles' && App.organizationId == '1'
-      return true if featureName == 'cdcrId' && App.organizationId == '3'
+      return true if featureName == 'memberId' && App.organizationId == '3'
       return false
     )
 

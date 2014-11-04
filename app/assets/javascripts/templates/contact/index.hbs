@@ -30,12 +30,12 @@
       <div class="top-info">
         <h3 id="contact-name">{{name}}</h3>
 
-        {{#feature 'cdcrId'}}
+        {{#feature 'memberId'}}
           <div class="contact-id">
-            {{#if cdcrId}}
-              cdcr: {{cdcrId}}
+            {{#if memberId}}
+              member id: {{memberId}}
             {{else}}
-              <span class="warning">missing cdcr id</span>
+              <span class="warning">missing member id</span>
             {{/if}}
           </div>
         {{/feature}}
