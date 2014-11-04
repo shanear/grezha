@@ -30,6 +30,17 @@ Daughters::Application.configure do
     }
   }
 
+  # Postmark email on heroku
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :port           => '25',
+    :address        => ENV['POSTMARK_SMTP_SERVER'],
+    :user_name      => ENV['POSTMARK_API_KEY'],
+    :password       => ENV['POSTMARK_API_KEY'],
+    :domain         => 'grezha-demo.heroku.com',
+    :authentication => :plain,
+  }
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 
