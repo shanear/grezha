@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
     mail(
       to: @user.email,
       from: "shane@grezha.org",
-      subject: "Password reminder for Grezha"
+      subject: "Password reset link for Grezha"
     );
   end
 end
