@@ -1,6 +1,10 @@
 App.BaseRoute = Ember.Route.extend
   beforeModel: ->
-    @transitionTo('/logout') unless App.get('loggedIn')
+    unless App.get('loggedIn')
+      if App.get('online')
+        window.location.replace("login")
+      else
+        @transitionTo('/logout')
 
   setupController: (controller, model)->
     @_super(controller, model);
