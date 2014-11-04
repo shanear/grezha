@@ -28,6 +28,9 @@ Daughters::Application.routes.draw do
        resources :relationships, except: [:new, :edit],
           defaults: { format: "json" }
 
+      resources :users, except: [:new, :edit, :update],
+        defaults: {format: "json"}
+
       resources :vehicles, except: [:new, :edit],
           defaults: { format: "json" }
 

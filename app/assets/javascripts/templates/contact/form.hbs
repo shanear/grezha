@@ -30,6 +30,11 @@
   {{textarea id="bio" class="form-control" value=bio rows="10"}}
 </div>
 
+{{#if allUsers}}
+  <div class="form-group" id='contact-user'>
+    {{view Ember.Select content=allUsers optionValuePath="content.id" optionLabelPath="content.name" selectionBinding="user" }}
+  </div>
+{{/if}}
 {{#if errors.length}}
   <ul class="errors">
     {{#each errors}}

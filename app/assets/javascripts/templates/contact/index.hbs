@@ -6,7 +6,7 @@
       {{/unless}}
     </div>
     {{#control-group name="options"}}
-      {{#link-to 'contact.edit' model}}
+      {{#link-to 'contact.edit' model id='edit-contact'}}
         <i class="fa fa-pencil"></i>
         Edit
       {{/link-to}}
@@ -48,6 +48,11 @@
             {{else}}
               unknown
             {{/if}}
+          </p>
+
+          <p id="user">
+            <span class="field-label"> volunteer </span>
+              {{user.name}}
           </p>
 
           <p>

@@ -1,6 +1,7 @@
 App.ContactEditController = Ember.ObjectController.extend
   errors: []
-  reset: -> @set 'errors', []
+
+  allUsers: []
 
   actions:
     saveContact: ->

@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20141101003311) do
     t.string   "name"
     t.text     "bio"
     t.datetime "birthday"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20141101003311) do
     t.integer  "organization_id"
     t.string   "phone"
     t.string   "cdcr_id"
+    t.integer  "user_id"
   end
 
   add_index "contacts", ["remote_id"], name: "index_contacts_on_remote_id", unique: true, using: :btree
@@ -75,8 +76,8 @@ ActiveRecord::Schema.define(version: 20141101003311) do
     t.string   "remember_token"
     t.string   "salt"
     t.string   "encrypted_password"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "organization_id"
     t.string   "role",                 default: "Admin"
     t.boolean  "active",               default: true
