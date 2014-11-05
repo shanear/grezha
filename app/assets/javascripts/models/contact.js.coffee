@@ -50,12 +50,12 @@ App.Contact = DS.Model.extend
   errors: []
   isValid: ->
     errors = []
-    if @get('name') == undefined || (@get('name').replace /[ ]/g, '').length < 1
+    if !@get('name')? || (@get('name').replace /[ ]/g, '').length < 1
       errors.push 'Name cannot be blank.'
     else if @isDuplicate()
       errors.push "That name already exists."
 
-    if @get('phone') != undefined && @get('phone').match(/^\d+-?\d+-?\d+-?\d+:?\d+$/) == null
+    if @get('phone')? && @get('phone').match(/^\d+-?\d+-?\d+-?\d+:?\d+$/) == null
       errors.push 'Invalid phone number. Format: xxx-xxx-xxx:ext'
 
     if App.hasFeature('memberId')

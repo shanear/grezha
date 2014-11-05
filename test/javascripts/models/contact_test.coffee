@@ -17,7 +17,7 @@ test 'isValid name', ->
   Ember.run -> contact.set("name", "    ")
   equal(contact.isValid(), false, "Contact isn't valid with whitespace name")
 
-  Ember.run -> contact.set("name", undefined)
+  Ember.run -> contact.set("name", null)
   equal(contact.isValid(), false, "Contact isn't valid with undefined name")
 
   Ember.run -> contact.set("name", "Shanze")
