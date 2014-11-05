@@ -57,7 +57,7 @@ App.Contact = DS.Model.extend
 
     if App.hasFeature('memberId')
       if @get('memberId') == undefined || (@get('memberId').replace /[ ]/g, '').length < 1
-        errors.push 'CDCR id cannot be blank.'
+        errors.push 'member id cannot be blank.'
 
     @set('errors', errors);
     if @get('errors').length > 0
