@@ -13,7 +13,6 @@ deploy:
   app: grezha-demo
   run:
     - "rake db:migrate"
-    - "rake cleanup"
   on:
     repo: shanear/grezha
 
