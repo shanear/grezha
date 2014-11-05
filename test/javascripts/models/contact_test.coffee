@@ -8,7 +8,7 @@ moduleForModel 'contact', 'Contact Model',
       contact = store.createRecord('contact', name: "Ms McGrethory")
 
 
-test 'isValid', ->
+test 'isValid name', ->
   ok(contact.isValid(), "Contact is valid by default")
 
   Ember.run -> contact.set("name", "")
@@ -22,6 +22,29 @@ test 'isValid', ->
 
   Ember.run -> contact.set("name", "Shanze")
   equal(contact.isValid(), true, "Contact is valid with name")
+
+  Ember.run -> contact.set("name", "Shanze")
+  equal(contact.isValid(), true, "Contact is valid with name")
+
+test 'isValid phone', ->
+
+  Ember.run -> contact.set("phone", "invalid phone #")
+  equal(contact.isValid(), false, "Contact should be invalid with bad phone #")
+
+  Ember.run -> contact.set("phone", "-")
+  equal(contact.isValid(), false, "Contact should be invalid with bad phone #")
+
+  Ember.run -> contact.set("phone", "1112223333")
+  equal(contact.isValid(), true, "Contact should be valid with phone #")
+
+  Ember.run -> contact.set("phone", "111-222-3333")
+  equal(contact.isValid(), true, "Contact should be valid with phone #")
+
+  Ember.run -> contact.set("phone", "1-949-830-1657")
+  equal(contact.isValid(), true, "Contact should be valid for international format")
+
+  Ember.run -> contact.set("phone", "1-949-830-1657:0000")
+  equal(contact.isValid(), true, "Contact should be valid for international format")
 
 test 'isDuplicate', ->
   equal(contact.isDuplicate(), false, "Contact isn't duplicate by default")
