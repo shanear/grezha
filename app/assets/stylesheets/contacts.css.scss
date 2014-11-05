@@ -25,25 +25,3 @@ div#birthdays {
   margin-left: 0.5em;
 }
 
-
-.phone-header {
-  .phone-help-icon {
-    margin-left: 0.5em;
-  }
-
-  .fa-question {
-    color: #00966e;
-  }
-
-  text {
-    visibility: hidden;
-  }
-
-  .phone-help-icon:hover{
-    text {
-      visibility: visible;
-      font-size: 85%;
-    }
-  }
-}
-
