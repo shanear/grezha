@@ -39,9 +39,9 @@ Application.initializer
     application.set('isAdmin', EmberConfiguration.isAdmin)
 
     application.set('hasFeature', (featureName)->
-      return true if App.organizationId == '2'
-      return true if featureName == 'vehicles' && App.organizationId == '1'
-      return true if featureName == 'memberId' && App.organizationId == '3'
+      return true if App.organizationId == '2' || App.organization == 'Grezha Admin'
+      return true if featureName == 'vehicles' && (App.organizationId == '1' || App.organization == 'Daughters of Bulgaria')
+      return true if featureName == 'memberId' && (App.organizationId == '3' || App.organization == 'Contra Costa Reentry Network')
       return false
     )
 
