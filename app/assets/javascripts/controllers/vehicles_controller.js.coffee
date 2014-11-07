@@ -1,4 +1,4 @@
 App.VehiclesController = Ember.ArrayController.extend App.FilterByQuery,
-  filterBy: "licensePlate"
+  filterBy: ["licensePlate"]
   modelName: "Vehicle"
 

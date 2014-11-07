@@ -1,10 +1,15 @@
 App.FilterByQuery = Ember.Mixin.create
   filterQuery: ""
 
+  isMatched: (expected, actual) ->
+    expected && ~expected.toUpperCase().indexOf actual.toUpperCase()
+
   filteredCollection: (->
     @filter (model)=>
-      model.get(@get('filterBy')) &&
-      ~model.get(@get('filterBy')).toUpperCase().indexOf this.filterQuery.toUpperCase()
+      isMatched = @isMatched
+      filterQuery = @filterQuery
+      @get('filterBy').some (elem) ->
+        isMatched model.get(elem), filterQuery
   ).property('@each.name', 'filterQuery')
 
   newModelText: (->
