@@ -4,17 +4,17 @@
       id="newRelationshipName"
       class="form-control"
       value=value
-      upArrow="moveAutocompleteHighlightUp"
-      downArrow="moveAutocompleteHighlightDown"
-      escape="hideAutocomplete"
-      enter="autocomplete"
+      upArrow="moveHighlightUp"
+      downArrow="moveHighlightDown"
+      escape="hideSuggestions"
+      enter="selectSuggestion"
       chromeAutocomplete="off"}}
 
   <ul {{bind-attr class=":suggestions isAutocompleting:active"}}>
     {{#each activeSuggestions}}
-      <li {{action "highlightAutocomplete" this on="mouseEnter"}}>
+      <li {{action "highlightSuggestion" this on="mouseEnter"}}>
         <a {{bind-attr class="isHighlighted:highlighted"}}
-           {{action "autocomplete" this}}>
+           {{action "selectSuggestion" this}}>
           {{name}}
         </a>
       </li>

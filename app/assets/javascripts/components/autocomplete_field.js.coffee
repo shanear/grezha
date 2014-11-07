@@ -17,21 +17,21 @@ App.AutocompleteFieldComponent = Ember.Component.extend
   ).observes('value')
 
   setHighlightedIndex: (index)->
-    @get("activeSuggestions").forEach (relationship)->
-      relationship.set("isHighlighted", false)
+    @get("activeSuggestions").forEach (suggestion)->
+      suggestion.set("isHighlighted", false)
 
-    newHighlightedRelationship = @get("activeSuggestions").objectAt(index)
+    newHighlightedSuggestion = @get("activeSuggestions").objectAt(index)
 
     @set("highlightedIndex", index)
-    newHighlightedRelationship.set("isHighlighted", true) if newHighlightedRelationship
+    newHighlightedSuggestion.set("isHighlighted", true) if newHighlightedSuggestion
 
   actions:
-    highlightAutocomplete: (relationship)->
-      index = @get('activeSuggestions').indexOf(relationship)
+    highlightSuggestion: (suggestion)->
+      index = @get('activeSuggestions').indexOf(suggestion)
       @setHighlightedIndex(index)
 
-    autocomplete: (suggestion)->
-      if suggestion?
+    selectSuggestion: (suggestion)->
+      unless suggestion?
         suggestion = @get("activeSuggestions").objectAt(@get("highlightedIndex"))
 
       if suggestion?
@@ -40,18 +40,18 @@ App.AutocompleteFieldComponent = Ember.Component.extend
         @sendAction("onSelect", suggestion)
         @set("isAutocompleting", false)
 
-    moveAutocompleteHighlightDown: ->
+    moveHighlightDown: ->
       @set('isAutocompleting', true)
 
       if(@get("highlightedIndex") + 1 < @get("activeSuggestions.length"))
         newIndex = @get("highlightedIndex") + 1
         @setHighlightedIndex(newIndex)
 
-    moveAutocompleteHighlightUp: ->
+    moveHighlightUp: ->
       if(@get("highlightedIndex") > -1)
         newIndex = @get("highlightedIndex") - 1
         @setHighlightedIndex(newIndex)
 
-    hideAutocomplete: ->
+    hideSuggestions: ->
       @set('isAutocompleting', false)
       @setHighlightedIndex(-1)
