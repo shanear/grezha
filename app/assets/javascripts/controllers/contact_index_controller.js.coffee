@@ -1,7 +1,7 @@
 App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
   newRelationship: {}
-  relationships: []
+  allRelationships: []
 
   actions:
     autofillRelationshipForm: (relationship) ->
