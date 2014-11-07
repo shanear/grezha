@@ -6,10 +6,8 @@ App.FilterByQuery = Ember.Mixin.create
 
   filteredCollection: (->
     @filter (model)=>
-      isMatched = @isMatched
-      filterQuery = @filterQuery
-      @get('filterBy').some (elem) ->
-        isMatched model.get(elem), filterQuery
+      @get('filterBy').some (elem)=>
+        @isMatched model.get(elem), @filterQuery
   ).property('@each.name', 'filterQuery')
 
   newModelText: (->
