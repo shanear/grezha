@@ -2,6 +2,8 @@
 # upArrow, downArrow, and Enter events.
 
 App.EnrichedTextfieldComponent = Ember.TextField.extend
+  attributeBindings: ['chromeAutocomplete:autocomplete']
+
   keyDown: (event)->
     if(event.keyCode == 38)
       @sendAction("upArrow")

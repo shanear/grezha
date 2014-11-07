@@ -1,10 +1,7 @@
 App.AutocompleteFieldComponent = Ember.Component.extend
   suggestions: []
   highlightedIndex: -1
-
-  isAutocompleting: (->
-    !@get('hideAutocomplete') && @get('value')
-  ).property("value", "hideAutocomplete")
+  isAutocompleting: false
 
   activeSuggestions: (->
     query = @get("value") || ""
@@ -16,7 +13,7 @@ App.AutocompleteFieldComponent = Ember.Component.extend
 
   reset: (->
     @setHighlightedIndex(-1)
-    @set('hideAutocomplete', false)
+    @set('isAutocompleting', true) if @get("value")?
   ).observes('value')
 
   setHighlightedIndex: (index)->
@@ -39,12 +36,12 @@ App.AutocompleteFieldComponent = Ember.Component.extend
 
       if suggestion?
         selectedValue = suggestion.get(@get("queryProperty"))
-        @set("hideAutocomplete", true)
         @set("value", selectedValue)
         @sendAction("onSelect", suggestion)
+        @set("isAutocompleting", false)
 
     moveAutocompleteHighlightDown: ->
-      @set('hideAutocomplete', false)
+      @set('isAutocompleting', true)
 
       if(@get("highlightedIndex") + 1 < @get("activeSuggestions.length"))
         newIndex = @get("highlightedIndex") + 1
@@ -56,5 +53,5 @@ App.AutocompleteFieldComponent = Ember.Component.extend
         @setHighlightedIndex(newIndex)
 
     hideAutocomplete: ->
-      @set('hideAutocomplete', true)
+      @set('isAutocompleting', false)
       @setHighlightedIndex(-1)
