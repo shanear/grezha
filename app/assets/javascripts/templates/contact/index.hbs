@@ -120,7 +120,14 @@
           <label for="newRelationshipName" class="col-sm-3 control-label">name</label>
 
           <div class="col-sm-9">
-            {{input type="text" id="newRelationshipName" class="form-control" valueBinding="newRelationship.name"}}
+            <div class="autocomplete">
+              {{autocomplete-field type="text" id="newRelationshipName" class="form-control" valueBinding="newRelationship.name" upArrow="moveAutocompleteHighlightUp" downArrow="moveAutocompleteHighlightDown" enter="autocomplete"}}
+              <ul {{bind-attr class=":suggestions isAutocompleting:active"}}>
+                {{#each autocompleteRelationships}}
+                  <li {{action "highlightAutocomplete" this on="mouseEnter"}}><a {{bind-attr class="isHighlighted:highlighted"}} {{action "autocomplete" this}}>{{name}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
           </div>
         </div>
 

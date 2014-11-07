@@ -555,3 +555,38 @@ div#ember-app {
     }
   }
 }
+
+.autocomplete {
+  position: relative;
+
+  .suggestions {
+    display: none;
+    list-style: none;
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    z-index: 3000;
+
+    &.active:hover {
+      display: block;
+    }
+
+    li a {
+      display: block;
+      width: 100%;
+      padding: 10px;
+
+      &.highlighted {
+        background-color: #ccc;
+      }
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
+
+  input:focus + .suggestions.active {
+    display: block;
+  }
+}
