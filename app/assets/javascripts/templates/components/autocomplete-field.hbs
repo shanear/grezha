@@ -1,0 +1,22 @@
+<div class="autocomplete">
+  {{enriched-textfield
+      type="text"
+      id="newRelationshipName"
+      class="form-control"
+      value=value
+      upArrow="moveAutocompleteHighlightUp"
+      downArrow="moveAutocompleteHighlightDown"
+      escape="hideAutocomplete"
+      enter="autocomplete"}}
+
+  <ul {{bind-attr class=":suggestions isAutocompleting:active"}}>
+    {{#each activeSuggestions}}
+      <li {{action "highlightAutocomplete" this on="mouseEnter"}}>
+        <a {{bind-attr class="isHighlighted:highlighted"}}
+           {{action "autocomplete" this}}>
+          {{name}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

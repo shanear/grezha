@@ -2,32 +2,13 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
   newRelationship: {}
   relationships: []
-  highlightedRelationshipIndex: -1
-  selectedName: ""
-  isAutocompleting: (->
-    @get('newRelationship.name') && @get('newRelationship.name') != @get('selectedName')
-  ).property("newRelationship.name", "selectedName")
-
-  autocompleteRelationships: (->
-    query = @get("newRelationship.name") || ""
-    @relationships.filter (relationship)->
-      relationship.get('name').toUpperCase().substring(0,query.length) == query.toUpperCase()
-  ).property('newRelationship.name')
-
-  resetHighlightedRelationship: (->
-    @setHighlightedRelationship(-1)
-  ).observes('newRelationship.name')
-
-  setHighlightedRelationship: (index)->
-    @get("autocompleteRelationships").forEach (relationship)->
-      relationship.set("isHighlighted", false)
-
-    newHighlightedRelationship = @get("autocompleteRelationships").objectAt(index)
-
-    @set("highlightedRelationshipIndex", index)
-    newHighlightedRelationship.set("isHighlighted", true) if newHighlightedRelationship
 
   actions:
+    autofillRelationshipForm: (relationship) ->
+      @set("newRelationship.contactInfo", relationship.get("contactInfo"))
+      @set("newRelationship.relationshipType", relationship.get("relationshipType"))
+      @set("newRelationship.notes", relationship.get("notes"))
+
     deleteContact: ->
       @set 'confirmation',
         heading: "Are you sure?"
@@ -58,7 +39,6 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
       else
         @set('relationshipErrors', newRelationship.get('errors'))
 
-
     saveConnection: ->
       newConnection = @store.createRecord('connection', @get('newConnection'))
       newConnection.set('contact', @get('model'))
@@ -76,28 +56,3 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     changeImage: (url)->
       @set('model.pictureUrl', url)
 
-    highlightAutocomplete: (relationship)->
-      index = @get('autocompleteRelationships').indexOf(relationship)
-      console.log(index)
-      @setHighlightedRelationship(index)
-
-    autocomplete: (relationship)->
-      if relationship?
-        relationship = @get("autocompleteRelationships").objectAt(@get("highlightedRelationshipIndex"))
-
-      if relationship?
-        @set("selectedName", relationship.get("name"))
-        @set("newRelationship.name", relationship.get("name"))
-        @set("newRelationship.contactInfo", relationship.get("contactInfo"))
-        @set("newRelationship.relationshipType", relationship.get("relationshipType"))
-        @set("newRelationship.notes", relationship.get("notes"))
-
-    moveAutocompleteHighlightDown: ->
-      if(@get("highlightedRelationshipIndex") + 1 < @get("autocompleteRelationships.length"))
-        newIndex = @get("highlightedRelationshipIndex") + 1
-        @setHighlightedRelationship(newIndex)
-
-    moveAutocompleteHighlightUp: ->
-      if(@get("highlightedRelationshipIndex") > -1)
-        newIndex = @get("highlightedRelationshipIndex") - 1
-        @setHighlightedRelationship(newIndex)
