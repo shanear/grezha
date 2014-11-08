@@ -37,7 +37,7 @@ Daughters::Application.configure do
     :address        => ENV['POSTMARK_SMTP_SERVER'],
     :user_name      => ENV['POSTMARK_API_KEY'],
     :password       => ENV['POSTMARK_API_KEY'],
-    :domain         => 'grezha-demo.heroku.com',
+    :domain         => 'grezha.heroku.com',
     :authentication => :plain,
   }
 
