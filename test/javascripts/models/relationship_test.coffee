@@ -1,7 +1,7 @@
 store = contact = relationship = null
 
 moduleForModel 'relationship', 'Relationship Model',
-  needs: ['model:contact', 'model:connection', 'model:user']
+  needs: ['model:contact', 'model:connection', 'model:user', "model:person"]
   setup: ->
     store = @store()
     Ember.run ->

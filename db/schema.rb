@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141104221753) do
+ActiveRecord::Schema.define(version: 20141108194235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20141104221753) do
     t.string   "name"
     t.text     "bio"
     t.datetime "birthday"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
@@ -56,6 +56,19 @@ ActiveRecord::Schema.define(version: 20141104221753) do
     t.datetime "updated_at"
   end
 
+  create_table "people", force: true do |t|
+    t.integer  "organization_id"
+    t.string   "remote_id",       limit: 8, null: false
+    t.string   "name"
+    t.string   "role"
+    t.string   "contact_info"
+    t.string   "notes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "people", ["remote_id"], name: "index_people_on_remote_id", unique: true, using: :btree
+
   create_table "relationships", force: true do |t|
     t.string   "remote_id",         limit: 8, null: false
     t.string   "name"
@@ -66,6 +79,7 @@ ActiveRecord::Schema.define(version: 20141104221753) do
     t.datetime "updated_at"
     t.integer  "organization_id"
     t.integer  "contact_id"
+    t.integer  "person_id"
   end
 
   add_index "relationships", ["remote_id"], name: "index_relationships_on_remote_id", unique: true, using: :btree
@@ -76,8 +90,8 @@ ActiveRecord::Schema.define(version: 20141104221753) do
     t.string   "remember_token"
     t.string   "salt"
     t.string   "encrypted_password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "organization_id"
     t.string   "role",                 default: "Admin"
     t.boolean  "active",               default: true

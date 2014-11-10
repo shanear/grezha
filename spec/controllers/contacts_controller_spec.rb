@@ -54,8 +54,6 @@ describe Api::V1::ContactsController do
         new_contact = Contact.last
         expect(new_contact.user).to eq(user)
       end
-
-
     end
 
     describe "PUT #update" do

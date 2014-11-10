@@ -63,7 +63,12 @@ class Api::V1::RelationshipsController < ApplicationController
       params[:relationship][:contact_id] = contact.id
     end
 
-  	params.required(:relationship).permit(:remote_id, :contact_id, :notes, :name, :contact_info, :relationship_type, :organization_id)
+    if remote_id?(params[:relationship][:person_id])
+      person = Person.where(remote_id: params[:relationship][:person_id]).first
+      params[:relationship][:person_id] = person.id
+    end
+
+  	params.required(:relationship).permit(:remote_id, :contact_id, :person_id, :notes, :name, :contact_info, :relationship_type, :organization_id)
   end
 
 end
