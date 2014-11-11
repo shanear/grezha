@@ -38,6 +38,7 @@ test "Create a relationship to an existing Person", ->
     equal(find(".relationship .name").text().trim(), "Mums",
       "The relationship name should be Mums")
 
+
 test "Create and delete a relationship with a new Person", ->
   visit("/contacts/" + contact.get("id"))
   click("#add-relationship")
@@ -54,6 +55,8 @@ test "Create and delete a relationship with a new Person", ->
   click(".delete-relationship")
   click(".confirm")
   andThen ->
+    equal(store.all('person').objectAt(0).get('name'), "Bob Hope",
+      "Deleting the relationship shouldn't delete the person")
     equal(find(".relationship .type").length, 0,
       "A relationship should not show up after being deleted " + find(".relationship .type").length)
 
