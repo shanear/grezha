@@ -36,6 +36,34 @@ test "activeSuggestions is limited to 5", ->
   equal(autocompleteField.get("activeSuggestions.length"), 5, "activeSuggestions should be limited to 5")
 
 
+test "activeSuggestions always contains default suggestion if present", ->
+  autocompleteField = @subject(
+    suggestions: suggestions
+    value: "P"
+    queryProperty: "name"
+    pinnedSuggestion: "something"
+  )
+
+  ok(autocompleteField.get("activeSuggestions.lastObject.isDefault"),
+    "Last element in activeSuggestions should be the default suggestion.")
+
+
+test "isAutocompleting is true and pinnedSuggestio is selected by default if forceSelection", ->
+  autocompleteField = @subject(
+    suggestions: suggestions
+    queryProperty: "name"
+    forceSelection: true
+    pinnedSuggestion: "something"
+  )
+
+  ok(autocompleteField.get("activeSuggestions.firstObject.isHighlighted"),
+    "isHighlighted should be set to true on default suggestion")
+  equal(autocompleteField.get("highlightedIndex"), 0,
+    "Highlighted index should be 0 but is " + autocompleteField.get("highlightedIndex"))
+  equal(autocompleteField.get("isAutocompleting"), true,
+    "isAutocompleting should be true but is " + autocompleteField.get("isAutocompleting"))
+
+
 test "moveHighlightDown sets next selection", ->
   autocompleteField = @subject(
     suggestions: suggestions
@@ -166,8 +194,7 @@ test "selectSuggestion sets value to passed suggestion value", ->
   autocompleteField.send("selectSuggestion", pringles)
   equal(autocompleteField.get("value"), pringles.get("name"))
 
-
-test "selectSuggestion sets value to currently highlighted suggestion", ->
+test "selectHighlightedSuggestion sets value to currently highlighted suggestion", ->
   autocompleteField = @subject(
     suggestions: suggestions
     value: "Pr",
@@ -175,9 +202,8 @@ test "selectSuggestion sets value to currently highlighted suggestion", ->
     highlightedIndex: 0
   )
 
-  autocompleteField.send("selectSuggestion")
+  autocompleteField.send("selectHighlightedSuggestion")
   equal(autocompleteField.get("value"), pringles.get("name"))
-
 
 test "selectSuggestion hides suggestions and calls onSelect callback", ->
   expect(2)
@@ -194,3 +220,21 @@ test "selectSuggestion hides suggestions and calls onSelect callback", ->
   autocompleteField.send("selectSuggestion", pringles)
   equal(autocompleteField.get("isAutocompleting"), false,
     "selectSuggestions should set isAutocompleting to false")
+
+test "selectSuggestion calls callback with null when default selection is selected", ->
+  expect(1)
+
+  targetObject = selectCallback: (argument)->
+    equal(argument, null, "Expected null argument passed to selection callback")
+
+  autocompleteField = @subject(
+    suggestions: suggestions
+    value: "blahlblahblah",
+    queryProperty: "name"
+    targetObject: targetObject
+    onSelect: "selectCallback"
+    highlightedIndex: 0
+    pinnedSuggestion: "something"
+  )
+
+  autocompleteField.send("selectHighlightedSuggestion")

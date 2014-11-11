@@ -20,7 +20,6 @@ class Relationship < ActiveRecord::Base
 	belongs_to :contact
   belongs_to :person
 
-	validates :relationship_type, presence: true
 	validates :contact, presence: true
 	validate :contact_organization_matches
 

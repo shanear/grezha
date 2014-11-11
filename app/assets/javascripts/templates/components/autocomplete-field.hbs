@@ -1,21 +1,26 @@
 <div class="autocomplete">
   {{enriched-textfield
+      id=inputId
+      class=inputClass
       type="text"
-      id="newRelationshipName"
-      class="form-control"
       value=value
       upArrow="moveHighlightUp"
       downArrow="moveHighlightDown"
       escape="hideSuggestions"
-      enter="selectSuggestion"
+      enter="selectHighlightedSuggestion"
       chromeAutocomplete="off"}}
 
   <ul {{bind-attr class=":suggestions isAutocompleting:active"}}>
-    {{#each activeSuggestions}}
-      <li {{action "highlightSuggestion" this on="mouseEnter"}}>
-        <a {{bind-attr class="isHighlighted:highlighted"}}
-           {{action "selectSuggestion" this}}>
-          {{name}}
+    {{#each suggestion in activeSuggestions}}
+      <li {{action "highlightSuggestion" suggestion on="mouseEnter"}}>
+        <a {{bind-attr class="suggestion.isHighlighted:highlighted"}}
+           {{action "selectSuggestion" suggestion}}>
+
+          {{#if suggestion.isDefault}}
+            {{pinnedSuggestion}}
+          {{else}}
+            {{property queryProperty suggestion}}
+          {{/if}}
         </a>
       </li>
     {{/each}}

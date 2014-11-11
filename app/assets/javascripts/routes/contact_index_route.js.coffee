@@ -3,5 +3,5 @@ App.ContactIndexRoute = App.BaseRoute.extend
     @modelFor("contact")
 
   setupController: (controller,model) ->
-    controller.set('allRelationships', @store.find('relationship'))
+    controller.set('allPeople', @store.find('person'))
     @_super(controller, model)

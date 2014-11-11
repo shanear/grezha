@@ -1,13 +1,27 @@
 App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
-  newRelationship: {}
-  allRelationships: []
+  allPeople: []
+
+  createRelationship: (person) ->
+    newRelationship = @store.createRecord(
+      'relationship')
+    newRelationship.set('person', person)
+    newRelationship.set('contact', @get('model'))
+
+    newRelationship.save().then =>
+      @get('relationships').pushObject newRelationship
+      @set('addingRelationship', false)
+      @set('newRelationship', {})
+      @set("newRelationshipName", "")
 
   actions:
-    autofillRelationshipForm: (relationship) ->
-      @set("newRelationship.contactInfo", relationship.get("contactInfo"))
-      @set("newRelationship.relationshipType", relationship.get("relationshipType"))
-      @set("newRelationship.notes", relationship.get("notes"))
+    selectPerson: (person) ->
+      if person?
+        @set("newPerson", null)
+        @createRelationship(person)
+      else
+        @set("newPerson", {})
+        @set("selectedPerson", null)
 
     deleteContact: ->
       @set 'confirmation',
@@ -25,35 +39,26 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
 
     cancelNewRelationship: ->
       @set('addingRelationship', false)
+      @set("selectedPerson", null)
+      @set("newPerson", null)
+      @set("newRelationshipName", "")
+
 
     saveRelationship: ->
-      newRelationship = @store.createRecord('relationship', @get('newRelationship'))
-
       newPerson = @store.createRecord('person',
         {
-          name: @get('newRelationship.name'),
-          contactInfo: @get('newRelationship.contactInfo'),
-          role: @get('newRelationship.relationshipType'),
-          notes: @get('newRelationship.notes')
+          name: @get('newRelationshipName'),
+          contactInfo: @get('newPerson.contactInfo'),
+          role: @get('newPerson.role'),
+          notes: @get('newPerson.notes')
         })
 
       newPerson.save().then (=>
-        newRelationship.set('person', newPerson)
-        newRelationship.set('contact', @get('model'))
-
-        if newRelationship.isValid()
-          newRelationship.save().then =>
-            @get('relationships').pushObject newRelationship
-            @set('addingRelationship', false)
-            @set('newRelationship', {})
-
-        else
-          @set('relationshipErrors', newRelationship.get('errors'))
+        @createRelationship(newPerson)
       ), (=>
         @set('relationshipErrors',
           ["There was a technical error. Please try again, or contact Grezha support."])
       )
-
 
     saveConnection: ->
       newConnection = @store.createRecord('connection', @get('newConnection'))

@@ -3,15 +3,17 @@
 <div class="relationship">
   <div class="summary">
     <div class="left">
-      <div class="name">{{relationship.name}}</div>
-      <div class="type">{{relationship.relationshipType}}</div>
+      <div class="name">
+        {{relationship.person.name}}
+      </div>
+      <div class="type">{{relationship.person.role}}</div>
       {{#link-to 'relationship.edit' relationship }}
           edit
       {{/link-to}}
     </div>
 
     <div class="right">
-      {{breaklines relationship.contactInfo}}
+      {{breaklines relationship.person.contactInfo}}
         {{#control-group name="options"}}
           <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
             <i class="fa fa-trash-o"></i>
@@ -23,7 +25,7 @@
 
   <div class="body">
     <div class="notes">
-      {{breaklines relationship.notes}}
+      {{breaklines relationship.person.notes}}
     </div>
   </div>
 </div>

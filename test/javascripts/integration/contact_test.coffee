@@ -5,6 +5,7 @@ store = contact = user1 = null
 App.Contact.FIXTURES = []
 App.Connection.FIXTURES = []
 App.Relationship.FIXTURES = []
+App.Person.FIXTURES = []
 App.User.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
