@@ -574,14 +574,19 @@ div#ember-app {
     li a {
       display: block;
       width: 100%;
-      padding: 10px;
+      padding: 7px;
 
       &.highlighted {
-        background-color: #ccc;
+        background-color: #ddd;
       }
 
       &:hover {
         color: black;
+      }
+      .subtext {
+        color: #888;
+        display: inline-block;
+        float: right;
       }
     }
   }

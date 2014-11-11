@@ -5,6 +5,7 @@ App.AutocompleteFieldComponent = Ember.Component.extend
   pinnedSuggestion: null
   forceSelection: false
   queryProperty: ""
+  subtextProperty: ""
 
   setInitialSelection: (->
     if @get("forceSelection")
