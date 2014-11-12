@@ -58,6 +58,8 @@ App.AutocompleteFieldComponent = Ember.Component.extend
       @send('selectSuggestion', suggestion) if suggestion?
 
     selectSuggestion: (suggestion)->
+      return false unless @get("isAutocompleting")
+
       if suggestion.get("isDefault")
         suggestion = null
       else
