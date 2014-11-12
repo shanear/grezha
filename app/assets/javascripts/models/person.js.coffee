@@ -8,7 +8,7 @@ App.Person = DS.Model.extend
   isValid: ->
     errors = []
     if @get('name') == undefined || $.trim(@get('name')).length < 1
-      errors.push 'Relationship must have a name.'
+      errors.push 'Name is required.'
     if @get('role') == undefined || $.trim(@get('role')).length < 1
       errors.push "Role is required."
     @set('errors', errors)

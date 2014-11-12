@@ -59,13 +59,16 @@ test "Create and delete a relationship with a new Person", ->
     equal(find(".relationship .type").length, 0,
       "A relationship should not show up after being deleted " + find(".relationship .type").length)
 
-###
-test "edits a relationship", ->
-  visit("/contacts/" + contact.get("id") + "/relationships/" + relationship.get("id") + "/edit")
-  fillIn("#newRelationshipName", "New Name")
+test "Show validation errors when relationship with a new Person lacks a role", ->
+  visit("/contacts/" + contact.get("id"))
+  click("#add-relationship")
+  fillIn("#new-relationship-name", "Wilfred the Cat")
+  click(".suggestions .highlighted")
+
   click("#save-relationship")
   andThen ->
-    ok(/New Name/.test(find(".relationship .name").text()),
-      "A newly edited relationship should update: ?" + find("#relationships").text())
-###
+    equal(find(".errors li").length, 1,
+    "There should have been an error because you didn't enter the role")
+    equal(find(".errors li").text().trim(), "Role is required.",
+    "There should have been an error because you didn't enter the role")
 
