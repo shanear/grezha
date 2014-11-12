@@ -3,14 +3,12 @@ App.AutocompleteFieldComponent = Ember.Component.extend
   highlightedIndex: -1
   isAutocompleting: false
   pinnedSuggestion: null
-  forceSelection: false
   queryProperty: ""
   subtextProperty: ""
 
   setInitialSelection: (->
-    if @get("forceSelection")
-      @setHighlightedIndex(0)
-      @set('isAutocompleting', true)
+    @setHighlightedIndex(0)
+    @set('isAutocompleting', true)
   ).on('init')
 
   activeSuggestions: (->
@@ -29,13 +27,8 @@ App.AutocompleteFieldComponent = Ember.Component.extend
   ).property('value', 'suggestions')
 
   reset: (->
-    if @get("forceSelection")
-      @setHighlightedIndex(0)
-      @set('isAutocompleting', true)
-    else
-      @setHighlightedIndex(-1)
-
-    @set('isAutocompleting', true) if @get("value")?
+    @setHighlightedIndex(0)
+    @set('isAutocompleting', true)
   ).observes('value', 'suggestions')
 
   setHighlightedIndex: (index)->
@@ -82,5 +75,5 @@ App.AutocompleteFieldComponent = Ember.Component.extend
         @setHighlightedIndex(newIndex)
 
     hideSuggestions: ->
+      @setHighlightedIndex(0)
       @set('isAutocompleting', false)
-      @setHighlightedIndex(-1)

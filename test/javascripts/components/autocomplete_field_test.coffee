@@ -3,6 +3,8 @@ moduleForComponent("autocomplete-field", "Autocomplete Field Component")
 Person = Ember.Object.extend({})
 
 pringles = Person.create(name: "Pringles")
+prussik  = Person.create(name: "Prussik")
+
 suggestions = [
   Person.create(name: "Peipeipei"),
   Person.create(name: "Popeye"),
@@ -10,7 +12,7 @@ suggestions = [
   Person.create(name: "Pat"),
   pringles,
   Person.create(name: "PumpkinRamen"),
-  Person.create(name: "Prussik")
+  prussik
 ]
 
 test "activeSuggestions filters based on value", ->
@@ -70,14 +72,11 @@ test "moveHighlightDown sets next selection", ->
     value: "pr"
     queryProperty: "name"
   )
-
   autocompleteField.send("moveHighlightDown")
-  ok(pringles.get("isHighlighted"))
-  equal(autocompleteField.get("highlightedIndex"), 0)
-
-  autocompleteField.send("moveHighlightDown")
-  ok(!pringles.get("isHighlighted"))
-  equal(autocompleteField.get("highlightedIndex"), 1)
+  ok(prussik.get("isHighlighted"),
+    "highlighted suggestion should be marked as isHighlighted")
+  equal(autocompleteField.get("highlightedIndex"), 1,
+    "highlightedIndex should be one below the starting index")
 
 
 test "moveHighlightDown doesn't move past final suggestion", ->
@@ -86,24 +85,9 @@ test "moveHighlightDown doesn't move past final suggestion", ->
     value: "pr"
     queryProperty: "name"
   )
-
   autocompleteField.send("moveHighlightDown")
   autocompleteField.send("moveHighlightDown")
   equal(autocompleteField.get("highlightedIndex"), 1)
-  autocompleteField.send("moveHighlightDown")
-  equal(autocompleteField.get("highlightedIndex"), 1)
-
-
-test "moveHighlightDown sets isAutocompleting", ->
-  autocompleteField = @subject(
-    suggestions: suggestions
-    value: ""
-    queryProperty: "name"
-  )
-
-  ok(!autocompleteField.get("isAutocompleting"))
-  autocompleteField.send("moveHighlightDown")
-  ok(autocompleteField.get("isAutocompleting"))
 
 
 test "moveHighlightUp sets previous highlighted suggestion", ->
@@ -113,8 +97,6 @@ test "moveHighlightUp sets previous highlighted suggestion", ->
     queryProperty: "name"
   )
 
-  autocompleteField.send("moveHighlightDown")
-  equal(autocompleteField.get("highlightedIndex"), 0)
   autocompleteField.send("moveHighlightUp")
   equal(autocompleteField.get("highlightedIndex"), -1)
 
@@ -126,8 +108,6 @@ test "moveHighlightUp doesn't set index less than -1", ->
     queryProperty: "name"
   )
 
-  autocompleteField.send("moveHighlightDown")
-  equal(autocompleteField.get("highlightedIndex"), 0)
   autocompleteField.send("moveHighlightUp")
   equal(autocompleteField.get("highlightedIndex"), -1)
   autocompleteField.send("moveHighlightUp")
@@ -137,26 +117,29 @@ test "moveHighlightUp doesn't set index less than -1", ->
 test "hide setsSuggestions isAutocompleting to false and returns highlighed index to -1", ->
   autocompleteField = @subject(
     isAutocompleting: true,
-    highlightedIndex: 0
+    highlightedIndex: 1
   )
 
   autocompleteField.send("hideSuggestions")
   ok(!autocompleteField.get("isAutocompleting"))
-  equal(autocompleteField.get("highlightedIndex"), -1)
+  equal(autocompleteField.get("highlightedIndex"), 0)
 
 
 test "modifying value resets highlight index", ->
   autocompleteField = @subject(
     suggestions: suggestions,
-    value: "S",
+    value: "P",
     queryProperty: "name"
   )
 
-  equal(autocompleteField.get("highlightedIndex"), -1)
+  equal(autocompleteField.get("highlightedIndex"), 0,
+    "highlighedIndex starts at 0")
   autocompleteField.send("moveHighlightDown")
-  equal(autocompleteField.get("highlightedIndex"), 0)
+  equal(autocompleteField.get("highlightedIndex"), 1,
+    "highlighedIndex should increase")
   autocompleteField.set("value", "pr")
-  equal(autocompleteField.get("highlightedIndex"), -1)
+  equal(autocompleteField.get("highlightedIndex"), 0,
+    "changing value should reset highlightedIndex")
 
 
 test "modifying value reshows hidden suggestions", ->
@@ -166,10 +149,12 @@ test "modifying value reshows hidden suggestions", ->
     queryProperty: "name"
   )
 
-  autocompleteField.send("hide")
-  ok(!autocompleteField.get("isAutocompleting"))
+  autocompleteField.send("hideSuggestions")
+  ok(!autocompleteField.get("isAutocompleting"),
+    "hideSuggestions should set isAutocompleting to false")
   autocompleteField.set("value", "pr")
-  ok(autocompleteField.get("isAutocompleting"))
+  ok(autocompleteField.get("isAutocompleting"),
+    "changing value should reset isAutocompleting")
 
 
 test "highlightSuggestion highlights suggestion", ->
