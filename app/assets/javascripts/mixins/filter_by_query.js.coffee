@@ -1,14 +1,13 @@
 App.FilterByQuery = Ember.Mixin.create
   filterQuery: ""
-
-  isMatched: (expected, actual) ->
+  find_by_substring: (expected, actual) ->
     expected && ~expected.toUpperCase().indexOf actual.toUpperCase()
 
   filteredCollection: (->
     @filter (model)=>
       @get('filterBy').some (elem)=>
-        @isMatched model.get(elem), @filterQuery
-  ).property('@each.name', 'filterQuery')
+        @find_by_substring model.get(elem), @filterQuery
+  ).property('@each.name','@each.memberId','@each.user.name', 'filterQuery')
 
   newModelText: (->
     if @get('filterQuery').length < 2
