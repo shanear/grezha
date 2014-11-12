@@ -16,6 +16,7 @@ module "Contact Index Page integration tests",
       store = App.__container__.lookup("store:main")
   teardown: ->
     App.reset()
+
 test "fills in a new contact", ->
   visit("/contacts/")
   fillIn("#contact-search", "Anna Bobana")

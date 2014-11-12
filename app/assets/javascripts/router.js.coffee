@@ -1,5 +1,6 @@
 App.Router.map () ->
   @route 'logout'
+
   @resource 'vehicles', ->
     @route 'new'
     @route 'new', { path: "/new/:name" }
@@ -11,7 +12,6 @@ App.Router.map () ->
     @route 'new', { path: "/new/:name" }
     @resource 'contact', { path: "/:contact_id" }, ->
       @route 'edit'
-      @resource 'relationships', ->
-        @route 'new'
-        @resource 'relationship', {path: "/:relationship_id"}, ->
+      @resource 'people', ->
+        @resource 'person', {path: "/:person_id"}, ->
           @route 'edit'

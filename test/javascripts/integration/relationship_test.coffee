@@ -53,7 +53,6 @@ test "Create and delete a relationship with a new Person", ->
     ok(/Officer/.test(find(".relationship .type").text()),
       "A newly created relationship should appear")
   click(".delete-relationship")
-  click(".confirm")
   andThen ->
     equal(store.all('person').objectAt(0).get('name'), "Bob Hope",
       "Deleting the relationship shouldn't delete the person")

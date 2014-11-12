@@ -1,0 +1,76 @@
+<div class="form-horizontal add-model-form">
+  {{#if relationshipErrors.length}}
+    <ul class="errors">
+      {{#each relationshipErrors}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  <div class="form-group">
+    <label for="person-name" class="col-sm-3 control-label">name</label>
+
+    <div class="col-sm-9">
+      {{input type="text" id="person-name" class="form-control" valueBinding="person.name" value=this.name}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="person-role" class="col-sm-3 control-label">role</label>
+
+    <div class="col-sm-9">
+      {{input type="text"
+          id="person-role"
+          class="form-control"
+          valueBinding="person.relationshipType"
+          placeholder="father, social worker, etc."
+          value=this.role}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="person-contact-info" class="col-sm-3 control-label">contact info</label>
+
+    <div class="col-sm-9">
+      {{textarea id="person-contact-info"
+        class="form-control"
+        valueBinding="person.contactInfo"
+        value=this.contactInfo
+        placeholder="phone number, email, etc."}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="person-note" class="col-sm-3 control-label">notes</label>
+
+    <div class="col-sm-9">
+      {{textarea id="person-note"
+        class="form-control"
+        placeholder="Any additional notes about them?"
+        valueBinding="person.notes"
+        value=this.notes}}
+    </div>
+  </div>
+
+  <div class="cancel">
+    <button class="btn btn-default">
+      {{#link-to 'contact' this.contact}}
+        cancel
+      {{/link-to}}
+    </button>  
+  </div>
+
+  <div class="save-button">
+    <button id="save-person" class="btn btn-default " {{action "savePerson"}}>
+      Save
+    </button>
+  </div>
+</div>
+
+{{#if errors.length}}
+  <ul class="errors">
+    {{#each errors}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/if}}
