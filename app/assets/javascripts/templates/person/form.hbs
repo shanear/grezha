@@ -1,11 +1,4 @@
 <div class="form-horizontal add-model-form">
-  {{#if relationshipErrors.length}}
-    <ul class="errors">
-      {{#each relationshipErrors}}
-        <li>{{this}}</li>
-      {{/each}}
-    </ul>
-  {{/if}}
 
   <div class="form-group">
     <label for="person-name" class="col-sm-3 control-label">name</label>
@@ -53,8 +46,8 @@
   </div>
 
   <div class="cancel">
-    <button class="btn btn-default">
-      {{#link-to 'contact' this.contact}}
+    <button class="btn btn-default" id="cancel-edit-person">
+      {{#link-to 'contact' contact}}
         cancel
       {{/link-to}}
     </button>  

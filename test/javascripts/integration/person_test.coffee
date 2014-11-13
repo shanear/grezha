@@ -40,3 +40,15 @@ test "Edits a person from a relationship", ->
   andThen ->
     ok(/New Name/.test(find(".relationship .name").text()),
       "A newly edited person should update: " + find("#relationships").text())
+
+#test "Returns to contact when cancel editing a person", ->
+#  visit("/contacts/" + contact.get("id"))
+#  click(".relationship .summary a")
+#  fillIn("#person-name", "Cancelled name")
+#
+#  click("#cancel-edit-person")
+#  andThen ->
+#    ok(true)
+#ok(/Sophster/.test(find(".relationship .name").text()),
+#  "Cancelling editing the person should not update: " + find("#relationships").text())
+
