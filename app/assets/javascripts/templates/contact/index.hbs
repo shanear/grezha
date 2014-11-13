@@ -108,9 +108,9 @@
 
     {{#if addingRelationship}}
       <div class="form-horizontal add-model-form">
-        {{#if relationshipErrors.length}}
+        {{#if newPerson.errors.length}}
           <ul class="errors">
-            {{#each relationshipErrors}}
+            {{#each newPerson.errors}}
               <li>{{this}}</li>
             {{/each}}
           </ul>
@@ -173,15 +173,6 @@
           </div>
         {{/if}}
       </div>
-
-      {{#if errors.length}}
-        <ul class="errors">
-          {{#each errors}}
-            <li>{{this}}</li>
-          {{/each}}
-        </ul>
-      {{/if}}
-
     {{/if}}
 
     {{#each relationships}}

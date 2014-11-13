@@ -43,7 +43,6 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
       @set("newPerson", null)
       @set("newRelationshipName", "")
 
-
     saveRelationship: ->
       newPerson = @store.createRecord('person',
         {
@@ -57,11 +56,11 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
         newPerson.save().then (=>
           @createRelationship(newPerson)
         ), (=>
-          @set('relationshipErrors',
+          @set('newPerson.errors',
             ["There was a technical error. Please try again, or contact Grezha support."])
         )
       else
-        @set('errors', newPerson.get('errors'))
+        @set('newPerson.errors', newPerson.get('errors'))
 
     saveConnection: ->
       newConnection = @store.createRecord('connection', @get('newConnection'))
