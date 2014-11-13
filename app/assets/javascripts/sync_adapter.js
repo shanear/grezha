@@ -47,20 +47,20 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
     var promise = this._super(store, type, sinceToken),
         self = this;
 
-    return Promise.cast(promise, "SyncAdapter: saving API data locally for " + type.typeKey)
-      .then(function(payload) {
-        return self._cacheRecords(payload, type);
+    return promise.then(
+        function(payload) {
+          return self._cacheRecords(payload, type);
+        },
 
-      }).catch(function(error) {
-        App.set('online', false);
-
-        return new Promise(function(resolve, reject) {
-          localforage.getItem(type.typeKey, function(records) {
-            if(records) resolve(records);
-            else        reject("No locally cached data");
+        function(error) {
+          return new Promise(function(resolve, reject) {
+            localforage.getItem(type.typeKey, function(records) {
+              if(records) { resolve(records); }
+              else        { reject("No locally cached data"); }
+            });
           });
-        });
-      });
+        }
+      );
   },
 
   findMany: function(store, type, ids) {
@@ -71,16 +71,18 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
     var promise = this._super(store, type, id),
         self = this;
 
+    // If the remote find fails, try fetching the record locally
     return promise.catch(function(error) {
       App.set('online', false);
 
-      return self._fetchLocalRecord(type.typeKey, id).then(function(result) {
-        var data = {}
-        data[type.typeKey] = result
+      return self._fetchLocalRecord(type.typeKey, id).then(
+        function(result) {
+          var data = {}
+          data[type.typeKey] = result
 
-        return data;
+          return data;
+        });
       });
-    });
   },
 
   createRecord: function(store, type, record) {
@@ -199,16 +201,20 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
   _fetchLocalRecord: function(recordType, recordId) {
     return new Promise(function(resolve, reject) {
       localforage.getItem(recordType, function(records) {
-        if(!records) reject("There are no locally stored records for this type");
+        if(!records) {
+          reject("There are no locally stored records for this type");
+        }
 
         var recordsKey = inflector.pluralize(recordType);
-
         records[recordsKey] = records[recordsKey] || []
         var recordsWithId = records[recordsKey].filter(function(record) {
             return record["id"] == recordId;
           });
 
-        if(!recordsWithId.length == 1) reject("There is no record with this id");
+        if(!recordsWithId.length == 1) {
+          reject("There is no record with this id");
+        }
+
         resolve(recordsWithId[0]);
       })
     });

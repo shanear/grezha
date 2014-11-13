@@ -7,11 +7,11 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <%= render partial: "setup/rollbar" %>
+
   <script>
     <%= yield :javascript_setup %>
   </script>
-
-  <%= javascript_include_tag "application" %>
 
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>

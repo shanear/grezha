@@ -35,6 +35,7 @@
 #= require_tree ./templates
 #= require_tree ./routes
 #= require ./router
+#= require error_handling
 
 # This fixes an issue where localforage breaks because Promise isn't defined.
 # The issue only happens when the assets were minified on Safari. Probably worth

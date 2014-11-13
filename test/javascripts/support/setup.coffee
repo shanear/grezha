@@ -3,3 +3,5 @@ window.EmberConfiguration =
   isDemo: false,
   currentUser: 'Tester Man'
   organization: 'Test Organization'
+
+QUnit.config.testTimeout = 10000

@@ -9,6 +9,7 @@ gem 'pg', '0.14.1'
 gem 'unicorn-rails', '1.1.0'
 gem 'foreman'
 gem 'haml'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,6 +31,8 @@ gem 'font-awesome-sass', '~> 4.0.3.1'
 
 gem 'paperclip', '~> 3.2'
 gem 'aws-sdk'
+
+gem 'rollbar', '~> 1.2.6'
 
 group :development, :test do
   gem 'jasmine', '~>2.0.0'

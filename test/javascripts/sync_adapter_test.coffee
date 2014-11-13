@@ -12,6 +12,18 @@ window.stubPost = (url, json, code = 200)->
 # To allow exceptions
 Ember.Test.adapter.reopen { exception: Ember.K }
 
+# Used to test which errors are intercepted by the error handler
+errorThrown = null
+
+checkError = ->
+  error = errorThrown
+  errorThrown = null
+  error
+
+Ember.RSVP.configure 'onerror', (e)->
+  errorThrown = App.processError(e)
+  console.log("INTERCEPTION:\n ", errorThrown) if errorThrown
+
 App.initializer
   name: "clear outstanding changes"
   before: "start connectivity checks"
@@ -51,7 +63,7 @@ module "SyncAdapter",
 
 
 asyncTest "Stores records in localforage for offline", ->
-  expect(2)
+  expect 2
 
   setupStep = new Ember.RSVP.Promise (resolve, reject)->
     localforage.clear -> resolve()
@@ -68,7 +80,8 @@ asyncTest "Stores records in localforage for offline", ->
     Ember.run ->
       store.find('client').then (result)->
         clients = result.toArray()
-        equal(clients.get('length'), 1, "Records should be returned from the API")
+        equal(clients.get('length'), 1,
+          "Records should be returned from the API")
 
   cachedTestStep = onlineTestStep.finally ->
     stubGet "/clients", {}, 404
@@ -77,7 +90,8 @@ asyncTest "Stores records in localforage for offline", ->
 
       findClients.then (result)->
         clients = result.toArray()
-        equal(clients.get('length'), 1, "Records should be cached correctly")
+        equal(clients.get('length'), 1,
+          "Records should be cached correctly")
         start()
 
       findClients.catch ->
@@ -100,6 +114,7 @@ asyncTest "Records added while offline are saved in localforage", ->
       clientSave.then ->
         clientId = client.get("id")
 
+        stubGet "/clients", {}, 404
         stubGet "/clients/:id", {}, 404
         store.unloadAll('client')
 
@@ -122,7 +137,8 @@ asyncTest "Records added while offline are saved in localforage", ->
     store.syncRecords().then ->
       store.find('client').then (result)->
         client = result.toArray()[0]
-        equal(client.get('isRemoteSynced'), true, "Added client should be marked as synced")
+        equal(client.get('isRemoteSynced'), true,
+          "Added client should be marked as synced")
 
   resyncStep = syncOnlineStep.then ->
     server.post "/clients", (request)->
@@ -130,6 +146,7 @@ asyncTest "Records added while offline are saved in localforage", ->
       [200, {"Content-Type" : "application/json"}, request.requestBody]
 
     store.syncRecords().then -> start()
+
 
 asyncTest "Records added while online are saved online and cached offline", ->
   expect(3)
@@ -201,6 +218,7 @@ asyncTest "Sync works with no changes", ->
       ok(true, "Synced nothing")
       start()
 
+
 asyncTest "Invalid records on server dont store locally while online", ->
   setupStep = new Ember.RSVP.Promise (resolve, reject)->
     localforage.clear -> resolve()
@@ -218,6 +236,7 @@ asyncTest "Invalid records on server dont store locally while online", ->
         store.unloadAll('client')
         equal(client.get('errors.length', 1), 1, "Client should have errors")
 
+        stubGet "/clients/:id", {}, 404
         findClient = store.find("client", client.get("id"))
         findClient.then (result)->
           ok(false, "Errored records shouldn't save on the back end")
