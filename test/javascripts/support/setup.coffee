@@ -4,4 +4,4 @@ window.EmberConfiguration =
   currentUser: 'Tester Man'
   organization: 'Test Organization'
 
-QUnit.config.testTimeout = 10000
+QUnit.config.testTimeout = 30000
