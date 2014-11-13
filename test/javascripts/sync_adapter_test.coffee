@@ -12,18 +12,6 @@ window.stubPost = (url, json, code = 200)->
 # To allow exceptions
 Ember.Test.adapter.reopen { exception: Ember.K }
 
-# Used to test which errors are intercepted by the error handler
-errorThrown = null
-
-checkError = ->
-  error = errorThrown
-  errorThrown = null
-  error
-
-Ember.RSVP.configure 'onerror', (e)->
-  errorThrown = App.processError(e)
-  console.log("INTERCEPTION:\n ", errorThrown) if errorThrown
-
 App.initializer
   name: "clear outstanding changes"
   before: "start connectivity checks"

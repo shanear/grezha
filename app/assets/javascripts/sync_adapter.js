@@ -108,6 +108,29 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
     });
   },
 
+  // Override the ajax method. We don't want an error to trigger the
+  // global RSVP promise error.
+  // This is messy, and will be difficult to maintain, need to look
+  // for a better way...
+  ajax: function(url, type, hash) {
+    var adapter = this;
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      hash = adapter.ajaxOptions(url, type, hash);
+
+      hash.success = function(json) {
+        Ember.run(null, resolve, json);
+      };
+
+      hash.error = function(jqXHR, textStatus, errorThrown) {
+        reject(adapter.ajaxError(jqXHR));
+      };
+
+      Ember.$.ajax(hash);
+    }, "DS: RestAdapter#ajax " + type + " to " + url);
+  },
+
+
   // Combine remotely fetched records with unsynced local records and cache them
   _cacheRecords: function(records, type) {
     var self = this;
