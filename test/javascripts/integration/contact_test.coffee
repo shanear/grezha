@@ -16,6 +16,7 @@ module "Contact Index Page integration tests",
       store = App.__container__.lookup("store:main")
   teardown: ->
     App.reset()
+    App.Contact.FIXTURES = []
 
 test "fills in a new contact", ->
   visit("/contacts/")

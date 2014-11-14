@@ -1,15 +1,9 @@
-App.ConnectionNewComponent = Ember.Component.extend
+App.NewConnectionComponent = Ember.Component.extend
   newConnection: { occurredAt: new Date(), note: "" }
   modes: ['In Person', 'Email', 'Phone']
   defaultMode: 'In Person'
 
   actions:
-    newConnection: ->
-      @set('addingConnection', true)
-
-    cancelNewConnection: ->
-      @set('addingConnection', false)
-
     saveConnection: ->
       newConnection = @store.createRecord('connection', @get('newConnection'))
       newConnection.set('contact', @get('contact'))
@@ -20,7 +14,7 @@ App.ConnectionNewComponent = Ember.Component.extend
 
           @set('newConnection.occurredAt', new Date())
           @set('newConnection.note', "")
-          @set('addingConnection', false)
+          @set('enabled', false)
       else
         @set('errors', newConnection.get('errors'))
 

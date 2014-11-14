@@ -1,0 +1,68 @@
+{{#if enabled}}
+  <div class="form-horizontal add-model-form">
+    {{#if newPerson.errors.length}}
+      <ul class="errors">
+        {{#each newPerson.errors}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
+    {{/if}}
+
+    <div class="form-group">
+      <label for="newRelationshipName" class="col-sm-3 control-label">name</label>
+
+      <div class="col-sm-9">
+        {{autocomplete-field
+            inputId="new-relationship-name"
+            inputClass="form-control"
+            value=newRelationshipName
+            suggestions=people
+            queryProperty="name"
+            subtextProperty="role"
+            pinnedSuggestion="+ New Person"
+            onSelect="selectPerson"}}
+      </div>
+    </div>
+    {{#if newPerson}}
+      <div class="form-group">
+        <label for="new-person-role" class="col-sm-3 control-label">role</label>
+
+        <div class="col-sm-9">
+          {{input type="text"
+              id="new-person-role"
+              class="form-control"
+              valueBinding="newPerson.role"
+              placeholder="father, social worker, etc."}}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="new-person-contact-info" class="col-sm-3 control-label">contact info</label>
+
+        <div class="col-sm-9">
+          {{textarea id="new-person-contact-info"
+            class="form-control"
+            valueBinding="newPerson.contactInfo"
+            placeholder="phone number, email, etc."}}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="new-person-notes" class="col-sm-3 control-label">notes</label>
+
+        <div class="col-sm-9">
+          {{textarea id="new-person-notes"
+            class="form-control"
+            placeholder="Any additional notes about this person?"
+            valueBinding="newPerson.notes"}}
+        </div>
+      </div>
+
+      <div class="save-button">
+        <button id="save-relationship" class="btn btn-default " {{action "saveRelationship"}}>
+          Save
+        </button>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}
