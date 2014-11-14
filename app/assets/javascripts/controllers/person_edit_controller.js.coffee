@@ -2,6 +2,10 @@ App.PersonEditController = Ember.ObjectController.extend
   needs: "contact"
   errors: []
   contact: Ember.computed.alias("controllers.contact.model")
+
+  reset: ->
+    @set('errors', [])
+
   actions:
     savePerson: ->
       person = @get('model')
