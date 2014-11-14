@@ -440,6 +440,11 @@ div#ember-app {
     border-radius: $usual-buffer;
   }
 
+  .mode-header {
+    width: 30%;
+    display:inline-block;
+  }
+
   .section-header {
     @include clearfix;
     padding: 0 $usual-buffer;

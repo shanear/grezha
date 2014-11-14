@@ -137,10 +137,13 @@
     </div>
 
     {{new-connection enabled=addingConnection contact=model store=store}}
-
-    {{#each connectionsByMode}}
-        {{mode}} -- {{connections.length}}
-    {{/each}}
+    <div>
+        {{#each connectionsByMode}}
+            <div class="section-header mode-header">
+                {{mode}} -- {{connections.length}}
+            </div>
+        {{/each}}
+    </div>
 
     {{#each sortedConnections}}
       {{connection-panel connection=this}}
