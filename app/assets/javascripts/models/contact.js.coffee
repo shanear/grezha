@@ -31,7 +31,7 @@ App.Contact = DS.Model.extend
   ).property('connections.@each')
 
   connectionsByMode: (->
-    this.get('connections').reduce ((modeTypes, connection) ->
+    @get('connections').reduce ((modeTypes, connection) ->
       if modeTypes[connection.get('mode')]?
         modeTypes[connection.get('mode')].pushObject(connection)
       else

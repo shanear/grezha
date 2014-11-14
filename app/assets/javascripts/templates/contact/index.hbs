@@ -138,6 +138,10 @@
 
     {{new-connection enabled=addingConnection contact=model store=store}}
 
+    {{#each connectionsByMode}}
+        {{mode}} -- {{connections.length}}
+    {{/each}}
+
     {{#each sortedConnections}}
       {{connection-panel connection=this}}
     {{else}}

@@ -2,6 +2,25 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
   allPeople: []
 
+  connectionsByMode: (->
+    connectByMode = @get('connections').reduce ((modeTypes, connection) ->
+      if modeTypes[connection.get('mode')]?
+        modeTypes[connection.get('mode')].pushObject(connection)
+      else
+        modeTypes[connection.get('mode')] = [connection]
+      modeTypes
+    ), {}
+    connectByModeAsArray = []
+    for mode of connectByMode
+      connectByModeAsArray.push
+        mode : mode
+        connections: connectByMode[mode]
+    connectByModeAsArray
+  ).property('connections.@each')
+  asynchIsHard: (->
+    @get('connections.length')
+  ).property('connections.@each')
+
   reset: ->
     @set('addingRelationship', false)
     @set('addingConnection', false)
