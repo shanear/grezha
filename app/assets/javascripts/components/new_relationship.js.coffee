@@ -8,15 +8,14 @@ App.NewRelationshipComponent = Ember.Component.extend
   ).observes('enabled')
 
   createRelationship: (person) ->
-    newRelationship = @store.createRecord('relationship')
-    newRelationship.set('person', person)
-    newRelationship.set('contact', @get('contact'))
+    newRelationship = @store.createRecord('relationship', {
+        person: person
+        contact: @get('contact')
+      })
 
     newRelationship.save().then =>
       @get('contact.relationships').pushObject newRelationship
       @set('enabled', false)
-      @set('newRelationship', {})
-      @set("newRelationshipName", "")
 
   actions:
     selectPerson: (person) ->
@@ -25,17 +24,11 @@ App.NewRelationshipComponent = Ember.Component.extend
         @createRelationship(person)
       else
         @set("newPerson", {})
-        @set("selectedPerson", null)
+        Ember.Binding.from("newRelationshipName")
+                     .to("newPerson.name").connect(this)
 
     saveRelationship: ->
-      attributes = @get('newPerson')
-      newPerson = @store.createRecord('person',
-        {
-          name: @get('newRelationshipName'),
-          contactInfo: @get('newPerson.contactInfo'),
-          role: @get('newPerson.role'),
-          notes: @get('newPerson.notes')
-        })
+      newPerson = @store.createRecord('person', @get("newPerson"))
 
       if newPerson.isValid()
         newPerson.save().then (=>
