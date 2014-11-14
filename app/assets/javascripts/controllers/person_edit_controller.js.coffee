@@ -13,3 +13,6 @@ App.PersonEditController = Ember.ObjectController.extend
             @set('errors', ["Something went wrong on the server, please try again later."]))
       else
         @set('errors',person.get('errors'))
+
+    cancel: ->
+      @transitionToRoute('contact', @get("contact"))

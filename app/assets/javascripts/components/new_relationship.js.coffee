@@ -1,9 +1,14 @@
 App.NewRelationshipComponent = Ember.Component.extend
   enabled: false
+  name: Ember.computed.alias("newPerson.name")
+  role: Ember.computed.alias("newPerson.role")
+  contactInfo: Ember.computed.alias("newPerson.contactInfo")
+  notes: Ember.computed.alias("newPerson.notes")
 
   _reset: (->
     if !@get('enabled')
       @set("newPerson", null)
+      @set("errors", null)
       @set("newRelationshipName", "")
   ).observes('enabled')
 
@@ -23,20 +28,21 @@ App.NewRelationshipComponent = Ember.Component.extend
         @set("newPerson", null)
         @createRelationship(person)
       else
-        @set("newPerson", {})
-        Ember.Binding.from("newRelationshipName")
-                     .to("newPerson.name").connect(this)
+        @set("newPerson", {name: @get("newRelationshipName")})
 
-    saveRelationship: ->
+    savePerson: ->
       newPerson = @store.createRecord('person', @get("newPerson"))
 
       if newPerson.isValid()
         newPerson.save().then (=>
           @createRelationship(newPerson)
         ), (=>
-          @set('newPerson.errors',
+          @set('errors',
             ["There was a technical error. Please try again, or contact Grezha support."])
         )
       else
-        @set('newPerson.errors', newPerson.get('errors'))
+        @set('errors', newPerson.get('errors'))
+
+    cancel: ->
+      @set('enabled', false)
 

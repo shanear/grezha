@@ -45,10 +45,10 @@ test "Create and delete a relationship with a new Person", ->
   fillIn("#new-relationship-name", "Bob Hope")
   click(".suggestions .highlighted")
 
-  fillIn("#new-person-notes", "Notes")
-  fillIn("#new-person-role", "Officer")
-  fillIn("#new-person-contact-info", "111-1111-1111")
-  click("#save-relationship")
+  fillIn("#person-notes", "Notes")
+  fillIn("#person-role", "Officer")
+  fillIn("#person-contact-info", "111-1111-1111")
+  click("#save-person")
   andThen ->
     ok(/Officer/.test(find(".relationship .type").text()),
       "A newly created relationship should appear")
@@ -65,7 +65,7 @@ test "Show validation errors when relationship with a new Person lacks a role", 
   fillIn("#new-relationship-name", "Wilfred the Cat")
   click(".suggestions .highlighted")
 
-  click("#save-relationship")
+  click("#save-person")
   andThen ->
     equal(find(".errors li").length, 1,
     "There should have been an error because you didn't enter the role")

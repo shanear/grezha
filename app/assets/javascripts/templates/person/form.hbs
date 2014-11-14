@@ -4,7 +4,7 @@
     <label for="person-name" class="col-sm-3 control-label">name</label>
 
     <div class="col-sm-9">
-      {{input type="text" id="person-name" class="form-control" valueBinding="person.name" value=this.name}}
+      {{input type="text" id="person-name" class="form-control" value=this.name}}
     </div>
   </div>
 
@@ -15,7 +15,6 @@
       {{input type="text"
           id="person-role"
           class="form-control"
-          valueBinding="person.relationshipType"
           placeholder="father, social worker, etc."
           value=this.role}}
     </div>
@@ -27,30 +26,26 @@
     <div class="col-sm-9">
       {{textarea id="person-contact-info"
         class="form-control"
-        valueBinding="person.contactInfo"
         value=this.contactInfo
         placeholder="phone number, email, etc."}}
     </div>
   </div>
 
   <div class="form-group">
-    <label for="person-note" class="col-sm-3 control-label">notes</label>
+    <label for="person-notes" class="col-sm-3 control-label">notes</label>
 
     <div class="col-sm-9">
-      {{textarea id="person-note"
+      {{textarea id="person-notes"
         class="form-control"
         placeholder="Any additional notes about them?"
-        valueBinding="person.notes"
         value=this.notes}}
     </div>
   </div>
 
   <div class="cancel">
-    <button class="btn btn-default" id="cancel-edit-person">
-      {{#link-to 'contact' contact}}
-        cancel
-      {{/link-to}}
-    </button>  
+    <button class="btn btn-link" id="cancel-edit-person" {{action "cancel"}}>
+      Cancel
+    </button>
   </div>
 
   <div class="save-button">
