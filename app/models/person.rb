@@ -3,6 +3,6 @@ class Person < ActiveRecord::Base
 
   has_many :relationships
 
-  validate :name, :presence :true
-  validate :role, :presence :true
+  validates :name, presence: true
+  validates :role, presence: true
 end
