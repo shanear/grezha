@@ -19,11 +19,12 @@
         <li class="contact">
           {{#link-to 'contact' contact}}
             {{#view "searchResult" filterItem=contact filterQuery=filterQuery}}
-                {{view.name}}
-
-              {{#if view.searchMatch}}
-                  {{view.searchMatch}}
-              {{/if}}
+              {{view.name}}
+              <div class="contact-secondary-search-information">
+                  {{#if view.searchMatch}}
+                      {{view.searchMatch}}
+                  {{/if}}
+              </div>
 
             {{/view}}
           {{/link-to}}

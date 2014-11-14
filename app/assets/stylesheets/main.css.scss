@@ -290,6 +290,12 @@ div#ember-app {
           background-color: lighten($bulgarian-green, 68);
         }
 
+        li.contact {
+          .contact-secondary-search-information {
+            float:right;
+          }
+        }
+
         li.contact, li.vehicle {
           a {
             width: 100%;
