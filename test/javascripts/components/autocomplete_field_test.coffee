@@ -50,7 +50,7 @@ test "activeSuggestions always contains default suggestion if present", ->
     "Last element in activeSuggestions should be the default suggestion.")
 
 
-test "isAutocompleting is true and pinnedSuggestio is selected by default if forceSelection", ->
+test "isAutocompleting defaults to true and first suggestion is selected", ->
   autocompleteField = @subject(
     suggestions: suggestions
     queryProperty: "name"
@@ -64,6 +64,19 @@ test "isAutocompleting is true and pinnedSuggestio is selected by default if for
     "Highlighted index should be 0 but is " + autocompleteField.get("highlightedIndex"))
   equal(autocompleteField.get("isAutocompleting"), true,
     "isAutocompleting should be true but is " + autocompleteField.get("isAutocompleting"))
+
+
+test "isAutocompleting is false when autofocus set to true", ->
+  autocompleteField = @subject(
+    suggestions: suggestions
+    queryProperty: "name"
+    forceSelection: true
+    pinnedSuggestion: "something"
+    autofocus: true
+  )
+
+  equal(autocompleteField.get("isAutocompleting"), false,
+    "isAutocompleting should be false but is " + autocompleteField.get("isAutocompleting"))
 
 
 test "moveHighlightDown sets next selection", ->

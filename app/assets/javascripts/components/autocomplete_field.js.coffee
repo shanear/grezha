@@ -8,7 +8,7 @@ App.AutocompleteFieldComponent = Ember.Component.extend
 
   setInitialSelection: (->
     @setHighlightedIndex(0)
-    @set('isAutocompleting', true)
+    @set('isAutocompleting', true) unless @get('autofocus')
   ).on('init')
 
   activeSuggestions: (->

@@ -4,6 +4,9 @@
 App.EnrichedTextfieldComponent = Ember.TextField.extend
   attributeBindings: ['chromeAutocomplete:autocomplete']
 
+  didInsertElement: ->
+    @$().focus() if @get("autofocus")
+
   keyDown: (event)->
     if(event.keyCode == 38)
       @sendAction("upArrow")

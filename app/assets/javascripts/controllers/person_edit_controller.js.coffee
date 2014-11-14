@@ -1,4 +1,5 @@
 App.PersonEditController = Ember.ObjectController.extend
+  autofocusName: true
   needs: "contact"
   errors: []
   contact: Ember.computed.alias("controllers.contact.model")

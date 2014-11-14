@@ -1,5 +1,6 @@
 App.NewRelationshipComponent = Ember.Component.extend
   enabled: false
+  autofocusRole: true
   name: Ember.computed.alias("newPerson.name")
   role: Ember.computed.alias("newPerson.role")
   contactInfo: Ember.computed.alias("newPerson.contactInfo")

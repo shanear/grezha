@@ -4,7 +4,11 @@
     <label for="person-name" class="col-sm-3 control-label">name</label>
 
     <div class="col-sm-9">
-      {{input type="text" id="person-name" class="form-control" value=this.name}}
+      {{enriched-textfield
+          id="person-name"
+          class="form-control"
+          value=this.name
+          autofocus=autofocusName}}
     </div>
   </div>
 
@@ -12,11 +16,12 @@
     <label for="person-role" class="col-sm-3 control-label">role</label>
 
     <div class="col-sm-9">
-      {{input type="text"
+      {{enriched-textfield
           id="person-role"
           class="form-control"
           placeholder="father, social worker, etc."
-          value=this.role}}
+          value=this.role
+          autofocus=autofocusRole}}
     </div>
   </div>
 

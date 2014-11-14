@@ -8,7 +8,8 @@
       downArrow="moveHighlightDown"
       escape="hideSuggestions"
       enter="selectHighlightedSuggestion"
-      chromeAutocomplete="off"}}
+      chromeAutocomplete="off"
+      autofocus=autofocus}}
 
   <ul {{bind-attr class=":suggestions isAutocompleting:active"}}>
     {{#each suggestion in activeSuggestions}}
