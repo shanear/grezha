@@ -1,6 +1,6 @@
 App.NewConnectionComponent = Ember.Component.extend
   newConnection: { occurredAt: new Date(), note: "" }
-  modes: ['In Person', 'Email', 'Phone']
+  modes: ['In Person', 'Email', 'Phone', 'Text']
   defaultMode: 'In Person'
 
   actions:
