@@ -13,4 +13,5 @@ App.ContactsNewController = Ember.ObjectController.extend
             @set('errors', ["Something went wrong on the server, please try again later."]))
       else
         @set('errors', newContact.get('errors'))
+        newContact.destroyRecord();
 

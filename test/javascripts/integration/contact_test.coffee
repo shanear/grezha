@@ -14,6 +14,7 @@ module "Contact Index Page integration tests",
     $.cookie('remember_token', 'get logged in')
     Ember.run ->
       store = App.__container__.lookup("store:main")
+      App.Contact.FIXTURES = []
   teardown: ->
     App.reset()
     App.Contact.FIXTURES = []
@@ -28,6 +29,16 @@ test "fills in a new contact", ->
     equal("Anna Bobana", find("#name").val(), "names should be same " + find("#name").val())
     equal("Add Anna Bobana", find(".new-contact > a").text().trim(), "should be Add + name")
 
+test "does not create a new contact when no name", ->
+  visit("/contacts/")
+  fillIn("#contact-search", "Anna Bobana")
+  click(".new-contact > a")
+  fillIn("#name", "")
+  click("#save-contact")
+  andThen ->
+    equal(currentPath(), "contacts.new", "should be" + currentPath())
+    storesLength = store.all("contact").get('length')
+    equal(storesLength, 0, "should not have a contact saved to store #{storesLength} #{store.all("contact")}")
 
 test "edits the user assigned", ->
   Ember.run ->
