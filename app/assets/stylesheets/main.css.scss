@@ -301,6 +301,10 @@ div#ember-app {
           a:hover {
             background-color: lighten($bulgarian-green, 68);
           }
+
+          .highlight {
+            font-weight: bold;
+          }
         }
       }
     }
@@ -442,7 +446,7 @@ div#ember-app {
 
   .mode-header {
     width: 30%;
-    display:inline-block;
+    display: inline-block;
   }
 
   .section-header {

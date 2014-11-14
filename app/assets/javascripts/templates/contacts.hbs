@@ -15,10 +15,17 @@
 
   <div class="searchlist">
     <ul class="contacts">
-      {{#each filteredCollection}}
+      {{#each contact in filteredCollection}}
         <li class="contact">
-          {{#link-to 'contact' this}}
-            {{name}}
+          {{#link-to 'contact' contact}}
+            {{#view "searchResult" filterItem=contact filterQuery=filterQuery}}
+                {{view.name}}
+
+              {{#if view.searchMatch}}
+                  {{view.searchMatch}}
+              {{/if}}
+
+            {{/view}}
           {{/link-to}}
         </li>
       {{/each}}

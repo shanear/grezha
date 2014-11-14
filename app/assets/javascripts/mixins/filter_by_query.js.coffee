@@ -1,12 +1,18 @@
 App.FilterByQuery = Ember.Mixin.create
   filterQuery: ""
-  find_by_substring: (expected, actual) ->
-    expected && ~expected.toUpperCase().indexOf actual.toUpperCase()
+  find_by_substring: (haystack, needle) ->
+    haystack && ~haystack.toUpperCase().indexOf needle.toUpperCase()
 
   filteredCollection: (->
     @filter (model)=>
-      @get('filterBy').some (elem)=>
-        @find_by_substring model.get(elem), @filterQuery
+      matches = []
+      for criteria in @get('filterBy')
+        if @find_by_substring model.get(criteria), @filterQuery
+          matches.push criteria
+      filteredMatches = matches.filter (elem) ->
+        elem isnt "name"
+      model.set('highlightFields', filteredMatches)
+      matches.length > 0
   ).property('@each.name','@each.memberId','@each.user.name', 'filterQuery')
 
   newModelText: (->
