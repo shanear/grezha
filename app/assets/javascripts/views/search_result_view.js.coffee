@@ -21,7 +21,7 @@ App.SearchResultView = Ember.View.extend
   highlightedText: (haystack, needle)->
     if needle isnt ""
       ignoreCaseRegex = new RegExp(needle,'i')
-      haystack.replace(ignoreCaseRegex, "<span class='highlight'>#{needle}</span>")
+      haystack.replace(ignoreCaseRegex, "<span class='highlight'>$&</span>")
     else
       haystack
 
