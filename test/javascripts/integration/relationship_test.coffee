@@ -48,6 +48,7 @@ test "Create and delete a relationship with a new Person", ->
   fillIn("#person-notes", "Notes")
   fillIn("#person-role", "Officer")
   fillIn("#person-contact-info", "111-1111-1111")
+  andThen -> find("#contact-search").focus()
   click("#save-person")
   andThen ->
     ok(/Officer/.test(find(".relationship .type").text()),
