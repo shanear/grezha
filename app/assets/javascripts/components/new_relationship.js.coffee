@@ -20,7 +20,7 @@ App.NewRelationshipComponent = Ember.Component.extend
       })
 
     newRelationship.save().then =>
-      @get('contact.relationships').pushObject newRelationship
+      @get('contact.relationships').unshiftObject newRelationship
       @set('enabled', false)
 
   actions:
