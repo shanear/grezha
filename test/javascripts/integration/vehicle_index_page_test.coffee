@@ -6,7 +6,7 @@ App.Vehicle.FIXTURES = []
 App.Connection.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
 
-module "Contact Index Page integration tests",
+module "Vehicle Index Page integration tests",
   setup: ->
     $.cookie('remember_token', 'get logged in')
     Ember.run ->
