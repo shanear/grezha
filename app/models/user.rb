@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(email, password)
-    user = find_by_email(email)
+    user = find_by_email(email.downcase)
     (user && user.has_password?(password)) ? user : nil
   end
 
