@@ -96,7 +96,7 @@
           </button>
         {{else}}
           <button id="add-relationship" class="btn btn-default" {{action "newRelationship"}}>
-            Add Relationship
+            Add
           </button>
         {{/if}}
       </div>
@@ -126,25 +126,25 @@
         {{else}}
           <button id="add-connection" class="btn btn-default"
              {{action "newConnection"}}>
-            Add Connection
+            Add
           </button>
         {{/if}}
       </div>
 
       <div class="left">
-        <h4>Connections</h4>
+        <h4>
+          Connections
+          ({{connections.length}})
+        </h4>
+        {{#each connectionsByMode}}
+          <div class="mode-header">
+            {{mode}} ({{connections.length}})
+          </div>
+        {{/each}}
       </div>
     </div>
 
     {{new-connection enabled=addingConnection contact=model store=store}}
-    <div>
-        {{#each connectionsByMode}}
-            <div class="section-header mode-header">
-                {{mode}} -- {{connections.length}}
-            </div>
-        {{/each}}
-    </div>
-
     {{#each sortedConnections}}
       {{connection-panel connection=this}}
     {{else}}
