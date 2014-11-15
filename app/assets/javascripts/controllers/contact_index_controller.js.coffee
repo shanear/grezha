@@ -17,9 +17,6 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
         connections: connectByMode[mode]
     connectByModeAsArray
   ).property('connections.@each')
-  asynchIsHard: (->
-    @get('connections.length')
-  ).property('connections.@each')
 
   reset: ->
     @set('addingRelationship', false)
