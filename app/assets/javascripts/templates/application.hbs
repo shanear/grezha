@@ -10,7 +10,11 @@
 
     <nav>
       <ul class="links">
-        <li>{{#link-to 'contacts'}} Contacts {{/link-to}}</li>
+        <li>
+          {{#link-to 'contacts'}}
+            Contacts ({{allContacts.length}})
+          {{/link-to}}
+        </li>
 
         {{#feature 'vehicles'}}
           <li> {{#link-to 'vehicles'}} Vehicles {{/link-to}} </li>
