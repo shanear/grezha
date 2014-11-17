@@ -163,7 +163,7 @@ test 'days until birthday', ->
       "daysUntilBirthday should be 0 for the birthday boy!")
 
   Ember.run ->
-    contact.set("birthday", moment().days(363).year(1999))
+    contact.set("birthday", moment().days(363).year(1999).seconds(1))
     equal(contact.get("daysUntilBirthday"), 363,
       "daysUntilBirthday should be the days until next birthday," +
       " expected 363 but was " + contact.get("daysUntilBirthday"))
