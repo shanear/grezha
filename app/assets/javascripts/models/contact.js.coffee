@@ -77,7 +77,7 @@ App.Contact = DS.Model.extend
     else if @isDuplicate()
       errors.push "That name already exists."
 
-    if @get('phone')? && @get('phone').match(/^\d+-?\d+-?\d+-?\d+:?\d+$/) == null
+    if @get('phone')? && @get('phone') isnt "" && @get('phone').match(/^\d+-?\d+-?\d+-?\d+:?\d+$/) == null
       errors.push 'Invalid phone number. Format: xxx-xxx-xxx:ext'
 
     if App.hasFeature('memberId')

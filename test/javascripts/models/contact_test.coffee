@@ -29,22 +29,25 @@ test 'isValid name', ->
 test 'isValid phone', ->
 
   Ember.run -> contact.set("phone", "invalid phone #")
-  equal(contact.isValid(), false, "Contact should be invalid with bad phone #")
+  equal(contact.isValid(), false, "phone # should be invalid when plain english")
 
   Ember.run -> contact.set("phone", "-")
-  equal(contact.isValid(), false, "Contact should be invalid with bad phone #")
+  equal(contact.isValid(), false, "phone # should be invalid when special char")
+
+  Ember.run -> contact.set("phone", "")
+  equal(contact.isValid(), true, "phone # should be invalid when empty string")
 
   Ember.run -> contact.set("phone", "1112223333")
-  equal(contact.isValid(), true, "Contact should be valid with phone #")
+  equal(contact.isValid(), true, "phone # should be valid when sequence of numbers")
 
   Ember.run -> contact.set("phone", "111-222-3333")
-  equal(contact.isValid(), true, "Contact should be valid with phone #")
+  equal(contact.isValid(), true, "phone # should be valid when alternating numbers and dash")
 
   Ember.run -> contact.set("phone", "1-949-830-1657")
-  equal(contact.isValid(), true, "Contact should be valid for international format")
+  equal(contact.isValid(), true, "phone # should be valid for international format")
 
   Ember.run -> contact.set("phone", "1-949-830-1657:0000")
-  equal(contact.isValid(), true, "Contact should be valid for international format")
+  equal(contact.isValid(), true, "phone # should be valid when with extension")
 
 test 'isDuplicate', ->
   equal(contact.isDuplicate(), false, "Contact isn't duplicate by default")
@@ -153,7 +156,6 @@ asyncTest 'last seen connection', ->
 test 'days until birthday', ->
   Ember.run ->
     contact.set("birthday", null)
-  console.log(contact.get("daysUntilBirthday"))
   equal(contact.get("daysUntilBirthday"), null,
     "daysUntilBirthday should be null if birthday is null")
 
