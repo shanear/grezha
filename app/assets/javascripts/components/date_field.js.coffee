@@ -16,7 +16,7 @@ App.DateFieldComponent = Ember.Component.extend
     {id : 12, name : "Dec"}
   ]
 
-  years: [2014..1950]
+  years: [(new Date().getFullYear())..1950]
 
   date: ((key, value, previousValue)->
     if arguments.length > 1 && value
