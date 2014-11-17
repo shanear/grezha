@@ -12,6 +12,15 @@ App.Contact = DS.Model.extend
     defaultValue: -> AssetPaths.defaultContactAvatar
   )
 
+  daysUntilBirthday: (->
+    return null unless @get('birthday')?
+
+    birthday = moment(@get('birthday'))
+    daysBetween = birthday.dayOfYear() - moment().dayOfYear()
+    daysBetween += 365 if daysBetween < 0
+    return daysBetween
+  ).property('birthday')
+
   connections: DS.hasMany('connection', async: true)
   relationships: DS.hasMany('relationship', async: true)
   user: DS.belongsTo('user')

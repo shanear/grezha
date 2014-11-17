@@ -1,0 +1,41 @@
+<div class="row">
+  {{#if displayRecentBirthdays}}
+    <div class="col-md-6">
+      <div class="section-header">
+        <h4>
+          Most Recent {{contactsWithRecentBirthdays.length}} birthdays
+        </h4>
+      </div>
+
+      {{#each contact in contactsWithRecentBirthdays}}
+        <div class="birthday">
+          <b>{{formatShortDate contact.birthday}}</b>
+          {{contact.name}}
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <div class="col-md-6">
+    <div class="section-header">
+      <h4>
+        Next {{contactsWithUpcomingBirthdays.length}} birthdays
+      </h4>
+    </div>
+
+    {{#each contact in contactsWithUpcomingBirthdays}}
+      <div class="birthday">
+        <b>{{formatShortDate contact.birthday}}</b>
+        {{contact.name}}
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="birthday-warning">
+      You have <b>{{contactsWithoutBirthdays.length}}</b> contacts with no birthdays recorded. How will you know when to give them a present?
+    </div>
+  </div>
+</div>

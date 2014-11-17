@@ -15,3 +15,5 @@ App.Router.map () ->
       @resource 'people', ->
         @resource 'person', {path: "/:person_id"}, ->
           @route 'edit'
+
+  @route 'birthdays'

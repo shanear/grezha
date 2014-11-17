@@ -4,6 +4,7 @@ $bulgarian-green: #00966E;
 $light-bulgarian-green: #e3fff7;
 $bulgarian-red: #D62612;
 $dark-grey: #333;
+$warning: #ffa295;
 
 $header-height: 50px;
 $usual-buffer: 10px;
@@ -570,6 +571,22 @@ div#ember-app {
       float: left;
     }
   }
+}
+
+.birthday {
+  padding: 5px 10px;
+  font-size: 120%;
+
+  b {
+    padding-right: 5px;
+  }
+}
+
+.birthday-warning {
+  color: $warning;
+  padding: 5px 10px;
+  margin-top: 15px;
+  text-align: center;
 }
 
 .autocomplete {

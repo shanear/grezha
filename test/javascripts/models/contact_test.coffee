@@ -149,3 +149,21 @@ asyncTest 'last seen connection', ->
     Ember.run ->
       deepEqual(contact.get('lastSeen'), new Date(2014, 9, 7), "uses the last seen date from connections " +contact.get('lastSeen'))
   start()
+
+test 'days until birthday', ->
+  Ember.run ->
+    contact.set("birthday", null)
+  console.log(contact.get("daysUntilBirthday"))
+  equal(contact.get("daysUntilBirthday"), null,
+    "daysUntilBirthday should be null if birthday is null")
+
+  Ember.run ->
+    contact.set("birthday", moment().year(1970))
+    equal(contact.get("daysUntilBirthday"), 0,
+      "daysUntilBirthday should be 0 for the birthday boy!")
+
+  Ember.run ->
+    contact.set("birthday", moment().days(363).year(1999))
+    equal(contact.get("daysUntilBirthday"), 363,
+      "daysUntilBirthday should be the days until next birthday," +
+      " expected 363 but was " + contact.get("daysUntilBirthday"))
