@@ -15,10 +15,10 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     @set('addingConnection', false)
 
   actions:
-    deleteContact: ->
+    deleteClient: ->
       @set 'confirmation',
         heading: "Are you sure?"
-        content: "Are you sure you want to delete this contact? It will be gone forever!"
+        content: "Are you sure you want to delete this client? It will be gone forever!"
         show: true
         button: "Delete"
         action: =>
