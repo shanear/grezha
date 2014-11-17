@@ -32,7 +32,7 @@ module "Person Integration Test",
     App.Person.FIXTURES = []
 
 test "Edits a person from a relationship", ->
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
   click(".relationship .summary a")
   fillIn("#person-name", "New Name")
   fillIn("#person-role", "Some role")

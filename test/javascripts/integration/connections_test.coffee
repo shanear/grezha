@@ -18,7 +18,7 @@ module "Connections Integration Tests",
     App.reset()
 
 test "Create and delete a connection", ->
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
 
   click("#add-connection")
   fillIn("#newConnectionNote", "roll tide.")
@@ -28,7 +28,7 @@ test "Create and delete a connection", ->
     ok(/roll tide/.test(find(".connection .note").text()),
       "A newly created connection should appear")
 
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
   click(".delete-connection")
   click(".confirm")
 
@@ -37,7 +37,7 @@ test "Create and delete a connection", ->
       "A connection should not show up after being deleted")
 
 test "Create a connection with a specific meeting type", ->
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
   click("#add-connection")
   fillIn("#newConnectionNote", "random notes")
   fillIn("#mode", "In Person")
@@ -48,7 +48,7 @@ test "Create a connection with a specific meeting type", ->
       "should display connection mode")
 
 test "Update last seen", ->
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
 
   andThen ->
     ok(/September 6th 2012/.test(find("#last-seen").text()),

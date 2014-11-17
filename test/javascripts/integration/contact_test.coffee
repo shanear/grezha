@@ -20,7 +20,7 @@ module "Contact Index Page integration tests",
     App.Contact.FIXTURES = []
 
 test "fills in a new contact", ->
-  visit("/contacts/")
+  visit("/clients/")
   fillIn("#contact-search", "Anna Bobana")
   click(".new-contact > a")
   andThen ->
@@ -30,7 +30,7 @@ test "fills in a new contact", ->
     equal("Add Anna Bobana", find(".new-contact > a").text().trim(), "should be Add + name")
 
 test "does not create a new contact when no name", ->
-  visit("/contacts/")
+  visit("/clients/")
   fillIn("#contact-search", "Anna Bobana")
   click(".new-contact > a")
   fillIn("#name", "")
@@ -52,7 +52,7 @@ test "edits the user assigned", ->
   Ember.run ->
     contact = store.createRecord('contact',
       name: "Ms McGrethory", createdAt: new Date(2012, 8, 6))
-  visit("/contacts/" + contact.get('id') + "/edit")
+  visit("/clients/" + contact.get('id') + "/edit")
   andThen ->
     users = find("#contact-user")
     ok(/Peiying Wen/.test(users.text()))
@@ -68,7 +68,7 @@ test "edits the user assigned", ->
     App.Contact.FIXTURES = []
 
 test "creates a new contact", ->
-  visit("/contacts/")
+  visit("/clients/")
   fillIn("#contact-search", "Anna Bobana")
   click(".new-contact > a")
   click("#save-contact")
@@ -79,7 +79,7 @@ test "creates a new contact", ->
     click(".confirm")
 
 test "creates a new contact with full information", ->
-  visit("/contacts/")
+  visit("/clients/")
   fillIn("#contact-search", "Ion Worris")
   click(".new-contact > a")
   fillIn("#city", "Lake Forest")
@@ -94,7 +94,7 @@ test "creates a new contact with full information", ->
 
 test "shows all people in sidebar when no search query entered", ->
   andThen ->
-    visit("/contacts/")
+    visit("/clients/")
   andThen ->
     equal(store.find('contact').get('length'), 0, "the store should have zero " + store.find('contact').get('length'))
     equal(find(".contact").length, 0, "Should show zero people in list by default: " + find("li.contact").length)
@@ -105,7 +105,7 @@ test "shows all people in sidebar when no search query entered", ->
         name: "Catherine MacDonald", createdAt: new Date(2012, 8, 6))
       otherContact = store.createRecord('contact',
         name: "Andrea Dworkin", createdAt: new Date(2012,8,7))
-  visit("/contacts/")
+  visit("/clients/")
   andThen ->
     equal(find(".contact").length, 3, "Should show three people in list by default: " + find("li.contact").length)
 
@@ -117,7 +117,7 @@ test "shows only people with matching string in name", ->
       name: "Catherine The Great", createdAt: new Date(2012, 8, 6))
     otherContact = store.createRecord('contact', 
       name: "Andrea Dworkin", createdAt: new Date(2012,8,7))
-  visit("/contacts/")
+  visit("/clients/")
   fillIn("#contact-search", "Cat")
   andThen ->
     equal(find(".contact").length, 2, "Should show matching on name")
@@ -134,7 +134,7 @@ test "shows only people with matching string in name", ->
 #       name: 'New Boy', user: user)
 #     contact3 = store.createRecord('contact',
 #       name: 'Hip Girl', user: user2)
-#   visit("/contacts/")
+#   visit("/clients/")
 #   fillIn("#contact-search", "Pat")
 #   andThen ->
 #     ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl")
@@ -149,7 +149,7 @@ test "show only people in sidebar with matching member id", ->
       name: "New Boy", memberId: '1999.2.3', createdAt: new Date(2012, 8, 6))
     otherContact = store.createRecord('contact',
       name: "Hip Girl", memberId: '1991.5.29', createdAt: new Date(2012,8,7))
-  visit("/contacts/")
+  visit("/clients/")
   fillIn("#contact-search", "199")
   andThen ->
     ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl ")

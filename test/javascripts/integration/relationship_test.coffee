@@ -26,7 +26,7 @@ test "Create a relationship to an existing Person", ->
   Ember.run ->
     store.createRecord('person', name: "Mums")
 
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
   click("#add-relationship")
   fillIn("#new-relationship-name", "M")
 
@@ -40,7 +40,7 @@ test "Create a relationship to an existing Person", ->
 
 
 test "Create and delete a relationship with a new Person", ->
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
   click("#add-relationship")
   fillIn("#new-relationship-name", "Bob Hope")
   click(".suggestions .highlighted")
@@ -61,7 +61,7 @@ test "Create and delete a relationship with a new Person", ->
       "A relationship should not show up after being deleted " + find(".relationship .type").length)
 
 test "Show validation errors when relationship with a new Person lacks a role", ->
-  visit("/contacts/" + contact.get("id"))
+  visit("/clients/" + contact.get("id"))
   click("#add-relationship")
   fillIn("#new-relationship-name", "Wilfred the Cat")
   click(".suggestions .highlighted")
