@@ -1,0 +1,9 @@
+{{#if modeConnections.length}}
+  {{#if isSelected}}
+    <b> {{mode}} ({{modeConnections.length}}) </b>
+  {{else}}
+    <a {{action "select" mode}}>
+      {{mode}} ({{modeConnections.length}})
+    </a>
+  {{/if}}
+{{/if}}

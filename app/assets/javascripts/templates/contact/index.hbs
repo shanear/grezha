@@ -133,19 +133,25 @@
 
       <div class="left">
         <h4>
-          Connections
-          ({{connections.length}})
+          <a {{action "filterMode" null}}>
+            Connections
+            ({{connections.length}})
+          </a>
         </h4>
-        {{#each connectionsByMode}}
-          <div class="mode-header">
-            {{mode}} ({{connections.length}})
-          </div>
+
+        {{#each mode in App.Connection.MODES}}
+          {{connection-mode
+              mode=mode
+              contact=model
+              selected=filterByMode
+              onSelect="filterMode"}}
         {{/each}}
       </div>
     </div>
 
     {{new-connection enabled=addingConnection contact=model store=store}}
-    {{#each sortedConnections}}
+
+    {{#each connectionsToShow}}
       {{connection-panel connection=this}}
     {{else}}
       <p> There are no connections for this person. </p>

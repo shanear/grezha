@@ -42,16 +42,6 @@ App.Contact = DS.Model.extend
       sortAscending: false
   ).property('connections.@each')
 
-  connectionsByMode: (->
-    @get('connections').reduce ((modeTypes, connection) ->
-      if modeTypes[connection.get('mode')]?
-        modeTypes[connection.get('mode')].pushObject(connection)
-      else
-        modeTypes[connection.get('mode')] = [connection]
-      modeTypes
-    ), {}
-  ).property('connections.@each')
-
   status: (->
     latestConnection = @get('lastSeen')
     if(latestConnection>= moment().subtract('months', '6').toDate())

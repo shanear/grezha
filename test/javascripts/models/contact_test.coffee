@@ -103,27 +103,6 @@ asyncTest 'sortedConnections', ->
 
     start()
 
-
-asyncTest 'connections by type', ->
-  setup = Ember.run -> contact.get('connections')
-  setup.then ->
-    Ember.run ->
-      connections = contact.get('connections')
-      connections.pushObject store.createRecord('connection',
-        note: "in person connection 1", occurredAt: new Date(2014, 9, 7), contact: contact, mode: "In Person")
-      connections.pushObject store.createRecord('connection',
-        note: "in person connection 2", occurredAt: new Date(2014, 9, 6), contact: contact, mode: "In Person")
-      connections.pushObject store.createRecord('connection',
-        note: "phone connection", occurredAt: new Date(2014, 9, 8), contact: contact, mode: "Phone")
-    connectionsByMode = {}
-    Ember.run ->
-      connectionsByMode = contact.get('connectionsByMode')
-    andThen ->
-      equal(connectionsByMode["In Person"].length, 2, connectionsByMode["In Person"])
-      equal(connectionsByMode["Phone"].length, 1, connectionsByMode["Phone"])
-      equal(connectionsByMode["Phone"][0].get('note'), "phone connection")
-    start()
-
 test "can have relationships", ->
   relationships = []
   relLength = "meh"

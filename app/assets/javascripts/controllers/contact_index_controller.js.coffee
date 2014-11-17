@@ -1,22 +1,14 @@
 App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   needs: "contacts"
   allPeople: []
+  filterByMode: null
 
-  connectionsByMode: (->
-    connectByMode = @get('connections').reduce ((modeTypes, connection) ->
-      if modeTypes[connection.get('mode')]?
-        modeTypes[connection.get('mode')].pushObject(connection)
-      else
-        modeTypes[connection.get('mode')] = [connection]
-      modeTypes
-    ), {}
-    connectByModeAsArray = []
-    for mode of connectByMode
-      connectByModeAsArray.push
-        mode : mode
-        connections: connectByMode[mode]
-    connectByModeAsArray
-  ).property('connections.@each')
+  connectionsToShow: (->
+    return @get("sortedConnections") unless @get("filterByMode")?
+
+    @get("sortedConnections").filter (connection)=>
+      connection.get("mode") == @get("filterByMode")
+  ).property('connections.@each', 'filterByMode')
 
   reset: ->
     @set('addingRelationship', false)
@@ -38,7 +30,6 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
     cancelNewConnection: -> @set("addingConnection", false)
     newRelationship: -> @set('addingRelationship', true)
     cancelNewRelationship: -> @set('addingRelationship', false)
-
-    changeImage: (url)->
-      @set('model.pictureUrl', url)
+    filterMode: (mode)-> @set('filterByMode', mode)
+    changeImage: (url)-> @set('model.pictureUrl', url)
 

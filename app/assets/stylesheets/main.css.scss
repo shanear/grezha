@@ -453,8 +453,15 @@ div#ember-app {
 
   .mode-header {
     display: inline-block;
-    color: #888;
     margin-left: 10px;
+
+    a {
+      color: #888;
+
+      &:hover {
+        color: $bulgarian-green
+      }
+    }
   }
 
   .section-header {

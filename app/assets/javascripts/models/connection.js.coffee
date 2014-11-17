@@ -14,3 +14,5 @@ App.Connection = DS.Model.extend
       return false
     return true
 
+App.Connection.reopenClass
+  MODES: ['In Person', 'Email', 'Phone', 'Text']
