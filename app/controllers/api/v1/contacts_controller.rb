@@ -25,7 +25,6 @@ class Api::V1::ContactsController < ApplicationController
   def create
   	@contact = contacts.new(create_contact_params)
     @contact.organization_id = current_user.organization_id
-    @contact.user_id = current_user.id
     if @contact.save()
       render json: @contact
     else

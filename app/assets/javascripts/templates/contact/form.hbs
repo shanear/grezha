@@ -33,9 +33,10 @@
 {{#if allUsers}}
   <div class="form-group" id='contact-user'>
     <label for="owner"> Owner: </label>
-    {{view Ember.Select class="form-control owner" content=allUsers optionValuePath="content.id" optionLabelPath="content.name" selectionBinding="user" }}
+    {{view Ember.Select class="form-control owner" content=allUsers optionValuePath="content.id" optionLabelPath="content.name" selectionBinding="user" prompt="None"}}
   </div>
 {{/if}}
+
 {{#if errors.length}}
   <ul class="errors">
     {{#each errors}}

@@ -48,12 +48,6 @@ describe Api::V1::ContactsController do
         expect(new_contact.remote_id).to match(/[a-zA-Z0-9]{8}/)
         expect(new_contact.organization_id).to eq(organization.id)
       end
-
-      it "creates a new contact in user's organization with their user id"  do
-        post :create, contact: {name: "Joey"}
-        new_contact = Contact.last
-        expect(new_contact.user).to eq(user)
-      end
     end
 
     describe "PUT #update" do

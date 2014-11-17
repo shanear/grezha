@@ -1,5 +1,6 @@
 App.ContactsNewController = Ember.ObjectController.extend
   errors: []
+  allUsers: []
   reset: -> @set 'errors', []
 
   actions:

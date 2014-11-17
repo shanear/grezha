@@ -42,12 +42,10 @@ test "does not create a new contact when no name", ->
 
 test "edits the user assigned", ->
   Ember.run ->
-    store.createRecord("user",
-      name: "Peiying Wen")
+    store.createRecord("user", name: "Peiying Wen")
   targetContact = null
   Ember.run ->
-    targetContact = store.createRecord("user",
-      name: "Inger Dickson")
+    targetContact = store.createRecord("user", name: "Inger Dickson")
   contact = null
   Ember.run ->
     contact = store.createRecord('contact',
@@ -75,6 +73,7 @@ test "creates a new contact", ->
   andThen ->
     equal(currentPath(), "contacts.contact.index", "should be" + currentPath())
     equal("Anna Bobana", find("h3#contact-name").text(), "name should display in header")
+    ok(/unassigned/.test(find("#user").text()), "expect user to default to \'unassigned\' but got #{find("#user").text()}")
     click(".delete-contact")
     click(".confirm")
 

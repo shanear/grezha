@@ -52,7 +52,11 @@
 
           <p id="user">
             <span class="field-label"> volunteer </span>
-              {{user.name}}
+              {{#if user}}
+                 {{user.name}}
+              {{else}}
+                 unassigned
+              {{/if}}
           </p>
 
           <p>
