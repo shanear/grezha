@@ -15,10 +15,13 @@ App.Contact = DS.Model.extend
   daysUntilBirthday: (->
     return null unless @get('birthday')?
 
-    birthday = moment(@get('birthday'))
-    daysBetween = birthday.dayOfYear() - moment().dayOfYear()
-    daysBetween += 365 if daysBetween < 0
-    return daysBetween
+    today = moment().startOf('day')
+    birthday = moment(@get('birthday')).startOf("day")
+
+    if birthday.dayOfYear() > today.dayOfYear()
+      birthday.year(today.year()).diff(today, 'days')
+    else
+      today.diff(birthday(today.year() + 1), 'days')
   ).property('birthday')
 
   connections: DS.hasMany('connection', async: true)
