@@ -13,6 +13,7 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
   reset: ->
     @set('addingRelationship', false)
     @set('addingConnection', false)
+    @set('filterByMode', null)
 
   actions:
     deleteClient: ->
