@@ -122,24 +122,24 @@ test "shows only people with matching string in name", ->
   andThen ->
     equal(find(".contact").length, 2, "Should show matching on name")
 
-# test 'show only people in sidebar with matching user', ->
-#   Ember.run ->
-#     user = store.createRecord('user',
-#       name: 'Pat Mims')
-#     user2 = store.createRecord('user',
-#       name: 'Marc Jan')
-#     contact = store.createRecord('contact',
-#       name: 'Old Dude', user: user)
-#     contact2 = store.createRecord('contact',
-#       name: 'New Boy', user: user)
-#     contact3 = store.createRecord('contact',
-#       name: 'Hip Girl', user: user2)
-#   visit("/clients/")
-#   fillIn("#contact-search", "Pat")
-#   andThen ->
-#     ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl")
-#     ok(/New Boy/.test(find(".contact").text()), "Should contain New Boy")
-#     ok(!/Old Dude/.test(find(".contact").text()), "Should not contain old dude since different user")
+test 'show only people in sidebar with matching user', ->
+  Ember.run ->
+    pat = store.createRecord('user',
+      name: 'Pat Mims')
+    marc = store.createRecord('user',
+      name: 'Marc Jan')
+    contact = store.createRecord('contact',
+      name: 'Old Dude', user: marc)
+    contact2 = store.createRecord('contact',
+      name: 'New Boy', user: pat)
+    contact3 = store.createRecord('contact',
+      name: 'Hip Girl', user: pat)
+  visit("/clients/")
+  fillIn("#contact-search", "Pat")
+  andThen ->
+    ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl")
+    ok(/New Boy/.test(find(".contact").text()), "Should contain New Boy")
+    ok(!/Old Dude/.test(find(".contact").text()), "Should not contain old dude since different user")
 
 test "show only people in sidebar with matching member id", ->
   Ember.run ->
