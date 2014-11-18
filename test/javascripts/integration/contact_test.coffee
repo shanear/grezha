@@ -77,6 +77,26 @@ test "creates a new contact", ->
     click(".delete-contact")
     click(".confirm")
 
+
+test "deletes a contact", ->
+  contact = null
+
+  Ember.run ->
+    contact = store.createRecord('contact', name: "Biff")
+    contact.save()
+
+  visit("/clients/" + contact.id)
+  click("#delete-contact")
+
+  andThen ->
+    equal(store.all('contact').get('length'), 1)
+
+  click("#confirmation .confirm")
+
+  andThen ->
+    equal(store.all('contact').get('length'), 0)
+
+
 test "creates a new contact with full information", ->
   visit("/clients/")
   fillIn("#contact-search", "Ion Worris")

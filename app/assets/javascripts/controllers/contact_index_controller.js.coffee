@@ -23,8 +23,8 @@ App.ContactIndexController = Ember.ObjectController.extend App.HasConfirmation,
         show: true
         button: "Delete"
         action: =>
-          @get('contact').deleteRecord()
-          @get('contact').save()
+          @get('model').deleteRecord()
+          @get('model').save()
           @transitionToRoute('contacts')
 
     newConnection: -> @set("addingConnection", true)
