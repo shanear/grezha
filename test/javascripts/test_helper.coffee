@@ -37,3 +37,53 @@
 #= require route-recognizer
 #= require pretender
 #= require support/ember_setup
+(->
+  module = ""
+  test = ""
+  lastModuleLogged = ""
+  lastTestLogged = ""
+  failuresOnCurrentTest = 0
+  failureFound = false
+  QUnit.moduleStart (details) ->
+    module = details.name
+    return
+
+  QUnit.testStart (details) ->
+    test = details.name
+    return
+
+  QUnit.log (details) ->
+    unless details.result
+      unless failureFound
+        failureFound = true
+        console.log "/n"
+        console.log "/*********************************************************************/"
+        console.log "/************************** FAILURE SUMMARY **************************/"
+        console.log "/*********************************************************************/"
+      unless lastModuleLogged is module
+        console.log ""
+        console.log "-----------------------------------------------------------------------"
+        console.log "Module: " + module
+      unless lastTestLogged is test
+        failuresOnCurrentTest = 1
+        console.log "-----------------------------------------------------------------------"
+        console.log "Test: " + test
+      else
+        failuresOnCurrentTest++
+      console.log " " + failuresOnCurrentTest + ") Message: " + details.message
+      if typeof details.expected isnt "undefined"
+        console.log "    Expected: " + details.expected
+        console.log "    Actual: " + details.actual
+      console.log "    Source: " + details.source  if typeof details.source isnt "undefined"
+      lastModuleLogged = module
+      lastTestLogged = test
+    return
+
+  QUnit.done (details) ->
+    if details.failed > 0
+      console.log "-----------------------------------------------------------------------"
+      console.log ""
+    return
+
+  return
+)()
