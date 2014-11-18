@@ -2,7 +2,9 @@ store = contact = null
 App.Contact.FIXTURES = []
 App.Connection.FIXTURES = []
 App.Relationship.FIXTURES = []
+App.Person.FIXTURES = []
 App.Store = DS.Store.extend({adapter: DS.FixtureAdapter})
+addingConnections = null
 
 module "Connections Integration Tests",
   setup: ->
@@ -13,6 +15,13 @@ module "Connections Integration Tests",
       store = App.__container__.lookup("store:main")
       contact = store.createRecord('contact',
         name: "Ms McGrethory", createdAt: new Date(2012, 8, 6))
+    addingConnections = (connection) ->
+      click("#add-connection")
+      fillIn("#newConnectionNote", connection.notes)
+      fillIn("#mode", connection.mode)
+      andThen ->
+        console.log("something")
+      click("#save-connection")
 
   teardown: ->
     App.reset()
@@ -46,6 +55,24 @@ test "Create a connection with a specific meeting type", ->
   andThen ->
     ok(/In Person/.test(find(".connection .mode").text()), 
       "should display connection mode")
+
+
+
+test "filter connections by type", ->
+  Ember.run ->
+    contact.save()
+  visit("/clients/" + contact.get("id"))
+  addingConnections({notes: "Phone connection 1", mode: "Phone"})
+  addingConnections({notes: "Phone connection 1", mode: "Phone"})
+  addingConnections({notes: "Called him about opportunity", mode: "In Person"})
+  andThen ->
+    equal(contact.get('connections.length'), 3, "this should be three")
+    equal(find(".connection .note").length, 3,
+      "All three should show up at first")
+    equal(find(".mode-header.has-connections").length, 2, "only two sub-modes should appear")
+
+
+
 
 test "Update last seen", ->
   visit("/clients/" + contact.get("id"))

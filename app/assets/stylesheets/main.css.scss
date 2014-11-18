@@ -452,8 +452,12 @@ div#ember-app {
   }
 
   .mode-header {
-    display: inline-block;
+    display: none;
     margin-left: 10px;
+
+    &.has-connections {
+      display: inline-block;
+    }
 
     a {
       color: #888;

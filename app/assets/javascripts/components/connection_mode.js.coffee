@@ -1,5 +1,10 @@
 App.ConnectionModeComponent = Ember.Component.extend
   classNames: ['mode-header']
+  classNameBindings: ['hasConnections']
+
+  hasConnections: (->
+    @get('modeConnections.length') > 0
+  ).property('modeConnections.@each')
 
   modeConnections: (->
     @get("contact.connections").filter (connection)=>
