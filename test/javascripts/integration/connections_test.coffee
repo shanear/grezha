@@ -16,10 +16,18 @@ module "Connections Integration Tests",
       contact = store.createRecord('contact',
         name: "Ms McGrethory", createdAt: new Date(2012, 8, 6))
     addingConnections = (connection) ->
+      andThen ->
+        console.log("What page am I on?")
       click("#add-connection")
       fillIn("#newConnectionNote", connection.notes)
       fillIn("#mode", connection.mode)
+      fillIn("#newConnectionDate .selected-month", "1")
+      fillIn("#newConnectionDate .selected-year", "2014")
+      fillIn("#newConnectionDate .selected-day", "1")
+
       click("#save-connection")
+      andThen ->
+        console.log("I think save isnt working?")
 
   teardown: ->
     App.reset()
@@ -53,6 +61,25 @@ test "Create a connection with a specific meeting type", ->
   andThen ->
     ok(/In Person/.test(find(".connection .mode").text()), 
       "should display connection mode")
+
+test "Creating a connection without a correct date yields an error", ->
+  visit("/clients/" + contact.get("id"))
+  click("#add-connection")
+  fillIn("#newConnectionNote", "random notes")
+  fillIn("#newConnectionDate .selected-month", "")
+  click("#save-connection")
+  andThen ->
+    ok(/Date cannot be blank/.test(find(".errors").text()), "Date should not allow month to be blank")
+  fillIn("#newConnectionDate .selected-month", "1")
+  fillIn("#newConnectionDate .selected-year", "")
+  click("#save-connection")
+  andThen ->
+    ok(/Date cannot be blank/.test(find(".errors").text()), "Date should not allow year to be blank")
+  fillIn("#newConnectionDate .selected-year", "2014")
+  fillIn("#newConnectionDate .selected-day", "")
+  click("#save-connection")
+  andThen ->
+    ok(/Date cannot be blank/.test(find(".errors").text()), "Date should not allow day to be blank")
 
 
 
