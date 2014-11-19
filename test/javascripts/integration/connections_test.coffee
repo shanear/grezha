@@ -19,8 +19,6 @@ module "Connections Integration Tests",
       click("#add-connection")
       fillIn("#newConnectionNote", connection.notes)
       fillIn("#mode", connection.mode)
-      andThen ->
-        console.log("something")
       click("#save-connection")
 
   teardown: ->

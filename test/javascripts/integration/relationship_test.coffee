@@ -1,5 +1,6 @@
-store = contact =  null
+store = contact = otherContact =  null
 relationship = contactWithRelationship = null
+createNewRelationship = null
 # TODO: consider using a Pretender server & use sync adapter
 #       for more realistic coverage
 App.Contact.FIXTURES = []
@@ -17,6 +18,18 @@ module "Relationship Integration Test",
       store = App.__container__.lookup("store:main")
       contact = store.createRecord('contact',
         name: "Ms McGrethory", createdAt: new Date(2012, 8, 6))
+      otherContact = store.createRecord("contact",
+        name: "Ronald McDonald")
+    createNewRelationship = (person) ->
+      click("#add-relationship")
+      fillIn("#new-relationship-name", person.name)
+      click(".suggestions .highlighted")
+
+      fillIn("#person-notes", person.notes)
+      fillIn("#person-role", person.role)
+      fillIn("#person-contact-info", person.contactInfo)
+      andThen -> find("#contact-search").focus()
+      click("#save-person")
 
   teardown: ->
     App.reset()
@@ -59,6 +72,25 @@ test "Create and delete a relationship with a new Person", ->
       "Deleting the relationship shouldn't delete the person")
     equal(find(".relationship .type").length, 0,
       "A relationship should not show up after being deleted " + find(".relationship .type").length)
+
+test "When editing a relationship, should show updates in multiple locations", ->
+  visit("/clients/" + contact.get("id"))
+  createNewRelationship({name: "Laura Cruz", role: "Social Worker", contactInfo: "111-1111-1111"})
+  visit("/clients/" + otherContact.get("id"))
+  click("#add-relationship")
+  fillIn("#new-relationship-name", "L")
+  click(".suggestions li:nth-of-type(1) a")
+  andThen ->
+    equal(find(".relationship .name").text().trim(), "Laura Cruz",
+      "The relationship name should be Laura Cruz")
+  click(".name")
+  fillIn("#person-role","crime fighter")
+  click("#save-person")
+  visit("/clients/" + contact.get("id"))
+  andThen ->
+    equal(find(".relationship .type").text().trim(), "crime fighter")
+
+
 
 test "Show validation errors when relationship with a new Person lacks a role", ->
   visit("/clients/" + contact.get("id"))
