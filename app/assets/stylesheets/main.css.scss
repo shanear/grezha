@@ -639,3 +639,44 @@ div#ember-app {
     display: block;
   }
 }
+
+#support {
+  position: fixed;
+  bottom: 0px;
+  right: 10px;
+
+  #need-help {
+    background: #bbb;
+    border-radius: 5px 5px 0px 0px;
+    padding: 5px;
+    color: white;
+    float: right;
+
+    &:hover {
+      background: #999;
+    }
+  }
+
+  .instructions {
+    max-height: 0;
+    border: #bbb 2px solid;
+    background: #eee;
+    transition: max-height 0.3s, margin-bottom 0.3s;
+    padding: $usual-buffer;
+    margin-bottom: ($usual-buffer + 2px) * -2;
+
+    &.support-active {
+      margin-bottom: 0px;
+      max-height: 200px;
+    }
+
+    a {
+      display: block;
+      margin: 10px 0;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      color: $bulgarian-green
+    }
+  }
+}

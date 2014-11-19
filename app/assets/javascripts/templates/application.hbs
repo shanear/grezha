@@ -75,6 +75,24 @@
   {{outlet}}
 </div>
 
+<div id="support">
+  <div class="clearfix">
+    <a href {{action "toggleSupport"}} id="need-help">
+      Need help?
+    </a>
+  </div>
+
+  <div {{bind-attr class=":instructions supportActive"}}>
+    Something not working right? Have questions?<br/>
+
+    Don't hesitate to email us:<br/>
+
+    <a href="mailto:shane@grezha.org">
+      shane@grezha.org
+    </a>
+  </div>
+</div>
+
 {{#if App.alertText}}
   <div id="alert">
     <p> {{App.alertText}} </p>
