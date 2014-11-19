@@ -18,10 +18,10 @@ App.Contact = DS.Model.extend
     today = moment().startOf('day')
     birthday = moment(@get('birthday')).startOf("day")
 
-    if birthday.dayOfYear() > today.dayOfYear()
+    if birthday.dayOfYear() >= today.dayOfYear()
       birthday.year(today.year()).diff(today, 'days')
     else
-      today.diff(birthday(today.year() + 1), 'days')
+      birthday.year(today.year() + 1).diff(today, 'days')
   ).property('birthday')
 
   connections: DS.hasMany('connection', async: true)

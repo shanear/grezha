@@ -133,21 +133,23 @@ asyncTest 'last seen connection', ->
   start()
 
 test 'days until birthday', ->
-  Ember.run ->
-    contact.set("birthday", null)
+  Ember.run -> contact.set("birthday", null)
   equal(contact.get("daysUntilBirthday"), null,
     "daysUntilBirthday should be null if birthday is null")
 
-  Ember.run ->
-    contact.set("birthday", moment().year(1970))
-    equal(contact.get("daysUntilBirthday"), 0,
-      "daysUntilBirthday should be 0 for the birthday boy!")
+  Ember.run -> contact.set("birthday", moment().year(1970))
+  equal(contact.get("daysUntilBirthday"), 0,
+    "daysUntilBirthday should be 0 for the birthday boy!")
+
+  leapYearBirthday = moment().year(1999).add(363, 'days').startOf('day')
+  Ember.run -> contact.set("birthday", leapYearBirthday)
+  equal(contact.get("daysUntilBirthday"), 362,
+    "daysUntilBirthday should be the days until next birthday," +
+    " expected 362 but was " + contact.get("daysUntilBirthday"))
 
   Ember.run ->
     contact.set("birthday",
-      moment().year(1999).add(363, 'days').startOf('day')
-    )
-
-    equal(contact.get("daysUntilBirthday"), 363,
-      "daysUntilBirthday should be the days until next birthday," +
-      " expected 363 but was " + contact.get("daysUntilBirthday"))
+      moment().year(2012).add(2, 'days').startOf('day'))
+  equal(contact.get("daysUntilBirthday"), 2,
+    "daysUntilBirthday should be the days until next birthday," +
+    " expected 2 but was " + contact.get("daysUntilBirthday"))
