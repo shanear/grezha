@@ -16,8 +16,6 @@ module "Connections Integration Tests",
       contact = store.createRecord('contact',
         name: "Ms McGrethory", createdAt: new Date(2012, 8, 6))
     addingConnections = (connection) ->
-      andThen ->
-        console.log("What page am I on?")
       click("#add-connection")
       fillIn("#newConnectionNote", connection.notes)
       fillIn("#mode", connection.mode)
@@ -26,8 +24,6 @@ module "Connections Integration Tests",
       fillIn("#newConnectionDate .selected-day", "1")
 
       click("#save-connection")
-      andThen ->
-        console.log("I think save isnt working?")
 
   teardown: ->
     App.reset()
@@ -83,19 +79,26 @@ test "Creating a connection without a correct date yields an error", ->
 
 
 
-test "filter connections by type", ->
+test "filter connections by mode", ->
   Ember.run ->
     contact.save()
   visit("/clients/" + contact.get("id"))
   addingConnections({notes: "Phone connection 1", mode: "Phone"})
-  addingConnections({notes: "Phone connection 1", mode: "Phone"})
+  addingConnections({notes: "Phone connection 2", mode: "Phone"})
   addingConnections({notes: "Called him about opportunity", mode: "In Person"})
   andThen ->
     equal(contact.get('connections.length'), 3, "this should be three")
     equal(find(".connection .note").length, 3,
       "All three should show up at first")
     equal(find(".mode-header.has-connections").length, 2, "only two sub-modes should appear")
-
+    ok(/In Person \(1\)/.test(find(".mode-header.has-connections").text()), "Should show up with the correct connection headers")
+    ok(/Phone \(2\)/.test(find(".mode-header.has-connections").text()), "Should show up with the correct connection headers")
+  click(".mode-header.has-connections a")
+  andThen ->
+    equal(find(".connection .note").length, 2, "phone should show up with two")
+    ok(/Phone connection 1/.test(find(".connection .note").text()))
+    ok(/Phone connection 2/.test(find(".connection .note").text()))
+    ok(!/Called him about opportunity/.test(find(".connection .note").text()))
 
 
 
