@@ -16,7 +16,7 @@ module "Person Integration Test",
       contact = store.createRecord('contact',
         name: "Ms McGrethory", createdAt: new Date(2012, 8, 6))
       person = store.createRecord('person',
-        name: "Sophster")
+        name: "Sophster", role: "Dancer")
 
     Ember.run ->
       relationship = store.createRecord('relationship',
@@ -42,13 +42,13 @@ test "Edits a person from a relationship", ->
       "A newly edited person should update: " + find("#relationships").text())
 
 #test "Returns to contact when cancel editing a person", ->
-#  visit("/contacts/" + contact.get("id"))
+#  visit("/clients/" + contact.get("id"))
+#  andThen ->
+#    ok(/Sophster/.test(find(".relationship .name").text()),
+#        "Cancelling editing the person should not update: " + find(".relationship").text())
 #  click(".relationship .summary a")
 #  fillIn("#person-name", "Cancelled name")
-#
-#  click("#cancel-edit-person")
 #  andThen ->
-#    ok(true)
-#ok(/Sophster/.test(find(".relationship .name").text()),
-#  "Cancelling editing the person should not update: " + find("#relationships").text())
-
+#    ok(/Sophster/.test(find("#person-name").text()),
+#        "Mid edit: " + find("#person-name").text())
+#  click("#cancel-edit-person")
