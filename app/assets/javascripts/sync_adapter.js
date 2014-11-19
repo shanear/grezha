@@ -53,6 +53,8 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
         },
 
         function(error) {
+          App.set('checkConnection', true);
+
           return new Promise(function(resolve, reject) {
             localforage.getItem(type.typeKey, function(records) {
               if(records) { resolve(records); }
@@ -73,7 +75,7 @@ App.SyncAdapter = DS.ActiveModelAdapter.extend({
 
     // If the remote find fails, try fetching the record locally
     return promise.catch(function(error) {
-      App.set('online', false);
+      App.set('checkConnection', true);
 
       return self._fetchLocalRecord(type.typeKey, id).then(
         function(result) {

@@ -7,24 +7,36 @@ Application = Ember.Application.extend
     @set('alertText', text);
     setTimeout (=> @set('alertText', null) ), 5000
 
+  _checkConnection: (->
+    if @get("checkConnection")
+      ping = Ember.$.get('/ping')
+      ping.fail => @set('online', false)
+      ping.done =>
+        if @get('online') == false
+          @set('online', true)
+          @get("store").syncRecords()
+
+      @set("checkConnection", false)
+  ).observes("checkConnection")
+
+
 Application.initializer
   name: "start connectivity checks"
   after: "store"
   initialize: (container, application)->
     store = container.lookup('store:main')
-
-    checkConnection = ->
-      ping = Ember.$.get('/ping')
-      ping.fail -> application.set('online', false)
-
-      ping.done ->
-        if application.get('online') == false
-          application.set('online', true)
-          store.syncRecords()
-
     store.syncRecords()
-    checkConnection()
-    setInterval checkConnection, 10000
+    setInterval (->
+      application.set("checkConnection", true)
+    ), 10000
+
+
+Application.initializer
+  name: 'inject store',
+  after: "store"
+  initialize: (container, application)->
+    application.set("store", container.lookup('store:main'))
+
 
 Application.initializer
   name: "configuration"
@@ -62,4 +74,3 @@ Application.initializer
 
 window.App = Application.create
   rootElement: EmberConfiguration.rootElement
-
