@@ -1,4 +1,5 @@
 App.DateFieldComponent = Ember.Component.extend
+  requireYear: true
   days: [1..31]
 
   months: [
@@ -24,6 +25,6 @@ App.DateFieldComponent = Ember.Component.extend
       @set('selectedYear', value.getFullYear())
       @set('selectedDay', value.getDate())
 
-    if @get('selectedMonth') && @get("selectedDay")
+    if @get('selectedMonth') && @get("selectedDay") && (!@get('requireYear') || @get("selectedYear"))
       new Date(@get('selectedYear'), @get('selectedMonth') - 1, @get('selectedDay'))
   ).property("selectedMonth", "selectedYear", "selectedDay")

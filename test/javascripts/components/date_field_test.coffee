@@ -39,6 +39,7 @@ test "Setting year to nil still preserves month and day", ->
     dateField.set("selectedYear", null)
     dateField.set("selectedMonth", 8)
     dateField.set("selectedDay", 2)
+    dateField.set("requireYear", false)
 
   date = dateField.get('date')
 

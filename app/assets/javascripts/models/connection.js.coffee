@@ -9,6 +9,8 @@ App.Connection = DS.Model.extend
     errors = []
     if @get('note') == undefined || (@get('note').replace /[ ]/g, '').length < 1
       errors.push 'Note cannot be blank.'
+    if @get('occurredAt') == undefined
+      errors.push 'Date cannot be blank.'
     @set('errors', errors)
     if @get('errors').length > 0
       return false

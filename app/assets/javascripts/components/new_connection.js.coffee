@@ -14,6 +14,7 @@ App.NewConnectionComponent = Ember.Component.extend
           @set('newConnection.occurredAt', new Date())
           @set('newConnection.note', "")
           @set('enabled', false)
+          @set('errors', [])
       else
         @set('errors', newConnection.get('errors'))
 
