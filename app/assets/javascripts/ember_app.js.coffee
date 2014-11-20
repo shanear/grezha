@@ -74,3 +74,9 @@ Application.initializer
 
 window.App = Application.create
   rootElement: EmberConfiguration.rootElement
+
+# helpers is a place for us to load shared helper functions
+App.Helpers  ?= {}
+App.Helpers.breaklines = (text) ->
+  text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+  new Ember.Handlebars.SafeString(text)
