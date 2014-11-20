@@ -1,9 +1,40 @@
 <div class="dashboard">
   <p>You've recorded <b>{{allConnections.length}}</b> connections.  Keep it up!</p>
-    <p>(
+
+    <h3>Connections made in {{currentYearConnections.year}}</h3>
+    <table class="table">
+      <tr>
+        <th></th>
+        {{#each month in currentYearConnections.months}}
+          <th>{{month.name}}</th>
+        {{/each}}
+        <th class="year-column">{{currentYearConnections.year}}</th>
+      </tr>
+
       {{#each mode in App.Connection.MODES}}
-        {{connectionsLength allConnections modeBinding="mode"}} {{mode}}
+        <tr>
+          <th>{{mode}}</th>
+          {{#each month in currentYearConnections.months}}
+            <td>
+              {{connectionsLength month.connections modeBinding="mode"}}
+            </td>
+          {{/each}}
+          <td class="year-column">
+            {{connectionsLength currentYearConnections.connections modeBinding="mode"}}
+          </td>
+        </tr>
       {{/each}}
-    )</p>
-    </div>
+
+      <tr class="totals-row">
+        <th>Total</th>
+        {{#each month in currentYearConnections.months}}
+            <td>
+              {{month.connections.length}}
+            </td>
+        {{/each}}
+        <td class="year-column">
+          <b>{{currentYearConnections.connections.length}}</b>
+        </td>
+      </tr>
+    </table>
 </div>
