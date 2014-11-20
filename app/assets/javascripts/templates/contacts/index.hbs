@@ -1,3 +1,9 @@
 <div class="dashboard">
   <p>You've recorded <b>{{allConnections.length}}</b> connections.  Keep it up!</p>
+    <p>(
+      {{#each mode in App.Connection.MODES}}
+        {{connectionsLength allConnections modeBinding="mode"}} {{mode}}
+      {{/each}}
+    )</p>
+    </div>
 </div>
