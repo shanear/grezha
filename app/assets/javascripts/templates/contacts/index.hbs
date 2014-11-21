@@ -1,7 +1,12 @@
 <div class="dashboard">
   <p>You've recorded <b>{{allConnections.length}}</b> connections.  Keep it up!</p>
 
-    <h3>Connections made in {{currentYearConnections.year}}</h3>
+    <h3>Connections made in {{selectedYear}}</h3>
+    <div class="year-selection">
+      {{#each year in connectionsByMonth}}
+        <button {{action "setYear" year.year}} class="btn btn-default">{{year.year}}</button>
+      {{/each}}
+    </div>
     <table class="table">
       <tr>
         <th></th>

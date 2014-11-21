@@ -693,3 +693,16 @@ div#ember-app {
 .totals-row {
   background-color: $light-bulgarian-green;
 }
+
+.year-column {
+  background-color: $light-bulgarian-green;
+}
+
+.year-selection {
+  padding: 5px;
+  padding-bottom: 10px;
+
+  .is-selected .btn {
+    background-color: $light-bulgarian-green;
+  }
+}
