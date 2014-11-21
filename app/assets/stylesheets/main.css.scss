@@ -480,6 +480,7 @@ div#ember-app {
       height: 3.5em;
       vertical-align: bottom;
 
+
       h4 {
         margin: 0px;
         display: inline-block;
@@ -531,7 +532,9 @@ div#ember-app {
 
   .relationship {
     padding: $usual-buffer;
-
+    a.email-links {
+      color: #428bca;
+    }
     .summary {
       @include clearfix;
     }
