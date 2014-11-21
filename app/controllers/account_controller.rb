@@ -24,7 +24,10 @@ class AccountController < ApplicationController
   def reset_password
     @user = User.where(reset_password_token: params[:token]).first || current_user
 
-    redirect_to root_path unless @user
+    unless @user
+      flash[:alert] = "It appears the link you used is invalid, click on the 'Forgot Password?' button to resend a link and try again."
+      redirect_to root_path
+    end
 
     if request.patch?
       if @user.update(reset_password_params)
