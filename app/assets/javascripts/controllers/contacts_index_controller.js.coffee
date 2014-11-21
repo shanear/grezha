@@ -6,6 +6,14 @@ App.ContactsIndexController = Ember.Controller.extend
       @set("selectedYear", @get("connectionsByMonth.lastObject.year"))
   ).observes("allConnections.@each")
 
+  hasMultipleYears: (->
+    @get("connectionsByMonth.length") > 1
+  ).property("connectionsByMonth")
+
+  hasConnections: (->
+    @get("connectionsByMonth.length") > 0
+  ).property("connectionsByMonth")
+
   connectionsByMonth:(->
     earliestConnection = @earliestConnection()
     return [] unless earliestConnection?

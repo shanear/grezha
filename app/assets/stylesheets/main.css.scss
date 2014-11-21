@@ -685,8 +685,17 @@ div#ember-app {
 }
 
 .dashboard {
+  display: none;
+
+  &.visible {
+    display: block;
+  }
+
   p {
-    font-size: 18pt;
+    font-size: 16pt;
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $bulgarian-green;
   }
 }
 
