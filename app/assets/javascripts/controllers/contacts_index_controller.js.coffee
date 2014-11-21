@@ -2,8 +2,7 @@ App.ContactsIndexController = Ember.Controller.extend
   selectedYear: null
 
   _initSelectedYear: (->
-    if !@get("selectedYear")?
-      @set("selectedYear", @get("connectionsByMonth.lastObject.year"))
+    @set("selectedYear", @get("connectionsByMonth.lastObject.year"))
   ).observes("allConnections.@each")
 
   hasMultipleYears: (->
@@ -11,8 +10,8 @@ App.ContactsIndexController = Ember.Controller.extend
   ).property("connectionsByMonth")
 
   hasConnections: (->
-    @get("connectionsByMonth.length") > 0
-  ).property("connectionsByMonth")
+    @get("allConnections.length") > 0
+  ).property("allConnections.@each")
 
   connectionsByMonth:(->
     earliestConnection = @earliestConnection()
