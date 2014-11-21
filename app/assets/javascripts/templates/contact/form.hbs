@@ -5,6 +5,11 @@
 
 {{#feature 'memberId'}}
   <div class="form-group">
+    <label for="added-on">added on:</label>
+    {{date-field id="added-on" date=addedAt}}
+  </div>
+
+  <div class="form-group">
     <label for="member-id">member id:</label>
     {{input type="text" id="member-id" class="form-control" value=memberId}}
   </div>

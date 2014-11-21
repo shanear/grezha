@@ -5,6 +5,7 @@ App.Contact = DS.Model.extend
   birthday: DS.attr('date')
   phone: DS.attr('string')
   memberId: DS.attr('string')
+  addedAt: DS.attr('date')
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
   )

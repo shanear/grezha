@@ -37,6 +37,11 @@
             {{else}}
               <span class="warning">missing member id</span>
             {{/if}}
+
+            {{#if addedAt}}
+              <br/>
+              added {{formatDate addedAt}}
+            {{/if}}
           </div>
         {{/feature}}
 
