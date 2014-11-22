@@ -11,7 +11,7 @@ App.BirthdaysController = Ember.ObjectController.extend
     @get("contacts").filter (contact)-> contact.get("birthday")?
   ).property("contacts.@each.birthday")
 
-  contactsWithUpcomingBirthdays: (->
+  contactsWithRecentBirthdays: (->
     Ember.ArrayProxy.createWithMixins(Ember.SortableMixin,
       content: @get('contactsWithBirthdays')
       sortProperties: ['daysUntilBirthday']
@@ -19,7 +19,7 @@ App.BirthdaysController = Ember.ObjectController.extend
     ).slice(0, @birthdaysToShow)
   ).property("contactsWithBirthdays")
 
-  contactsWithRecentBirthdays: (->
+  contactsWithUpcomingBirthdays: (->
     Ember.ArrayProxy.createWithMixins(Ember.SortableMixin,
       content: @get('contactsWithBirthdays')
       sortProperties: ['daysUntilBirthday']
