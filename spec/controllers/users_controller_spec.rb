@@ -31,8 +31,8 @@ describe UsersController do
   end
 
   describe "POST #create" do
-    let(:user_json) {Hash[user: Hash[name: 'some_name', role: "role", password: 'default_password', email: 'default@email.com']]}
-    let(:invalid_password_user) {Hash[user: Hash[name: 'some_name', password: 'secr', email: 'default@email.com']]}
+    let(:user_json) {Hash[user: Hash[name: 'some_name', role: "role", email: 'default@email.com']]}
+    let(:invalid_user) {Hash[user: Hash[name: nil, email: 'default@email.com']]}
 
     context "when valid" do
       it 'creates a user' do
@@ -48,21 +48,15 @@ describe UsersController do
     context "when invalid" do
       it "renders new" do
         expect {
-          expect(post :create, invalid_password_user).to render_template(:new)
+          expect(post :create, invalid_user).to render_template(:new)
         }.not_to change(User, :count)
       end
 
       it "assigns errors" do
-        post :create, invalid_password_user
+        post :create, invalid_user
         expect(assigns(:user).errors).to have(1).items
       end
-
-      it "clears password" do
-        post :create, invalid_password_user
-        expect(assigns(:user).password).to be_blank
-      end
     end
-
   end
 
   describe "GET #edit" do

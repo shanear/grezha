@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
       redirect_to users_path
     else
-      @user.password = ""
       render :new
     end
   end
