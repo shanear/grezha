@@ -1,13 +1,15 @@
 # Grezha
 ![build status](https://travis-ci.org/shanear/grezha.svg)
 
-Grezha is a field note taking application for rescuing and caring for people
-involved in prostitution & sex trafficking.
+Grezha is a CRM specialized for service-based organizations.
 
-* Keep up with the birthdays, needs, and the times you've connected with
-  your contacts.
-* Also record information about vehicles you see in the field.
+With Grezha, you can:
+* __Easily find and record client information__
+* __Record communication with your clients__  using Connections, which represent a phone call, an in person meeting, or a text. See a timeline of the connections you've
+* __See your impact__ through a dashboard repoprt into the number of the connections your organization is making with clients.
+* __Work offline__. It uses HTML5 to save the entire application in your browser. Data added offline will be automatically synced with the server when reconnected. 
 
+Grezha is currently a work in progress, and our development is directed by our users. So if you think Grezha would be helpful to your organization, let me know! Send me an email at shane@grezha.org
 
 ## Getting Started
 
@@ -57,5 +59,5 @@ rake db:seed
 ## Want to use it?
 
 If you're interested in helping or think Grezha would be helpful to your
-organization, let me know! Send me a shoutout at shane1337@gmail.com
+organization, let me know! Send me a shoutout at shane@grezha.org
 
