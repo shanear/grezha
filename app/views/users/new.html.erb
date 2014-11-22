@@ -28,12 +28,8 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.select :role, User.roles %>
+      <%= f.label :role %>
+      <%= f.select :role, User.roles, {}, {class: "form-control"} %>
     </div>
 
     <%= f.submit class: "btn btn-default" %>

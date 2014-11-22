@@ -53,6 +53,11 @@ class User < ActiveRecord::Base
     self.reset_password_token = SecureRandom.urlsafe_base64
   end
 
+  def generate_password
+    self.password = SecureRandom.base64(4).tr('+/=', '012')
+    self.password_confirmation = password
+  end
+
   private
 
   def normalize_email

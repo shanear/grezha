@@ -14,8 +14,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.generate_password
 
     if @user.save
+      UserMailer.new_user_email(@user,
+        "http://#{request.host}").deliver
+
       redirect_to users_path
     else
       @user.password = ""

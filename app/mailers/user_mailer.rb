@@ -9,4 +9,17 @@ class UserMailer < ActionMailer::Base
       subject: "Password reset link for Grezha"
     );
   end
+
+  def new_user_email(user, url)
+    @user = user
+    @password = @user.password
+    @organization_name = @user.organization.name
+    @url = url
+
+    mail(
+      to: @user.email,
+      from: "shane@grezha.org",
+      subject: "You've been added to the Grezha account for #{@organization_name}"
+    );
+  end
 end
