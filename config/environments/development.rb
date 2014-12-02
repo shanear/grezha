@@ -29,6 +29,11 @@ Daughters::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
+  config.action_dispatch.default_headers.merge!(
+    "Access-Control-Allow-Origin" => "http://localhost:4200",
+    "Access-Control-Allow-Headers" => "x-csrf-token"
+  )
+
   # Do not compress assets
   config.assets.compress = false
 

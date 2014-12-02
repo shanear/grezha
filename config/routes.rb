@@ -2,6 +2,7 @@ Daughters::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :users
 
+
   get    "/login", to: "sessions#new"
   delete "/logout", to: "sessions#destroy"
   get    "/logout", to: "sessions#destroy"
@@ -18,27 +19,21 @@ Daughters::Application.routes.draw do
   get "/application.manifest", to: "offline#manifest",
     format: :appcache
 
-  namespace :api do
+  namespace :api, defaults: { format: "json" } do
+    match "/:resource", to: "base#index", via: [:options]
+    get "/ping", to: "base#index"
+    get "/csrf", to: 'csrf#index'
+
     namespace :v1 do
-      resources :contacts, except: [:new, :edit],
-          defaults: { format: "json" } do
+      resources :contacts, except: [:new, :edit] do
         post 'upload_image', on: :member
       end
 
-       resources :people, except: [:new, :edit],
-          defaults: { format: "json" }
-
-       resources :relationships, except: [:new, :edit],
-          defaults: { format: "json" }
-
-      resources :users, except: [:new, :edit, :update],
-        defaults: {format: "json"}
-
-      resources :vehicles, except: [:new, :edit],
-          defaults: { format: "json" }
-
-      resources :connections, except: [:new, :edit, :update],
-          defaults: { format: "json" }
+      resources :people, except: [:new, :edit]
+      resources :relationships, except: [:new, :edit]
+      resources :users, except: [:new, :edit, :update]
+      resources :vehicles, except: [:new, :edit]
+      resources :connections, except: [:new, :edit, :update]
     end
   end
 
