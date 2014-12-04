@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121231643) do
+ActiveRecord::Schema.define(version: 20141202220237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20141121231643) do
     t.string   "role",                 default: "Admin"
     t.boolean  "active",               default: true
     t.string   "reset_password_token"
+    t.string   "authentication_token"
   end
 
   create_table "vehicles", force: true do |t|

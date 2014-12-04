@@ -41,6 +41,15 @@ class User < ActiveRecord::Base
     (user && user.has_password?(password)) ? user : nil
   end
 
+  def self.api_authenticate(email, password)
+    authenticate(email, password).tap do |user|
+      if user
+        user.generate_authentication_token
+        user.save!
+      end
+    end
+  end
+
   def self.roles
     ["user", "admin"]
   end
@@ -56,6 +65,10 @@ class User < ActiveRecord::Base
   def generate_password
     self.password = SecureRandom.base64(4).tr('+/=', '012')
     self.password_confirmation = password
+  end
+
+  def generate_authentication_token
+    self.authentication_token = SecureRandom.urlsafe_base64
   end
 
   private

@@ -31,7 +31,7 @@ Daughters::Application.configure do
 
   config.action_dispatch.default_headers.merge!(
     "Access-Control-Allow-Origin" => "http://localhost:4200",
-    "Access-Control-Allow-Headers" => "x-csrf-token"
+    "Access-Control-Allow-Headers" => "x-csrf-token, Authorization"
   )
 
   # Do not compress assets

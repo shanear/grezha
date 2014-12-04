@@ -21,6 +21,8 @@ Daughters::Application.routes.draw do
 
   namespace :api, defaults: { format: "json" } do
     match "/:resource", to: "base#index", via: [:options]
+    match "/:resource/:resource", to: "base#index", via: [:options]
+
     get "/ping", to: "base#index"
     get "/csrf", to: 'csrf#index'
 
@@ -34,6 +36,13 @@ Daughters::Application.routes.draw do
       resources :users, except: [:new, :edit, :update]
       resources :vehicles, except: [:new, :edit]
       resources :connections, except: [:new, :edit, :update]
+    end
+
+    namespace :v2 do
+      post "/authenticate", to: "sessions#create"
+      post "/invalidate", to: "sessions#destroy"
+
+      resources :contacts, except: [:new, :edit]
     end
   end
 
