@@ -5,22 +5,22 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 # Ignore bundler config
-/.bundle
+rails/.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
+rails/db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
+rails/log/*.log
+rails/tmp
 
 grezha.iml
 .idea
 # Ignore paperclip uploads
-/public/system
+rails/public/system
 
 # Ignore compiled assets
-/public/assets
+rails/public/assets
 
 .ruby-version
 .ruby-gemset
