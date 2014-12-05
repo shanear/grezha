@@ -7,7 +7,7 @@ install:
 - npm install -g ember-cli
 - npm install -g bower
 - npm install -g phantomjs
-- cd ember && npm install && bower install
+- cd ember && npm install && bower install && cd ..
 
 before_script:
 - cp config/database.yml.travis config/database.yml
@@ -15,10 +15,10 @@ before_script:
 
 script:
 - rake
-- cd ember && ember test
+- cd ember && ember test && cd ..
 
 before_deploy:
-- cd ember && ember build --outputPath=dist --environment=staging
+- cd ember && ember build --outputPath=dist --environment=staging && cd ..
 
 deploy:
   - provider: heroku
