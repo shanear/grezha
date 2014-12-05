@@ -6,7 +6,7 @@ before_script:
 - cp rails/config/database.yml.travis rails/config/database.yml
 - psql -c 'create database grezha_travis_ci_test;' -U postgres
 
-script: sh -c 'cd SUBDIRECTORY && bundle exec rake'
+script: sh -c 'cd rails && bundle exec rake'
 
 deploy:
   provider: heroku
