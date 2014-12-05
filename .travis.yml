@@ -19,13 +19,13 @@ script:
 
 before_deploy:
 - cd ember && ember build --outputPath=dist --environment=staging && cd ..
-- ls ember/dist
 
 deploy:
   - provider: divshot
     environment: staging
     api_key:
       secure: GHbuarPyzMtmFpMdK8SJj8ECLjSCgi3mJJRdHYyp59ReKZnA05c7rizfKdsYjHLTxgx88HAqy0EGRfXBoJEUKMqlKXwJ6tNQkA1IIR8bqLvZuTYz1yErgqee4zknaLwQ/uQLqe5yUB+56H9aCtEuqOmqIm5KuwoDoFIUjzcRQCA=
+    skip_cleanup: true
 
   - provider: heroku
     api_key:
