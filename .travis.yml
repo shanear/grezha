@@ -6,6 +6,10 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database grezha_travis_ci_test;' -U postgres
 
+script:
+- rake
+- cd ember && ember test
+
 before_deploy:
 - cd ember && ember build --outputPath=dist --environment=staging
 
