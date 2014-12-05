@@ -6,13 +6,14 @@ before_script:
 - cp rails/config/database.yml.travis rails/config/database.yml
 - psql -c 'create database grezha_travis_ci_test;' -U postgres
 
+script: sh -c 'cd SUBDIRECTORY && bundle exec rake'
+
 deploy:
   provider: heroku
   api_key:
     secure: BqVkLlG6mnKupVTU+jdz2dVRI9V+HF9mBlhUtRW2doz9STsBlXeTOaCHrOb/0l4K29myrvzP3Xz9wgHk1Ms7EGObLni+IKacZIu997HuOMZ606/iwnUJAULgkZhxEpt9gCVTAS+07JzLxhtV91kgiiuicNHhvSgKCFVWFjh2Bos=
   app: grezha-demo
-  run:
-    - "cd rails; rake db:migrate"
+  run: cd rails && rake db:migrate
   on:
     repo: shanear/grezha
 
