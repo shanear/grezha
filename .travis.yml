@@ -6,18 +6,25 @@ before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database grezha_travis_ci_test;' -U postgres
 
+before_deploy:
+- cd ember && ember build --outputPath=dist --environment=staging
+
 deploy:
-  provider: heroku
-  api_key:
-    secure: BqVkLlG6mnKupVTU+jdz2dVRI9V+HF9mBlhUtRW2doz9STsBlXeTOaCHrOb/0l4K29myrvzP3Xz9wgHk1Ms7EGObLni+IKacZIu997HuOMZ606/iwnUJAULgkZhxEpt9gCVTAS+07JzLxhtV91kgiiuicNHhvSgKCFVWFjh2Bos=
-  app: grezha-demo
-  run:
-    - "rake db:migrate"
-  on:
-    repo: shanear/grezha
+  - provider: heroku
+    api_key:
+      secure: BqVkLlG6mnKupVTU+jdz2dVRI9V+HF9mBlhUtRW2doz9STsBlXeTOaCHrOb/0l4K29myrvzP3Xz9wgHk1Ms7EGObLni+IKacZIu997HuOMZ606/iwnUJAULgkZhxEpt9gCVTAS+07JzLxhtV91kgiiuicNHhvSgKCFVWFjh2Bos=
+    app: grezha-demo
+    run: rake db:migrate
+    on:
+      repo: shanear/grezha
+
+  - provider: divshot
+    environment: staging
+    api_key:
+      secure: GHbuarPyzMtmFpMdK8SJj8ECLjSCgi3mJJRdHYyp59ReKZnA05c7rizfKdsYjHLTxgx88HAqy0EGRfXBoJEUKMqlKXwJ6tNQkA1IIR8bqLvZuTYz1yErgqee4zknaLwQ/uQLqe5yUB+56H9aCtEuqOmqIm5KuwoDoFIUjzcRQCA=
 
 notifications:
   email:
-    - inorris@thoughtworks.com
-    - pwen@thoughtworks.com
-    - shane1337@gmail.com
+  - inorris@thoughtworks.com
+  - pwen@thoughtworks.com
+  - shane1337@gmail.com

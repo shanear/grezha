@@ -30,3 +30,5 @@ grezha.iml
 *.DS_Store
 *swp
 *swo
+
+.divshot-cache
