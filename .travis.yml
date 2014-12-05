@@ -3,9 +3,11 @@ rvm:
 - 2.1.2
 
 install:
+- bundle install --jobs=3 --retry=3
 - npm install -g ember-cli
 - npm install -g bower
 - npm install -g phantomjs
+- cd ember && npm install && bower install
 
 before_script:
 - cp config/database.yml.travis config/database.yml
