@@ -2,6 +2,11 @@ language: ruby
 rvm:
 - 2.1.2
 
+install:
+- npm install -g ember-cli
+- npm install -g bower
+- npm install -g phantomjs
+
 before_script:
 - cp config/database.yml.travis config/database.yml
 - psql -c 'create database grezha_travis_ci_test;' -U postgres
