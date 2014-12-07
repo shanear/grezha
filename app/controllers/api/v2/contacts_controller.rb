@@ -62,6 +62,6 @@ class Api::V2::ContactsController < Api::BaseController
 
   def create_contact_params
     params[:contact][:remote_id] = params[:contact][:id]
-    params.required(:contact).permit(:remote_id, :name, :city, :bio, :birthday, :phone, :member_id, :user_id, :added_at)
+    params.required(:contact).permit(:remote_id, :name, :city, :bio, :birthday, :phone, :user_id, :added_at)
   end
 end

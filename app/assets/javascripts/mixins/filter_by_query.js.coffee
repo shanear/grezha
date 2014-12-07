@@ -13,7 +13,7 @@ App.FilterByQuery = Ember.Mixin.create
         elem isnt "name"
       model.set('highlightFields', filteredMatches)
       matches.length > 0
-  ).property('@each.name','@each.memberId','@each.user.name', 'filterQuery')
+  ).property('@each.name','@each.user.name', 'filterQuery')
 
   newModelText: (->
     if @get('filterQuery').length < 2

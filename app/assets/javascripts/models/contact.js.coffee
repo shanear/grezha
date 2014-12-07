@@ -4,7 +4,6 @@ App.Contact = DS.Model.extend
   bio: DS.attr('string')
   birthday: DS.attr('date')
   phone: DS.attr('string')
-  memberId: DS.attr('string')
   addedAt: DS.attr('date')
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
@@ -70,10 +69,6 @@ App.Contact = DS.Model.extend
 
     if @get('phone')? && @get('phone') isnt "" && @get('phone').match(/^\d+-?\d+-?\d+-?\d+:?\d+$/) == null
       errors.push 'Invalid phone number. Format: xxx-xxx-xxx:ext'
-
-    if App.hasFeature('memberId')
-      if @get('memberId') == undefined || (@get('memberId').replace /[ ]/g, '').length < 1
-        errors.push 'member id cannot be blank.'
 
     @set('errors', errors);
     if @get('errors').length > 0

@@ -30,16 +30,9 @@
       <div class="top-info">
         <h3 id="contact-name">{{name}}</h3>
 
-        {{#feature 'memberId'}}
+        {{#feature 'addedOn'}}
           <div class="contact-id">
-            {{#if memberId}}
-              member id: {{memberId}}
-            {{else}}
-              <span class="warning">missing member id</span>
-            {{/if}}
-
             {{#if addedAt}}
-              <br/>
               added {{formatDate addedAt}}
             {{/if}}
           </div>
@@ -56,7 +49,7 @@
           </p>
 
           <p id="user">
-            <span class="field-label"> volunteer </span>
+            <span class="field-label">field op</span>
               {{#if user}}
                  {{user.name}}
               {{else}}

@@ -1,3 +1,3 @@
 App.ContactsController = Ember.ArrayController.extend App.FilterByQuery,
-  filterBy: ["name", "memberId", "user.name"]
+  filterBy: ["name", "user.name"]
   modelName: "Client"

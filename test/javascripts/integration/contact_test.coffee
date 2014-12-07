@@ -159,18 +159,3 @@ test 'show only people in sidebar with matching user', ->
     ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl")
     ok(/New Boy/.test(find(".contact").text()), "Should contain New Boy")
     ok(!/Old Dude/.test(find(".contact").text()), "Should not contain old dude since different user")
-
-test "show only people in sidebar with matching member id", ->
-  Ember.run ->
-    contact = store.createRecord('contact',
-      name: "Old Dude", memberId: '1984.11.7', createdAt: new Date(2012, 8, 6))
-    contact2 = store.createRecord('contact',
-      name: "New Boy", memberId: '1999.2.3', createdAt: new Date(2012, 8, 6))
-    otherContact = store.createRecord('contact',
-      name: "Hip Girl", memberId: '1991.5.29', createdAt: new Date(2012,8,7))
-  visit("/clients/")
-  fillIn("#contact-search", "199")
-  andThen ->
-    ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl ")
-    ok(/New Boy/.test(find(".contact").text()), "Should contain New Boy")
-    ok(!/Old Dude/.test(find(".contact").text()), "Should not contain old dude")
