@@ -20,6 +20,8 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.EmberENV.apiURL = "http://grezha.dev/";
+
     // ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -28,6 +30,10 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    // Set the api url to the same host because pretender can't mock
+    // CORS requests.
+    ENV.EmberENV.apiURL = "/";
+
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'auto';
