@@ -28,6 +28,7 @@ describe Api::V2::SessionsController do
         session = json["session"]
         expect(session["token"]).to eq(user.authentication_token)
         expect(session["username"]).to eq(user.name)
+        expect(session["organization"]).to eq(user.organization.name)
       end
     end
   end

@@ -10,7 +10,8 @@ class Api::V2::SessionsController < Api::BaseController
       render json: {
         session: {
           token: user.authentication_token,
-          username: user.name
+          username: user.name,
+          organization: user.organization.name
         }
       }
     else
