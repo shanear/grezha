@@ -1,3 +1,7 @@
+<div id="app">
 <h2 id='title'>Welcome to Ember.js</h2>
+<div id="current-user">{{session.username}}</div>
+<button {{action "invalidateSession"}} id="logout">logout</button>
 
 {{outlet}}
+</div>

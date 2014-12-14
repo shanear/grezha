@@ -22,6 +22,23 @@ module.exports = function(environment) {
   if (environment === 'development') {
     ENV.EmberENV.apiURL = "http://grezha.dev/";
 
+    ENV['simple-auth'] = {
+      authorizer: 'authorizer:api',
+      crossOriginWhitelist: [
+        "http://grezha.dev", "http://localhost:3000"
+      ]
+    }
+
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
+      'font-src': "*",
+      'connect-src': "*",
+      'img-src': "'self'",
+      'style-src': "*",
+      'media-src': "'self'"
+    }
+
     // ENV.APP.LOG_RESOLVER = true;
     ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -33,6 +50,11 @@ module.exports = function(environment) {
     // Set the api url to the same host because pretender can't mock
     // CORS requests.
     ENV.EmberENV.apiURL = "/";
+
+    // Don't persist session information.
+    ENV['simple-auth'] = {
+      store: 'simple-auth-session-store:ephemeral'
+    }
 
     // Testem prefers this...
     ENV.baseURL = '/';

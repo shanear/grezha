@@ -24,7 +24,10 @@ describe Api::V2::SessionsController do
 
         user.reload
         expect(response.status).to eq(200)
-        expect(json["token"]).to eq(user.authentication_token)
+
+        session = json["session"]
+        expect(session["token"]).to eq(user.authentication_token)
+        expect(session["username"]).to eq(user.name)
       end
     end
   end

@@ -7,7 +7,12 @@ class Api::V2::SessionsController < Api::BaseController
     )
 
     if user
-      render json: { token: user.authentication_token }
+      render json: {
+        session: {
+          token: user.authentication_token,
+          username: user.name
+        }
+      }
     else
       render json: { message: "Username and password incorrect" },
           status: 401

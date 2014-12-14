@@ -9,11 +9,16 @@ ApiAuthenticator = Base.extend
 
   authenticate: (options)->
     new Promise( (resolve, reject)->
-      login = Ember.$.post(EmberENV.apiURL + 'api/v2/authenticate',
-        { email: options["email"], password: options["password"] })
+      login = Ember.$.post(
+        EmberENV.apiURL + 'api/v2/authenticate',
+        {
+          email: options["email"],
+          password: options["password"]
+        }
+      )
 
       login.fail (error)-> reject(error)
-      login.done (data)-> resolve(data)
+      login.done (data)-> resolve(data["session"])
     )
 
   invalidate: (data)->

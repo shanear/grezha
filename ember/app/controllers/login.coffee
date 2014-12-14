@@ -1,7 +1,6 @@
 `import Ember from 'ember'`
 
 LoginController = Ember.Controller.extend
-  loginErrors: null
   actions:
     login: ->
       @get("session").authenticate("authenticator:api", {
