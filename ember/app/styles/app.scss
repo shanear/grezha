@@ -1,0 +1,13 @@
+@import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
+
+$bulgarian-green: #00966E;
+$light-bulgarian-green: #e3fff7;
+$bulgarian-red: #D62612;
+$dark-grey: #333;
+$warning: #ffa295;
+
+$header-height: 50px;
+$usual-buffer: 10px;
+
+@import "login";
+@import "main";
