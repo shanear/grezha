@@ -1,6 +1,12 @@
-`import Ember from 'ember';`
+`import Ember from 'ember'`
 `import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin'`
 
-ContactsRoute = Ember.Route.extend(AuthenticatedRouteMixin)
+IndexRoute = Ember.Route.extend
+  redirect: ->
+    if @session.isAuthenticated
+      @transitionTo('contacts')
+    else
+      @transitionTo('login')
 
-`export default ContactsRoute`
+
+`export default IndexRoute`

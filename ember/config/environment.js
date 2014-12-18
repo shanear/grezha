@@ -20,13 +20,14 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.EmberENV.apiURL = "http://grezha.dev/";
+    ENV.EmberENV.apiURL = "http://localhost:3000/";
 
     ENV['simple-auth'] = {
       authorizer: 'authorizer:api',
       crossOriginWhitelist: [
         "http://grezha.dev", "http://localhost:3000"
-      ]
+      ],
+      routeAfterAuthentication: '/'
     }
 
     ENV.contentSecurityPolicy = {
@@ -53,7 +54,9 @@ module.exports = function(environment) {
 
     // Don't persist session information.
     ENV['simple-auth'] = {
-      store: 'simple-auth-session-store:ephemeral'
+      authorizer: 'authorizer:api',
+      store: 'simple-auth-session-store:ephemeral',
+      routeAfterAuthentication: '/'
     }
 
     // Testem prefers this...

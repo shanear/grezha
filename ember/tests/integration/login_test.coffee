@@ -64,8 +64,9 @@ test "Login with good credentials", ->
   fillIn "#email", "lou@gmail.com"
   fillIn "#password", "password"
   click "#login-submit"
+
   andThen ->
-    equal(currentURL(), "/", "Redirects to index")
+    equal(currentURL(), "/contacts", "Redirects to index (contacts)")
     equal(find("#current-user").text().trim(), "Lou"
       "Sets current user to authenticated username")
 
@@ -77,7 +78,7 @@ test "Login redirects to index when authenticated", ->
   click "#login-submit"
   visit "login"
   andThen ->
-    equal(currentURL(), "/", "Redirects to index")
+    equal(currentURL(), "/contacts", "Redirects to index (contacts)")
 
 
 test "Logout", ->
