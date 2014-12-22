@@ -1,11 +1,15 @@
 <div id="app">
+  <!-- Authenticated header -->
   {{#if session.isAuthenticated}}
     <div id="logged-in">Logged in</div>
     <div id="current-user">{{session.username}}</div>
     <button {{action "invalidateSession"}} id="logout">logout</button>
+  {{/if}}
 
-    {{outlet}}
-  {{else}}
-    {{outlet}}
+  {{outlet}}
+
+  <!-- Authenticated footer -->
+  {{#if session.isAuthenticated}}
+    <div id="logged-in"> Footer town </div>
   {{/if}}
 </div>
