@@ -41,6 +41,7 @@ Daughters::Application.routes.draw do
     namespace :v2 do
       post "/authenticate", to: "sessions#create"
       post "/invalidate", to: "sessions#destroy"
+      post "/forgot-password", to: "account#forgot_password"
 
       resources :contacts, except: [:new, :edit]
     end
