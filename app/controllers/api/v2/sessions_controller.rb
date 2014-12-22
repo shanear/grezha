@@ -15,8 +15,8 @@ class Api::V2::SessionsController < Api::BaseController
         }
       }
     else
-      render json: { message: "Username and password incorrect" },
-          status: 401
+      render status: 401,
+        json: { message: "Username and password incorrect" }
     end
   end
 

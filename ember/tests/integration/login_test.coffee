@@ -80,7 +80,6 @@ test "Login redirects to index when authenticated", ->
   andThen ->
     equal(currentURL(), "/contacts", "Redirects to index (contacts)")
 
-
 test "Logout", ->
   visit "login"
   fillIn "#email", "lou@gmail.com"
