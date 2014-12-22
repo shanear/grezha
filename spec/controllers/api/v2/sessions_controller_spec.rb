@@ -15,6 +15,16 @@ describe Api::V2::SessionsController do
       end
     end
 
+    context "when missing credentials" do
+      it "responds 401" do
+        post :create, {
+          password: "incorrect#{user.password}"
+        }
+
+        expect(response.status).to eq(401)
+      end
+    end
+
     context "when good credentials" do
       it "responds 200 and returns auth token" do
         post :create, {

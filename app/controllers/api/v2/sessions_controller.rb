@@ -3,7 +3,7 @@ class Api::V2::SessionsController < Api::BaseController
 
   def create
     user = User.api_authenticate(
-      params[:email], params[:password]
+      params[:email] || "", params[:password] || ""
     )
 
     if user
