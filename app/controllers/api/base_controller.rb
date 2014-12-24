@@ -1,5 +1,6 @@
 class Api::BaseController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter :get_authentication
 
   def index
     render json: { status: :alive }
@@ -8,15 +9,18 @@ class Api::BaseController < ApplicationController
   private
 
   def current_user
-    @current_user ||= User.where(
-      authentication_token: @authentication_token
-    ).first
+    @current_user
+  end
+
+  def get_authentication
+    authenticate_with_http_token do |token, options|
+      @current_user = User.where(
+        authentication_token: token
+      ).first
+    end
   end
 
   def authenticate_request
-    authenticate_or_request_with_http_token do |token, options|
-      @authentication_token = token
-      current_user
-    end
+    request_http_token_authentication unless current_user
   end
 end

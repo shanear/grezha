@@ -2,10 +2,13 @@ require 'spec_helper'
 
 describe Api::V2::AccountController do
   let!(:user) {
-    FactoryGirl.create(:user, email: "shake@gmail.com")
+    FactoryGirl.create(:user,
+      email: "shake@gmail.com",
+      authentication_token: "token"
+    )
   }
 
-  describe "POST /forgot_password" do
+  describe "POST /forgot-password" do
     context "when no users with email exist" do
       it "responds 422" do
         post :forgot_password, {
@@ -33,6 +36,91 @@ describe Api::V2::AccountController do
 
         user.reload
         expect(user.reset_password_token).to_not be_nil
+      end
+    end
+  end
+
+  describe "PUT /reset-password" do
+    context "when authenticated" do
+      before { authorize_api(user) }
+
+      context "when params are valid" do
+        it "updates user password and repsonds 200" do
+          put :reset_password, {
+            password: "passw0rd",
+            password_confirmation: "passw0rd"
+          }
+
+          expect(response.status).to eq(200)
+
+          matching_user = User.authenticate("shake@gmail.com", "passw0rd")
+          expect(matching_user).to eq(user)
+        end
+      end
+
+      context "when params aren't valid" do
+        it "responds 422" do
+          put :reset_password, {
+            password: "passw0rd",
+            password_confirmation: "passw0rd-oops"
+          }
+
+          expect(response.status).to eq(422)
+          expect(json["errors"]).to_not be_nil
+        end
+      end
+    end
+
+    context "when email matches password reset token" do
+      before do
+        user.generate_password_reset
+        user.save!
+      end
+
+      context "when password matches confirmation" do
+        it "updates user password and repsonds 200" do
+          put :reset_password, {
+            email: user.email,
+            token: user.reset_password_token,
+            password: "passw0rd",
+            password_confirmation: "passw0rd"
+          }
+
+          expect(response.status).to eq(200)
+
+          matching_user = User.authenticate("shake@gmail.com", "passw0rd")
+          expect(matching_user).to eq(user)
+        end
+      end
+
+      context "when password doesn't match confirmation" do
+        it "responds 422" do
+          put :reset_password, {
+            email: user.email,
+            token: user.reset_password_token,
+            password: "passw0rd",
+            password_confirmation: "passw0rd-oops"
+          }
+
+          expect(response.status).to eq(422)
+          expect(json["errors"]).to_not be_nil
+        end
+      end
+    end
+
+    context "when email doesn't match password reset token" do
+      it "responds 403" do
+        user.generate_password_reset
+        user.save!
+
+        put :reset_password, {
+          email: user.email,
+          token: user.reset_password_token + "x",
+          password: "passw0rd",
+          password_confirmation: "passw0rd"
+        }
+
+        expect(response.status).to eq(403)
       end
     end
   end
