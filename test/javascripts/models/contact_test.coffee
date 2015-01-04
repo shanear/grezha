@@ -143,9 +143,9 @@ test 'days until birthday', ->
 
   leapYearBirthday = moment().year(1999).add(363, 'days').startOf('day')
   Ember.run -> contact.set("birthday", leapYearBirthday)
-  equal(contact.get("daysUntilBirthday"), 362,
+  equal(contact.get("daysUntilBirthday"), 363,
     "daysUntilBirthday should be the days until next birthday," +
-    " expected 362 but was " + contact.get("daysUntilBirthday"))
+    " expected 363 but was " + contact.get("daysUntilBirthday"))
 
   Ember.run ->
     contact.set("birthday",
