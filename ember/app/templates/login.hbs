@@ -27,12 +27,18 @@
              class="btn btn-default"
              value="Sign in">
 
-      <a href class="alternate-link btn btn-link"
-          {{action "forgotPassword"}}>
+      {{#link-to 'forgot-password'
+          class="alternate-link btn btn-link"}}
         Forgot Password?
-      </a>
+      {{/link-to}}
     </form>
   </div>
+
+  {{#if notice}}
+    <div id="notice" class="notice login">
+      {{notice}}
+    </div>
+  {{/if}}
 
   {{#if loginErrors}}
     <div id="login-errors" class="alert login">

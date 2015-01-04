@@ -33,6 +33,7 @@ describe Api::V2::AccountController do
         }
 
         expect(response.status).to eq(200)
+        expect(json['success']).to be_true
 
         user.reload
         expect(user.reset_password_token).to_not be_nil
