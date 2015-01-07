@@ -42,7 +42,7 @@ Daughters::Application.routes.draw do
       post "/authenticate", to: "sessions#create"
       post "/invalidate", to: "sessions#destroy"
       post "/forgot-password", to: "account#forgot_password"
-      put "/reset-password", to: "account#reset_password"
+      post "/reset-password", to: "account#reset_password"
 
       resources :contacts, except: [:new, :edit]
     end

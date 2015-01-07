@@ -5,7 +5,8 @@ Promise = Ember.RSVP.Promise
 
 ApiAuthorizer = Base.extend
   authorize: (jqXHR, requestOptions)->
-    jqXHR.setRequestHeader("Authorization",
-      "Token token=\"#{@session.content.token}\"")
+    if(@session.isAuthenticated)
+      jqXHR.setRequestHeader("Authorization",
+        "Token token=\"#{@session.content.token}\"")
 
 `export default ApiAuthorizer`

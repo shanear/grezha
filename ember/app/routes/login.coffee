@@ -1,6 +1,6 @@
-`import Ember from 'ember';`
+`import BaseRoute from './base';`
 
-LoginRoute = Ember.Route.extend
+LoginRoute = BaseRoute.extend
   beforeModel: ->
     @transitionTo("/") if @session.isAuthenticated
 

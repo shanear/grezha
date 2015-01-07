@@ -2,6 +2,8 @@
 
 ForgotPasswordController = Ember.Controller.extend
   needs: ['login']
+  reset: ->
+    @set("errors", "")
 
   actions:
     submit: ->
