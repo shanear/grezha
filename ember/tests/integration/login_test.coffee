@@ -1,15 +1,9 @@
 `import Ember from "ember"`
 `import { test } from 'ember-qunit'`
 `import startApp from '../helpers/start-app'`
+`import parsePostData from '../helpers/parse-post-data'`
 
 App = null
-
-parsePostData = (query)->
-  result = {}
-  query.split("&").forEach (part)->
-    item = part.split("=")
-    result[item[0]] = decodeURIComponent(item[1])
-  result
 
 module 'Login integration test',
   setup: ->
