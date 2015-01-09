@@ -23,6 +23,7 @@ input[type = "checkbox"] {
 
 .left { float: left; }
 .right { float: right; }
+.feature.disabled { display: none !important; }
 
 .alert {
   background-color: lighten($bulgarian-red, 40);
@@ -95,6 +96,7 @@ header {
 
       ul.links  {
         display: inline-block;
+        padding-left: 0px;
         margin: 0px;
 
         li {
@@ -175,378 +177,376 @@ label { text-transform: lowercase; }
   background: $light-bulgarian-green url(asset-path("greenspin.gif", image)) no-repeat center center;
 }
 
-div#ember-app {
-  h2, h3 {
-    margin: 0px;
-    margin-bottom: $usual-buffer * 2;
+h2, h3 {
+  margin: 0px;
+  margin-bottom: $usual-buffer * 2;
+}
+
+.disabled-control {
+  a:not(.btn) {
+    visibility: hidden;
   }
 
-  .disabled-control {
-    a:not(.btn) {
-      visibility: hidden;
-    }
+  .btn {
+    color: #eee;
+    border-color: #eee;
+    pointer-events: none;
+    cursor: default;
+  }
+}
 
-    .btn {
-      color: #eee;
-      border-color: #eee;
-      pointer-events: none;
-      cursor: default;
-    }
+.date-field {
+  display:inline;
+  width:auto;
+  margin-right: .5em;
+}
+
+.connection-top-row {
+  .connection-date-span {
+    display: inline-block;
+  }
+  .connection-mode-span {
+    float: right;
   }
 
-  .date-field {
-    display:inline;
-    width:auto;
-    margin-right: .5em;
+  .connection-mode {
+    display: inline;
+    width: auto;
   }
+}
 
-  .connection-top-row {
-    .connection-date-span {
-      display: inline-block;
-    }
-    .connection-mode-span {
-      float: right;
-    }
 
-    .connection-mode {
-      display: inline;
-      width: auto;
-    }
+#confirmation {
+  width: 100%;
+  background-color: $light-bulgarian-green;
+  border-radius: 10px;
+  padding: 20px;
+
+  h4 {
+    margin-top: 0;
   }
+}
 
+#main-panel {
+  padding: $usual-buffer;
+  padding-left: 240px + ($usual-buffer * 2);
+  min-width: 240px;
+  width: 100%;
+}
 
-  #confirmation {
-    width: 100%;
-    background-color: $light-bulgarian-green;
-    border-radius: 10px;
-    padding: 20px;
+#sidebar {
+  position: fixed;
+  top: $header-height + $usual-buffer;
+  bottom: $usual-buffer;
+  min-width: 240px;
+  background-color: $light-bulgarian-green;
+  border-radius: $usual-buffer;
 
-    h4 {
-      margin-top: 0;
-    }
-  }
-
-  #main-panel {
+  .controls {
+    height: 90px;
     padding: $usual-buffer;
-    padding-left: 240px + ($usual-buffer * 2);
-    min-width: 240px;
-    width: 100%;
+
+    .new-contact, .new-vehicle {
+      padding: 10px 0px 0 0px;
+    }
+
+    .searchbar {
+      position: relative;
+
+      i.fa {
+        position: absolute;
+        right: 0px;
+        padding: $usual-buffer;
+        pointer-events: none;
+      }
+    }
   }
 
-  #sidebar {
-    position: fixed;
-    top: $header-height + $usual-buffer;
-    bottom: $usual-buffer;
-    min-width: 240px;
-    background-color: $light-bulgarian-green;
-    border-radius: $usual-buffer;
+  .searchlist {
+    position: absolute;
+    width: 100%;
+    top: 100px;
+    bottom: 10px;
+    overflow-y: scroll;
+    border-top: 1px solid $bulgarian-green;
 
-    .controls {
-      height: 90px;
+    ul.contacts, ul.vehicles {
+      position: absolute;
+      top: 0px;
+      width: 100%;
       padding: $usual-buffer;
+      padding-top: 0px;
+      list-style-type: none;
 
-      .new-contact, .new-vehicle {
-        padding: 10px 0px 0 0px;
+      a.active {
+        background-color: lighten($bulgarian-green, 68);
       }
 
-      .searchbar {
-        position: relative;
-
-        i.fa {
-          position: absolute;
-          right: 0px;
-          padding: $usual-buffer;
-          pointer-events: none;
+      li.contact {
+        .contact-secondary-search-information {
+          float:right;
         }
       }
-    }
 
-    .searchlist {
-      position: absolute;
-      width: 100%;
-      top: 100px;
-      bottom: 10px;
-      overflow-y: scroll;
-      border-top: 1px solid $bulgarian-green;
+      li.contact, li.vehicle {
+        a {
+          width: 100%;
+          padding: $usual-buffer;
+          display: block;
+          text-decoration: none;
+        }
 
-      ul.contacts, ul.vehicles {
-        position: absolute;
-        top: 0px;
-        width: 100%;
-        padding: $usual-buffer;
-        padding-top: 0px;
-        list-style-type: none;
-
-        a.active {
+        a:hover {
           background-color: lighten($bulgarian-green, 68);
         }
 
-        li.contact {
-          .contact-secondary-search-information {
-            float:right;
-          }
-        }
-
-        li.contact, li.vehicle {
-          a {
-            width: 100%;
-            padding: $usual-buffer;
-            display: block;
-            text-decoration: none;
-          }
-
-          a:hover {
-            background-color: lighten($bulgarian-green, 68);
-          }
-
-          .highlight {
-            font-weight: bold;
-          }
+        .highlight {
+          font-weight: bold;
         }
       }
     }
   }
+}
 
-  .options {
-    float: right;
+.options {
+  float: right;
 
-    a {
-      color: #aaa;
-      margin-left: $usual-buffer;
-    }
-
-    a:hover { color: lighten($bulgarian-green, 5); }
+  a {
+    color: #aaa;
+    margin-left: $usual-buffer;
   }
 
-  ul.errors  {
+  a:hover { color: lighten($bulgarian-green, 5); }
+}
+
+ul.errors  {
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: $usual-buffer;
+  list-style-type: none;
+  color: $bulgarian-red;
+}
+
+ul.connection_errors  {
+  list-style-type: none;
+  color: $bulgarian-red;
+}
+
+.cancel {
+  float: right;
+}
+
+.vehicle-panel {
+  h3 {
     margin: 0px;
-    padding: 0px;
-    margin-bottom: $usual-buffer;
-    list-style-type: none;
-    color: $bulgarian-red;
   }
 
-  ul.connection_errors  {
-    list-style-type: none;
-    color: $bulgarian-red;
+  .used-by {
+    color: #aaa;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+}
+
+.control-bar {
+  width: 100%;
+
+  .status {
+    float: left;
+    color: #aaa;
+  }
+}
+
+.contact-panel {
+  h3 {
+    margin: 0px;
   }
 
-  .cancel {
-    float: right;
-  }
+  .top-info {
+    padding: $usual-buffer;
 
-  .vehicle-panel {
-    h3 {
-      margin: 0px;
+    .attributes {
+      margin-top: $usual-buffer * 2;
     }
 
-    .used-by {
-      color: #aaa;
-      font-size: 1.4em;
-      font-weight: bold;
-      margin-bottom: 25px;
+    .field-label {
+      color: #999;
+      width: 80px;
+      display: inline-block;
     }
   }
 
-  .control-bar {
+  .contact-id {
+    color: #aaa;
+    font-size: 110%;
+  }
+
+  .bio {
+    padding: $usual-buffer;
+  }
+
+  .avatar {
+    background-color: $light-bulgarian-green;
+    margin: $usual-buffer;
+    margin-left: 0px;
+    width: 140px;
+    float: left;
+    text-align: center;
+
+    img {
+      height: 140px;
+      width: 140px;
+    }
+  }
+}
+
+.file-upload-contatiner {
+  background-color: white;
+  position: relative;
+  font-size: .7em;
+  color: #999;
+  margin-top: -5px;
+  z-index: 1;
+
+  &.disabled-control {
+    display: none;
+  }
+
+  &:hover {
+    .fake-uploader {
+      color: lighten($bulgarian-green, 5);
+    }
+  }
+
+  .fake-uploader {
     width: 100%;
-
-    .status {
-      float: left;
-      color: #aaa;
-    }
+    height: 100%;
   }
 
-  .contact-panel {
-    h3 {
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+.add-model-form {
+  @include clearfix;
+  margin-bottom: 20px;
+  padding: $usual-buffer;
+  background-color: $light-bulgarian-green;
+  border-radius: $usual-buffer;
+}
+
+.mode-header {
+  display: none;
+  margin-left: 10px;
+
+  &.has-connections {
+    display: inline-block;
+  }
+
+  a {
+    color: #888;
+
+    &:hover {
+      color: $bulgarian-green
+    }
+  }
+}
+
+.section-header {
+  @include clearfix;
+  padding: 0 $usual-buffer;
+  background-color: $light-bulgarian-green;
+  border-radius: $usual-buffer;
+  margin: $usual-buffer * 3  0 $usual-buffer 0 ;
+
+  .left, .right {
+    line-height: 3.5em;
+    height: 3.5em;
+    vertical-align: bottom;
+
+
+    h4 {
       margin: 0px;
+      display: inline-block;
     }
+  }
+}
 
-    .top-info {
-      padding: $usual-buffer;
+.save-button {
+  float: right;
+}
 
-      .attributes {
-        margin-top: $usual-buffer * 2;
-      }
+.connection {
+  margin: $usual-buffer;
+  margin-top: $usual-buffer * 2;
 
-      .field-label {
-        color: #999;
-        width: 80px;
-        display: inline-block;
-      }
-    }
+  .body {
+    padding-right: $usual-buffer;
+    padding-left: 80px + $usual-buffer;
+  }
 
-    .contact-id {
-      color: #aaa;
+  .connection-info-panel {
+    float: left;
+    width: 80px;
+
+    .mode {
+      text-align: center;
+      padding-top: 0.5em;
+      color: #999;
       font-size: 110%;
     }
 
-    .bio {
-      padding: $usual-buffer;
-    }
-
-    .avatar {
+    .date {
       background-color: $light-bulgarian-green;
-      margin: $usual-buffer;
-      margin-left: 0px;
-      width: 140px;
-      float: left;
-      text-align: center;
+      border-radius: $usual-buffer;
+      padding: $usual-buffer;
 
-      img {
-        height: 140px;
-        width: 140px;
-      }
-    }
-  }
-
-  .file-upload-contatiner {
-    background-color: white;
-    position: relative;
-    font-size: .7em;
-    color: #999;
-    margin-top: -5px;
-    z-index: 1;
-
-    &.disabled-control {
-      display: none;
-    }
-
-    &:hover {
-      .fake-uploader {
-        color: lighten($bulgarian-green, 5);
-      }
-    }
-
-    .fake-uploader {
-      width: 100%;
-      height: 100%;
-    }
-
-    input[type="file"] {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-    }
-  }
-
-  .add-model-form {
-    @include clearfix;
-    margin-bottom: 20px;
-    padding: $usual-buffer;
-    background-color: $light-bulgarian-green;
-    border-radius: $usual-buffer;
-  }
-
-  .mode-header {
-    display: none;
-    margin-left: 10px;
-
-    &.has-connections {
-      display: inline-block;
-    }
-
-    a {
-      color: #888;
-
-      &:hover {
-        color: $bulgarian-green
-      }
-    }
-  }
-
-  .section-header {
-    @include clearfix;
-    padding: 0 $usual-buffer;
-    background-color: $light-bulgarian-green;
-    border-radius: $usual-buffer;
-    margin: $usual-buffer * 3  0 $usual-buffer 0 ;
-
-    .left, .right {
-      line-height: 3.5em;
-      height: 3.5em;
-      vertical-align: bottom;
-
-
-      h4 {
-        margin: 0px;
-        display: inline-block;
-      }
-    }
-  }
-
-  .save-button {
-    float: right;
-  }
-
-  .connection {
-    margin: $usual-buffer;
-    margin-top: $usual-buffer * 2;
-
-    .body {
-      padding-right: $usual-buffer;
-      padding-left: 80px + $usual-buffer;
-    }
-
-    .connection-info-panel {
-      float: left;
-      width: 80px;
-
-      .mode {
+      .day {
+        font-size: 120%;
         text-align: center;
-        padding-top: 0.5em;
-        color: #999;
-        font-size: 110%;
       }
 
-      .date {
-        background-color: $light-bulgarian-green;
-        border-radius: $usual-buffer;
-        padding: $usual-buffer;
-
-        .day {
-          font-size: 120%;
-          text-align: center;
-        }
-
-        .year {
-          font-size: 80%;
-          text-align: center;
-        }
+      .year {
+        font-size: 80%;
+        text-align: center;
       }
     }
   }
+}
 
-  .relationship {
-    padding: $usual-buffer;
-    a.email-links {
-      color: #428bca;
-    }
-    .summary {
-      @include clearfix;
-    }
-
-    a .name {
-      font-weight: bold;
-      font-size: 1.3em;
-    }
-
-    .type {
-      color: #999;
-    }
-
+.relationship {
+  padding: $usual-buffer;
+  a.email-links {
+    color: #428bca;
+  }
+  .summary {
+    @include clearfix;
   }
 
-  #not-found {
-    text-align: center;
+  a .name {
+    font-weight: bold;
+    font-size: 1.3em;
+  }
 
-    h4 {
-      margin-top: 40px;
-      color: $bulgarian-green;
-    }
+  .type {
+    color: #999;
+  }
+
+}
+
+#not-found {
+  text-align: center;
+
+  h4 {
+    margin-top: 40px;
+    color: $bulgarian-green;
   }
 }
 

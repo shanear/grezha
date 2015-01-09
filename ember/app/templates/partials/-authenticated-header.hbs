@@ -1,0 +1,84 @@
+<header>
+  <div id="topbar" class="clearfix">
+    <div class="logo">
+      <h1>
+        {{#link-to 'contacts' class="title"}}
+          Grezha
+        {{/link-to}}
+      </h1>
+    </div>
+
+    <nav>
+      <ul class="links">
+        <li>
+          {{#link-to 'contacts'}}
+            Clients ({{allContacts.length}})
+          {{/link-to}}
+        </li>
+
+        {{#toggled-feature name='vehicles' tagName='li'}}
+          {{#link-to 'vehicles'}} Vehicles {{/link-to}}
+        {{/toggled-feature}}
+
+        {{!-- {{#if App.online}} --}}
+        <li>{{#link-to 'birthdays'}}Birthdays{{/link-to}}</li>
+        {{!-- {{/if}} --}}
+      </ul>
+
+      <div class="login-info">
+{{!--
+        {{#unless App.online}}
+          <div class="offline">
+            Offline
+          </div>
+        {{/unless}}
+
+        {{#unless App.isProduction}}
+          <div class="environment">
+            {{App.environment}}
+          </div>
+        {{/unless}}
+--}}
+
+        <div class="environment">
+          (Environment)
+        </div>
+
+        <div class="organization">
+          {{#if session.admin}}
+            <a href="/users">
+              {{session.organization}}
+              <i class="fa fa-cog"></i>
+            </a>
+          {{else}}
+            {{session.organization}}
+          {{/if}}
+        </div>
+
+        {{!--
+        <div {{bind-attr class=":dropdown App.online:online:offline"}}>
+        --}}
+        <div class="dropdown online">
+          <a data-toggle="dropdown" id href="#">
+            <span id="username">{{session.username}}</span>
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li class="reset-password">
+              {{#link-to 'reset-password'}}
+                Reset Password
+              {{/link-to}}
+            </li>
+            <!-- <li class="divider"></li> -->
+            <li>
+              <a href {{action "invalidateSession"}} id="logout">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

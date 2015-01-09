@@ -5,7 +5,7 @@
 
 App = null
 
-module 'Forgot password integration test',
+module 'Reset password integration test',
   setup: ->
     App = startApp()
 
@@ -51,7 +51,7 @@ test "When for current user", ->
   click '#reset-password-submit'
 
   andThen ->
-    equal(currentURL(), '/contacts',
+    equal(currentURL(), '/clients',
       'Reset password should succeed and redirect to root')
     equal(find('#notice').length, 1,
       'There should be a success message')
