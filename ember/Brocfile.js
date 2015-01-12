@@ -19,4 +19,8 @@ var app = new EmberApp();
 
 app.import('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js');
 
+if (app.env === 'test') {
+  app.import('bower_components/timekeeper/lib/timekeeper.js');
+}
+
 module.exports = app.toTree();
