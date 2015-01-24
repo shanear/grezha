@@ -1,9 +1,11 @@
 import resolver from './helpers/resolver';
+import setupFixtures from './helpers/setup-fixtures';
 import {
   setResolver
 } from 'ember-qunit';
 
 setResolver(resolver);
+setupFixtures();
 
 document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
 

@@ -2,20 +2,18 @@
 `import Ember from 'ember'`
 `import { test, moduleForModel } from 'ember-qunit'`
 
-moduleForModel('contact', 'Contact Model'
+moduleForModel 'contact', 'Contact Model'
   setup: ->
-    @store().unloadAll('contact')
+    stop()
+    Ember.run =>
+      @store().find('contact', 'base').then((contact)=>
+        @contact = contact
+      ).finally(start)
 
-    @contact = Ember.run =>
-      @store().createRecord(
-        'contact', { name: 'Smurfy' }
-      )
-)
 
 test "createdAt defaults to now", ->
   now = new Date()
   timekeeper.freeze(now)
-  @contact = Ember.run => @store().createRecord('contact')
   equal(@contact.get("createdAt"), now,
     "Created at should default to now")
 
