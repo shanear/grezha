@@ -2,13 +2,14 @@
 `import Ember from 'ember'`
 `import { test, moduleForModel } from 'ember-qunit'`
 
-moduleForModel 'contact', 'Contact Model'
+moduleForModel('contact', 'Contact Model'
   setup: ->
     stop()
     Ember.run =>
       @store().find('contact', 'base').then((contact)=>
         @contact = contact
       ).finally(start)
+)
 
 
 test "createdAt defaults to now", ->
