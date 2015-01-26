@@ -3,96 +3,134 @@
 `import { test, moduleForModel } from 'ember-qunit'`
 
 moduleForModel('contact', 'Contact Model'
+  needs: ['model:connection']
   setup: ->
     stop()
     Ember.run =>
-      @store().find('contact', 'base').then((contact)=>
+      find1 = @store().find('contact', 'base').then (contact)=>
         @contact = contact
-      ).finally(start)
+
+      find2 = @store().find('contact', 'has-connections').then (contact)=>
+        @contactWithConnections = contact
+        @contactWithConnections.get('connections')
+
+      Ember.RSVP.all([find1, find2]).finally(start)
 )
 
 
-test "createdAt defaults to now", ->
+test "createdAt", ->
   now = new Date()
   timekeeper.freeze(now)
   equal(@contact.get("createdAt"), now,
-    "Created at should default to now")
+    "defaults to now")
 
 
 test 'isValid validates name', ->
-  ok(@contact.isValid(), "Contact is valid with name")
+  ok(@contact.isValid(), "is valid with name")
 
   Ember.run => @contact.set("name", "")
   equal(@contact.isValid(), false,
-    "Contact isn't valid with empty name")
+    "isn't valid with empty name")
 
   Ember.run => @contact.set("name", "    ")
   equal(@contact.isValid(), false,
-    "Contact isn't valid with whitespace name")
+    "isn't valid with whitespace name")
 
   Ember.run => @contact.set("name", null)
   equal(@contact.isValid(), false,
-    "Contact isn't valid with undefined name")
+    "isn't valid with undefined name")
 
 
 test 'isValid validates phone number', ->
   Ember.run => @contact.set("phone", "invalid phone #")
   equal(@contact.isValid(), false,
-    "phone # should be invalid when plain english")
+    "is invalid when plain english")
 
   Ember.run => @contact.set("phone", "-")
   equal(@contact.isValid(), false,
-    "phone # should be invalid when special char")
+    "is invalid when special char")
 
   Ember.run => @contact.set("phone", "")
   equal(@contact.isValid(), true,
-    "phone # should be invalid when empty string")
+    "is invalid when empty string")
 
   Ember.run => @contact.set("phone", "1112223333")
   equal(@contact.isValid(), true,
-    "phone # should be valid when sequence of numbers")
+    "is valid when sequence of numbers")
 
   Ember.run => @contact.set("phone", "111-222-3333")
   equal(@contact.isValid(), true,
-    "phone # should be valid when alternating numbers and dash")
+    "is valid when alternating numbers and dash")
 
   Ember.run => @contact.set("phone", "1-949-830-1657")
   equal(@contact.isValid(), true,
-    "phone # should be valid for international format")
+    "is valid for international format")
 
   Ember.run => @contact.set("phone", "1-949-830-1657:0000")
   equal(@contact.isValid(), true,
-    "phone # should be valid when with extension")
+    "is valid when with extension")
 
 
 test 'isDuplicate', ->
-  equal(@contact.isDuplicate(), false, "Contact isn't duplicate by default")
+  equal(@contact.isDuplicate(), false,
+    "isn't true by default")
+
   Ember.run =>
     @store().createRecord('contact', name: "Fran")
     @contact.set("name", "Fran")
-
   ok(@contact.isDuplicate(),
-    "Contact is duplicate when it has same name as another Contact")
+    "is true when contact has same name as another Contact")
 
 
 test 'daysUntilBirthday', ->
   Ember.run => @contact.set("birthday", null)
   equal(@contact.get("daysUntilBirthday"), null,
-    "daysUntilBirthday should be null if birthday is null")
+    "is null if birthday is null")
 
   Ember.run => @contact.set("birthday", moment().year(1970))
   equal(@contact.get("daysUntilBirthday"), 0,
-    "daysUntilBirthday should be 0 for the birthday boy!")
+    "is 0 for the birthday boy!")
 
   leapYearBirthday = moment().year(1999).add(363, 'days').startOf('day')
   Ember.run => @contact.set("birthday", leapYearBirthday)
   equal(@contact.get("daysUntilBirthday"), 363,
-    "daysUntilBirthday should be the days until next birthday," +
-    " expected 363 but was " + @contact.get("daysUntilBirthday"))
+    "is the days until next birthday, even if it's next year")
 
   Ember.run =>
     @contact.set("birthday",
       moment().year(2012).add(2, 'days').startOf('day'))
   equal(@contact.get("daysUntilBirthday"), 2,
-    "daysUntilBirthday should be the days until next birthday," +
-    " expected 2 but was " + @contact.get("daysUntilBirthday"))
+    "is the days until next birthday")
+
+
+test 'sortedConnections', ->
+  Ember.run =>
+    equal(@contact.get('sortedConnections.length'), 0,
+      "is empty when no connections")
+
+    connections = @contactWithConnections.get('connections')
+    connections.objectAt(0).setProperties(
+      note: "occurs second", occurredAt: new Date(2014, 9, 7))
+    connections.objectAt(1).setProperties(
+      note: "occurs first", occurredAt: new Date(2014, 9, 6))
+    connections.objectAt(2).setProperties(
+      note: "occurs third", occurredAt: new Date(2014, 9, 8))
+
+    sortedConnections = @contactWithConnections.get('sortedConnections')
+    equal(sortedConnections.get('length'), 3,
+      "have the same number of connections")
+    deepEqual(
+      sortedConnections.mapBy('note'),
+      ["occurs third", "occurs second", "occurs first"],
+      "are in reverse time order")
+
+
+test 'lastSeen', ->
+  Ember.run =>
+    equal(@contact.get('lastSeen'), @contact.get('createdAt'),
+      "is createdAt time when no connections")
+
+    connections = @contactWithConnections.get('connections')
+    connections.objectAt(1).set('occurredAt', new Date(2014, 9, 6))
+    deepEqual(@contactWithConnections.get('lastSeen'), new Date(2014, 9, 6),
+      "is occurredAt from most recent connection")

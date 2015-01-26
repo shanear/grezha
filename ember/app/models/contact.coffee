@@ -10,11 +10,11 @@ Contact = DS.Model.extend
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
   )
+  connections: DS.hasMany('connection', async: true)
   errors: []
 
   isDuplicate: ->
     contacts = @store.all('contact')
-    console.log(contacts.get('length'))
     i = 0
     while i < contacts.get('length')
       contact = contacts.objectAt(i)
@@ -38,6 +38,13 @@ Contact = DS.Model.extend
       return false
     return true
 
+  sortedConnections: (->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      content: @get('connections')
+      sortProperties: ['occurredAt']
+      sortAscending: false
+  ).property('connections.@each')
+
   daysUntilBirthday: (->
     return null unless @get('birthday')?
 
@@ -49,5 +56,14 @@ Contact = DS.Model.extend
     else
       birthday.year(today.year() + 1).diff(today, 'days')
   ).property('birthday')
+
+  lastSeen: (->
+    latestConnection = @get('sortedConnections.firstObject')
+
+    if(latestConnection)
+      latestConnection.get('occurredAt')
+    else
+      @get('createdAt')
+  ).property('connections.@each')
 
 `export default Contact`
