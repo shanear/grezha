@@ -1,6 +1,6 @@
 common: &common
   adapter: postgresql
-  username: grezha
+  username: postgres
   pool: 5
   timeout: 5000
 
