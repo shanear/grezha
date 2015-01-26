@@ -13,7 +13,6 @@ module 'Contacts page integration test',
         {"Content-Type": "application/json"},
         JSON.stringify({contacts: @contacts})]
     server.get '/api/v2/users/:id', (req)=>
-      console.log(req.params.id)
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({user: @users[req.params.id]})]
@@ -28,7 +27,6 @@ test "shows all people in sidebar when no search query entered", ->
   @contacts = [{id: 1, name: "Cat"}, {id: 2, name: "Sted"}]
   visit("/clients/")
   andThen =>
-    console.log(find(".contacts"))
     equal(find(".contact").length, 2,
       "shows all contacts in list")
 
