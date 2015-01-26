@@ -9,9 +9,10 @@ Router.map(function() {
   this.route('login');
   this.route('forgot-password');
   this.route('reset-password', { path: "/reset-password/:token" });
-  this.resource('contacts',
-    { path: "/clients" },
-    function() { }
+  this.resource('contacts', { path: "/clients" },
+    function() {
+      this.route('new');
+    }
   );
 
   this.resource('vehicles', function() { });

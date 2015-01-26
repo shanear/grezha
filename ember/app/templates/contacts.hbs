@@ -1,5 +1,48 @@
-<h2>These are the contacts</h2>
+<div id="sidebar">
+  <div class="controls">
+    <div class="searchbar">
+      <i class="fa fa-search"></i>
+      {{input type="text"
+        id="contact-search"
+        class="form-control"
+        value=filterQuery}}
+      {{searchFilter}}
+    </div>
 
+    <div class="new-contact">
+      {{!-- {{#link-to 'contacts.new' filterQuery class="btn btn-default"}} --}}
+      {{#link-to 'contacts.new' class='btn btn-default'}}
+        Add {{newModelText}}
+      {{/link-to}}
+    </div>
+  </div>
+
+  <div class="searchlist">
+    <ul class="contacts">
+      {{#each contact in filteredCollection}}
+        <li class="contact">
+          {{#link-to 'contact' contact}}
+            {{!-- {{#view "searchResult" filterItem=contact filterQuery=filterQuery}} --}}
+              {{view.name}}
+              <div class="contact-secondary-search-information">
+                  {{#if view.searchMatch}}
+                      {{view.searchMatch}}
+                  {{/if}}
+              </div>
+
+            {{!-- {{/view}} --}}
+          {{/link-to}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div id="main-panel">
+  {{outlet}}
+</div>
+
+{{!-- TODO: Find a place for this. --}}
 {{#if notice}}
   <div id="notice" class="notice login">
     {{notice}}
