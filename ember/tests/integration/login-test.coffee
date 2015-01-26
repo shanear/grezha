@@ -27,8 +27,13 @@ module 'Login integration test',
       else
         return [401, {"Content-Type": "application/json"}, ""]
 
-    server.post 'api/v2/invalidate', ->
+    server.post '/api/v2/invalidate', ->
       return [200, {}, ""]
+
+    server.get '/api/v2/contacts', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({contacts: []})]
 
   teardown: ->
     Ember.run(App, App.destroy)

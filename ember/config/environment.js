@@ -20,7 +20,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.EmberENV.apiURL = "http://localhost:3000/";
+    ENV.EmberENV.apiURL = "http://localhost:3000";
 
     ENV['simple-auth'] = {
       authorizer: 'authorizer:api',
@@ -50,7 +50,7 @@ module.exports = function(environment) {
   if (environment === 'test') {
     // Set the api url to the same host because pretender can't mock
     // CORS requests.
-    ENV.EmberENV.apiURL = "/";
+    ENV.EmberENV.apiURL = "";
 
     // Don't persist session information.
     ENV['simple-auth'] = {

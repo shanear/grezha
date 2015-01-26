@@ -21,9 +21,9 @@
     <ul class="contacts">
       {{#each contact in filteredCollection}}
         <li class="contact">
-          {{#link-to 'contact' contact}}
+          {{!-- {{#link-to 'contact' contact}} --}}
             {{!-- {{#view "searchResult" filterItem=contact filterQuery=filterQuery}} --}}
-              {{view.name}}
+              {{contact.name}} {{!-- view.name--}}
               <div class="contact-secondary-search-information">
                   {{#if view.searchMatch}}
                       {{view.searchMatch}}
@@ -31,7 +31,7 @@
               </div>
 
             {{!-- {{/view}} --}}
-          {{/link-to}}
+          {{!-- {{/link-to}} --}}
         </li>
       {{/each}}
     </ul>

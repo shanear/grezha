@@ -3,7 +3,7 @@
 `import { test, moduleForModel } from 'ember-qunit'`
 
 moduleForModel('contact', 'Contact Model'
-  needs: ['model:connection']
+  needs: ['model:connection', 'model:user']
   setup: ->
     stop()
     Ember.run =>

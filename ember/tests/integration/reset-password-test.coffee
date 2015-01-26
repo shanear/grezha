@@ -29,6 +29,11 @@ module 'Reset password integration test',
           {"Content-Type": "application/json"},
           ""]
 
+    server.get '/api/v2/contacts', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({contacts: []})]
+
   teardown: ->
     invalidateSession()
     Ember.run(App, App.destroy)
