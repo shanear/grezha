@@ -20,8 +20,9 @@ Daughters::Application.routes.draw do
     format: :appcache
 
   namespace :api, defaults: { format: "json" } do
-    match "/:resource", to: "base#index", via: [:options]
-    match "/:resource/:resource", to: "base#index", via: [:options]
+    match "/:x", to: "base#index", via: [:options]
+    match "/:x/:y", to: "base#index", via: [:options]
+    match "/:x/:y/:z", to: "base#index", via: [:options]
 
     get "/ping", to: "base#index"
     get "/csrf", to: 'csrf#index'
@@ -45,6 +46,7 @@ Daughters::Application.routes.draw do
       post "/reset-password", to: "account#reset_password"
 
       resources :contacts, except: [:new, :edit]
+      resources :users, except: [:new, :edit, :update]
     end
   end
 
