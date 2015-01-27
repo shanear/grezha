@@ -1,42 +1,19 @@
 `import Ember from "ember"`
-`import { test } from 'ember-qunit'`
 `import startApp from '../helpers/start-app'`
-`import parsePostData from '../helpers/parse-post-data'`
-
-App = null
+`import PretendApi from '../helpers/pretend-api'`
 
 module 'Login integration test',
   setup: ->
-    App = startApp()
-
-    server = new Pretender()
-    loginSuccessJson = {
-      session: {
-        token: "TOKEN!",
-        username: "Lou"
-      }
-    }
-    server.post '/api/v2/authenticate', (request)->
-      data = parsePostData(request.requestBody);
-
-      if (data.email == "lou@gmail.com" &&
-          data.password == "password")
-        return [200,
-          {"Content-Type": "application/json"},
-          JSON.stringify(loginSuccessJson)]
-      else
-        return [401, {"Content-Type": "application/json"}, ""]
-
-    server.post '/api/v2/invalidate', ->
-      return [200, {}, ""]
-
-    server.get '/api/v2/contacts', =>
-      return [200,
-        {"Content-Type": "application/json"},
-        JSON.stringify({contacts: []})]
+    @app = startApp()
+    @api = PretendApi.create().start()
+    @api.set('users', [{
+      name: "Lou"
+      email: "lou@gmail.com"
+      password: "password"
+    }])
 
   teardown: ->
-    Ember.run(App, App.destroy)
+    Ember.run(@app, @app.destroy)
 
 
 test "Redirects to login page when not authenticated", ->

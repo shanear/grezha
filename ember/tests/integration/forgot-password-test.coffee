@@ -1,30 +1,15 @@
 `import Ember from "ember"`
-`import { test } from 'ember-qunit'`
 `import startApp from '../helpers/start-app'`
-`import parsePostData from '../helpers/parse-post-data'`
-
-App = null
+`import PretendApi from '../helpers/pretend-api'`
 
 module 'Forgot password integration test',
   setup: ->
-    App = startApp()
-
-    server = new Pretender()
-
-    server.post '/api/v2/forgot-password', (request)->
-      data = parsePostData(request.requestBody);
-
-      if (data.email == "forgetful@gmail.com")
-        return [200,
-          {"Content-Type": "application/json"},
-          JSON.stringify({success: true})]
-      else
-        return [422,
-          {"Content-Type": "application/json"},
-          ""]
+    @app = startApp()
+    @api = PretendApi.create().start()
+    @api.set('users', [{email: "forgetful@gmail.com"}])
 
   teardown: ->
-    Ember.run(App, App.destroy)
+    Ember.run(@app, @app.destroy)
 
 
 test "Redirects to login page when successful", ->

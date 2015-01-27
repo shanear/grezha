@@ -1,42 +1,17 @@
 `import Ember from "ember"`
-`import { test } from 'ember-qunit'`
 `import startApp from '../helpers/start-app'`
-`import parsePostData from '../helpers/parse-post-data'`
-
-App = null
+`import PretendApi from '../helpers/pretend-api'`
 
 module 'Reset password integration test',
   setup: ->
-    App = startApp()
-
-    server = new Pretender()
-
-    server.post '/api/v2/reset-password', (request)->
-      data = parsePostData(request.requestBody);
-      auth = request.requestHeaders['Authorization'];
-
-      if (auth != 'Token token="abc123"' && data.token != 'reset123')
-        return [401,
-          {"Content-Type": "application/json"},
-          ""]
-
-      if (data.password && data.password == data.password_confirmation)
-        return [200,
-          {"Content-Type": "application/json"},
-          JSON.stringify({success: true})]
-      else
-        return [422,
-          {"Content-Type": "application/json"},
-          ""]
-
-    server.get '/api/v2/contacts', =>
-      return [200,
-        {"Content-Type": "application/json"},
-        JSON.stringify({contacts: []})]
+    @app = startApp()
+    @api = PretendApi.create().start()
+    @api.set('authToken', 'abc123')
+    @api.set('resetPasswordToken', 'reset123')
 
   teardown: ->
     invalidateSession()
-    Ember.run(App, App.destroy)
+    Ember.run(@app, @app.destroy)
 
 
 test "When for current user", ->

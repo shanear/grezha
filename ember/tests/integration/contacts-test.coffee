@@ -1,22 +1,11 @@
 `import Ember from "ember"`
 `import startApp from '../helpers/start-app'`
-`import parsePostData from '../helpers/parse-post-data'`
+`import PretendApi from '../helpers/pretend-api'`
 
 module 'Contacts page integration test',
   setup: ->
     @app = startApp()
-    @contacts = []
-
-    server = new Pretender()
-    server.get '/api/v2/contacts', =>
-      return [200,
-        {"Content-Type": "application/json"},
-        JSON.stringify({contacts: @contacts})]
-    server.get '/api/v2/users/:id', (req)=>
-      return [200,
-        {"Content-Type": "application/json"},
-        JSON.stringify({user: @users[req.params.id]})]
-
+    @api = PretendApi.create().start()
     authenticateSession()
 
   teardown: ->
@@ -24,7 +13,7 @@ module 'Contacts page integration test',
 
 
 test "shows all people in sidebar when no search query entered", ->
-  @contacts = [{id: 1, name: "Cat"}, {id: 2, name: "Sted"}]
+  @api.set('contacts', [{id: 1, name: "Cat"}, {id: 2, name: "Sted"}])
   visit("/clients/")
   andThen =>
     equal(find(".contact").length, 2,
@@ -32,8 +21,7 @@ test "shows all people in sidebar when no search query entered", ->
 
 
 test "shows only people with matching string in name", ->
-  @contacts = [{id: 1, name: "Cat"}, {id: 2, name: "Cat Dog"}, {id: 3, name: "Sted"}]
-
+  @api.set('contacts', [{id: 1, name: "Cat"}, {id: 2, name: "Cat Dog"}, {id: 3, name: "Sted"}])
   visit("/clients/")
   fillIn("#contact-search", "Cat")
   andThen ->
@@ -41,12 +29,11 @@ test "shows only people with matching string in name", ->
 
 
 test 'show only people in sidebar with matching user', ->
-  pat = {id: 0, name: "Pat Mims"}
-  marc = {id: 1, name: "Marc Jan"}
-  @users = [pat, marc]
-  @contacts = [{id: 1, name: 'New Boy', user_id: pat.id},
-               {id: 2, name: 'Hip Girl', user_id: pat.id},
-               {id: 3, name: 'Old Dude', user_id: marc.id}]
+  @api.set('users', [{id: 0, name: "Pat Mims"},
+                     {id: 1, name: "Marc Jan"}])
+  @api.set('contacts', [{id: 1, name: 'New Boy',  user_id: 0},
+                        {id: 2, name: 'Hip Girl', user_id: 0},
+                        {id: 3, name: 'Old Dude', user_id: 1}])
 
   visit("/clients/")
   fillIn("#contact-search", "Pat")
