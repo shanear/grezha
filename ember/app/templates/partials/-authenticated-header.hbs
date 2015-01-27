@@ -20,29 +20,23 @@
           {{#link-to 'vehicles'}} Vehicles {{/link-to}}
         {{/toggled-feature}}
 
-        {{!-- {{#if App.online}} --}}
+        {{#if isOnline}}
         <li>{{#link-to 'birthdays'}}Birthdays{{/link-to}}</li>
-        {{!-- {{/if}} --}}
+        {{/if}}
       </ul>
 
       <div class="login-info">
-{{!--
-        {{#unless App.online}}
+        {{#unless isOnline}}
           <div class="offline">
             Offline
           </div>
         {{/unless}}
 
-        {{#unless App.isProduction}}
+        {{#unless isProduction}}
           <div class="environment">
-            {{App.environment}}
+            {{environment}}
           </div>
         {{/unless}}
---}}
-
-        <div class="environment">
-          (Environment)
-        </div>
 
         <div class="organization">
           {{#if session.admin}}
@@ -55,10 +49,7 @@
           {{/if}}
         </div>
 
-        {{!--
-        <div {{bind-attr class=":dropdown App.online:online:offline"}}>
-        --}}
-        <div class="dropdown online">
+        <div {{bind-attr class=":dropdown isOnline:online:offline"}}>
           <a data-toggle="dropdown" id href="#">
             <span id="username">{{session.username}}</span>
             <span class="caret"></span>
@@ -70,7 +61,7 @@
                 Reset Password
               {{/link-to}}
             </li>
-            <!-- <li class="divider"></li> -->
+            <li class="divider"></li>
             <li>
               <a href {{action "invalidateSession"}} id="logout">
                 Logout
