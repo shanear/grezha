@@ -20,8 +20,19 @@ PretendApi = Ember.Object.extend({
         {"Content-Type": "application/json"},
         JSON.stringify({contacts: @get('contacts')})]
 
+    server.get '/api/v2/contacts/:id', (req)=>
+      contacts = Ember.A(@get('contacts'))
+      contact  = contacts.findBy('id', parseInt(req.params.id))
+      if contact
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({contact: contact})]
+      else
+        return [404, {}, ""]
+
     server.get '/api/v2/users/:id', (req)=>
-      user = @get('users')[req.params.id]
+      users = Ember.A(@get('users'))
+      user  = users.findBy('id', parseInt(req.params.id))
       if user
         return [200,
           {"Content-Type": "application/json"},

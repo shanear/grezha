@@ -34,11 +34,17 @@ test 'show only people in sidebar with matching user', ->
   @api.set('contacts', [{id: 1, name: 'New Boy',  user_id: 0},
                         {id: 2, name: 'Hip Girl', user_id: 0},
                         {id: 3, name: 'Old Dude', user_id: 1}])
-
   visit("/clients/")
   fillIn("#contact-search", "Pat")
   andThen ->
-    ok(/Hip Girl/.test(find(".contact").text()), "Should contain Hip Girl")
-    ok(/New Boy/.test(find(".contact").text()), "Should contain New Boy")
-    ok(!/Old Dude/.test(find(".contact").text()), "Should not contain old dude since different user")
+    ok(contains(".contacts", "Hip Girl"))
+    ok(contains(".contacts", "New Boy"))
+    ok(!contains(".contacts", "Old Dude"))
+
+
+test 'clicking on contact goes to contact page', ->
+  @api.set('contacts', [{id: 1, name: "Cat"}])
+  visit("/clients/")
+  click('.contacts a')
+  andThen -> equal(currentURL(), '/clients/1')
 

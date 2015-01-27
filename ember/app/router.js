@@ -12,7 +12,9 @@ Router.map(function() {
   this.resource('contacts', { path: "/clients" }, function() {
     this.route('new');
     this.route('new', { path: "/new/:name" });
-    this.resource('contact', { path: "/:contact_id" });
+    this.resource('contact', { path: "/:contact_id" }, function() {
+      this.route('edit');
+    });
   });
 
   this.resource('vehicles', function() { });

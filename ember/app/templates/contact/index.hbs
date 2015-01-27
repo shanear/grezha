@@ -1,0 +1,164 @@
+<div class="contact-panel">
+  <div class="control-bar clearfix">
+    <div class="status">
+      {{#unless isRemoteSynced}}
+        Unsynced
+      {{/unless}}
+    </div>
+    {{!--#control-group name="options"}}
+      {{#link-to 'contact.edit' model id='edit-contact'}}
+        <i class="fa fa-pencil"></i>
+        Edit
+      {{/link-to}}
+      <a href {{action "deleteClient"}} id="delete-contact">
+        <i class="fa fa-trash-o delete-contact"></i>
+        Delete
+      </a>
+    {{/control-group --}}
+  </div>
+
+  {{!-- partial "partials/confirmation" --}}
+
+  <div class="clearfix">
+    {{!-- TODO: add the picture field to as a custom feature
+      <div class="avatar clearfix">
+        <img {{bind-attr src=pictureUrl}}></img>
+        {{image-uploader resource="contacts" resourceId=id action="changeImage"}}
+      </div>
+    --}}
+
+      <div class="top-info">
+        <h3 id="contact-name">{{name}}</h3>
+
+        {{!#feature 'addedOn'}}
+          <div class="contact-id">
+            {{#if addedAt}}
+              added {{!formatDate addedAt}}
+            {{/if}}
+          </div>
+        {{!/feature}}
+
+        <div class="attributes">
+          <p id="contact-from">
+            <span class="field-label">from</span>
+            {{#if city}}
+              {{city}}
+            {{else}}
+              unknown
+            {{/if}}
+          </p>
+
+          <p id="contact-user">
+            <span class="field-label">field op</span>
+              {{#if user}}
+                 {{user.name}}
+              {{else}}
+                 unassigned
+              {{/if}}
+          </p>
+
+          <p id="contact-birthday">
+            <span class="field-label">birthday</span>
+            {{#if birthday}}
+              {{format-birthday birthday}}
+            {{else}}
+              unknown
+            {{/if}}
+          </p>
+
+          <p id="last-seen">
+            <span class="field-label">last contact</span>
+            {{#if lastSeen}}
+              {{format-date lastSeen}}
+            {{/if}}
+          </p>
+
+          <p id="contact-phone">
+            {{#if phone}}
+            <span class="field-label">phone</span>
+              {{phone}}
+            {{/if}}
+          </p>
+        </div>
+    </div>
+  </div>
+
+  {{#if bio}}
+    <div class="bio">
+      {{break-lines bio}}
+    </div>
+  {{/if}}
+
+  <div id="relationships">
+    <div class="section-header">
+      <div class="right">
+        {{#if addingRelationship}}
+          <button class="btn btn-link" {{action "cancelNewRelationship"}}>
+            Cancel
+          </button>
+        {{else}}
+          <button id="add-relationship" class="btn btn-default" {{action "newRelationship"}}>
+            Add
+          </button>
+        {{/if}}
+      </div>
+
+      <div class="left">
+        <h4>Relationships</h4>
+      </div>
+    </div>
+
+    {{!new-relationship contact=model store=store people=allPeople
+      enabled=addingRelationship}}
+
+    {{#each relationships}}
+      {{relationship-panel relationship=this}}
+    {{else}}
+       <p> There are no relationships for this person. </p>
+    {{/each}}
+  </div>
+
+  <div class="connections">
+    <div class="section-header">
+      <div class="right">
+        {{#if addingConnection}}
+          <button class="btn btn-link" {{action "cancelNewConnection"}}>
+            Cancel
+          </button>
+        {{else}}
+          <button id="add-connection" class="btn btn-default"
+             {{action "newConnection"}}>
+            Add
+          </button>
+        {{/if}}
+      </div>
+
+      <div class="left">
+        <h4>
+          <a {{action "filterMode" null}}>
+            Connections
+            ({{connections.length}})
+          </a>
+        </h4>
+
+        {{#each mode in App.Connection.MODES}}
+          {{connection-mode
+              mode=mode
+              contact=model
+              selected=filterByMode
+              onSelect="filterMode"}}
+        {{/each}}
+      </div>
+    </div>
+
+    {{!new-connection enabled=addingConnection contact=model store=store}}
+
+    {{#each connectionsToShow}}
+      {{connection-panel connection=this}}
+    {{else}}
+      <p> There are no connections for this person. </p>
+    {{/each}}
+  </div>
+
+</div>
+
