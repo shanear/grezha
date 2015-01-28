@@ -3,6 +3,8 @@
 
 PretendApi = Ember.Object.extend({
   contacts: [],
+  savedContact: null,
+  deletedContactId: null,
   users: [],
   authToken: "",
   resetPasswordToken: "",
@@ -10,11 +12,22 @@ PretendApi = Ember.Object.extend({
   start: ->
     server = new Pretender()
     @setupAccountEndpoints(server)
-    @setupEndpoints(server)
+    @setupContactEndpoints(server)
+    @setupUserEndpoints(server)
     this
 
-  setupEndpoints: (server)->
-    @endpoints + ""
+  setupContactEndpoints: (server)->
+    server.post '/api/v2/contacts', (req)=>
+      data = JSON.parse(req.requestBody)
+      @set('savedContact', data.contact)
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({contacts: @get('contacts')})]
+
+    server.delete '/api/v2/contacts/:id', (req)=>
+      @set('deletedContactId', req.params.id)
+      return [200, {"Content-Type": "application/json"}, "{}"]
+
     server.get '/api/v2/contacts', =>
       return [200,
         {"Content-Type": "application/json"},
@@ -29,6 +42,12 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({contact: contact})]
       else
         return [404, {}, ""]
+
+  setupUserEndpoints: (server)->
+    server.get '/api/v2/users', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({users: @get('users')})]
 
     server.get '/api/v2/users/:id', (req)=>
       users = Ember.A(@get('users'))

@@ -1,6 +1,7 @@
 `import DS from 'ember-data'`
 
 Contact = DS.Model.extend
+  isRemoteSynced: true
   name: DS.attr('string')
   city: DS.attr('string')
   bio: DS.attr('string')

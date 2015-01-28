@@ -29,6 +29,7 @@ test "shows correctly formatted information for contact", ->
     name: "Suzie",
     birthday: "1990-03-02T08:00:00.000Z",
     created_at: "2015-01-26T18:48:31.142Z",
+    added_at: "2015-01-22T18:48:31.142Z",
     city: "San Francisco",
     phone: "123-123-5555",
     user_id: 1,
@@ -41,5 +42,18 @@ test "shows correctly formatted information for contact", ->
     ok(contains("#contact-user", "Kat"))
     ok(contains("#contact-from", "San Francisco"))
     ok(contains("#last-seen", "January 26th 2015"))
+    ok(contains("#added-at", "added January 22nd 2015"))
     ok(contains("#contact-phone", "123-123-5555"))
-    ok(contains(".bio", "Line one<br>Line two"), find(".bio").html())
+    ok(contains(".bio", "Line one<br>Line two"))
+
+
+test "delete a contact", ->
+  @api.set('contacts', [{id: 7, name: "Jane Doe"}])
+  visit("/clients/7")
+  click("#delete-contact")
+  click("#confirmation .cancel")
+  andThen -> ok(!exists("#confirmation"))
+  click("#delete-contact")
+  click("#confirmation .confirm")
+  andThen =>
+    equal(@api.get('deletedContactId'), '7')
