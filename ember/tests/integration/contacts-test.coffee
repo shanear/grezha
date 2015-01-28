@@ -48,3 +48,11 @@ test 'clicking on contact goes to contact page', ->
   click('.contacts a')
   andThen -> equal(currentURL(), '/clients/1')
 
+
+test 'adds contact with name in search bar', ->
+  visit('/clients/')
+  fillIn("#contact-search", "Hamilton")
+  click('.new-contact a')
+  andThen ->
+    equal(currentPath(), 'contacts.new')
+    equal(find('#name').val(), "Hamilton")
