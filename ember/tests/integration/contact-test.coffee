@@ -57,3 +57,40 @@ test "delete a contact", ->
   click("#confirmation .confirm")
   andThen =>
     equal(@api.get('deletedContactId'), '7')
+
+
+test "add a relationship", ->
+  @api.set('contacts', [{id: 7, name: "Jane Doe"}])
+  visit("/clients/7")
+  click("#add-relationship")
+  fillIn("#new-relationship-name", "Mother May")
+  click(".suggestions.active a")
+  fillIn("#person-role", "mom")
+  click("#save-person")
+  andThen =>
+    savedPerson = @api.get('savedPerson')
+    equal(savedPerson.name, "Mother May")
+    equal(savedPerson.role, "mom")
+    savedRelationship = @api.get('savedRelationship')
+    equal(savedRelationship.contact_id, 7)
+
+
+test "shows relationships for a contact", ->
+  @api.set('contacts', [{id: 8, name: "Leeroy Jenkins", relationship_ids: [1000]}])
+  @api.set('people',[{id:2, name: "Tatiana", role: "Fairy Princess"}])
+  @api.set('relationships', [{id: 1000, contact_id: 8, person_id: 2}])
+  visit("/clients/8")
+  andThen =>
+    ok(contains(".relationship .name", "Tatiana"))
+    ok(contains(".relationship .type", "Fairy Princess"))
+
+
+test "deletes a relationship", ->
+  @api.set('contacts', [{id: 8, name: "Leeroy Jenkins", relationship_ids: [1000]}])
+  @api.set('people',[{id:2, name: "Tatiana", role: "Fairy Princess"}])
+  @api.set('relationships', [{id: 1000, contact_id: 8, person_id: 2}])
+  visit("/clients/8")
+  click(".delete-relationship")
+  andThen =>
+    ok(contains("#relationships", "There are no relationships for this person"))
+    equal(@api.get('deletedRelationshipId'), 1000)

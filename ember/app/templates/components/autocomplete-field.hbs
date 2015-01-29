@@ -1,0 +1,33 @@
+<div class="autocomplete">
+  {{enriched-textfield
+      id=inputId
+      class=inputClass
+      type="text"
+      value=value
+      upArrow="moveHighlightUp"
+      downArrow="moveHighlightDown"
+      escape="hideSuggestions"
+      enter="selectHighlightedSuggestion"
+      chromeAutocomplete="off"
+      autofocus=autofocus}}
+
+  <ul {{bind-attr class=":suggestions isAutocompleting:active"}}>
+    {{#each suggestion in activeSuggestions}}
+      <li {{action "highlightSuggestion" suggestion on="mouseEnter"}}>
+        <a {{bind-attr class="suggestion.isHighlighted:highlighted"}}
+           {{action "selectSuggestion" suggestion}}>
+
+          {{#if suggestion.isDefault}}
+            {{pinnedSuggestion}}
+          {{else}}
+            {{property queryProperty suggestion}}
+
+            <div class="subtext">
+              {{property subtextProperty suggestion}}
+            </div>
+          {{/if}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+</div>

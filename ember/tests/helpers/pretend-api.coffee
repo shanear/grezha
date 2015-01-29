@@ -5,7 +5,10 @@ PretendApi = Ember.Object.extend({
   contacts: [],
   savedContact: null,
   deletedContactId: null,
+  deletedRelationshipId: null,
   users: [],
+  relationships: [],
+  people: [],
   authToken: "",
   resetPasswordToken: "",
 
@@ -14,6 +17,8 @@ PretendApi = Ember.Object.extend({
     @setupAccountEndpoints(server)
     @setupContactEndpoints(server)
     @setupUserEndpoints(server)
+    @setupPeopleEndpoints(server)
+    @setupRelationshipEndpoints(server)
     this
 
   setupContactEndpoints: (server)->
@@ -42,6 +47,48 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({contact: contact})]
       else
         return [404, {}, ""]
+
+  setupPeopleEndpoints: (server)->
+    server.post '/api/v2/people', (req)=>
+      data = JSON.parse(req.requestBody)
+      @set('savedPerson', data.person)
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({person: data.person})]
+
+    server.get '/api/v2/people/:id', (req) =>
+      people = Ember.A(@get('people'))
+      person = people.findBy('id', parseInt(req.params.id))
+      if person
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({person: person})]
+      else
+        return [404, {}, ""]
+
+  setupRelationshipEndpoints: (server) ->
+    server.post '/api/v2/relationships', (req) =>
+      data = JSON.parse(req.requestBody)
+      @set('savedRelationship', data.relationship)
+      @get('relationships')
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({relationship: data.relationship})]
+
+    server.get '/api/v2/relationships/:id', (req) =>
+      relationships = Ember.A(@get('relationships'))
+      relationship  = relationships.findBy('id', parseInt(req.params.id))
+      if relationship
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({relationship: relationship})]
+      else
+        return [404, {}, ""]
+
+    server.delete '/api/v2/relationships/:id', (req)=>
+      @set('deletedRelationshipId', req.params.id)
+      return [200, {"Content-Type": "application/json"}, "{}"]
+
 
   setupUserEndpoints: (server)->
     server.get '/api/v2/users', =>

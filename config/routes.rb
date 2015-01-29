@@ -47,6 +47,8 @@ Daughters::Application.routes.draw do
 
       resources :contacts, except: [:new, :edit]
       resources :users, except: [:new, :edit, :update]
+      resources :people, except: [:new, :edit]
+      resources :relationships, except: [:new, :edit]
     end
   end
 

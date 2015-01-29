@@ -4,6 +4,7 @@
 ContactIndexController = Ember.ObjectController.extend HasConfirmation,
   needs: ['application']
   isReadonly: Ember.computed.oneWay('controllers.application.isReadonly')
+  allPeople: []
 
   actions:
     deleteClient: ->
@@ -16,5 +17,7 @@ ContactIndexController = Ember.ObjectController.extend HasConfirmation,
           @get('model').deleteRecord()
           @get('model').save()
           @transitionToRoute('contacts')
+
+    newRelationship: -> @set('addingRelationship', true)
 
 `export default ContactIndexController`

@@ -1,0 +1,30 @@
+{{partial "partials/confirmation"}}
+
+<div class="relationship">
+  <div class="summary">
+    <div class="left">
+      {{!#link-to 'person.edit' relationship.person }}
+        <div class="name">
+          {{relationship.person.name}}
+        </div>
+      {{!/link-to}}
+      <div class="type">{{relationship.person.role}}</div>
+    </div>
+
+    <div class="right">
+      {{!-- {{{highlightEmails relationship.person.contactInfo}}} --}}
+        {{!#control-group name="options"}}
+          <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
+            <i class="fa fa-trash-o"></i>
+            Remove
+          </button>
+        {{!/control-group}}
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="notes">
+      {{break-lines relationship.person.notes}}
+    </div>
+  </div>
+</div>

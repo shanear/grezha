@@ -12,6 +12,7 @@ Contact = DS.Model.extend
     defaultValue: -> new Date()
   )
   connections: DS.hasMany('connection', async: true)
+  relationships: DS.hasMany('relationship', async: true)
   user: DS.belongsTo('user', async: true)
   errors: []
 

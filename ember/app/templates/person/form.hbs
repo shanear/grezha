@@ -1,0 +1,69 @@
+<div class="form-horizontal add-model-form">
+
+  <div class="form-group">
+    <label for="person-name" class="col-sm-3 control-label">name</label>
+
+    <div class="col-sm-9">
+      {{enriched-textfield
+          id="person-name"
+          class="form-control"
+          value=this.name
+          autofocus=autofocusName}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="person-role" class="col-sm-3 control-label">role</label>
+
+    <div class="col-sm-9">
+      {{enriched-textfield
+          id="person-role"
+          class="form-control"
+          placeholder="father, social worker, etc."
+          value=this.role
+          autofocus=autofocusRole}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="person-contact-info" class="col-sm-3 control-label">contact info</label>
+
+    <div class="col-sm-9">
+      {{textarea id="person-contact-info"
+        class="form-control"
+        value=this.contactInfo
+        placeholder="phone number, email, etc."}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="person-notes" class="col-sm-3 control-label">notes</label>
+
+    <div class="col-sm-9">
+      {{textarea id="person-notes"
+        class="form-control"
+        placeholder="Any additional notes about them?"
+        value=this.notes}}
+    </div>
+  </div>
+
+  <div class="cancel">
+    <button class="btn btn-link" id="cancel-edit-person" {{action "cancel"}}>
+      Cancel
+    </button>
+  </div>
+
+  <div class="save-button">
+    <button id="save-person" class="btn btn-default " {{action "savePerson"}}>
+      Save
+    </button>
+  </div>
+</div>
+
+{{#if errors.length}}
+  <ul class="errors">
+    {{#each errors}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

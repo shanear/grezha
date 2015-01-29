@@ -1,0 +1,24 @@
+{{#if enabled}}
+  {{#if newPerson}}
+    {{partial "person/form"}}
+  {{else}}
+    <div class="form-horizontal add-model-form">
+      <div class="form-group">
+        <label for="newRelationshipName" class="col-sm-3 control-label">name</label>
+
+        <div class="col-sm-9">
+          {{autocomplete-field
+              inputId="new-relationship-name"
+              inputClass="form-control"
+              value=newRelationshipName
+              suggestions=people
+              queryProperty="name"
+              subtextProperty="role"
+              pinnedSuggestion="+ New Person"
+              onSelect="selectPerson"
+              autofocus=true}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+{{/if}}
