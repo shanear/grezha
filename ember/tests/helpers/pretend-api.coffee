@@ -66,6 +66,11 @@ PretendApi = Ember.Object.extend({
       else
         return [404, {}, ""]
 
+    server.get '/api/v2/people', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({people: @get('people')})]
+
   setupRelationshipEndpoints: (server) ->
     server.post '/api/v2/relationships', (req) =>
       data = JSON.parse(req.requestBody)

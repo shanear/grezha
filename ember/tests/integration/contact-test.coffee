@@ -80,6 +80,19 @@ test "add a relationship", ->
     equal(savedRelationship.contact_id, 7)
 
 
+test "add relationship to an existing person", ->
+  @api.set('contacts', [{id: 4, name: "Jonny Manzel"}])
+  @api.set('people', [{id: 5, name: "Coach Carter", role: "coach"}])
+  visit("/clients/4")
+  click("#add-relationship")
+  fillIn("#new-relationship-name", "Coach C")
+  click(".suggestions.active a")
+  andThen =>
+    savedRelationship = @api.get('savedRelationship')
+    equal(savedRelationship.contact_id, 4)
+    equal(savedRelationship.person_id, 5)
+
+
 test "shows relationships for a contact", ->
   @api.set('contacts', [{id: 8, name: "Leeroy Jenkins", relationship_ids: [1000]}])
   @api.set('people',[{id:2, name: "Tatiana", role: "Fairy Princess"}])

@@ -20,10 +20,10 @@
           {{#if suggestion.isDefault}}
             {{pinnedSuggestion}}
           {{else}}
-            {{property queryProperty suggestion}}
+            {{property-from queryProperty suggestion}}
 
             <div class="subtext">
-              {{property subtextProperty suggestion}}
+              {{property-from subtextProperty suggestion}}
             </div>
           {{/if}}
         </a>
