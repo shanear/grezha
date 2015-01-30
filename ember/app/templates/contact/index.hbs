@@ -89,7 +89,9 @@
     <div class="section-header">
       <div class="right">
         {{#if addingRelationship}}
-          <button class="btn btn-link" {{action "cancelNewRelationship"}}>
+          <button id="cancel-new-relationship"
+                  class="btn btn-link"
+                  {{action "cancelNewRelationship"}}>
             Cancel
           </button>
         {{else}}

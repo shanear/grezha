@@ -63,6 +63,11 @@ test "add a relationship", ->
   @api.set('contacts', [{id: 7, name: "Jane Doe"}])
   visit("/clients/7")
   click("#add-relationship")
+  click("#cancel-new-relationship")
+  andThen ->
+    ok(!exists("#new-relationship-name"))
+
+  click("#add-relationship")
   fillIn("#new-relationship-name", "Mother May")
   click(".suggestions.active a")
   fillIn("#person-role", "mom")
