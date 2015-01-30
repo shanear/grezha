@@ -12,14 +12,15 @@
     </div>
 
     <div class="right">
-      {{!-- {{{highlightEmails relationship.person.contactInfo}}} --}}
-        {{#if connection.online}}
-          <div class="optons">
-            <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
-              <i class="fa fa-trash-o"></i>
-              Remove
-            </button>
-        {{/if}}
+      {{{linkify-emails relationship.person.contactInfo}}}
+
+      {{#if connection.online}}
+        <div class="optons">
+          <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
+            <i class="fa fa-trash-o"></i>
+            Remove
+          </button>
+      {{/if}}
     </div>
   </div>
 

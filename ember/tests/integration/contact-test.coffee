@@ -95,12 +95,19 @@ test "add relationship to an existing person", ->
 
 test "shows relationships for a contact", ->
   @api.set('contacts', [{id: 8, name: "Leeroy Jenkins", relationship_ids: [1000]}])
-  @api.set('people',[{id:2, name: "Tatiana", role: "Fairy Princess"}])
+  @api.set('people',[{
+    id: 2,
+    name: "Tatiana",
+    role: "Fairy Princess"
+    contact_info: "hapily@everafter.com"
+  }])
   @api.set('relationships', [{id: 1000, contact_id: 8, person_id: 2}])
   visit("/clients/8")
   andThen =>
     ok(contains(".relationship .name", "Tatiana"))
     ok(contains(".relationship .type", "Fairy Princess"))
+    ok(contains("a[href='mailto:hapily@everafter.com']",
+                "hapily@everafter.com"))
 
 
 test "deletes a relationship", ->
