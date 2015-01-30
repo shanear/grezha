@@ -13,12 +13,13 @@
 
     <div class="right">
       {{!-- {{{highlightEmails relationship.person.contactInfo}}} --}}
-        {{!#control-group name="options"}}
-          <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
-            <i class="fa fa-trash-o"></i>
-            Remove
-          </button>
-        {{!/control-group}}
+        {{#if connection.online}}
+          <div class="optons">
+            <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
+              <i class="fa fa-trash-o"></i>
+              Remove
+            </button>
+        {{/if}}
     </div>
   </div>
 

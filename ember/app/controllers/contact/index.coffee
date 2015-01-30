@@ -2,8 +2,6 @@
 `import HasConfirmation from 'grezha/mixins/has-confirmation'`
 
 ContactIndexController = Ember.ObjectController.extend HasConfirmation,
-  needs: ['application']
-  isReadonly: Ember.computed.oneWay('controllers.application.isReadonly')
   allPeople: []
 
   actions:

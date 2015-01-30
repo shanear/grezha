@@ -6,7 +6,7 @@
       {{/unless}}
     </div>
 
-    {{#unless isReadonly}}
+    {{#if connection.online}}
       <div class="options">
         {{#link-to 'contact.edit' model id='edit-contact'}}
           <i class="fa fa-pencil"></i>
@@ -17,7 +17,7 @@
           Delete
         </a>
       </div>
-    {{/unless}}
+    {{/if}}
   </div>
 
   {{ partial "partials/confirmation" }}
