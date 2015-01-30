@@ -91,11 +91,15 @@ test "shows relationships for a contact", ->
 
 
 test "deletes a relationship", ->
-  @api.set('contacts', [{id: 8, name: "Leeroy Jenkins", relationship_ids: [1000]}])
+  @api.set('contacts', [{
+    id: 8,
+    name: "Leeroy Jenkins",
+    relationship_ids: [1000]
+  }])
   @api.set('people',[{id:2, name: "Tatiana", role: "Fairy Princess"}])
   @api.set('relationships', [{id: 1000, contact_id: 8, person_id: 2}])
   visit("/clients/8")
   click(".delete-relationship")
   andThen =>
-    ok(contains("#relationships", "There are no relationships for this person"))
+    ok(contains("#relationships", "no relationships"))
     equal(@api.get('deletedRelationshipId'), 1000)
