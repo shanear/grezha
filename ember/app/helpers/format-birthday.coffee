@@ -1,10 +1,12 @@
 `import Ember from 'ember'`
 
 formatBirthday = Ember.Handlebars.makeBoundHelper (date) ->
+    return "" unless date
+
     if date.getFullYear() != 1900
-      return moment(date).format("MMMM Do YYYY")
+      moment(date).format("MMMM Do YYYY")
     else
-      return moment(date).format("MMMM Do")
+      moment(date).format("MMMM Do")
 
 `export default formatBirthday`
 

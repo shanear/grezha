@@ -11,6 +11,13 @@ module 'Contacts page integration test',
   teardown: ->
     Ember.run(@app, @app.destroy)
 
+test "contact counter works", ->
+  @api.set('contacts', [{id: 1}, {id: 2}, {id: 3}, {id: 7}])
+  visit("/clients/")
+  andThen =>
+    ok(contains("#contacts-link", "(4)"),
+      "Number of total contacts should be in header")
+
 
 test "shows all people in sidebar when no search query entered", ->
   @api.set('contacts', [{id: 1, name: "Cat"}, {id: 2, name: "Sted"}])
