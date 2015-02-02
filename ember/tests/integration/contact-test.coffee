@@ -59,6 +59,23 @@ test "delete a contact", ->
     equal(@api.get('deletedContactId'), '7')
 
 
+test "add a connection", ->
+  @api.set('contacts', [{id: 4, name: "Tom Brady"}])
+  visit("/clients/4")
+  click("#add-connection")
+  fillIn("#new-connection-note", "good email")
+  fillIn("#new-connection-mode", "Email")
+  fillIn("#new-connection-date .selected-month", "9")
+  fillIn("#new-connection-date .selected-day", "6")
+  fillIn("#new-connection-date .selected-year", "2014")
+  click("#save-connection")
+  andThen =>
+    savedConnection = @api.get('savedConnection')
+    equal(savedConnection.note, "good email")
+    equal(savedConnection.mode, "Email")
+    ok(/2014-09-06/.test(savedConnection.occurred_at))
+
+
 test "add a relationship", ->
   @api.set('contacts', [{id: 7, name: "Jane Doe"}])
   visit("/clients/7")

@@ -16,6 +16,7 @@ ContactIndexController = Ember.ObjectController.extend HasConfirmation,
           @get('model').save()
           @transitionToRoute('contacts')
 
+    newConnection: -> @set("addingConnection", true)
     newRelationship: -> @set('addingRelationship', true)
     cancelNewRelationship: -> @set('addingRelationship', false)
 
