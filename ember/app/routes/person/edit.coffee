@@ -3,7 +3,6 @@
 
 PersonEditRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
-    console.log("LOADING ROUTE")
     @modelFor('person')
 
   deactivate: ->
