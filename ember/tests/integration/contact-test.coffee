@@ -109,6 +109,10 @@ test "shows relationships for a contact", ->
     ok(contains("a[href='mailto:hapily@everafter.com']",
                 "hapily@everafter.com"))
 
+  click('.relationship .name')
+  andThen ->
+    equal(currentPath(), 'contacts.contact.people.person.edit')
+
 
 test "deletes a relationship", ->
   @api.set('contacts', [{

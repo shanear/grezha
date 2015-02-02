@@ -19,6 +19,17 @@ PretendApi = Ember.Object.extend({
     @setupUserEndpoints(server)
     @setupPeopleEndpoints(server)
     @setupRelationshipEndpoints(server)
+
+    server.unhandledRequest = (verb, path, request)->
+      console.warn("The API was hit with an unrecognized path:");
+      console.warn("#{verb} #{path}");
+
+    server.erroredRequest = (verb, path, request, error)->
+      console.warn("There was an error with the pretend API:");
+      console.warn("endpoint: #{verb} #{path}");
+      console.warn("error:");
+      console.warn(error);
+
     this
 
   setupContactEndpoints: (server)->
@@ -55,6 +66,18 @@ PretendApi = Ember.Object.extend({
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({person: data.person})]
+
+    server.put '/api/v2/people/:id', (req)=>
+      people = Ember.A(@get('people'))
+      person = people.findBy('id', parseInt(req.params.id))
+      if person
+        data = JSON.parse(req.requestBody)
+        @set('savedPerson', data.person)
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({person: person})]
+      else
+        return [404, {}, ""]
 
     server.get '/api/v2/people/:id', (req) =>
       people = Ember.A(@get('people'))

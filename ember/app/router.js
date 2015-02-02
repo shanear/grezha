@@ -14,9 +14,13 @@ Router.map(function() {
     this.route('new', { path: "/new/:name" });
     this.resource('contact', { path: "/:contact_id" }, function() {
       this.route('edit');
+      this.resource('people', function() {
+        this.resource('person', {path: "/:person_id"}, function() {
+          this.route('edit');
+        });
+      });
     });
   });
-
   this.resource('vehicles', function() { });
   this.route('birthdays');
 });
