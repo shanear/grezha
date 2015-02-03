@@ -1,8 +1,18 @@
 `import Ember from 'ember'`
+`import Connection from 'grezha/models/connection'`
 `import HasConfirmation from 'grezha/mixins/has-confirmation'`
 
 ContactIndexController = Ember.ObjectController.extend HasConfirmation,
+  connectionModes: Connection.MODES
   allPeople: []
+  filterByMode: null
+
+  connectionsToShow: (->
+    return @get("sortedConnections") unless @get("filterByMode")?
+
+    @get("sortedConnections").filter (connection)=>
+      connection.get("mode") == @get("filterByMode")
+  ).property('sortedConnections.@each.mode', 'filterByMode')
 
   actions:
     deleteClient: ->
@@ -17,7 +27,9 @@ ContactIndexController = Ember.ObjectController.extend HasConfirmation,
           @transitionToRoute('contacts')
 
     newConnection: -> @set("addingConnection", true)
+    cancelNewConnection: -> @set("addingConnection", false)
     newRelationship: -> @set('addingRelationship', true)
     cancelNewRelationship: -> @set('addingRelationship', false)
+    filterMode: (mode)-> @set('filterByMode', mode)
 
 `export default ContactIndexController`

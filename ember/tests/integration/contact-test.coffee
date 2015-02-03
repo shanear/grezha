@@ -47,6 +47,42 @@ test "shows correctly formatted information for contact", ->
     ok(contains(".bio", "Line one<br>Line two"))
 
 
+test "shows and filters connections", ->
+  @api.set('contacts', [{
+    id: 6,
+    name: "Matt Saracen",
+    connection_ids: [1, 2]
+  }])
+  @api.set('connections', [
+    {
+      id: 1,
+      mode: "Email",
+      occured_at: "2015-01-26T18:48:31.142Z",
+      note: "sent an email"
+    },
+    {
+      id: 2,
+      mode: "In Person",
+      occured_at: "2015-01-27T11:48:42.000Z",
+      note: "sent an email"
+    }
+  ])
+
+  visit("/clients/6")
+  andThen =>
+    equal(find(".connection").length, 2)
+    equal(find(".select-mode").length, 2)
+  click(".select-mode")
+  andThen =>
+    equal(find(".connection").length, 1)
+    equal(find(".select-mode").length, 1)
+    equal(find(".selected-mode").length, 1)
+  click(".connections h4 a")
+  andThen =>
+    equal(find(".connection").length, 2)
+    equal(find(".select-mode").length, 2)
+
+
 test "delete a contact", ->
   @api.set('contacts', [{id: 7, name: "Jane Doe"}])
   visit("/clients/7")
@@ -57,6 +93,17 @@ test "delete a contact", ->
   click("#confirmation .confirm")
   andThen =>
     equal(@api.get('deletedContactId'), '7')
+
+
+test "cancel add a connection", ->
+  @api.set('contacts', [{id: 4, name: "LeBron James"}])
+  visit("/clients/4")
+  click("#add-connection")
+  fillIn("#new-connection-note", "good email")
+  click("#cancel-add-connection")
+  andThen =>
+    ok(!exists("#new-connection-note"),
+      "Clicking cancel should close new connection form")
 
 
 test "add a connection", ->
@@ -74,6 +121,8 @@ test "add a connection", ->
     equal(savedConnection.note, "good email")
     equal(savedConnection.mode, "Email")
     ok(/2014-09-06/.test(savedConnection.occurred_at))
+    ok(!exists("#new-connection-note"),
+      "Saving connction should close form")
 
 
 test "add a relationship", ->

@@ -69,6 +69,16 @@ PretendApi = Ember.Object.extend({
         {"Content-Type": "application/json"},
         JSON.stringify({connection: data.connection})]
 
+    server.get '/api/v2/connections/:id', (req)=>
+      connections = Ember.A(@get('connections'))
+      connection = connections.findBy('id', parseInt(req.params.id))
+      if connection
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({connection: connection})]
+      else
+        return [404, {}, ""]
+
   setupPeopleEndpoints: (server)->
     server.post '/api/v2/people', (req)=>
       data = JSON.parse(req.requestBody)
