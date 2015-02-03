@@ -45,6 +45,7 @@ Daughters::Application.routes.draw do
       post "/forgot-password", to: "account#forgot_password"
       post "/reset-password", to: "account#reset_password"
 
+      resources :connections, except: [:new, :edit, :update]
       resources :contacts, except: [:new, :edit]
       resources :users, except: [:new, :edit, :update]
       resources :people, except: [:new, :edit]
