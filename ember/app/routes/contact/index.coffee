@@ -1,7 +1,7 @@
 `import BaseRoute from '../base'`
 `import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin'`
 
-ContactIndexRoute = BaseRoute.extend
+ContactIndexRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
     @modelFor("contact")
 
