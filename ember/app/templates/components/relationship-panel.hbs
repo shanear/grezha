@@ -15,7 +15,7 @@
     <div class="right">
       {{{linkify-emails relationship.person.contactInfo}}}
 
-      {{#if connection.online}}
+      {{#if apiConnection.online}}
         <div class="optons">
           <button class="btn btn-link delete-relationship" {{action "deleteRelationship"}}>
             <i class="fa fa-trash-o"></i>

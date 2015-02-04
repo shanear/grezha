@@ -125,6 +125,16 @@ test "add a connection", ->
       "Saving connction should close form")
 
 
+test "delete a connection", ->
+  @api.set('contacts', [{id: 4, name: "Liz Lemon", connection_ids: [72]}])
+  @api.set('connections', [{id: 72, note: "we laughed, we cried"}])
+  visit("/clients/4")
+  click(".delete-connection")
+  click(".confirm")
+  andThen =>
+    equal(@api.get('deletedConnectionId'), 72)
+
+
 test "add a relationship", ->
   @api.set('contacts', [{id: 7, name: "Jane Doe"}])
   visit("/clients/7")

@@ -5,6 +5,7 @@ PretendApi = Ember.Object.extend({
   contacts: [],
   savedContact: null,
   deletedContactId: null,
+  deletedConnectionId: null,
   deletedRelationshipId: null,
   users: [],
   connections: [],
@@ -78,6 +79,10 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({connection: connection})]
       else
         return [404, {}, ""]
+
+    server.delete '/api/v2/connections/:id', (req)=>
+      @set('deletedConnectionId', req.params.id)
+      return [200, {"Content-Type": "application/json"}, "{}"]
 
   setupPeopleEndpoints: (server)->
     server.post '/api/v2/people', (req)=>

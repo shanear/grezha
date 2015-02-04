@@ -20,13 +20,13 @@
           {{#link-to 'vehicles'}} Vehicles {{/link-to}}
         {{/toggled-feature}}
 
-        {{#if connection.online}}
+        {{#if apiConnection.online}}
           <li>{{#link-to 'birthdays'}}Birthdays{{/link-to}}</li>
         {{/if}}
       </ul>
 
       <div class="login-info">
-        {{#unless connection.online}}
+        {{#unless apiConnection.online}}
           <div class="offline">
             Offline
           </div>
@@ -49,7 +49,7 @@
           {{/if}}
         </div>
 
-        <div {{bind-attr class=":dropdown connection.online:online:offline"}}>
+        <div {{bind-attr class=":dropdown apiConnection.online:online:offline"}}>
           <a data-toggle="dropdown" id href="#">
             <span id="username">{{session.username}}</span>
             <span class="caret"></span>
