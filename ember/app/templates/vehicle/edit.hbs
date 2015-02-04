@@ -1,0 +1,15 @@
+<h2>Edit Vehicle</h2>
+
+<form class="vehicle-form">
+  {{partial "vehicle/form"}}
+
+  <div class="cancel">
+    {{#link-to 'vehicle' this}}
+      cancel
+    {{/link-to}}
+  </div>
+
+  <button class="btn btn-default" id="saveVehicle" {{action "saveVehicle"}}>
+    Save Vehicle
+  </button>
+</form>

@@ -341,6 +341,10 @@ ul.connection_errors  {
 }
 
 .vehicle-panel {
+  .top-info {
+    padding: $usual-buffer;
+  }
+
   h3 {
     margin: 0px;
   }

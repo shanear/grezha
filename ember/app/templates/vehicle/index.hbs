@@ -1,0 +1,43 @@
+<div class="vehicle-panel">
+  <div class="control-bar clearfix">
+    <div class="status">
+      {{#unless isRemoteSynced}}
+        Unsynced
+      {{/unless}}
+    </div>
+
+    {{#if apiConnection.online}}
+      <div class="options">
+        {{#link-to 'vehicle.edit' model}}
+          <i class="fa fa-pencil"></i>
+          Edit
+        {{/link-to}}
+        <a href {{action "deleteVehicle"}}>
+          <i class="fa fa-trash-o"></i>
+          Delete
+        </a>
+      </div>
+    {{/if}}
+  </div>
+
+  {{partial "partials/confirmation"}}
+
+  <div class="top-info">
+    <h3>
+      #{{licensePlate}}
+    </h3>
+
+    <div class="used-by">
+      {{#if usedBy}}
+        driven by {{usedBy}}
+      {{else}}
+        unknown driver
+      {{/if}}
+    </div>
+
+    <div class="notes">
+      <b>notes:</b><br/>
+      {{break-lines notes}}
+    </div>
+  </div>
+</div>

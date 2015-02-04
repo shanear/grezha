@@ -21,7 +21,13 @@ Router.map(function() {
       });
     });
   });
-  this.resource('vehicles', function() { });
+  this.resource('vehicles', function() {
+    this.route('new');
+    this.route('new', { path: "/new/:name" });
+    this.resource('vehicle', { path: "/:vehicle_id" }, function() {
+      this.route('edit');
+    });
+  });
   this.route('birthdays');
 });
 

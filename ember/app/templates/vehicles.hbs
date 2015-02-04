@@ -1,0 +1,31 @@
+<div id="sidebar">
+  <div class="controls">
+    <div class="searchbar">
+        <i class="fa fa-search"></i>
+        {{input type="text" class="form-control" id="vehicle-search" value=filterQuery}}
+        {{searchFilter}}
+    </div>
+
+    <div class='new-vehicle'>
+      {{#link-to 'vehicles.new' filterQuery class="btn btn-default"}}
+        Add {{newModelText}}
+      {{/link-to}}
+    </div>
+  </div>
+
+  <div class="searchlist">
+    <ul class="vehicles">
+      {{#each filteredCollection}}
+        <li class="vehicle">
+          {{#link-to 'vehicle' this}}
+            {{licensePlate}}
+          {{/link-to}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div id="main-panel">
+  {{outlet}}
+</div>
