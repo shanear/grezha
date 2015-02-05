@@ -75,6 +75,11 @@ PretendApi = Ember.Object.extend({
         return [404, {}, ""]
 
   setupConnectionEndpoints: (server)->
+    server.get '/api/v2/connections', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({connections: @get('connections')})]
+
     server.post '/api/v2/connections', (req)=>
       data = JSON.parse(req.requestBody)
       @set('savedConnection', data.connection)

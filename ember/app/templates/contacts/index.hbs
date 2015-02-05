@@ -1,0 +1,51 @@
+<div {{bind-attr class=":dashboard hasConnections:visible"}}>
+  <p>You've recorded <b>{{allConnections.length}}</b> connections.  Keep it up!</p>
+
+  <div class="connections-report">
+    {{#if hasMultipleYears}}
+      <div class="year-selection">
+        {{#each year in connectionsByMonth}}
+          <button {{action "setYear" year.year}} class="btn btn-default">{{year.year}}</button>
+        {{/each}}
+      </div>
+    {{/if}}
+
+    <h4>Connections made in {{selectedYear}}</h4>
+
+    <table class="table">
+      <tr>
+        <th></th>
+        {{#each month in currentYearConnections.months}}
+          <th>{{month.name}}</th>
+        {{/each}}
+        <th class="year-column">{{currentYearConnections.year}}</th>
+      </tr>
+
+      {{#each mode in connectionModes}}
+        <tr>
+          <th>{{mode}}</th>
+          {{#each month in currentYearConnections.months}}
+            <td>
+              {{connections-length month.connections modeBinding="mode"}}
+            </td>
+          {{/each}}
+          <td class="year-column">
+            {{connections-length currentYearConnections.connections modeBinding="mode"}}
+          </td>
+        </tr>
+      {{/each}}
+
+      <tr class="totals-row">
+        <th>Total</th>
+        {{#each month in currentYearConnections.months}}
+            <td>
+              {{month.connections.length}}
+            </td>
+        {{/each}}
+        <td class="year-column">
+          <b>{{currentYearConnections.connections.length}}</b>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

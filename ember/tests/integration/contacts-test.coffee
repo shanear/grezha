@@ -11,6 +11,25 @@ module 'Contacts page integration test',
   teardown: ->
     Ember.run(@app, @app.destroy)
 
+
+test "shows the number of connections in the dashboard", ->
+  @api.set('contacts', [
+    {id: 3, name: "Ms McGrethory", connection_ids: [1, 2]}
+    {id: 4, name: "Sukirti", connection_ids: [3, 4]}
+  ])
+
+  @api.set('connections', [
+    {id: 1, note: "test 1"},
+    {id: 2, note: "test 2"},
+    {id: 3, note: "test 3"},
+    {id: 4, note: "test 4"}
+  ])
+
+  visit("/clients/")
+  andThen ->
+    ok(contains('.dashboard', "You've recorded <b>4</b> connections"))
+
+
 test "contact counter works", ->
   @api.set('contacts', [{id: 1}, {id: 2}, {id: 3}, {id: 7}])
   visit("/clients/")
