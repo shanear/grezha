@@ -64,3 +64,16 @@ test "Logout", ->
   click "#logout"
   andThen ->
     equal(currentURL(), "/login", "Redirects to login")
+
+
+test "Help button", ->
+  visit "login"
+  click "#need-help"
+  andThen ->
+    ok(exists(".instructions.support-active"),
+      "clicking help button should show support")
+
+  click "#need-help"
+  andThen ->
+    ok(!exists(".instructions.support-active"),
+      "clicking help again should hide support")
