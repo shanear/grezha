@@ -1,9 +1,8 @@
 `import Ember from 'ember'`
 
-ContactsNewController = Ember.ObjectController.extend
+ContactEditController = Ember.ObjectController.extend
   errors: []
   allUsers: []
-  reset: -> @set 'errors', []
 
   # workaround to bug with Ember.Select
   # https://github.com/emberjs/ember.js/issues/4150
@@ -11,21 +10,23 @@ ContactsNewController = Ember.ObjectController.extend
     @get("user.id")
   ).property("user")
 
+  reset: ->
+    @set('errors', [])
+
   actions:
-    createContact: ->
-      newContact = @store.createRecord('contact', @get('model'))
+    saveContact: ->
+      contact = @get('model')
 
       selectedUser = @get('allUsers').findBy('id', @get('selectedUserId'))
-      newContact.set('user', selectedUser)
+      contact.set('user', selectedUser)
 
-      if newContact.isValid()
-        newContact.save().then(
+      if contact.isValid()
+        contact.save().then(
           (contact)=>
             @transitionToRoute('contact', contact)
           ,(error)=>
             @set('errors', ["Something went wrong on the server, please try again later."]))
       else
-        @set('errors', newContact.get('errors'))
-        newContact.destroyRecord();
+        @set('errors',contact.get('errors'))
 
-`export default ContactsNewController`
+`export default ContactEditController`

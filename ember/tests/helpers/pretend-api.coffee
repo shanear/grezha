@@ -62,6 +62,18 @@ PretendApi = Ember.Object.extend({
       else
         return [404, {}, ""]
 
+    server.put '/api/v2/contacts/:id', (req)=>
+      contacts = Ember.A(@get('contacts'))
+      contact = contacts.findBy('id', parseInt(req.params.id))
+      if contact
+        data = JSON.parse(req.requestBody)
+        @set('savedContact', data.contact)
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({contact: contact})]
+      else
+        return [404, {}, ""]
+
   setupConnectionEndpoints: (server)->
     server.post '/api/v2/connections', (req)=>
       data = JSON.parse(req.requestBody)

@@ -6,20 +6,20 @@
 {{#toggled-feature name='addedOn'}}
   <div class="form-group">
     <label for="added-on">added on:</label>
-    {{!date-field id="added-on" date=addedAt}}
+    {{date-field id="added-on" date=addedAt}}
   </div>
 {{/toggled-feature}}
 
 {{#if allUsers}}
   <div class="form-group" id='contact-user'>
     <label for="owner">field op: </label>
-    {{view "select"
+    {{view 'select'
         id="field-op"
         class="form-control"
         content=allUsers
+        value=selectedUserId
         optionValuePath="content.id"
         optionLabelPath="content.name"
-        selectionBinding="user"
         prompt="None"}}
   </div>
 {{/if}}
@@ -31,7 +31,7 @@
 
 <div class="form-group">
   <label for="birthday">birthday:</label>
-  {{!date-field id="birthday" date=birthday requireYear=false}}
+  {{date-field id="birthday" date=birthday requireYear=false}}
 </div>
 
 <div class="form-group">
