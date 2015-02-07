@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'grezha',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -71,7 +71,33 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.EmberENV.apiURL = "http://localhost:3000";
 
+    ENV['simple-auth'] = {
+      authorizer: 'authorizer:api',
+      crossOriginWhitelist: [
+        "http://grezha.dev", "http://localhost:3000"
+      ],
+      routeAfterAuthentication: '/'
+    }
+
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
+      'font-src': "*",
+      'connect-src': "*",
+      'img-src': "'self'",
+      'style-src': "*",
+      'media-src': "'self'"
+    }
+
+    ENV.manifest = {
+      enabled: true,
+      appcacheFile: "/manifest.appcache",
+      excludePaths: [],
+      includePaths: ["/"],
+      network: ['*']
+    }
   }
 
   return ENV;

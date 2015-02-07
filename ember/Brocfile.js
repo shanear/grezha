@@ -4,6 +4,15 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp();
 
+// Add offline manifest in production
+if (app.env === 'production') {
+  app.options.inlineContent = {
+    'manifest' : {
+      content: 'manifest="manifest.appcache"'
+    }
+  }
+}
+
 // Use `app.import` to add additional libraries to the generated
 // output files.
 //
