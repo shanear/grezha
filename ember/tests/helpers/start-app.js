@@ -16,6 +16,14 @@ export default function startApp(attrs) {
     application = Application.create(attributes);
     application.setupForTesting();
     application.injectTestHelpers();
+
+    if (localforage.pendingTransactions === undefined) {
+      localforage.pendingTransactions = 0;
+    }
+
+    Ember.Test.registerWaiter(function() {
+      return localforage.pendingTransactions === 0;
+    });
   });
 
   return application;

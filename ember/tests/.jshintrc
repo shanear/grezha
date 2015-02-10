@@ -46,7 +46,8 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "localforage"
   ],
   "node": false,
   "browser": false,

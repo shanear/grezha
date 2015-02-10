@@ -9,6 +9,7 @@ initialize = (container, app) ->
   app.register 'api-connection:main', apiConnection, { instantiate: false }
   app.inject 'controller', 'apiConnection', 'api-connection:main'
   app.inject 'component', 'apiConnection', 'api-connection:main'
+  app.inject 'adapter', 'apiConnection', 'api-connection:main'
 
 
 SetupApiConnectionInitializer =

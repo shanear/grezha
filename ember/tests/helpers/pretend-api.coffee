@@ -41,7 +41,7 @@ PretendApi = Ember.Object.extend({
       @set('savedContact', data.contact)
       return [200,
         {"Content-Type": "application/json"},
-        JSON.stringify({contacts: @get('contacts')})]
+        JSON.stringify({contact: data.contact})]
 
     server.delete '/api/v2/contacts/:id', (req)=>
       @set('deletedContactId', req.params.id)

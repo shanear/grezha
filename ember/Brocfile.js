@@ -27,8 +27,8 @@ if (app.env === 'production') {
 // along with the exports of each module as its value.
 
 app.import('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js');
-
 app.import('bower_components/moment/moment.js');
+app.import('bower_components/localforage/dist/localforage.js')
 
 if (app.env === 'test') {
   app.import('bower_components/timekeeper/lib/timekeeper.js');
