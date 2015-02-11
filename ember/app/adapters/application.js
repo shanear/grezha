@@ -12,6 +12,18 @@ DS.Model.reopen({
   }.property("unsyncedChanges")
 });
 
+var incrementLocalforageTransactions =  function() {
+  if(typeof localforage.pendingTransactions === 'number') {
+    localforage.pendingTransactions += 1;
+  }
+};
+
+var decrementLocalforageTransactions =  function() {
+  if(typeof localforage.pendingTransactions === 'number') {
+    localforage.pendingTransactions -= 1;
+  }
+};
+
 export default DS.ActiveModelAdapter.extend({
   host: EmberENV.apiURL,
   namespace: "api/v2",
@@ -340,13 +352,11 @@ export default DS.ActiveModelAdapter.extend({
 
   // sets the state of localforage transactions
   _localforageCallback: function(callback) {
-    if(typeof localforage.pendingTransactions === 'number') {
-      localforage.pendingTransactions += 1;
+    incrementLocalforageTransactions();
 
-      return function() {
-        localforage.pendingTransactions -= 1;
-        if(callback) { callback.apply(this, arguments); }
-      };
-    }
+    return function() {
+      decrementLocalforageTransactions();
+      if(callback) { callback.apply(this, arguments); }
+    };
   }
 });
