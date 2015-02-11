@@ -45,6 +45,11 @@ input[type = "checkbox"] {
   color: lighten($bulgarian-red, 30);
 }
 
+.icon-loading {
+  color: $med-grey;
+  font-size: 200%;
+}
+
 
 header {
   // Fix the header in the center

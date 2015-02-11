@@ -29,6 +29,7 @@ if (app.env === 'production') {
 app.import('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js');
 
 // Fontello
+app.import('vendor/fontello/css/animation.css');
 app.import('vendor/fontello/css/grezha-icons.css');
 app.import('vendor/fontello/font/grezha-icons.ttf', {
   destDir: 'font'
