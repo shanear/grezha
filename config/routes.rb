@@ -40,6 +40,7 @@ Daughters::Application.routes.draw do
     end
 
     namespace :v2 do
+      get "/ping", to: "base#index"
       post "/authenticate", to: "sessions#create"
       post "/invalidate", to: "sessions#destroy"
       post "/forgot-password", to: "account#forgot_password"

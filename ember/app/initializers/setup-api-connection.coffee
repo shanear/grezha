@@ -14,7 +14,7 @@ initialize = (container, app) ->
   adapter = container.lookup('adapter:application')
   adapter.syncRecords()
   setInterval (->
-    ping = Ember.$.get(EmberENV.apiURL + '/api/ping')
+    ping = Ember.$.get(EmberENV.apiURL + '/api/v2/ping')
     ping.fail => apiConnection.set('online', false)
     ping.done =>
       if apiConnection.get('online') == false
