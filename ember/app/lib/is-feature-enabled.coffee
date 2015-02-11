@@ -1,5 +1,9 @@
+`import config from '../config/environment'`
+
+
 isFeatureEnabled = (feature, organization)->
   return true if organization == 'Grezha Admin'
+  return true if config.environment == 'development'
 
   if feature == 'vehicles'
     if organization == 'Daughters of Bulgaria'
