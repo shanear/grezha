@@ -12,15 +12,6 @@ DS.Model.reopen({
   }.property("unsyncedChanges")
 });
 
-DS.Store.reopen({
-  syncRecords: function() {
-    var adapter = this.get('defaultAdapter');
-    if(adapter && adapter.syncRecords) {
-      return this.get('defaultAdapter').syncRecords(this);
-    }
-  }
-});
-
 export default DS.ActiveModelAdapter.extend({
   host: EmberENV.apiURL,
   namespace: "api/v2",
@@ -74,7 +65,7 @@ export default DS.ActiveModelAdapter.extend({
         },
 
         function() {
-          self.get('apiConnection').set('online', true);
+          self.get('apiConnection').set('online', false);
 
           return new Promise(function(resolve, reject) {
             localforage.getItem(type.typeKey,
@@ -97,7 +88,7 @@ export default DS.ActiveModelAdapter.extend({
 
     // If the remote find fails, try fetching the record locally
     return promise.catch(function() {
-      self.get('apiConnection').set('online', true);
+      self.get('apiConnection').set('online', false);
 
       return self._fetchLocalRecord(type.typeKey, id).then(
         function(result) {
