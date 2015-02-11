@@ -1,8 +1,7 @@
 `import Ember from 'ember'`
 
 BirthdaysController = Ember.ObjectController.extend
-  needs: ['application']
-  contacts: Ember.computed.alias('controllers.application.allContacts')
+  contacts: Ember.computed.alias('model')
   birthdaysToShow: 5
 
   contactsWithoutBirthdays: (->
