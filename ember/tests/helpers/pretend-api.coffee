@@ -17,7 +17,7 @@ PretendApi = Ember.Object.extend({
   start: ->
     server = new Pretender()
 
-    server.post '/api/v2/ping', ()=> return [200, {}, ""]
+    server.get '/api/v2/ping', ()=> return [200, {}, ""]
 
     @setupAccountEndpoints(server)
     @setupContactEndpoints(server)
