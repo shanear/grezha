@@ -27,6 +27,22 @@ if (app.env === 'production') {
 // along with the exports of each module as its value.
 
 app.import('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js');
+
+// Fontello
+app.import('vendor/fontello/css/grezha-icons.css');
+app.import('vendor/fontello/font/grezha-icons.ttf', {
+  destDir: 'font'
+});
+app.import('vendor/fontello/font/grezha-icons.eot', {
+  destDir: 'font'
+});
+app.import('vendor/fontello/font/grezha-icons.svg', {
+  destDir: 'font'
+});
+app.import('vendor/fontello/font/grezha-icons.woff', {
+  destDir: 'font'
+});
+
 app.import('bower_components/moment/moment.js');
 app.import('bower_components/localforage/dist/localforage.js')
 

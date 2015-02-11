@@ -15,7 +15,7 @@ body {
     color: $dark-grey;
   }
 
-  a:hover {
+  a:hover, .btn-link:hover {
     color: lighten($bulgarian-green, 5);
     text-decoration: none;
   }
@@ -257,7 +257,7 @@ h2, h3 {
     .searchbar {
       position: relative;
 
-      i.fa {
+      i.icon-search {
         position: absolute;
         right: 0px;
         padding: $usual-buffer;
@@ -315,12 +315,15 @@ h2, h3 {
 .options {
   float: right;
 
-  a {
+  a, .btn-link {
+    padding-right: 0px;
     color: #aaa;
     margin-left: $usual-buffer;
   }
 
-  a:hover { color: lighten($bulgarian-green, 5); }
+  a:hover, .btn-link:hover {
+    color: lighten($bulgarian-green, 5);
+  }
 }
 
 ul.errors  {
@@ -496,7 +499,6 @@ ul.connection_errors  {
   margin-top: $usual-buffer * 2;
 
   .body {
-    padding-right: $usual-buffer;
     padding-left: 80px + $usual-buffer;
   }
 
