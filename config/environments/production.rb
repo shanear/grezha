@@ -41,6 +41,12 @@ Daughters::Application.configure do
     :authentication => :plain,
   }
 
+  # CORS headers
+  config.action_dispatch.default_headers.merge!(
+    "Access-Control-Allow-Headers" => "Authorization, Content-Type",
+    "Access-Control-Allow-Methods" => "GET, POST, PUT, DELETE"
+  )
+
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
 

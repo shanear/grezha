@@ -30,8 +30,7 @@ Daughters::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   config.action_dispatch.default_headers.merge!(
-    "Access-Control-Allow-Origin" => "http://localhost:4200",
-    "Access-Control-Allow-Headers" => "x-csrf-token, Authorization, Content-Type",
+    "Access-Control-Allow-Headers" => "Authorization, Content-Type",
     "Access-Control-Allow-Methods" => "GET, POST, PUT, DELETE"
   )
 
