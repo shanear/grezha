@@ -1,5 +1,5 @@
 class Api::V2::PeopleController < Api::BaseController
-  before_filter :require_logged_in
+  before_filter :authenticate_request
   respond_to :json
 
   def index
