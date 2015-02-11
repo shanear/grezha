@@ -21,7 +21,7 @@ script:
 - cd ember && ember test && cd ..
 
 before_deploy:
-- cd ember && ember build --outputPath=dist --environment=staging && cd ..
+- cd ember && ember build --outputPath=dist --environment=production && cd ..
 
 deploy:
   - provider: divshot

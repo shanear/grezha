@@ -71,13 +71,11 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.EmberENV.apiURL = "http://localhost:3000";
+    ENV.EmberENV.apiURL = "http://www.grezha.org";
 
     ENV['simple-auth'] = {
       authorizer: 'authorizer:api',
-      crossOriginWhitelist: [
-        "http://grezha.dev", "http://localhost:3000"
-      ],
+      crossOriginWhitelist: ["http://www.grezha.org"],
       routeAfterAuthentication: '/'
     }
 
