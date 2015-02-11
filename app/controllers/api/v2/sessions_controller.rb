@@ -11,7 +11,8 @@ class Api::V2::SessionsController < Api::BaseController
         session: {
           token: user.authentication_token,
           username: user.name,
-          organization: user.organization.name
+          organization: user.organization.name,
+          admin: user.role == 'admin'
         }
       }
     else
