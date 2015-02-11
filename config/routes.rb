@@ -25,6 +25,7 @@ Daughters::Application.routes.draw do
     match "/:x/:y/:z", to: "base#index", via: [:options]
 
     get "/ping", to: "base#index"
+    get "/v2/ping", to: "base#index"
     get "/csrf", to: 'csrf#index'
 
     namespace :v1 do
@@ -40,7 +41,6 @@ Daughters::Application.routes.draw do
     end
 
     namespace :v2 do
-      get "/ping", to: "base#index"
       post "/authenticate", to: "sessions#create"
       post "/invalidate", to: "sessions#destroy"
       post "/forgot-password", to: "account#forgot_password"
