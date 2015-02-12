@@ -8,7 +8,7 @@ ForgotPasswordController = Ember.Controller.extend
   actions:
     submit: ->
       forgotPassword = Ember.$.post(
-        EmberENV.apiURL + 'api/v2/forgot-password',
+        EmberENV.apiURL + '/api/v2/forgot-password',
         { email: @get('email') }
       )
 

@@ -4,6 +4,8 @@ ResetPasswordController = Ember.Controller.extend
   needs: ['login', 'contacts']
 
   reset: ->
+    @set("newPassword", "")
+    @set("newPasswordConfirm", "")
     @set("errors", "")
 
   validatePasswordsMatch: ()->
@@ -22,7 +24,7 @@ ResetPasswordController = Ember.Controller.extend
       return false unless @validatePasswordsMatch()
 
       resetPassword = Ember.$.post(
-        EmberENV.apiURL + 'api/v2/reset-password',
+        EmberENV.apiURL + '/api/v2/reset-password',
         {
           token: @get('token'),
           email: @get('email'),
