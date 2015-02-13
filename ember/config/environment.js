@@ -72,13 +72,13 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.EmberENV.apiURL = "http://grezha.herokuapp.com";
+    ENV.EmberENV.apiURL = "https://grezha.herokuapp.com";
     ENV.EmberENV.adminURL =
-      "http://grezha.herokuapp.com/admin/login";
+      "https://grezha.herokuapp.com/admin/login";
 
     ENV['simple-auth'] = {
       authorizer: 'authorizer:api',
-      crossOriginWhitelist: ["http://grezha.herokuapp.com"],
+      crossOriginWhitelist: ["https://grezha.herokuapp.com"],
       routeAfterAuthentication: '/'
     }
 
