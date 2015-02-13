@@ -71,6 +71,10 @@ class User < ActiveRecord::Base
     self.authentication_token = SecureRandom.urlsafe_base64
   end
 
+  def generate_remember_token
+    self.remember_token = SecureRandom.urlsafe_base64
+  end
+
   private
 
   def normalize_email
@@ -80,10 +84,6 @@ class User < ActiveRecord::Base
   def encrypt_password
     self.salt = Digest::SHA2.hexdigest(Time.now.utc.to_s)
     self.encrypted_password = encrypt(password)
-  end
-
-  def generate_remember_token
-    self.remember_token = SecureRandom.urlsafe_base64
   end
 
   def clear_reset_password_token

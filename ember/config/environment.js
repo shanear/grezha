@@ -21,6 +21,7 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.EmberENV.apiURL = "http://localhost:3000";
+    ENV.EmberENV.adminURL = "http://localhost:3000/admin/login";
 
     ENV['simple-auth'] = {
       authorizer: 'authorizer:api',
@@ -72,6 +73,8 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.EmberENV.apiURL = "http://grezha.herokuapp.com";
+    ENV.EmberENV.adminURL =
+      "http://grezha.herokuapp.com/admin/login";
 
     ENV['simple-auth'] = {
       authorizer: 'authorizer:api',

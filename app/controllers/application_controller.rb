@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
   end
 
   def logout
+    if(current_user)
+      current_user.authentication_token = nil
+      current_user.generate_remember_token
+      current_user.save!
+    end
+
     cookies.delete(:remember_token)
     @current_user = nil
   end
@@ -25,7 +31,7 @@ class ApplicationController < ActionController::Base
   helper_method :logged_in?
 
   def current_user
-    @current_user ||= User.find_by_remember_token(cookies[:remember_token])
+    @current_user ||= cookies[:remember_token] && User.find_by_remember_token(cookies[:remember_token])
   end
   helper_method :current_user
 
@@ -41,6 +47,10 @@ class ApplicationController < ActionController::Base
 
   def require_logged_in
     redirect_to(login_path) unless logged_in?
+  end
+
+  def require_admin_logged_in
+    redirect_to(admin_login_path) unless logged_in?
   end
 
   def require_logged_out

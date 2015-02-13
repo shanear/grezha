@@ -22,6 +22,7 @@ class Api::V2::SessionsController < Api::BaseController
   end
 
   def destroy
+    logout
     render json: { success: true }
   end
 end

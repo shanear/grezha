@@ -4,6 +4,8 @@ Daughters::Application.routes.draw do
 
 
   get    "/login", to: "sessions#new"
+  get    "/admin/login", to: "sessions#admin_new"
+  get    "/admin/logout", to: "sessions#admin_destroy"
   delete "/logout", to: "sessions#destroy"
   get    "/logout", to: "sessions#destroy"
 

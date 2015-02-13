@@ -1,8 +1,10 @@
+<%= content_for(:title) do %>Grezha Admin<% end %>
+
 <%= content_for(:content) do %>
   <header>
     <div id="topbar" class="clearfix">
       <div class="logo">
-        <h1> <%= link_to "Grezha", root_path %> Setup </h1>
+        <h1><%= link_to "Grezha Admin", users_path %></h1>
       </div>
 
       <nav>
@@ -13,7 +15,7 @@
         <div class="login-info">
           <%= current_user.name %> -
           <%= current_user.organization.name %> -
-          <%= link_to "Logout", logout_path %>
+          <%= link_to "Logout", admin_logout_path %>
         </div>
       </nav>
     </div>
