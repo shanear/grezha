@@ -25,6 +25,7 @@ ApiAuthenticator = Base.extend
     new Promise( (resolve, reject)->
       logout = Ember.$.post(EmberENV.apiURL + '/api/v2/invalidate')
 
+      localforage.clear()
       logout.fail -> resolve()
       logout.done -> resolve()
     )
