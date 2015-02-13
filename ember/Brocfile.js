@@ -28,6 +28,8 @@ if (app.env === 'production') {
 
 app.import('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js');
 
+app.import('vendor/redressed.ttf', {destDir: 'font'});
+
 // Fontello
 app.import('vendor/fontello/css/animation.css');
 app.import('vendor/fontello/css/grezha-icons.css');

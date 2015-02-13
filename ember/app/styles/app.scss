@@ -1,5 +1,10 @@
 @import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
+@font-face {
+    font-family: Redressed;
+    src: url(font/redressed.ttf);
+}
+
 $bulgarian-green: #00966E;
 $light-bulgarian-green: #e3fff7;
 $bulgarian-red: #D62612;
