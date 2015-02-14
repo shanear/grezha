@@ -57,13 +57,13 @@ test "shows and filters connections", ->
     {
       id: 1,
       mode: "Email",
-      occured_at: "2015-01-26T18:48:31.142Z",
+      occurred_at: "2015-01-26T18:48:31.142Z",
       note: "sent an email"
     },
     {
       id: 2,
       mode: "In Person",
-      occured_at: "2015-01-27T11:48:42.000Z",
+      occurred_at: "2015-01-27T11:48:42.000Z",
       note: "sent an email"
     }
   ])
