@@ -2,7 +2,9 @@
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-var app = new EmberApp();
+var app = new EmberApp({
+  vendorFiles: {'handlebars.js': null}
+});
 
 // Add offline manifest in production
 if (app.env === 'production') {
