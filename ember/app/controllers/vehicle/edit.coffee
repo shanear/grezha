@@ -1,5 +1,4 @@
 `import Ember from 'ember'`
-`import HasConfirmation from 'grezha/mixins/has-confirmation'`
 
 VehicleEditController = Ember.ObjectController.extend
   errors: []
