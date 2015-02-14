@@ -35,6 +35,17 @@ test "Login with bad credentials", ->
       "Errors should appear when login failed")
 
 
+test "Login while offline", ->
+  Ember.run => @api.set('online', false)
+  visit "login"
+  fillIn "#email", "lou@gmail.com"
+  fillIn "#password", "password"
+  click "#login-submit"
+  andThen ->
+    ok(exists("#offline-login"))
+    ok(!exists("#email"))
+
+
 test "Login with good credentials", ->
   visit "login"
   fillIn "#email", "lou@gmail.com"

@@ -10,6 +10,7 @@ initialize = (container, app) ->
   app.inject 'controller', 'apiConnection', 'api-connection:main'
   app.inject 'component', 'apiConnection', 'api-connection:main'
   app.inject 'adapter', 'apiConnection', 'api-connection:main'
+  app.inject 'authenticator', 'apiConnection', 'api-connection:main'
 
   adapter = container.lookup('adapter:application')
   adapter.syncRecords()

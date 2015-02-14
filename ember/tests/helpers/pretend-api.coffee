@@ -2,6 +2,7 @@
 `import parsePostData from './parse-post-data'`
 
 PretendApi = Ember.Object.extend({
+  online: true,
   contacts: [],
   savedContact: null,
   deletedContactId: null,
@@ -205,6 +206,7 @@ PretendApi = Ember.Object.extend({
       return response
 
     server.post '/api/v2/authenticate', (request)=>
+      return [404, {}, ""] unless @get('online')
       data = parsePostData(request.requestBody);
       response = [401, {"Content-Type": "application/json"}, ""]
       @get('users').forEach (user)->

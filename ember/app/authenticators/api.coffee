@@ -8,7 +8,7 @@ ApiAuthenticator = Base.extend
     Promise.resolve(data)
 
   authenticate: (options)->
-    new Promise( (resolve, reject)->
+    new Promise( (resolve, reject)=>
       login = Ember.$.post(
         EmberENV.apiURL + '/api/v2/authenticate',
         {
@@ -17,7 +17,11 @@ ApiAuthenticator = Base.extend
         }
       )
 
-      login.fail (error)-> reject(error)
+      login.fail (error)=>
+        if(error.status != 401)
+          Ember.run =>
+            @set("apiConnection.online", false)
+        reject(error)
       login.done (data)-> resolve(data["session"])
     )
 
