@@ -2,6 +2,7 @@
 `import Connection from 'grezha/models/connection'`
 `import Person from 'grezha/models/person'`
 `import Vehicle from 'grezha/models/vehicle'`
+`import User from 'grezha/models/user'`
 
 setupFixtures = ->
   Contact.reopenClass(
@@ -32,5 +33,10 @@ setupFixtures = ->
   Vehicle.reopenClass(
     FIXTURES: [
       {id: 'base', licensePlate: "license"}
+    ])
+
+  User.reopenClass(
+    FIXTURES: [
+      { id: 'base', name: "Sir Charles Barkley" }
     ])
 `export default setupFixtures`

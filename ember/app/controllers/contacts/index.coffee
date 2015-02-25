@@ -4,6 +4,15 @@
 ContactsIndexController = Ember.Controller.extend
   connectionModes: Connection.MODES
   selectedYear: null
+  needs: ['contacts']
+  allContacts: Ember.computed.alias('controllers.contacts.model')
+
+  unassignedContactCount: (->
+    console.log("computing")
+    @get('allContacts').filter((contact)->
+      contact.get('unassigned')
+    ).get('length')
+  ).property("allContacts.@each.unassigned")
 
   _initSelectedYear: (->
     @set("selectedYear", @get("connectionsByMonth.lastObject.year"))

@@ -1,7 +1,25 @@
-<div {{bind-attr class=":dashboard hasConnections:visible"}}>
-  <p>You've recorded <b>{{allConnections.length}}</b> connections.  Keep it up!</p>
+<div class="dashboard">
+  {{#toggled-feature name='fieldOp'}}
+    <section class="clients-report row">
+      <div class="col-lg-6">
+        <h3>Clients</h3>
+        <table id="field-ops" class="table">
+          {{#each user in allUsers}}
+            <tr>
+              <td><b>{{user.name}}</b></td>
+              <td>{{user.contacts.length}}</td>
+            </tr>
+          {{/each}}
+          <tr>
+            <td><b>Unassigned</b></td>
+            <td>{{unassignedContactCount}}</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  {{/toggled-feature}}
 
-  <div class="connections-report">
+  <section {{bind-attr class=":connections-report hasConnections:visible"}}>
     {{#if hasMultipleYears}}
       <div class="year-selection">
         {{#each year in connectionsByMonth}}
@@ -10,7 +28,7 @@
       </div>
     {{/if}}
 
-    <h4>Connections made in {{selectedYear}}</h4>
+    <h3>Client connections made in {{selectedYear}}</h3>
 
     <table class="table"><tbody>
       <tr>
@@ -47,5 +65,9 @@
         </td>
       </tr>
     </tbody></table>
-  </div>
+  </section>
+
+  <section {{bind-attr class=":connections-report hasConnections:visible"}}>
+    <p>You've recorded <b>{{allConnections.length}}</b> all-time connections.  Keep it up!</p>
+  </section>
 </div>

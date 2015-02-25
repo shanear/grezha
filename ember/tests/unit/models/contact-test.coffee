@@ -13,7 +13,10 @@ moduleForModel('contact', 'Contact Model'
         @contactWithConnections = contact
         @contactWithConnections.get('connections')
 
-      Ember.RSVP.all([find1, find2]).finally(start)
+      find3 = @store().find('user', 'base').then (user)=>
+        @user = user
+
+      Ember.RSVP.all([find1, find2, find3]).finally(start)
 )
 
 
@@ -133,3 +136,11 @@ test 'lastSeen', ->
     connections.objectAt(1).set('occurredAt', new Date(2014, 9, 6))
     deepEqual(@contactWithConnections.get('lastSeen'), new Date(2014, 9, 6),
       "is occurredAt from most recent connection")
+
+
+test 'unassigned', ->
+  Ember.run =>
+    equal(@contact.get("unassigned"), true)
+    @contact.set('user', @user)
+    equal(@contact.get("unassigned"), false)
+

@@ -69,4 +69,8 @@ Contact = DS.Model.extend
       @get('createdAt')
   ).property('connections.@each')
 
+  unassigned: (->
+    !@get('user.content')
+  ).property('user')
+
 `export default Contact`

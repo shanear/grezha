@@ -7,8 +7,9 @@ module 'Login integration test',
     @app = startApp()
     @api = PretendApi.create().start()
     @api.set('users', [{
-      name: "Lou"
-      email: "lou@gmail.com"
+      id: 1,
+      name: "Lou",
+      email: "lou@gmail.com",
       password: "password"
     }])
 

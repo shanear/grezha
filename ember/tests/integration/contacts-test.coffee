@@ -11,6 +11,28 @@ module 'Contacts page integration test',
   teardown: ->
     Ember.run(@app, @app.destroy)
 
+test "shows number of clients assigned to each user", ->
+  @api.set('users', [
+    {id: 1, name: "Micheal Keaton"}
+    {id: 3, name: "Eddie Redmayne"}
+  ])
+
+  @api.set('contacts', [
+    {id: 1, name: "Sue", user_id: 1},
+    {id: 2, name: "Stu", user_id: 1},
+    {id: 3, name: "Shu", user_id: 1},
+    {id: 4, name: "Smu", user_id: 3},
+    {id: 5, name: "Tae"}
+  ])
+
+  visit("/clients/")
+  andThen ->
+    ok(contains('#field-ops tr:first-child', "Micheal Keaton"))
+    ok(contains('#field-ops tr:first-child', "3"))
+    ok(contains('#field-ops tr:nth-child(2)', "Eddie Redmayne"))
+    ok(contains('#field-ops tr:nth-child(2)', "1"))
+    ok(contains('#field-ops tr:last-child', "Unassigned"))
+    ok(contains('#field-ops tr:last-child', "1"))
 
 test "shows the number of connections in the dashboard", ->
   @api.set('contacts', [
@@ -27,7 +49,7 @@ test "shows the number of connections in the dashboard", ->
 
   visit("/clients/")
   andThen ->
-    ok(contains('.dashboard', "You've recorded <b>4</b> connections"))
+    ok(contains('.dashboard', "You've recorded <b>4</b>"))
 
 
 test "contact counter works", ->

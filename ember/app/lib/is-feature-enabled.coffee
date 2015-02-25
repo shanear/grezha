@@ -9,7 +9,7 @@ isFeatureEnabled = (feature, organization)->
     if organization == 'Daughters of Bulgaria'
       return true
 
-  if feature == 'addedOn'
+  if feature == 'addedOn' || feature == 'fieldOp'
     if organization == 'Contra Costa Reentry Network'
       return true
 

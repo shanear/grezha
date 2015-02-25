@@ -4,6 +4,7 @@
 ContactsIndexRoute = BaseRoute.extend AuthenticatedRouteMixin,
   setupController: (controller) ->
     controller.set('allConnections', @store.find('connection'))
+    controller.set('allUsers', @store.find('user'))
     @_super(controller)
 
 `export default ContactsIndexRoute`

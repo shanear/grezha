@@ -19,7 +19,12 @@ body {
     color: lighten($bulgarian-green, 5);
     text-decoration: none;
   }
+
+  h3 {
+    margin-bottom: $usual-buffer;
+  }
 }
+
 
 input[type = "checkbox"] {
   margin: 0;
@@ -690,17 +695,29 @@ ul.connection_errors  {
 }
 
 .dashboard {
-  display: none;
-
-  &.visible {
-    display: block;
-  }
+  padding-top: 4px;
 
   p {
     font-size: 16pt;
     margin: 20px 0;
     padding-bottom: 20px;
+  }
+
+  section {
+    margin-bottom: $usual-buffer * 3;
     border-bottom: 1px solid $bulgarian-green;
+  }
+
+  #field-ops {
+    font-size: 14px;
+  }
+
+  .connections-report {
+    display: none;
+
+    &.visible {
+      display: block;
+    }
   }
 }
 
