@@ -20,6 +20,8 @@
   {{/toggled-feature}}
 
   <section {{bind-attr class=":connections-report hasConnections:visible"}}>
+    <h3>Client Connections Made in {{selectedYear}}</h3>
+
     {{#if hasMultipleYears}}
       <div class="year-selection">
         {{#each year in connectionsByMonth}}
@@ -27,8 +29,6 @@
         {{/each}}
       </div>
     {{/if}}
-
-    <h3>Client Connections Made in {{selectedYear}}</h3>
 
     <table class="table"><tbody>
       <tr>
