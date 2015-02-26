@@ -6,9 +6,10 @@ ContactEditController = Ember.ObjectController.extend
 
   # workaround to bug with Ember.Select
   # https://github.com/emberjs/ember.js/issues/4150
-  selectedUserId: (->
-    @get("user.id")
-  ).property("user")
+  selectedUserId: null
+  recalculateSelectedUserId: (->
+    @set("selectedUserId", @get('user.id'))
+  ).observes("user.id")
 
   reset: ->
     @set('errors', [])
