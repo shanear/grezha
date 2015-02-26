@@ -6,9 +6,9 @@ ContactsIndexController = Ember.Controller.extend
   selectedYear: null
   needs: ['contacts']
   allContacts: Ember.computed.alias('controllers.contacts.model')
+  allUsers: []
 
   unassignedContactCount: (->
-    console.log("computing")
     @get('allContacts').filter((contact)->
       contact.get('unassigned')
     ).get('length')
