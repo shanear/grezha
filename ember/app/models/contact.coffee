@@ -67,7 +67,7 @@ Contact = DS.Model.extend
       latestConnection.get('occurredAt')
     else
       @get('createdAt')
-  ).property('connections.@each')
+  ).property('connections.@each.occurredAt')
 
   unassigned: (->
     !@get('user.content')
