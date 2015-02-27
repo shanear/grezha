@@ -44,6 +44,14 @@ class ApplicationController < ActionController::Base
     id =~ /[A-Za-z0-9]{8}/
   end
 
+  def app_url
+    if Rails.env.production?
+      "http://app.grezha.org/"
+    else
+      "#{request.host}/"
+    end
+  end
+
   private
 
   def require_admin

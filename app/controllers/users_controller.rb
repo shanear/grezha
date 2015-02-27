@@ -17,8 +17,7 @@ class UsersController < ApplicationController
     @user.generate_password
 
     if @user.save
-      UserMailer.new_user_email(@user,
-        "http://#{request.host}").deliver
+      UserMailer.new_user_email(@user, app_url).deliver
 
       redirect_to users_path
     else
