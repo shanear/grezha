@@ -43,6 +43,6 @@ class Api::V2::AccountController < Api::BaseController
   end
 
   def reset_password_url(user)
-    "#{request.host}/reset-password/#{user.reset_password_token}"
+    "#{app_url}#/reset-password/#{user.reset_password_token}"
   end
 end
