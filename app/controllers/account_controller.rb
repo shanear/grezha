@@ -47,10 +47,6 @@ class AccountController < ApplicationController
   end
 
   def reset_password_url(user)
-    if Rails.env.production?
-      "#{app_url}#reset-password/#{user.reset_password_token}"
-    else
-      "#{app_url}reset-password/#{user.reset_password_token}"
-    end
+    "#{app_url}#/reset-password/#{user.reset_password_token}"
   end
 end
