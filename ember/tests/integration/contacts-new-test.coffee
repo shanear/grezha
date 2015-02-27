@@ -22,7 +22,7 @@ test "errors when when no name entered", ->
 
 
 test "saves correctly", ->
-  @api.set('users', [{id: 1, name: "Kat"}])
+  @api.set('users', [{id: 1, name: "Kat", role: "admin"}])
   visit("/clients/new")
   fillIn("#name", "Newbie")
   fillIn("#field-op", 1)

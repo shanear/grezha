@@ -2,7 +2,7 @@
 
 ContactsNewController = Ember.ObjectController.extend
   errors: []
-  allUsers: []
+  assignableUsers: []
   reset: -> @set 'errors', []
 
   # workaround to bug with Ember.Select
@@ -15,7 +15,7 @@ ContactsNewController = Ember.ObjectController.extend
     createContact: ->
       newContact = @store.createRecord('contact', @get('model'))
 
-      selectedUser = @get('allUsers').findBy('id', @get('selectedUserId'))
+      selectedUser = @get('assignableUsers').findBy('id', @get('selectedUserId'))
       newContact.set('user', selectedUser)
 
       if newContact.isValid()

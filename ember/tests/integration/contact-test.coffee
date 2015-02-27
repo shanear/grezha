@@ -23,7 +23,7 @@ test "shows correctly for contact with no data", ->
 
 
 test "shows correctly formatted information for contact", ->
-  @api.set('users', [{id: 1, name: "Kat"}])
+  @api.set('users', [{id: 1, name: "Kat", role: "admin"}])
   @api.set('contacts', [{
     id: 1,
     name: "Suzie",

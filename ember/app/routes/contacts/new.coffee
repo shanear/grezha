@@ -9,7 +9,12 @@ ContactsNewRoute = BaseRoute.extend AuthenticatedRouteMixin,
     }
 
   setupController: (controller, model)->
-    controller.set('allUsers', @store.find('user'))
+    @store.find('user')
+    controller.set('assignableUsers',
+      @store.filter('user', ((user)->
+        user.get('role') == "field-op" || user.get('role') == "admin"
+      ))
+    )
     @_super(controller, model)
 
 `export default ContactsNewRoute`

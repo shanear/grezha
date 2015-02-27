@@ -24,7 +24,7 @@ test "errors when when no name entered", ->
 
 test "saves correctly", ->
   @api.set('contacts', [{id: 4, name: "Jenkins"}])
-  @api.set('users', [{id: 2, name: "Kat"}])
+  @api.set('users', [{id: 2, name: "Kat", role: "admin"}])
   visit("/clients/4/edit")
   fillIn("#name", "Stinkins")
   fillIn("#field-op", 2)

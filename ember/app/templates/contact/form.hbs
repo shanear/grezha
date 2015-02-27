@@ -10,19 +10,21 @@
   </div>
 {{/toggled-feature}}
 
-{{#if allUsers}}
-  <div class="form-group" id='contact-user'>
-    <label for="owner">field op: </label>
-    {{view 'select'
-        id="field-op"
-        class="form-control"
-        content=allUsers
-        value=selectedUserId
-        optionValuePath="content.id"
-        optionLabelPath="content.name"
-        prompt="None"}}
-  </div>
-{{/if}}
+{{#toggled-feature name='fieldOp'}}
+  {{#if assignableUsers}}
+    <div class="form-group" id='contact-user'>
+      <label for="owner">field op: </label>
+      {{view 'select'
+          id="field-op"
+          class="form-control"
+          content=assignableUsers
+          value=selectedUserId
+          optionValuePath="content.id"
+          optionLabelPath="content.name"
+          prompt="None"}}
+    </div>
+  {{/if}}
+{{/toggled-feature}}
 
 <div class="form-group">
   <label for="city">from city:</label>

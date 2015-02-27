@@ -2,7 +2,7 @@
 
 ContactEditController = Ember.ObjectController.extend
   errors: []
-  allUsers: []
+  assignableUsers: []
 
   # workaround to bug with Ember.Select
   # https://github.com/emberjs/ember.js/issues/4150
@@ -18,7 +18,7 @@ ContactEditController = Ember.ObjectController.extend
     saveContact: ->
       contact = @get('model')
 
-      selectedUser = @get('allUsers').findBy('id', @get('selectedUserId'))
+      selectedUser = @get('assignableUsers').findBy('id', @get('selectedUserId'))
       contact.set('user', selectedUser)
 
       if contact.isValid()

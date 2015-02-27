@@ -50,10 +50,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.roles
-    ["user", "admin"]
-  end
-
   def admin?
     return self.role.to_sym == :admin
   end

@@ -35,6 +35,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def current_organization
+    current_user && current_user.organization
+  end
+  helper_method :current_organization
+
   def remote_id?(id)
     id =~ /[A-Za-z0-9]{8}/
   end

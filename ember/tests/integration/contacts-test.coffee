@@ -13,8 +13,8 @@ module 'Contacts page integration test',
 
 test "shows number of clients assigned to each user", ->
   @api.set('users', [
-    {id: 1, name: "Micheal Keaton"}
-    {id: 3, name: "Eddie Redmayne"}
+    {id: 1, name: "Micheal Keaton", role: 'admin'}
+    {id: 3, name: "Eddie Redmayne", role: 'admin'}
   ])
 
   @api.set('contacts', [
