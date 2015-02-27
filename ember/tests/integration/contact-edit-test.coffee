@@ -35,4 +35,4 @@ test "saves correctly", ->
     savedContact = @api.get("savedContact")
     equal(savedContact.name, "Stinkins")
     equal(savedContact.user_id, "2")
-    equal(savedContact.birthday, "1900-03-02T08:00:00.000Z")
+    ok(/1900-03-02T..:00:00.000Z/.test(savedContact.birthday))
