@@ -100,7 +100,7 @@ test 'daysUntilBirthday', ->
 
   Ember.run =>
     @contact.set("birthday",
-      moment().year(2012).add(2, 'days').startOf('day'))
+      moment().year(2013).add(2, 'days').startOf('day'))
   equal(@contact.get("daysUntilBirthday"), 2,
     "is the days until next birthday")
 
