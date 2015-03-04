@@ -84,6 +84,7 @@ test "shows and filters connections", ->
 
 
 test "delete a contact", ->
+  currentSession().set('admin', true);
   @api.set('contacts', [{id: 7, name: "Jane Doe"}])
   visit("/clients/7")
   click("#delete-contact")
@@ -93,6 +94,12 @@ test "delete a contact", ->
   click("#confirmation .confirm")
   andThen =>
     equal(@api.get('deletedContactId'), '7')
+
+
+test "delete is hidden if not admin", ->
+  @api.set('contacts', [{id: 7, name: "Jane Doe"}])
+  visit("/clients/7")
+  andThen => ok(!exists("#delete-contact"))
 
 
 test "cancel add a connection", ->

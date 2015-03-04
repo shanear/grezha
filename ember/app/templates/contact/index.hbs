@@ -12,10 +12,13 @@
           <i class="icon-pencil"></i>
           Edit
         {{/link-to}}
-        <a href {{action "deleteClient"}} id="delete-contact">
-          <i class="icon-trash delete-contact"></i>
-          Delete
-        </a>
+
+        {{#if session.admin}}
+          <a href {{action "deleteClient"}} id="delete-contact">
+            <i class="icon-trash delete-contact"></i>
+            Delete
+          </a>
+        {{/if}}
       </div>
     {{/if}}
   </div>
