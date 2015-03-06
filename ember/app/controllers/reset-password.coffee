@@ -7,6 +7,7 @@ ResetPasswordController = Ember.Controller.extend
     @set("newPassword", "")
     @set("newPasswordConfirm", "")
     @set("errors", "")
+    @set('isLoading', false)
 
   validatePasswordsMatch: ()->
     if @get('newPassword') != @get('newPasswordConfirm')
@@ -23,6 +24,7 @@ ResetPasswordController = Ember.Controller.extend
     submit: ->
       return false unless @validatePasswordsMatch()
 
+      @set('isLoading', true)
       resetPassword = Ember.$.post(
         EmberENV.apiURL + '/api/v2/reset-password',
         {
@@ -41,6 +43,7 @@ ResetPasswordController = Ember.Controller.extend
             @onSuccess('login')
 
       resetPassword.fail (error)=>
+        @set('isLoading', false)
         Ember.run =>
           @set("errors", "The reset password link doesn't appear to be working with the email you entered. Please try again.")
 
