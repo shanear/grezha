@@ -21,8 +21,8 @@ ForgotPasswordController = Ember.Controller.extend
             "We sent a password reset link to your email address. You should see it here soon.")
 
       forgotPassword.fail =>
-        @set('isLoading', false)
         Ember.run =>
+          @set('isLoading', false)
           @set("errors", "The username or password you entered didn't match an account. Please try again.")
 
 `export default ForgotPasswordController`

@@ -43,8 +43,8 @@ ResetPasswordController = Ember.Controller.extend
             @onSuccess('login')
 
       resetPassword.fail (error)=>
-        @set('isLoading', false)
         Ember.run =>
+          @set('isLoading', false)
           @set("errors", "The reset password link doesn't appear to be working with the email you entered. Please try again.")
 
 `export default ResetPasswordController`
