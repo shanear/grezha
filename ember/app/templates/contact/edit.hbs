@@ -4,17 +4,18 @@
     <div id="test">
   {{partial "contact/form"}}
     </div>
-  <div class="cancel">
-    {{#link-to 'contact' this}}
-      cancel
-    {{/link-to}}
-  </div>
 
   {{#if isSaving}}
     <div class="spin-button">
       <i class="icon-loading animate-spin"></i>
     </div>
   {{else}}
+    <div class="cancel">
+      {{#link-to 'contact' this}}
+        cancel
+      {{/link-to}}
+    </div>
+
     <button class="btn btn-default" id="update-contact" {{action "saveContact"}}>
       Save Client
     </button>

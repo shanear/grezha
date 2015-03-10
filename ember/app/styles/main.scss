@@ -470,6 +470,11 @@ ul.connection_errors  {
   padding: $usual-buffer;
   background-color: $light-bulgarian-green;
   border-radius: $usual-buffer;
+
+  .spin-button {
+    padding-right: 20px;
+    float: right;
+  }
 }
 
 .mode-header {

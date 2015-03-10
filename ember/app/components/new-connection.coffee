@@ -5,6 +5,7 @@ NewConnectionComponent = Ember.Component.extend
   newConnection: { occurredAt: new Date(), note: "" }
   defaultMode: 'In Person'
   connectionModes: Connection.MODES
+  isSaving: false
 
   actions:
     saveConnection: ->
@@ -12,6 +13,7 @@ NewConnectionComponent = Ember.Component.extend
       newConnection.set('contact', @get('contact'))
 
       if newConnection.isValid()
+        @set("isSaving", true)
         newConnection.save().then =>
           @get('contact').get('connections').pushObject newConnection
 
@@ -19,6 +21,7 @@ NewConnectionComponent = Ember.Component.extend
           @set('newConnection.note', "")
           @set('enabled', false)
           @set('errors', [])
+          @set("isSaving", false)
       else
         @set('errors', newConnection.get('errors'))
 

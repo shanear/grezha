@@ -3,17 +3,17 @@
 <form class="vehicle-form">
   {{partial "vehicle/form"}}
 
-  <div class="cancel">
-    {{#link-to 'vehicle' this}}
-      cancel
-    {{/link-to}}
-  </div>
-
   {{#if isSaving}}
     <div class="spin-button">
       <i class="icon-loading animate-spin"></i>
     </div>
   {{else}}
+    <div class="cancel">
+      {{#link-to 'vehicle' this}}
+        cancel
+      {{/link-to}}
+    </div>
+
     <button class="btn btn-default" id="saveVehicle" {{action "saveVehicle"}}>
       Save Vehicle
     </button>

@@ -23,11 +23,17 @@
     </div>
 
 
-    <div class="save-button">
-      <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
-        Save Connection
-      </button>
-    </div>
+    {{#if isSaving}}
+      <div class="spin-button">
+        <i class="icon-loading animate-spin"></i>
+      </div>
+    {{else}}
+      <div class="save-button">
+        <button id="save-connection" class="btn btn-default" {{action "saveConnection"}}>
+          Save Connection
+        </button>
+      </div>
+    {{/if}}
   </div>
 
   {{#if errors.length}}

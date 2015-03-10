@@ -7,11 +7,13 @@ NewRelationshipComponent = Ember.Component.extend
   role: Ember.computed.alias("newPerson.role")
   contactInfo: Ember.computed.alias("newPerson.contactInfo")
   notes: Ember.computed.alias("newPerson.notes")
+  isSaving: false
 
   _reset: (->
     if !@get('enabled')
       @set("newPerson", null)
       @set("errors", null)
+      @set("isSaving", false)
       @set("newRelationshipName", "")
   ).observes('enabled')
 
@@ -37,11 +39,13 @@ NewRelationshipComponent = Ember.Component.extend
       newPerson = @store.createRecord('person', @get("newPerson"))
 
       if newPerson.isValid()
+        @set("isSaving", true)
         newPerson.save().then (=>
           @createRelationship(newPerson)
+          @set("isSaving", false)
         ), (=>
-          @set('errors',
-            ["There was a technical error. Please try again, or contact Grezha support."])
+          @set("isSaving", false)
+          @set('errors', ["There was a technical error. Please try again, or contact Grezha support."])
         )
       else
         @set('errors', newPerson.get('errors'))

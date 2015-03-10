@@ -47,17 +47,22 @@
     </div>
   </div>
 
-  <div class="cancel">
-    <button class="btn btn-link" id="cancel-edit-person" {{action "cancel"}}>
-      Cancel
-    </button>
-  </div>
-
-  <div class="save-button">
-    <button id="save-person" class="btn btn-default " {{action "savePerson"}}>
-      Save
-    </button>
-  </div>
+  {{#if isSaving}}
+    <div class="spin-button">
+      <i class="icon-loading animate-spin"></i>
+    </div>
+  {{else}}
+    <div class="cancel">
+      <button class="btn btn-link" id="cancel-edit-person" {{action "cancel"}}>
+        Cancel
+      </button>
+    </div>
+    <div class="save-button">
+      <button id="save-person" class="btn btn-default " {{action "savePerson"}}>
+        Save
+      </button>
+    </div>
+  {{/if}}
 </div>
 
 {{#if errors.length}}
