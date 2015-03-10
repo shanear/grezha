@@ -42,4 +42,10 @@ class Api::BaseController < ApplicationController
       end
     end
   end
+
+
+  rescue_from StandardError, with: :render_unknown_error
+  def render_unknown_error(error)
+    render(json: error.inspect, status: 500)
+  end
 end

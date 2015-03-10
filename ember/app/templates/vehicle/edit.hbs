@@ -9,7 +9,13 @@
     {{/link-to}}
   </div>
 
-  <button class="btn btn-default" id="saveVehicle" {{action "saveVehicle"}}>
-    Save Vehicle
-  </button>
+  {{#if isSaving}}
+    <div class="spin-button">
+      <i class="icon-loading animate-spin"></i>
+    </div>
+  {{else}}
+    <button class="btn btn-default" id="saveVehicle" {{action "saveVehicle"}}>
+      Save Vehicle
+    </button>
+  {{/if}}
 </form>

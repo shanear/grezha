@@ -3,7 +3,10 @@
 ContactsNewController = Ember.ObjectController.extend
   errors: []
   assignableUsers: []
-  reset: -> @set 'errors', []
+  isSaving: false
+  reset: ->
+    @set 'errors', []
+    @set('isSaving', false)
 
   # workaround to bug with Ember.Select
   # https://github.com/emberjs/ember.js/issues/4150
@@ -19,11 +22,15 @@ ContactsNewController = Ember.ObjectController.extend
       newContact.set('user', selectedUser)
 
       if newContact.isValid()
+        @set('isSaving', true)
         newContact.save().then(
           (contact)=>
             @transitionToRoute('contact', contact)
           ,(error)=>
+            @store.unloadRecord(newContact)
+            @set('isSaving', false)
             @set('errors', ["Something went wrong on the server, please try again later."]))
+
       else
         @set('errors', newContact.get('errors'))
         newContact.destroyRecord();

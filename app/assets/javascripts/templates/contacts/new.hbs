@@ -9,7 +9,13 @@
     {{/link-to}}
   </div>
 
-  <button id="save-contact" class="btn btn-default" {{action "createContact"}}>
-    Save Client
-  </button>
+  {{#if isLoading}}
+    <div class="spin-button">
+      <i class="icon-loading animate-spin"></i>
+    </div>
+  {{else}}
+    <button id="save-contact" class="btn btn-default" {{action "createContact"}}>
+      Save Client
+    </button>
+  {{/if}}
 </form>
