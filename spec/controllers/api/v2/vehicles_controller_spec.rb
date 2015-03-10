@@ -32,9 +32,8 @@ describe Api::V2::VehiclesController do
     end
 
     it "fails if vehicle not in organization" do
-      expect {
-        get :show, id: other_vehicle.id, format: :json
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      get :show, id: other_vehicle.id, format: :json
+      expect(response.status).to eq(500)
     end
   end
 
@@ -58,9 +57,8 @@ describe Api::V2::VehiclesController do
     end
 
     it "fails if vehicle not in organization" do
-      expect {
-        put :update, id: other_vehicle.id, vehicle: {}, format: :json
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      put :update, id: other_vehicle.id, vehicle: {}, format: :json
+      expect(response.status).to eq(500)
     end
   end
 
@@ -72,9 +70,8 @@ describe Api::V2::VehiclesController do
     end
 
     it "fails if vehicle not in organization" do
-      expect {
-        delete :destroy, id: other_vehicle.id, format: :json
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      delete :destroy, id: other_vehicle.id, format: :json
+      expect(response.status).to eq(500)
     end
   end
 end

@@ -34,9 +34,8 @@ describe Api::V2::ConnectionsController do
     end
 
     it "fails if contact not in organization" do
-      expect {
-        get :show, id: other_connection.id, format: :json
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      get :show, id: other_connection.id, format: :json
+      expect(response.status).to eq(500)
     end
   end
 
@@ -60,9 +59,8 @@ describe Api::V2::ConnectionsController do
     end
 
     it "fails if contact not in organization" do
-      expect {
-        delete :destroy, id: other_connection.id, format: :json
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      delete :destroy, id: other_connection.id, format: :json
+      expect(response.status).to eq(500)
     end
   end
 end
