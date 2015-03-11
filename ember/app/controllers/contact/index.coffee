@@ -7,6 +7,10 @@ ContactIndexController = Ember.ObjectController.extend HasConfirmation,
   allPeople: []
   filterByMode: null
 
+  # Workaround for https://github.com/emberjs/data/issues/2666
+  # Remove when fixed...
+  relationships: Ember.computed.filterBy('model.relationships', 'isDeleted', false)
+
   connectionsToShow: (->
     return @get("sortedConnections") unless @get("filterByMode")?
 

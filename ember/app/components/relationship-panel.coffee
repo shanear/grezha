@@ -6,7 +6,6 @@ RelationshipPanelComponent = Ember.Component.extend HasConfirmation,
 
   actions:
     deleteRelationship: ->
-      @get('relationship.contact.relationships').removeObject @get('relationship')
       @get('relationship').deleteRecord()
       @get('relationship').save()
 
