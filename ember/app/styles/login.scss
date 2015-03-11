@@ -10,6 +10,10 @@ div#account-box {
   padding: 20px;
   background-color: lighten($bulgarian-green, 65);
 
+  @media screen and (max-width: $break-small) {
+    width: 100%;
+  }
+
   h3 {
     text-align: center;
     font-weight: normal;
