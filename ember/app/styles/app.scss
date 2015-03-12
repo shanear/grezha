@@ -1,8 +1,8 @@
 @import "bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap";
 
 @font-face {
-    font-family: Redressed;
-    src: url(../font/redressed.ttf);
+  font-family: Redressed;
+  src: url(../font/redressed.ttf);
 }
 
 $bulgarian-green: #00966E;
@@ -16,6 +16,10 @@ $header-height: 50px;
 $usual-buffer: 10px;
 
 $break-small: 480px;
+$break-medium: 650px;
 
+@import "mobile";
 @import "login";
+@import "header";
+@import "type";
 @import "main";

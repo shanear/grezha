@@ -1,0 +1,159 @@
+header {
+  // Fix the header in the center
+  position: fixed;
+  left: 50%;
+  width: 96%;
+  max-width: 800px;
+  min-width: 450px;
+  z-index: 10;
+
+  @media screen and (max-width: $break-medium) {
+    top: 0px;
+    left: 0px;
+    min-width: 0px;
+    width: 100%;
+  }
+
+  #topbar {
+    left: -50%;
+    position: relative;
+    display: table;
+    width: 100%;
+    height: $header-height;
+    padding-bottom: 5px;
+
+    background-color: white;
+    border-bottom: 2px solid $bulgarian-red;
+
+    @media screen and (max-width: $break-medium) {
+      top: 0px;
+      left: 0px;
+      padding-bottom: 0px;
+    }
+
+    .menu-button, .search-button {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 0px 10px;
+      font-size: 1.2em;
+
+      @media screen and (min-width: $break-medium) {
+        display: none;
+      }
+    }
+
+    .logo {
+      display: table-cell;
+      vertical-align: bottom;
+      white-space: nowrap;
+
+      @media screen and (max-width: $break-medium) {
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      h1 {
+        margin-right: $usual-buffer * 2;
+        @media screen and (max-width: $break-medium) {
+          margin-right: 0px;
+        }
+      }
+    }
+
+    .environment, .organization {
+      color: $bulgarian-green;
+      text-transform: capitalize;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    nav {
+      width: 100%;
+      display: table-cell;
+      vertical-align: bottom;
+      font-size: 1.1em;
+
+      @media screen and (max-width: $break-medium) {
+        background-color: $light-bulgarian-green;
+        width: 80%;
+        top: $header-height;
+        right: 0px;
+        bottom: -1000px;
+        position: absolute;
+      }
+
+      ul.links {
+        display: inline-block;
+        padding-left: 0px;
+        margin: 0px;
+
+        li {
+          padding-left: $usual-buffer;
+          display: inline-block;
+        }
+
+        @media screen and (max-width: $break-medium) {
+          display: block;
+
+          li {
+            padding-left: 0;
+            display: block;
+          }
+
+          a {
+            display: block;
+            width: 100%;
+            padding: $usual-buffer;
+          }
+        }
+      }
+
+      .offline .reset-password a {
+        pointer-events: none;
+        cursor: default;
+        color: #aaa;
+      }
+
+      .mobile-only {
+        .account-info {
+          padding: $usual-buffer;
+          padding-top: ($usual-buffer * 2);
+          color: $med-grey;
+          border-bottom: 1px solid $med-grey;
+          font-weight: bold;
+        }
+
+        .account-links {
+          padding-left: 0px;
+
+          li { display: block; }
+
+          a {
+            display: block;
+            width: 100%;
+            padding: $usual-buffer;
+          }
+        }
+      }
+
+
+      .login-info {
+        float: right;
+
+        > div {
+          padding-left: 1em;
+          float: left;
+
+        }
+
+        @media screen and (max-width: $break-medium) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+

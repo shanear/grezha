@@ -1,6 +1,15 @@
 Font license info
 
 
+## Typicons
+
+   (c) Stephen Hutchings 2012
+
+   Author:    Stephen Hutchings
+   License:   SIL (http://scripts.sil.org/OFL)
+   Homepage:  http://typicons.com/
+
+
 ## Elusive
 
    Copyright (C) 2013 by Aristeides Stathopoulos

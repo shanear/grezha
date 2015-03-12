@@ -56,87 +56,6 @@ input[type = "checkbox"] {
 }
 
 
-header {
-  // Fix the header in the center
-  position: fixed;
-  left: 50%;
-  width: 96%;
-  max-width: 800px;
-  min-width: 450px;
-  z-index: 10;
-
-  #topbar {
-    position: relative;
-    left: -50%;
-    display: table;
-    width: 100%;
-    height: $header-height;
-
-    background-color: white;
-    padding-bottom: 5px;
-    border-bottom: 2px solid $bulgarian-red;
-
-    .logo {
-      display: table-cell;
-      vertical-align: bottom;
-      white-space: nowrap;
-
-      h1 {
-        font-family: 'Redressed', sans-serif;
-        font-size: 2em;
-        margin: 0px;
-        margin-right: $usual-buffer * 2;
-
-        a { color: $bulgarian-green; }
-        a:hover { color: lighten($bulgarian-green, 10); }
-      }
-    }
-
-    .environment, .organization {
-      color: $bulgarian-green;
-      text-transform: capitalize;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    nav {
-      width: 100%;
-      display: table-cell;
-      vertical-align: bottom;
-
-      font-size: 1.1em;
-
-      ul.links  {
-        display: inline-block;
-        padding-left: 0px;
-        margin: 0px;
-
-        li {
-          padding-left: $usual-buffer;
-          display: inline-block;
-        }
-      }
-
-      .offline .reset-password a {
-        pointer-events: none;
-        cursor: default;
-        color: #aaa;
-      }
-
-      .login-info {
-        float: right;
-
-        > div {
-          padding-left: 1em;
-          float: left;
-        }
-      }
-    }
-  }
-}
-
 
 div#content {
   padding-top: $header-height;
@@ -144,23 +63,18 @@ div#content {
   width: 96%;
   max-width: 800px;
 
-  .logo {
-    h1 {
-      color: $bulgarian-green;
-      text-align: center;
-      font-family: 'Redressed', sans-serif;
-      font-size: 3.5em;
-      margin: 0px;
-
-      a { color: $bulgarian-green; }
-      a:hover { color: lighten($bulgarian-green, 10); }
-    }
+  .logo h1 {
+    text-align: center;
   }
 }
 
 #main-panel {
   padding: $usual-buffer;
   &.skinny { width: 26em; }
+
+  @media screen and (max-width: $break-medium) {
+    display: none;
+  }
 }
 
 #top-panel {

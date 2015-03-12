@@ -1,5 +1,9 @@
 <header>
   <div id="topbar" class="clearfix">
+    <div class="search-button">
+      <i class="icon-search"></i>
+    </div>
+
     <div class="logo">
       <h1>
         {{#link-to 'contacts' class="title"}}
@@ -8,7 +12,11 @@
       </h1>
     </div>
 
-    <nav>
+    <a class="menu-button" {{action "toggleMenu"}}>
+      <i class="icon-menu"></i>
+    </a>
+
+    <nav {{bind-attr class="isMenuShowing:menu:desktop-only"}}>
       <ul class="links">
         <li>
           {{#link-to 'contacts' id="contacts-link"}}
@@ -24,6 +32,25 @@
           <li>{{#link-to 'birthdays'}}Birthdays{{/link-to}}</li>
         {{/if}}
       </ul>
+
+      <div class="mobile-only">
+        <div class="account-info">
+          {{session.username}} - {{session.organization}}
+        </div>
+
+        <ul class="account-links">
+          <li class="reset-password">
+            {{#link-to 'reset-password' 'current-user'}}
+              Reset Password
+            {{/link-to}}
+          </li>
+          <li>
+            <a href {{action "invalidateSession"}} id="logout">
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
 
       <div class="login-info">
         {{#unless apiConnection.online}}
