@@ -2,7 +2,9 @@
 `import FilterByQuery from 'grezha/mixins/filter-by-query'`
 
 VehiclesController = Ember.ArrayController.extend FilterByQuery,
+  needs: ['application']
   filterBy: ["licensePlate"]
   modelName: "Vehicle"
+  isSearchShowing: Ember.computed.alias("controllers.application.isSearchShowing")
 
 `export default VehiclesController`

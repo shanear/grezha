@@ -1,3 +1,9 @@
+a.active {
+  font-weight: bold;
+  cursor: default;
+  &:hover { color: inherit; }
+}
+
 .logo {
   &.large {
     h1 { font-size: 3.5em; }
@@ -7,6 +13,7 @@
     color: $bulgarian-green;
     font-family: 'Redressed', sans-serif;
     font-size: 2em;
+    font-weight: bold;
     margin: 0px;
 
     a { color: $bulgarian-green; }

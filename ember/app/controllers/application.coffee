@@ -9,16 +9,20 @@ ApplicationController = Ember.Controller.extend
   allContacts: Ember.computed.alias('controllers.contacts.model')
   isMenuShowing: false
 
-  currentPathChange: (->
-    @set("isMenuShowing", false);
-  ).observes('currentPath')
+  reset: ->
+    @set("isMenuShowing", false)
+    @set("isSearchShowing", false)
 
   actions:
     toggleSupport: ->
       @set("supportActive", !@get("supportActive"))
 
     toggleMenu: ->
+      @set("isSearchShowing", false)
       @set("isMenuShowing", !@get("isMenuShowing"))
 
+    toggleSearch: ->
+      @set("isMenuShowing", false)
+      @set("isSearchShowing", !@get("isSearchShowing"))
 
 `export default ApplicationController`

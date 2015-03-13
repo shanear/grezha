@@ -30,41 +30,43 @@
       </div>
     {{/if}}
 
-    <table class="table"><tbody>
-      <tr>
-        <th></th>
-        {{#each month in currentYearConnections.months}}
-          <th>{{month.name}}</th>
-        {{/each}}
-        <th class="year-column">{{currentYearConnections.year}}</th>
-      </tr>
-
-      {{#each mode in connectionModes}}
+    <div class="data">
+      <table class="table"><tbody>
         <tr>
-          <th>{{mode}}</th>
+          <th></th>
           {{#each month in currentYearConnections.months}}
-            <td>
-              {{connections-length month.connections modeBinding="mode"}}
+            <th>{{month.name}}</th>
+          {{/each}}
+          <th class="year-column">{{currentYearConnections.year}}</th>
+        </tr>
+
+        {{#each mode in connectionModes}}
+          <tr>
+            <th>{{mode}}</th>
+            {{#each month in currentYearConnections.months}}
+              <td>
+                {{connections-length month.connections modeBinding="mode"}}
+              </td>
+            {{/each}}
+            <td class="year-column">
+              {{connections-length currentYearConnections.connections modeBinding="mode"}}
             </td>
+          </tr>
+        {{/each}}
+
+        <tr class="totals-row">
+          <th>Total</th>
+          {{#each month in currentYearConnections.months}}
+              <td>
+                {{month.connections.length}}
+              </td>
           {{/each}}
           <td class="year-column">
-            {{connections-length currentYearConnections.connections modeBinding="mode"}}
+            <b>{{currentYearConnections.connections.length}}</b>
           </td>
         </tr>
-      {{/each}}
-
-      <tr class="totals-row">
-        <th>Total</th>
-        {{#each month in currentYearConnections.months}}
-            <td>
-              {{month.connections.length}}
-            </td>
-        {{/each}}
-        <td class="year-column">
-          <b>{{currentYearConnections.connections.length}}</b>
-        </td>
-      </tr>
-    </tbody></table>
+      </tbody></table>
+    </div>
   </section>
 
   <section {{bind-attr class=":connections-report hasConnections:visible"}}>

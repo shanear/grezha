@@ -68,15 +68,6 @@ div#content {
   }
 }
 
-#main-panel {
-  padding: $usual-buffer;
-  &.skinny { width: 26em; }
-
-  @media screen and (max-width: $break-medium) {
-    display: none;
-  }
-}
-
 #top-panel {
   display: table;
   width: 100%;
@@ -168,6 +159,12 @@ h2, h3 {
   padding-left: 240px + ($usual-buffer * 2);
   min-width: 240px;
   width: 100%;
+
+  @media screen and (max-width: $break-medium) {
+    padding-left: $usual-buffer;
+  }
+
+  &.skinny { width: 26em; }
 }
 
 #sidebar {
@@ -177,6 +174,14 @@ h2, h3 {
   min-width: 240px;
   background-color: $light-bulgarian-green;
   border-radius: $usual-buffer;
+  z-index: 3000;
+
+  @media screen and (max-width: $break-medium) {
+    width: 100%;
+    border-radius: 0px;
+    left: 0px;
+    top: $header-height;
+  }
 
   .controls {
     height: 90px;
@@ -271,8 +276,14 @@ ul.connection_errors  {
   color: $bulgarian-red;
 }
 
-.cancel {
+.cancel{
   float: right;
+
+  a.active {
+    cursor: pointer;
+    font-weight: normal;
+    color: $dark-grey;
+  }
 }
 
 .vehicle-panel {
@@ -618,49 +629,5 @@ ul.connection_errors  {
       text-align: center;
       color: $bulgarian-green
     }
-  }
-}
-
-.dashboard {
-  padding-top: 4px;
-
-  p {
-    font-size: 16pt;
-    margin: 20px 0;
-    padding-bottom: 20px;
-  }
-
-  section {
-    margin-bottom: $usual-buffer * 3;
-    border-bottom: 1px solid $bulgarian-green;
-  }
-
-  #field-ops {
-    font-size: 14px;
-  }
-
-  .connections-report {
-    display: none;
-
-    &.visible {
-      display: block;
-    }
-  }
-}
-
-.totals-row {
-  background-color: $light-bulgarian-green;
-}
-
-.year-column {
-  background-color: $light-bulgarian-green;
-}
-
-.year-selection {
-  padding: 5px;
-  padding-bottom: 10px;
-
-  .is-selected .btn {
-    background-color: $light-bulgarian-green;
   }
 }

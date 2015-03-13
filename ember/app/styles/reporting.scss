@@ -1,0 +1,48 @@
+.dashboard {
+  padding-top: 4px;
+
+  p {
+    font-size: 16pt;
+    margin: 20px 0;
+    padding-bottom: 20px;
+  }
+
+  section {
+    margin-bottom: $usual-buffer * 3;
+    border-bottom: 1px solid $bulgarian-green;
+  }
+
+  #field-ops {
+    font-size: 14px;
+  }
+
+  .connections-report {
+    display: none;
+
+    .data {
+      width: 100%;
+      overflow-x: scroll;
+    }
+
+    &.visible {
+      display: block;
+    }
+  }
+}
+
+.totals-row {
+  background-color: $light-bulgarian-green;
+}
+
+.year-column {
+  background-color: $light-bulgarian-green;
+}
+
+.year-selection {
+  padding: 5px;
+  padding-bottom: 10px;
+
+  .is-selected .btn {
+    background-color: $light-bulgarian-green;
+  }
+}
