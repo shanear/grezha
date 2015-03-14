@@ -1,6 +1,7 @@
 <header>
   <div id="topbar" class="clearfix">
-    <a class="search-button" {{action "toggleSearch"}}>
+    <a {{bind-attr class=":search-button isSearchShowing:active"}}
+       {{action "toggleSearch"}}>
       <i class="icon-search"></i>
     </a>
 
@@ -12,7 +13,8 @@
       </h1>
     </div>
 
-    <a class="menu-button" {{action "toggleMenu"}}>
+    <a {{bind-attr class=":menu-button isMenuShowing:active"}}
+       {{action "toggleMenu"}}>
       <i class="icon-menu"></i>
     </a>
 

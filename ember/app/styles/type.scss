@@ -1,3 +1,38 @@
+body {
+  font-family: 'HelveticaNeue', sans-serif;
+  color: $dark-grey;
+
+  a {
+    cursor: pointer;
+    color: $dark-grey;
+  }
+
+  a:hover, .btn-link:hover {
+    color: lighten($bulgarian-green, 5);
+    text-decoration: none;
+  }
+
+  h3 {
+    margin-bottom: $usual-buffer;
+  }
+}
+
+
+@media screen and (max-width: $break-medium) {
+  input[type='text'],
+  input[type='number'],
+  input[type='password'],
+  select,
+  textarea {
+    font-size: 16px;
+
+    &:hover, &:focus {
+      font-size: 16px;
+    }
+  }
+}
+
+
 a.active {
   font-weight: bold;
   cursor: default;

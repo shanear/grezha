@@ -7,4 +7,8 @@ VehiclesController = Ember.ArrayController.extend FilterByQuery,
   modelName: "Vehicle"
   isSearchShowing: Ember.computed.alias("controllers.application.isSearchShowing")
 
+  reset: ->
+    @set("isSearchShowing", true);
+
+
 `export default VehiclesController`

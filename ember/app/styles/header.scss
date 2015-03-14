@@ -37,6 +37,10 @@ header {
       padding: 0px 10px;
       font-size: 1.2em;
 
+      &.active {
+        color: $bulgarian-green;
+      }
+
       @media screen and (min-width: $break-medium) {
         display: none;
       }

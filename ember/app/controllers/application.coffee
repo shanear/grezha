@@ -24,5 +24,6 @@ ApplicationController = Ember.Controller.extend
     toggleSearch: ->
       @set("isMenuShowing", false)
       @set("isSearchShowing", !@get("isSearchShowing"))
+      true
 
 `export default ApplicationController`

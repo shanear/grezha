@@ -4,9 +4,12 @@
 ContactsIndexController = Ember.Controller.extend
   connectionModes: Connection.MODES
   selectedYear: null
-  needs: ['contacts']
+  needs: ['application', 'contacts']
   allContacts: Ember.computed.alias('controllers.contacts.model')
   assignableUsers: []
+
+  reset: ->
+    @set("controllers.application.isSearchShowing", true);
 
   unassignedContactCount: (->
     @get('allContacts').filter((contact)->
