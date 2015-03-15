@@ -5,6 +5,10 @@
       <i class="icon-search"></i>
     </a>
 
+    <a class="new-button" {{action "newRecord"}}>
+      <i class="icon-plus"></i>
+    </a>
+
     <div class="logo">
       <h1>
         {{#link-to 'contacts' class="title"}}
@@ -12,6 +16,10 @@
         {{/link-to}}
       </h1>
     </div>
+
+    <a class="button-spacer" {{action "newRecord"}}>
+      <i class="icon-plus"></i>
+    </a>
 
     <a {{bind-attr class=":menu-button isMenuShowing:active"}}
        {{action "toggleMenu"}}>

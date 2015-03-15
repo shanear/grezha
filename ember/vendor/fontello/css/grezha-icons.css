@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'grezha-icons';
-  src: url('../font/grezha-icons.eot?94778623');
-  src: url('../font/grezha-icons.eot?94778623#iefix') format('embedded-opentype'),
-       url('../font/grezha-icons.woff?94778623') format('woff'),
-       url('../font/grezha-icons.ttf?94778623') format('truetype'),
-       url('../font/grezha-icons.svg?94778623#grezha-icons') format('svg');
+  src: url('../font/grezha-icons.eot?6753015');
+  src: url('../font/grezha-icons.eot?6753015#iefix') format('embedded-opentype'),
+       url('../font/grezha-icons.woff?6753015') format('woff'),
+       url('../font/grezha-icons.ttf?6753015') format('truetype'),
+       url('../font/grezha-icons.svg?6753015#grezha-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'grezha-icons';
-    src: url('../font/grezha-icons.svg?94778623#grezha-icons') format('svg');
+    src: url('../font/grezha-icons.svg?6753015#grezha-icons') format('svg');
   }
 }
 */
@@ -57,3 +57,4 @@
 .icon-trash:before { content: '\e804'; } /* '' */
 .icon-loading:before { content: '\e805'; } /* '' */
 .icon-cancel:before { content: '\e806'; } /* '' */
+.icon-plus:before { content: '\e807'; } /* '' */

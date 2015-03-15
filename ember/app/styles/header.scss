@@ -31,7 +31,7 @@ header {
       padding-bottom: 0px;
     }
 
-    .menu-button, .search-button {
+    .menu-button, .search-button, .new-button, .button-spacer {
       display: table-cell;
       vertical-align: middle;
       padding: 0px 10px;
@@ -45,6 +45,10 @@ header {
       @media screen and (min-width: $break-medium) {
         display: none;
       }
+    }
+
+    .button-spacer {
+      color: white;
     }
 
     .logo {

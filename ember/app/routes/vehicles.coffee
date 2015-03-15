@@ -5,4 +5,8 @@ VehiclesRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: ->
     @get('store').find('vehicle')
 
+  actions:
+    newRecord: ->
+      @transitionTo('vehicles.new', {name: ""})
+
 `export default VehiclesRoute`

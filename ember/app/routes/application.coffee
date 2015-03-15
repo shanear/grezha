@@ -6,4 +6,7 @@ ApplicationRoute = Ember.Route.extend ApplicationRouteMixin,
     sessionInvalidationSucceeded: ->
       @transitionTo('/login')
 
+    newRecord: ->
+      @transitionTo('contacts.new', {name: ""})
+
 `export default ApplicationRoute`
