@@ -44,11 +44,14 @@ a.active {
     h1 { font-size: 3.5em; }
   }
 
+  .active {
+    font-weight: normal;
+  }
+
   h1 {
     color: $bulgarian-green;
     font-family: 'Redressed', sans-serif;
     font-size: 2em;
-    font-weight: bold;
     margin: 0px;
 
     a { color: $bulgarian-green; }

@@ -38,6 +38,7 @@ header {
       font-size: 1.2em;
 
       &.active {
+        cursor: pointer;
         color: $bulgarian-green;
       }
 
@@ -83,10 +84,15 @@ header {
       @media screen and (max-width: $break-medium) {
         background-color: $light-bulgarian-green;
         width: 80%;
+        transition: right 0.3s;
         top: $header-height;
-        right: 0px;
+        right: -$break-medium * .8;
         bottom: -1000px;
         position: absolute;
+
+        &.showing {
+          right: 0px;
+        }
       }
 
       ul.links {

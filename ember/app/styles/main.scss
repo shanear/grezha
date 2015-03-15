@@ -159,8 +159,14 @@ h2, h3 {
   @media screen and (max-width: $break-medium) {
     width: 100%;
     border-radius: 0px;
-    left: 0px;
+    left: -$break-medium;
+    transition: left 0.3s;
+    bottom: 0px;
     top: $header-height;
+
+    &.showing {
+      left: 0px;
+    }
   }
 
   .search-title {
