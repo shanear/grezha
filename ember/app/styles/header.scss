@@ -26,6 +26,7 @@ header {
     border-bottom: 2px solid $bulgarian-red;
 
     @media screen and (max-width: $break-medium) {
+      height: $header-height-mobile;
       top: 0px;
       left: 0px;
       padding-bottom: 0px;
@@ -35,7 +36,7 @@ header {
       display: table-cell;
       vertical-align: middle;
       padding: 0px 10px;
-      font-size: 1.2em;
+      font-size: 1.4em;
 
       &.active {
         cursor: pointer;
@@ -89,7 +90,7 @@ header {
         background-color: $light-bulgarian-green;
         width: 80%;
         transition: right 0.3s;
-        top: $header-height;
+        top: $header-height-mobile;
         right: -$break-medium * .8;
         bottom: -1000px;
         position: absolute;

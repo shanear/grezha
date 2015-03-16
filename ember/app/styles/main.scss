@@ -43,6 +43,10 @@ div#content {
   width: 96%;
   max-width: 800px;
 
+  @media screen and (max-width: $break-medium) {
+    padding-top: $header-height-mobile;
+  }
+
   .logo h1 {
     text-align: center;
   }
@@ -161,7 +165,7 @@ h2, h3 {
     left: -$break-medium;
     transition: left 0.3s;
     bottom: 0px;
-    top: $header-height;
+    top: $header-height-mobile;
 
     &.showing {
       left: 0px;
