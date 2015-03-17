@@ -11,9 +11,9 @@
     </div>
 
     <div class='new-vehicle'>
-      {{#link-to 'vehicles.new' filterQuery class="btn btn-default"}}
+      <a class="btn btn-default" {{action 'newVehicle'}}>
         Add {{newModelText}}
-      {{/link-to}}
+      </a>
     </div>
   </div>
 

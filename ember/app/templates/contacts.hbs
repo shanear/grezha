@@ -14,9 +14,9 @@
     </div>
 
     <div class="new-contact">
-      {{#link-to 'contacts.new' filterQuery class='btn btn-default'}}
+      <a class="btn btn-default" {{action 'newContact'}}>
         Add {{newModelText}}
-      {{/link-to}}
+      </a>
     </div>
   </div>
 

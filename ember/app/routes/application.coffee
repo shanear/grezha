@@ -9,4 +9,8 @@ ApplicationRoute = Ember.Route.extend ApplicationRouteMixin,
     newRecord: ->
       @transitionTo('contacts.new', {name: ""})
 
+    toggleSearch: ->
+      @controller.set("isMenuShowing", false)
+      @controller.set("isSearchShowing", !@controller.get("isSearchShowing"))
+
 `export default ApplicationRoute`

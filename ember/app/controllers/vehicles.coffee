@@ -10,5 +10,9 @@ VehiclesController = Ember.ArrayController.extend FilterByQuery,
   reset: ->
     @set("isSearchShowing", true);
 
+  actions:
+    newVehicle: ->
+      @get('controllers.application').reset()
+      @transitionToRoute("vehicles.new", @get("filterQuery"))
 
 `export default VehiclesController`
