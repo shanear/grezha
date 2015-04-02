@@ -29,7 +29,7 @@
     <nav {{bind-attr class="isMenuShowing:showing"}}>
       <ul class="links">
         <li>
-          {{#link-to 'contacts' id="contacts-link"}}
+          {{#link-to 'contacts' 'clients' id="contacts-link"}}
             Clients ({{allContacts.length}})
           {{/link-to}}
         </li>

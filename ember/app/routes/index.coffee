@@ -4,7 +4,7 @@
 IndexRoute = Ember.Route.extend
   redirect: ->
     if @session.isAuthenticated
-      @transitionTo('contacts')
+      @transitionTo('contacts', 'clients')
     else
       @transitionTo('login')
 
