@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202220237) do
+ActiveRecord::Schema.define(version: 20150404173516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20141202220237) do
     t.string   "member_id"
     t.integer  "user_id"
     t.datetime "added_at"
+    t.string   "role"
   end
 
   add_index "contacts", ["remote_id"], name: "index_contacts_on_remote_id", unique: true, using: :btree
