@@ -10,6 +10,6 @@ ContactsRoute = BaseRoute.extend AuthenticatedRouteMixin,
 
   setupController: (controller, model)->
     @_super(controller, model)
-    controller.set('all', @store.find('contact'))
+    controller.set('all', @store.all('contact'))
 
 `export default ContactsRoute`

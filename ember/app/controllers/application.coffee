@@ -2,16 +2,9 @@
 `import config from '../config/environment'`
 
 ApplicationController = Ember.Controller.extend
-  needs: ['contacts']
-  environment: config.environment
-  isProduction: (config.environment == 'production')
-  adminURL: EmberENV.adminURL
-  allContacts: Ember.computed.alias('controllers.contacts.all')
-  isMenuShowing: false
-
+  needs: ['authenticated']
   reset: ->
-    @set("isMenuShowing", false)
-    @set("isSearchShowing", false)
+    @get('controllers.authenticated').reset()
 
   actions:
     toggleSupport: ->

@@ -132,5 +132,5 @@ test 'adds contact with name in search bar', ->
   fillIn("#contact-search", "Hamilton")
   click('.new-contact a')
   andThen ->
-    equal(currentPath(), 'contacts.new')
+    equal(currentURL(), '/clients/new/Hamilton')
     equal(find('#name').val(), "Hamilton")

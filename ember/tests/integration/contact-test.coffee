@@ -194,7 +194,7 @@ test "shows relationships for a contact", ->
 
   click('.relationship .name')
   andThen ->
-    equal(currentPath(), 'contacts.contact.people.person.edit')
+    equal(currentURL(), '/clients/8/people/2/edit')
 
 
 test "deletes a relationship", ->

@@ -1,60 +1,62 @@
-<div class="logo large">
-  <h1>Grezha</h1>
-</div>
+<div id="content">
+  <div class="logo large">
+    <h1>Grezha</h1>
+  </div>
 
- <div id="account-box">
-  {{#if apiConnection.online}}
-    <h3>Login</h3>
-    <form {{action "login" on="submit"}}>
-      <div class="form-group">
-        {{input type="text"
-                id="email"
-                value=email
-                placeholder="Email"
-                class="form-control"}}
-      </div>
-
-      <div class="form-group">
-        {{input type="password"
-                id="password"
-                value=password
-                placeholder="Password"
-                class="form-control"}}
-      </div>
-
-      {{#if isLoading}}
-        <div class="spin-button">
-          <i class="icon-loading animate-spin"></i>
+   <div id="account-box">
+    {{#if apiConnection.online}}
+      <h3>Login</h3>
+      <form {{action "login" on="submit"}}>
+        <div class="form-group">
+          {{input type="text"
+                  id="email"
+                  value=email
+                  placeholder="Email"
+                  class="form-control"}}
         </div>
-      {{else}}
-        <input type="submit"
-               id="login-submit"
-               class="btn btn-default"
-               value="Sign in">
-      {{/if}}
 
-      {{#link-to 'forgot-password'
-          class="alternate-link btn btn-link"}}
-        Forgot Password?
-      {{/link-to}}
-    </form>
-  {{else}}
-    <h3 id="offline-login">Offline</h3>
-    <p>It looks like you're offline...</p>
-    <p>You won't be able to login again until you return online.</p>
+        <div class="form-group">
+          {{input type="password"
+                  id="password"
+                  value=password
+                  placeholder="Password"
+                  class="form-control"}}
+        </div>
+
+        {{#if isLoading}}
+          <div class="spin-button">
+            <i class="icon-loading animate-spin"></i>
+          </div>
+        {{else}}
+          <input type="submit"
+                 id="login-submit"
+                 class="btn btn-default"
+                 value="Sign in">
+        {{/if}}
+
+        {{#link-to 'forgot-password'
+            class="alternate-link btn btn-link"}}
+          Forgot Password?
+        {{/link-to}}
+      </form>
+    {{else}}
+      <h3 id="offline-login">Offline</h3>
+      <p>It looks like you're offline...</p>
+      <p>You won't be able to login again until you return online.</p>
+    {{/if}}
+  </div>
+
+  {{#if apiConnection.online}}
+    {{#if notice}}
+      <div id="notice" class="notice login">
+        {{notice}}
+      </div>
+    {{/if}}
+
+    {{#if loginErrors}}
+      <div id="login-errors" class="alert login">
+        {{loginErrors}}
+      </div>
+    {{/if}}
   {{/if}}
 </div>
-
-{{#if apiConnection.online}}
-  {{#if notice}}
-    <div id="notice" class="notice login">
-      {{notice}}
-    </div>
-  {{/if}}
-
-  {{#if loginErrors}}
-    <div id="login-errors" class="alert login">
-      {{loginErrors}}
-    </div>
-  {{/if}}
-{{/if}}

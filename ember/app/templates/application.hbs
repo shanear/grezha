@@ -1,11 +1,5 @@
 <div id="app">
-  {{#if session.isAuthenticated}}
-    {{partial 'partials/authenticated-header'}}
-  {{/if}}
-
-  <div id="content">
-    {{outlet}}
-  </div>
+  {{outlet}}
 
   <div id="support" class="desktop-only">
     <div class="clearfix">
