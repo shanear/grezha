@@ -53,7 +53,6 @@ PretendApi = Ember.Object.extend({
 
     server.get '/api/v2/contacts', (req)=>
       role = req.queryParams.role
-      console.log(req.params)
       contacts = @get('contacts').filter((contact)-> contact.role == role)
       return [200,
         {"Content-Type": "application/json"},
