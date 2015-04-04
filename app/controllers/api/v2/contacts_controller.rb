@@ -4,8 +4,7 @@ class Api::V2::ContactsController < Api::BaseController
   respond_to :json
 
   def index
-    test = contacts.order('LOWER(name) asc')
-    respond_with test
+    respond_with contacts.order('LOWER(name) asc')
   end
 
   def show
@@ -62,6 +61,6 @@ class Api::V2::ContactsController < Api::BaseController
 
   def create_contact_params
     params[:contact][:remote_id] = params[:contact][:id]
-    params.required(:contact).permit(:remote_id, :name, :city, :bio, :birthday, :phone, :user_id, :added_at)
+    params.required(:contact).permit(:remote_id, :name, :city, :bio, :birthday, :phone, :user_id, :added_at, :role)
   end
 end

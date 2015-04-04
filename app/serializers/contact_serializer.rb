@@ -1,5 +1,5 @@
 class ContactSerializer < ActiveModel::Serializer
-  attributes :id, :created_at, :name, :birthday, :phone, :bio, :city, :picture_url, :user_id, :added_at
+  attributes :id, :created_at, :name, :birthday, :phone, :bio, :city, :picture_url, :user_id, :added_at, :role
 
   def id
     object.remote_id
