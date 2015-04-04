@@ -3,6 +3,7 @@
 Contact = DS.Model.extend
   isRemoteSynced: true
   name: DS.attr('string')
+  role: DS.attr('string')
   city: DS.attr('string')
   bio: DS.attr('string')
   birthday: DS.attr('date')

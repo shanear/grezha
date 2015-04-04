@@ -6,7 +6,7 @@ ApplicationController = Ember.Controller.extend
   environment: config.environment
   isProduction: (config.environment == 'production')
   adminURL: EmberENV.adminURL
-  allContacts: Ember.computed.alias('controllers.contacts.model')
+  allContacts: Ember.computed.alias('controllers.contacts.all')
   isMenuShowing: false
 
   reset: ->

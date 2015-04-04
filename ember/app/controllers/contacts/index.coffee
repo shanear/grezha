@@ -5,7 +5,7 @@ ContactsIndexController = Ember.Controller.extend
   connectionModes: Connection.MODES
   selectedYear: null
   needs: ['application', 'contacts']
-  allContacts: Ember.computed.alias('controllers.contacts.model')
+  allContacts: Ember.computed.alias('controllers.contacts.all')
   assignableUsers: []
 
   reset: ->
