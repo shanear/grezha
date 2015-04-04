@@ -6,10 +6,15 @@ ContactsIndexController = Ember.Controller.extend
   selectedYear: null
   needs: ['application', 'contacts']
   allContacts: Ember.computed.alias('controllers.contacts.all')
+  role: Ember.computed.alias('controllers.contacts.modelName')
   assignableUsers: []
 
   reset: ->
     @set("controllers.application.isSearchShowing", true);
+
+  showClientDashboard: (->
+    @get('role') == 'client'
+  ).property('role')
 
   unassignedContactCount: (->
     @get('allContacts').filter((contact)->

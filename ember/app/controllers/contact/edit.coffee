@@ -11,6 +11,10 @@ ContactEditController = Ember.ObjectController.extend
     @set("selectedUserId", @get('user.id'))
   ).observes("user.id")
 
+  roleName: (->
+    (@get('model.role') || "contact").capitalize()
+  ).property("model")
+
   reset: ->
     @set('errors', [])
 

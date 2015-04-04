@@ -4,12 +4,13 @@
 
 ContactsRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
-    @store.filter('contact', (contact)->
-      contact.get('role') == Ember.String.singularize(params.contact_role)
-    )
+    Ember.String.singularize(params.contact_role)
 
-  setupController: (controller, model)->
-    @_super(controller, model)
+  setupController: (controller, role)->
+    controller.set('modelName', role)
+    controller.set('model', @store.filter('contact', (contact)->
+      contact.get('role') == role
+    ))
     controller.set('all', @store.all('contact'))
 
 `export default ContactsRoute`

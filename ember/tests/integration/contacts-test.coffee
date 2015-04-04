@@ -33,7 +33,6 @@ test "shows number of clients assigned to each user", ->
     ok(contains('#field-ops tr:nth-child(2)', "1"))
     ok(contains('#field-ops tr:last-child', "Unassigned"),
       "should show unassigned contacts in report")
-    console.log(find('#field-ops tr:last-child').html())
     ok(contains('#field-ops tr:last-child', "1"),
       "should show correct # of unassigned contacts in report")
 

@@ -9,6 +9,14 @@ AuthenticatedController = Ember.Controller.extend
   allContacts: Ember.computed.alias('controllers.contacts.all')
   isMenuShowing: false
 
+  allClients: (->
+    @get('allContacts').filter((contact)-> contact.get('role') == 'client')
+  ).property("allContacts.@each")
+
+  allVolunteers: (->
+    @get('allContacts').filter((contact)-> contact.get('role') == 'volunteer')
+  ).property("allContacts.@each")
+
   reset: ->
     @set("isMenuShowing", false)
     @set("isSearchShowing", false)

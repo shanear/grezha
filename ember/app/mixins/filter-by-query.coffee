@@ -22,6 +22,6 @@ FilterByQuery = Ember.Mixin.create
       @get('modelName')
     else
       @get('filterQuery')
-  ).property('filterQuery')
+  ).property('filterQuery', 'modelName')
 
 `export default FilterByQuery`

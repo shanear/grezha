@@ -14,6 +14,10 @@ ContactsNewController = Ember.ObjectController.extend
     @get("user.id")
   ).property("user")
 
+  roleName: (->
+    @get('model.role').capitalize()
+  ).property("model")
+
   actions:
     createContact: ->
       newContact = @store.createRecord('contact', @get('model'))

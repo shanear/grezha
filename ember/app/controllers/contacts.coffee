@@ -4,7 +4,6 @@
 ContactsController = Ember.ArrayController.extend FilterByQuery,
   needs: ['application']
   filterBy: ["name", "user.name"]
-  modelName: "Client"
   isSearchShowing: Ember.computed.alias("controllers.application.isSearchShowing")
 
   actions:

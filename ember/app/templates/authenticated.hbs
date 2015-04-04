@@ -30,12 +30,14 @@
       <ul class="links">
         <li>
           {{#link-to 'contacts' 'clients' id="clients-link"}}
-            Clients ({{allContacts.length}})
+            Clients ({{allClients.length}})
           {{/link-to}}
         </li>
 
         {{#toggled-feature name='volunteers' tagName='li'}}
-          {{#link-to 'contacts' 'volunteers'}} Volunteers {{/link-to}}
+          {{#link-to 'contacts' 'volunteers'}}
+            Volunteers ({{allVolunteers.length}})
+          {{/link-to}}
         {{/toggled-feature}}
 
         {{#toggled-feature name='vehicles' tagName='li'}}

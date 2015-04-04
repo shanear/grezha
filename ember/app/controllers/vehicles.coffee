@@ -4,7 +4,7 @@
 VehiclesController = Ember.ArrayController.extend FilterByQuery,
   needs: ['application']
   filterBy: ["licensePlate"]
-  modelName: "Vehicle"
+  modelName: "vehicle"
   isSearchShowing: Ember.computed.alias("controllers.application.isSearchShowing")
 
   reset: ->
