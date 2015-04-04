@@ -18,11 +18,11 @@ test "shows number of clients assigned to each user", ->
   ])
 
   @api.set('contacts', [
-    {id: 1, name: "Sue", user_id: 1},
-    {id: 2, name: "Stu", user_id: 1},
-    {id: 3, name: "Shu", user_id: 1},
-    {id: 4, name: "Smu", user_id: 3},
-    {id: 5, name: "Tae"}
+    {id: 1, name: "Sue", user_id: 1, role: 'client'},
+    {id: 2, name: "Stu", user_id: 1, role: 'client'},
+    {id: 3, name: "Shu", user_id: 1, role: 'client'},
+    {id: 4, name: "Smu", user_id: 3, role: 'client'},
+    {id: 5, name: "Tae", role: 'client'}
   ])
 
   visit("/clients/")
@@ -52,24 +52,49 @@ test "shows the number of connections in the dashboard", ->
     ok(contains('.dashboard', "You've recorded <b>4</b>"))
 
 
-test "contact counter works", ->
-  @api.set('contacts', [{id: 1}, {id: 2}, {id: 3}, {id: 7}])
+test "client counter works", ->
+  @api.set('contacts', [
+    {id: 1, role: 'client'},
+    {id: 2, role: 'client'},
+    {id: 3, role: 'client'},
+    {id: 7, role: 'client'}
+  ])
   visit("/clients/")
   andThen =>
-    ok(contains("#contacts-link", "(4)"),
+    ok(contains("#clients-link", "(4)"),
       "Number of total contacts should be in header")
 
 
 test "shows all people in sidebar when no search query entered", ->
-  @api.set('contacts', [{id: 1, name: "Cat"}, {id: 2, name: "Sted"}])
+  @api.set('contacts', [
+    {id: 1, name: "Cat", role: 'client'},
+    {id: 2, name: "Sted", role: 'client'}
+  ])
   visit("/clients/")
   andThen =>
     equal(find(".contact").length, 2,
       "shows all contacts in list")
 
 
+test "shows only people matching role in sidebar", ->
+  @api.set('contacts', [
+    {id: 1, name: "Cat", role: 'client'},
+    {id: 2, name: "Sted", role: 'client'}
+    {id: 3, name: "Flash", role: 'volunteer'}
+    {id: 4, name: "Sanjay", role: 'volunteer'}
+  ])
+  visit("/volunteers/")
+  andThen =>
+    equal(find(".contact").length, 2, "shows only volunteers in list")
+    ok(contains(".contact:eq(0)", "Flash"), "shows volunteer names in list")
+
+
 test "shows only people with matching string in name", ->
-  @api.set('contacts', [{id: 1, name: "Cat"}, {id: 2, name: "Cat Dog"}, {id: 3, name: "Sted"}])
+  @api.set('contacts', [
+    {id: 1, role: 'client', name: "Cat"},
+    {id: 2, role: 'client', name: "Cat Dog"},
+    {id: 3, role: 'client', name: "Sted"}
+  ])
   visit("/clients/")
   fillIn("#contact-search", "Cat")
   andThen ->
@@ -79,9 +104,11 @@ test "shows only people with matching string in name", ->
 test 'show only people in sidebar with matching user', ->
   @api.set('users', [{id: 0, name: "Pat Mims"},
                      {id: 1, name: "Marc Jan"}])
-  @api.set('contacts', [{id: 1, name: 'New Boy',  user_id: 0},
-                        {id: 2, name: 'Hip Girl', user_id: 0},
-                        {id: 3, name: 'Old Dude', user_id: 1}])
+  @api.set('contacts', [
+    {id: 1, role: 'client', name: 'New Boy',  user_id: 0},
+    {id: 2, role: 'client', name: 'Hip Girl', user_id: 0},
+    {id: 3, role: 'client', name: 'Old Dude', user_id: 1}
+  ])
   visit("/clients/")
   fillIn("#contact-search", "Pat")
   andThen ->
@@ -91,7 +118,7 @@ test 'show only people in sidebar with matching user', ->
 
 
 test 'clicking on contact goes to contact page', ->
-  @api.set('contacts', [{id: 1, name: "Cat"}])
+  @api.set('contacts', [{id: 1, role: 'client', name: "Cat"}])
   visit("/clients/")
   click('.contacts a')
   andThen -> equal(currentURL(), '/clients/1')

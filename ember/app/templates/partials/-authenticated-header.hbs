@@ -29,10 +29,14 @@
     <nav {{bind-attr class="isMenuShowing:showing"}}>
       <ul class="links">
         <li>
-          {{#link-to 'contacts' 'clients' id="contacts-link"}}
+          {{#link-to 'contacts' 'clients' id="clients-link"}}
             Clients ({{allContacts.length}})
           {{/link-to}}
         </li>
+
+        {{#toggled-feature name='volunteers' tagName='li'}}
+          {{#link-to 'contacts' 'volunteers'}} Volunteers {{/link-to}}
+        {{/toggled-feature}}
 
         {{#toggled-feature name='vehicles' tagName='li'}}
           {{#link-to 'vehicles'}} Vehicles {{/link-to}}

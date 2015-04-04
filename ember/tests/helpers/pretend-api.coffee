@@ -51,10 +51,13 @@ PretendApi = Ember.Object.extend({
       @set('deletedContactId', req.params.id)
       return [200, {"Content-Type": "application/json"}, "{}"]
 
-    server.get '/api/v2/contacts', =>
+    server.get '/api/v2/contacts', (req)=>
+      role = req.queryParams.role
+      console.log(req.params)
+      contacts = @get('contacts').filter((contact)-> contact.role == role)
       return [200,
         {"Content-Type": "application/json"},
-        JSON.stringify({contacts: @get('contacts')})]
+        JSON.stringify({contacts: contacts})]
 
     server.get '/api/v2/contacts/:id', (req)=>
       contacts = Ember.A(@get('contacts'))
