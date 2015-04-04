@@ -31,3 +31,4 @@ test "saves correctly", ->
     newContact = @api.get("savedContact")
     equal(newContact.name, "Newbie")
     equal(newContact.user_id, "1")
+    equal(newContact.role, "client")

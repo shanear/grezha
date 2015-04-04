@@ -5,6 +5,7 @@ ContactsNewRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
     {
       name: params.name
+      role: Ember.String.singularize(@paramsFor('contacts').contact_role)
       addedAt: new Date()
     }
 
