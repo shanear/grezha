@@ -1,19 +1,79 @@
-<div id="sidebar">
-  <div class="controls">
-    <div class="searchbar">
-        <i class="icon-search"></i>
-        {{input type="text" class="form-control"}}
+<header>
+  <div id="topbar" class="clearfix">
+    <div class="logo">
+      <h1>
+        Grezha
+      </h1>
+    </div>
+
+
+    <nav {{bind-attr class="isMenuShowing:showing"}}>
+      <div class="login-info">
+        {{#unless apiConnection.online}}
+          <div class="offline">
+            Offline
+          </div>
+        {{/unless}}
+
+        {{#unless isProduction}}
+          <div class="environment">
+            {{environment}}
+          </div>
+        {{/unless}}
+
+        <div class="organization">
+          {{#if session.admin}}
+            <a target="_blank" href="{{unbound adminURL}}">
+              {{session.organization}}
+              <i class="icon-cog"></i>
+            </a>
+          {{else}}
+            {{session.organization}}
+          {{/if}}
+        </div>
+
+        <div {{bind-attr class=":dropdown apiConnection.online:online:offline"}}>
+          <a data-toggle="dropdown" id href="#">
+            <span id="username">{{session.username}}</span>
+            <span class="caret"></span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li class="reset-password">
+              {{#link-to 'reset-password' 'current-user'}}
+                Reset Password
+              {{/link-to}}
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href {{action "invalidateSession"}} id="logout">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div id="content">
+  <div id="sidebar">
+    <div class="controls">
+      <div class="searchbar">
+          <i class="icon-search"></i>
+          {{input type="text" class="form-control"}}
+      </div>
+    </div>
+
+    <div class="spinner">
+      <i class="icon-loading animate-spin"></i>
     </div>
   </div>
 
-  <div class="spinner">
-    <i class="icon-loading animate-spin"></i>
+  <div id="main-panel">
+    <div class="mobile-only spinner">
+      <i class="icon-loading animate-spin"></i>
+    </div>
   </div>
-</div>
-
-<div id="main-panel">
-  <div class="mobile-only spinner">
-    <i class="icon-loading animate-spin"></i>
-  </div>
-  {{outlet}}
 </div>

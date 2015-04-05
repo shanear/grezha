@@ -1,10 +1,11 @@
 `import BaseRoute from './base'`
+`import Ember from 'ember'`
 
 AuthenticatedRoute = BaseRoute.extend
   beforeModel: ->
     @transitionTo('login') unless @session.isAuthenticated
 
-  setupController: ->
+  model: ->
     Ember.RSVP.all([
       @store.find('contact'),
       @store.find('connection'),
