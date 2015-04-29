@@ -19,10 +19,10 @@
 
   <div class="searchlist">
     <ul class="vehicles">
-      {{#each filteredCollection}}
+      {{#each vehicle in filteredCollection}}
         <li class="vehicle">
-          {{#link-to 'vehicle' this}}
-            {{licensePlate}}
+          {{#link-to 'vehicle' vehicle}}
+            {{vehicle.licensePlate}}
           {{/link-to}}
         </li>
       {{/each}}

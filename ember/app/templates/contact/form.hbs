@@ -48,8 +48,8 @@
 
 {{#if errors.length}}
   <ul class="errors">
-    {{#each errors}}
-      <li>{{this}}</li>
+    {{#each error in errors}}
+      <li>{{error}}</li>
     {{/each}}
   </ul>
 {{/if}}
