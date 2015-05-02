@@ -24,7 +24,7 @@
     "ember-cli-app-version": "0.3.3",
     "ember-cli-babel": "^4.0.0",
     "broccoli-manifest": "0.0.5",
-    "broccoli-sass": "^0.3.3",
+    "broccoli-sass": "^0.4.0",
     "ember-cli-coffeescript": "^0.8.0",
     "ember-cli-content-security-policy": "0.3.0",
     "ember-cli-dependency-checker": "0.0.7",
