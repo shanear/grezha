@@ -28,6 +28,11 @@ test 'Contra Costa features', ->
   ok(this.$().hasClass('enabled'),
     "should have 'addedOn' feature enabled")
 
+  Ember.run =>
+    component.set('name', 'events')
+
+  ok(this.$().hasClass('disabled'),
+    "should have events disabled")
 
 test 'Daughters of Bulgaria features', ->
   component = this.subject()
@@ -44,6 +49,11 @@ test 'Daughters of Bulgaria features', ->
   ok(this.$().hasClass('enabled'),
     "should have 'vehicles' feature enabled")
 
+  Ember.run =>
+    component.set('name', 'events')
+
+  ok(this.$().hasClass('disabled'),
+    "should have events disabled")
 
 test 'City Hope features', ->
   component = this.subject()
@@ -60,5 +70,11 @@ test 'City Hope features', ->
 
   ok(this.$().hasClass('enabled'),
     "should have volunteers enabled")
+
+  Ember.run =>
+    component.set('name', 'events')
+
+  ok(this.$().hasClass('enabled'),
+    "should have events enabled")
 
 

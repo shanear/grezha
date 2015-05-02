@@ -13,7 +13,7 @@ isFeatureEnabled = (feature, organization)->
     if organization == 'Contra Costa Reentry Network'
       return true
 
-  if feature == 'volunteers'
+  if feature == 'volunteers' || feature == 'events'
     if organization == 'City Hope'
       return true
 

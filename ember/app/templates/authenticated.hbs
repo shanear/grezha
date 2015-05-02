@@ -40,11 +40,11 @@
           {{/link-to}}
         {{/toggled-feature}}
 
-        <li>
+        {{#toggled-feature name='events' tagName='li'}}
           {{#link-to 'events' id="events-link"}}
             Events
           {{/link-to}}
-        </li>
+        {{/toggled-feature}}
 
         {{#toggled-feature name='vehicles' tagName='li'}}
           {{#link-to 'vehicles'}} Vehicles {{/link-to}}
