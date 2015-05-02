@@ -32,6 +32,8 @@ Router.map(function() {
       });
     });
 
+    this.resource('events');
+
     this.resource('birthdays');
   });
 });
