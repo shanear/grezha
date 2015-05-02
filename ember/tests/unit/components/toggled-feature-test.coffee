@@ -43,3 +43,22 @@ test 'Daughters of Bulgaria features', ->
   Ember.run => component.set('name', 'vehicles')
   ok(this.$().hasClass('enabled'),
     "should have 'vehicles' feature enabled")
+
+
+test 'City Hope features', ->
+  component = this.subject()
+
+  Ember.run =>
+    component.set('session', {organization: 'City Hope'})
+    component.set('name', 'faily-feature-mongodb')
+
+  ok(this.$().hasClass('disabled'),
+    "should be disabled for unknown features")
+
+  Ember.run =>
+    component.set('name', 'volunteers')
+
+  ok(this.$().hasClass('enabled'),
+    "should have volunteers enabled")
+
+

@@ -13,6 +13,10 @@ isFeatureEnabled = (feature, organization)->
     if organization == 'Contra Costa Reentry Network'
       return true
 
+  if feature == 'volunteers'
+    if organization == 'City Hope'
+      return true
+
   return false
 
 `export default isFeatureEnabled`
