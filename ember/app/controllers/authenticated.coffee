@@ -10,11 +10,11 @@ AuthenticatedController = Ember.Controller.extend
   isMenuShowing: false
 
   allClients: (->
-    @get('allContacts').filter((contact)-> contact.get('role') == 'client')
+    (@get('allContacts') || []).filter((contact)-> contact.get('role') == 'client')
   ).property("allContacts.@each")
 
   allVolunteers: (->
-    @get('allContacts').filter((contact)-> contact.get('role') == 'volunteer')
+    (@get('allContacts') || []).filter((contact)-> contact.get('role') == 'volunteer')
   ).property("allContacts.@each")
 
   reset: ->

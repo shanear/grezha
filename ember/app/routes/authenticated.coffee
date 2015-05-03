@@ -5,9 +5,12 @@ AuthenticatedRoute = BaseRoute.extend
   beforeModel: ->
     @transitionTo('login') unless @session.isAuthenticated
 
-  model: ->
+  setupController: ->
+    setContacts = @store.find('contact').then (contacts)=>
+      @controllerFor('contacts').set('all', contacts)
+
     Ember.RSVP.all([
-      @store.find('contact'),
+      setContacts,
       @store.find('connection'),
       @store.find('user')
     ])
