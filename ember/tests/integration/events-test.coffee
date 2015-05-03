@@ -16,3 +16,10 @@ test "Navigation link takes you to the Events page", ->
   andThen ->
     equal(currentURL(), "/events",
       "Events tab directs to events page")
+
+test "Add event from events page", ->
+  visit("/events")
+  click("#add-event")
+  andThen ->
+    equal(currentURL(), "/events/new",
+      "Add event button directs to new event form")

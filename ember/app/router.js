@@ -32,7 +32,9 @@ Router.map(function() {
       });
     });
 
-    this.resource('events');
+    this.resource('events', function() {
+      this.route('new');
+    });
 
     this.resource('birthdays');
   });
