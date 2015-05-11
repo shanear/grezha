@@ -11,6 +11,7 @@ module "Events page integration test",
   teardown: ->
     Ember.run(@app, @app.destroy)
 
+
 test "Navigation link takes you to the Events page", ->
   visit("/")
   click("#events-link")
@@ -18,12 +19,14 @@ test "Navigation link takes you to the Events page", ->
     equal(currentURL(), "/events",
       "Events tab directs to events page")
 
+
 test "Add event from events page", ->
   visit("/events")
   click("#add-event")
   andThen ->
     equal(currentURL(), "/events/new",
       "Add event button directs to new event form")
+
 
 test "Save event from event create page", ->
   visit("/events/new")
@@ -44,8 +47,9 @@ test "Save event from event create page", ->
     newEvent = @api.get("savedEvent")
     equal(newEvent.name, "Micah's Birthday")
     ok(/2015-01-19T..:15/.test(newEvent.starts_at))
-    equal(newEvent.where, "Houston, Texas")
+    equal(newEvent.location, "Houston, Texas")
     equal(newEvent.notes, "The day that will be remembered by all but forgotten by one")
+
 
 test "Date defaults to start of the current hour", ->
   @app.register("datetime:test", Ember.Object.create({

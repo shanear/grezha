@@ -54,6 +54,7 @@ Daughters::Application.routes.draw do
       resources :people, except: [:new, :edit]
       resources :relationships, except: [:new, :edit]
       resources :vehicles, except: [:new, :edit]
+      resources :events, except: [:new, :edit]
     end
   end
 
