@@ -3,9 +3,8 @@
 
 EventsNewRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
-    console.log(@get('datetime.now')())
-    starts = @get('datetime.now')()
-    starts.setMinutes(0)
-    { starts: starts }
+    startsAt = @get('datetime.now')()
+    startsAt.setMinutes(0)
+    { startsAt: startsAt }
 
 `export default EventsNewRoute`

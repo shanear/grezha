@@ -26,6 +26,7 @@ PretendApi = Ember.Object.extend({
     @setupUserEndpoints(server)
     @setupPeopleEndpoints(server)
     @setupRelationshipEndpoints(server)
+    @setupEventsEndpoints(server)
 
     server.unhandledRequest = (verb, path, request)->
       console.warn("The API was hit with an unrecognized path:");
@@ -222,6 +223,14 @@ PretendApi = Ember.Object.extend({
 
     server.post '/api/v2/invalidate', ->
       return [200, {}, ""]
+
+  setupEventsEndpoints: (server)->
+    server.post '/api/v2/events', (req)=>
+      data = JSON.parse(req.requestBody)
+      @set('savedEvent', data["event"])
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({event: data["event"]})]
 });
 
 `export default PretendApi`
