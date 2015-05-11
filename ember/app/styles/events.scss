@@ -3,3 +3,21 @@ a#add-event {
   @extend .btn-default;
   float: right;
 }
+
+#new-event {
+  @extend .panel;
+  @extend .row;
+}
+
+#event-form {
+  @extend .col-md-8;
+
+  #event-name {
+    font-size: 120%;
+  }
+
+  #save-event {
+    @extend .btn;
+    @extend .btn-default;
+  }
+}

@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="date-field form-group">
   {{view "select"
     class="form-control date-field selected-month"
     content=months
@@ -18,4 +18,24 @@
     content=years
     selection=selectedYear
     prompt="Year"}}
+
+  {{#if includeTime}}
+    at
+    <div class="time">
+      {{view "select"
+        class="form-control date-field selected-hours"
+        content=hours
+        selection=selectedHour}}
+
+      {{view "select"
+        class="form-control date-field selected-minutes"
+        content=minutes
+        selection=selectedMinute}}
+
+      {{view "select"
+        class="form-control date-field selected-am-pm"
+        content=amPm
+        selection=selectedAmPm}}
+    </div>
+  {{/if}}
 </div>

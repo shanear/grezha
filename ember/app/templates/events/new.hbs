@@ -1,3 +1,45 @@
-<div class="panel">
-  <h2>Add Event</h2>
+<div id="new-event">
+  <form id="event-form">
+    <h2>Add Event</h2>
+
+    <div class="form-group">
+      {{enriched-textfield
+        id="event-name"
+        class="form-control"
+        value=name
+        placeholder="Untitled event"
+        autofocus=true}}
+    </div>
+
+    <div class="form-group">
+      <label for="when">when:</label>
+      {{date-field id="when" date=starts includeTime=true}}
+    </div>
+
+    <div class="form-group">
+      <label for="where">where:</label>
+      {{input type="text" id="where" class="form-control" value=where}}
+    </div>
+
+    <div class="form-group">
+      <label for="where">notes:</label>
+      {{textarea id="notes" class="form-control" value=notes rows="10"}}
+    </div>
+
+    {{#if isSaving}}
+      <div class="spin-button">
+        <i class="icon-loading animate-spin"></i>
+      </div>
+    {{else}}
+      <div class="cancel">
+        {{#link-to 'events'}}
+          cancel
+        {{/link-to}}
+      </div>
+
+      <button id="save-event" {{action "createEvent"}}>
+        Create Event
+      </button>
+    {{/if}}
+  </form>
 </div>

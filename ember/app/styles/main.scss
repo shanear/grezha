@@ -109,6 +109,16 @@ h2, h3 {
   display:inline;
   width:auto;
   margin-right: .5em;
+
+  .time {
+    display: inline-block;
+    padding-left: 6px;
+
+    @media screen and (max-width: $break-small) {
+      padding-left: 0px;
+      margin-top: 6px;
+    }
+  }
 }
 
 .connection-top-row {
