@@ -20,6 +20,29 @@ test "Navigation link takes you to the Events page", ->
       "Events tab directs to events page")
 
 
+test "Show events in time order", ->
+  @api.set('events', [
+    {
+      id: 1,
+      name: "after party",
+      starts_at: moment().startOf('day').add(22, 'hours')
+    },
+    {
+      id: 2,
+      name: "main event",
+      starts_at: moment().startOf('day').add(18, 'hours')
+    }
+  ]);
+
+  visit("/events")
+  andThen ->
+    console.log(find("#events").html())
+    ok(contains(".event:first .name", "main event"))
+    ok(contains(".event:first .time", "6:00 pm"))
+    ok(contains(".event:last  .name", "after party"))
+    ok(contains(".event:last  .time", "10:00 pm"))
+
+
 test "Add event from events page", ->
   visit("/events")
   click("#add-event")

@@ -1,0 +1,22 @@
+<div class="panel">
+  {{#link-to 'events.new' id="add-event"}}
+    Add event
+  {{/link-to}}
+
+  <h2>Upcoming Events</h2>
+</div>
+
+<div id="events">
+  <ul>
+    {{#each event in sortedEvents}}
+      <li class="event">
+        <span class="time">{{format-time event.startsAt}}</span>
+        <span class="name">{{event.name}}</span>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div id="action-pane">
+  {{outlet}}
+</div>

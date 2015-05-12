@@ -12,6 +12,7 @@ PretendApi = Ember.Object.extend({
   connections: [],
   relationships: [],
   people: [],
+  events: [],
   authToken: "",
   resetPasswordToken: "",
 
@@ -231,6 +232,10 @@ PretendApi = Ember.Object.extend({
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({event: data["event"]})]
+    server.get '/api/v2/events', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({events: @get('events')})]
 });
 
 `export default PretendApi`
