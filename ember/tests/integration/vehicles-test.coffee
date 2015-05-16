@@ -32,7 +32,6 @@ test "should make new vehicle", ->
   visit("/vehicles/")
   fillIn("#vehicle-search", "NEWPLATE1")
   click(".new-vehicle .btn")
-  fillIn("#licensePlate", "NEWPLATE1")
   fillIn("#usedBy","Mr Burns")
   fillIn("#notes","Was pitch black")
   click("#saveVehicle")

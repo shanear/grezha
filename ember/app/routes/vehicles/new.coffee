@@ -2,6 +2,8 @@
 `import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin'`
 
 VehiclesNewRoute = BaseRoute.extend AuthenticatedRouteMixin,
-  model: ()-> {}
+  model: (params)-> {
+  	licensePlate: params.name
+  }
 
 `export default VehiclesNewRoute`
