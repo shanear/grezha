@@ -9,6 +9,7 @@ PretendApi = Ember.Object.extend({
   deletedConnectionId: null,
   deletedRelationshipId: null,
   users: [],
+  vehicles: [],
   connections: [],
   relationships: [],
   people: [],
@@ -28,6 +29,7 @@ PretendApi = Ember.Object.extend({
     @setupPeopleEndpoints(server)
     @setupRelationshipEndpoints(server)
     @setupEventsEndpoints(server)
+    @setupVehiclesEndpoints(server)
 
     server.unhandledRequest = (verb, path, request)->
       console.warn("The API was hit with an unrecognized path:");
@@ -40,6 +42,12 @@ PretendApi = Ember.Object.extend({
       console.warn(error);
 
     this
+
+  setupVehiclesEndpoints: (server) ->
+    server.get '/api/v2/vehicles', (req) =>
+      return [200,
+        {"Content-Type":"application/json"},
+        JSON.stringify({vehicles: @get('vehicles')})]
 
   setupContactEndpoints: (server)->
     server.post '/api/v2/contacts', (req)=>
