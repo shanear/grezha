@@ -4,6 +4,7 @@
 PretendApi = Ember.Object.extend({
   online: true,
   contacts: [],
+  savedVehicle: null,
   savedContact: null,
   deletedContactId: null,
   deletedConnectionId: null,
@@ -44,10 +45,27 @@ PretendApi = Ember.Object.extend({
     this
 
   setupVehiclesEndpoints: (server) ->
+    server.get '/api/v2/vehicles/:id', (req) =>
+      vehicles = Ember.A(@get('vehicles'))
+      vehicle = vehicles.findBy('licensePlate', req.params.id)
+      if vehicle
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({vehicle: vehicle})]
+      else
+        return [404, {}, ""]
+
     server.get '/api/v2/vehicles', (req) =>
       return [200,
         {"Content-Type":"application/json"},
         JSON.stringify({vehicles: @get('vehicles')})]
+
+    server.post '/api/v2/vehicles', (req) =>
+      data = JSON.parse(req.requestBody)
+      @set('savedVehicle', data.vehicle)
+      return [200,
+        {"Content-Type":"application/json"},
+        JSON.stringify({vehicle: data.vehicle})]
 
   setupContactEndpoints: (server)->
     server.post '/api/v2/contacts', (req)=>

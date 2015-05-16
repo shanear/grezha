@@ -20,7 +20,7 @@ VehiclesNewController = Ember.ObjectController.extend
             @set('isSaving', false)
             @set('errors', ["Something went wrong on the server, please try again later."]))
       else
-        @store.unloadRecord(newContact)
+        @store.unloadRecord(newVehicle)
         @set('errors', newVehicle.get('errors'))
 
 `export default VehiclesNewController`
