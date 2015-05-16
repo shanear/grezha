@@ -22,7 +22,7 @@ test "should display license plate on the vehicles list page", ->
 
 test "should display license plate details when going to specific license plate", ->
   @api.set("vehicles", [{id: 1,licensePlate: "PLATE1", usedBy:"Sketchy Dude", notes: "Whee"}])
-  visit("/vehicles/PLATE1")
+  visit("/vehicles/1")
   andThen =>
     ok(contains(".vehicle-panel", "PLATE1"))
     ok(contains(".vehicle-panel", "Sketchy Dude"))
@@ -40,3 +40,14 @@ test "should make new vehicle", ->
     ok(contains(".vehicle-panel", "NEWPLATE1"))
     ok(contains(".vehicle-panel", "Mr Burns"))
     ok(contains(".vehicle-panel", "Was pitch black"))
+
+test "should edit vehicle", ->
+  @api.set("vehicles", [{id: 1,licensePlate: "PLATE1", usedBy:"Sketchy Dude", notes: "Whee"}])
+  visit("/vehicles/1")
+  click(".icon-pencil")
+  fillIn("#usedBy","Ned Flanders")
+  click("#saveVehicle")
+  andThen =>
+    ok(contains(".vehicle-panel", "PLATE1"))
+    ok(contains(".vehicle-panel", "Ned Flanders"))
+    ok(contains(".vehicle-panel", "Whee"))

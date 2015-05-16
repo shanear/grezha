@@ -47,7 +47,7 @@ PretendApi = Ember.Object.extend({
   setupVehiclesEndpoints: (server) ->
     server.get '/api/v2/vehicles/:id', (req) =>
       vehicles = Ember.A(@get('vehicles'))
-      vehicle = vehicles.findBy('licensePlate', req.params.id)
+      vehicle = vehicles.findBy('id', parseInt(req.params.id))
       if vehicle
         return [200,
           {"Content-Type": "application/json"},
@@ -59,6 +59,21 @@ PretendApi = Ember.Object.extend({
       return [200,
         {"Content-Type":"application/json"},
         JSON.stringify({vehicles: @get('vehicles')})]
+
+    server.put '/api/v2/vehicles/:id', (req) =>
+      vehicles = Ember.A(@get('vehicles'))
+      vehicle = vehicles.findBy('id', parseInt(req.params.id))
+      if vehicle
+        data = JSON.parse(req.requestBody)
+        @set('savedVehicle', data.vehicle)
+        vehicleToReturn = data.vehicle
+        vehicleToReturn.id = req.params.id
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({vehicle: vehicleToReturn})]
+      else
+        return [404, {}, ""]
+
 
     server.post '/api/v2/vehicles', (req) =>
       data = JSON.parse(req.requestBody)
