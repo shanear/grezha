@@ -26,7 +26,7 @@ test "Redirects to login page when not authenticated", ->
 
 
 test "Login with bad credentials", ->
-  expect(1)
+  expect(2)
   visit "login"
   fillIn "#email", "lou@gmail.com"
   fillIn "#password", "bad!password"
@@ -34,6 +34,7 @@ test "Login with bad credentials", ->
   andThen ->
     equal(find("#login-errors").length, 1,
       "Errors should appear when login failed")
+    equal(find("#password").val(), "")
 
 
 test "Login while offline", ->
