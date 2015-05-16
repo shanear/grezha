@@ -7,6 +7,6 @@ ApiAuthorizer = Base.extend
   authorize: (jqXHR, requestOptions)->
     if(@session.isAuthenticated)
       jqXHR.setRequestHeader("Authorization",
-        "Token token=\"#{@session.content.token}\"")
+        "Token token=\"#{@session.content && @session.content.token}\"")
 
 `export default ApiAuthorizer`
