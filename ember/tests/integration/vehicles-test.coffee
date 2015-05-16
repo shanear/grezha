@@ -51,3 +51,25 @@ test "should edit vehicle", ->
     ok(contains(".vehicle-panel", "PLATE1"))
     ok(contains(".vehicle-panel", "Ned Flanders"))
     ok(contains(".vehicle-panel", "Whee"))
+
+test "should not create new vehicle and show error message if license plate empty", ->
+  visit("/vehicles/")
+  fillIn("#vehicle-search", "NEWPLATE1")
+  click(".new-vehicle .btn")
+  fillIn("#licensePlate", "NEWPLATE1")
+  fillIn("#usedBy","Mr Burns")
+  fillIn("#notes","Was pitch black")
+  fillIn("#licensePlate", "")
+  click("#saveVehicle")
+  andThen =>
+    ok(contains(".errors", "License plate is blank"))
+    ok(@api.savedVehicle == null)
+
+test "should search vehicles by license plate", ->
+  vehicles = [{id: 1,licensePlate: "PLATE1", usedBy:"Sketchy Dude", notes: "Whee"},{id: 2,licensePlate: "PLATE2", usedBy:"Jon Weasley", notes: "He's ok"},{id: 3,licensePlate: "PLATE2000", usedBy:"Jon Weasley", notes: "He's ok"} ]
+  @api.set("vehicles", vehicles)
+  visit("/vehicles/")
+  fillIn("#vehicle-search", "PLATE2")
+  andThen =>
+    ok(contains(".vehicle:nth-child(1)", "PLATE2"))
+    ok(contains(".vehicle:nth-child(2)", "PLATE2000"))
