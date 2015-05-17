@@ -7,14 +7,21 @@
 </div>
 
 <div id="events">
-  <ul>
-    {{#each event in sortedEvents}}
+  {{#each eventDay in eventDays}}
+    <div class="event-date">{{format-short-date eventDay.date}}</div>
+    <ul>
+    {{#each event in eventDay.events }}
       <li class="event">
         <span class="time">{{format-time event.startsAt}}</span>
         <span class="name">{{event.name}}</span>
+        {{#if event.location }}
+          <span class="location">at {{event.location}}</span>
+        {{/if}}
       </li>
+
     {{/each}}
-  </ul>
+    </ul>
+  {{/each}}
 </div>
 
 <div id="action-pane">
