@@ -13,6 +13,10 @@ class Api::V2::EventsController < Api::BaseController
     end
   end
 
+  def index
+    respond_with events
+  end
+
   private
 
   def events
