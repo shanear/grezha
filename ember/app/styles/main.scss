@@ -151,12 +151,12 @@ h2, h3 {
   }
 }
 
-.panel {
+@mixin panel() {
   padding: $usual-buffer;
 }
 
 #main-panel {
-  @extend .panel;
+  @include panel;
   padding-left: 240px + ($usual-buffer * 2);
   min-width: 240px;
   width: 100%;

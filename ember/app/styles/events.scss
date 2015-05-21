@@ -4,14 +4,47 @@ a#add-event {
   float: right;
 }
 
-#new-event {
-  @extend .panel;
+#events-header {
+  @include panel;
+  h2 { margin-bottom: 0; }
+}
+
+#events {
+  @include panel;
   @extend .row;
+
+  .event-date {
+    margin-top: $usual-buffer * 1.5;
+    margin-bottom: $usual-buffer / 2;
+  }
+
+  .event {
+    border-bottom: 1px solid $light-bulgarian-green;
+    padding-top: $usual-buffer / 2;
+    padding-bottom: $usual-buffer / 2;
+
+    .time {
+      font-weight: bold;
+      padding-right: 1rem;
+    }
+
+    .location {
+      color: $med-grey;
+    }
+  }
+}
+
+#events-list {
+  @extend .col-md-8;
+}
+
+
+#new-event {
+  @include panel;
+  @extend .col-md-8;
 }
 
 #event-form {
-  @extend .col-md-8;
-
   #event-name {
     font-size: 120%;
   }

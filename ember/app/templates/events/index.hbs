@@ -1,0 +1,28 @@
+<div id="events-header">
+  {{#link-to 'events.new' id="add-event"}}
+    Add event
+  {{/link-to}}
+
+  <h2>Upcoming Events</h2>
+</div>
+
+<div id="events">
+  {{outlet}}
+
+  <div id="events-list">
+    {{#each eventDay in eventDays}}
+      <h4 class="event-date">{{format-day eventDay.date}}</h4>
+      <ul>
+      {{#each event in eventDay.events }}
+        <li class="event list-unstyled">
+          <span class="time">{{format-time event.startsAt}}</span>
+          <span class="name">{{event.name}}</span>
+          {{#if event.location }}
+            <span class="location">at {{event.location}}</span>
+          {{/if}}
+        </li>
+      {{/each}}
+      </ul>
+    {{/each}}
+  </div>
+</div>

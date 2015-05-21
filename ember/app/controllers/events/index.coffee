@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-EventsController = Ember.ArrayController.extend
+EventsIndexController = Ember.ArrayController.extend
   eventSorting: ['startsAt']
   sortedEvents: Ember.computed.sort('model', 'eventSorting')
   eventsByDate: Ember.computed('@each', ->
@@ -22,4 +22,4 @@ EventsController = Ember.ArrayController.extend
       x
     )
 
-`export default EventsController`
+`export default EventsIndexController`
