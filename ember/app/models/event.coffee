@@ -5,5 +5,6 @@ Event = DS.Model.extend
   startsAt: DS.attr('date')
   location: DS.attr('string')
   notes: DS.attr('string')
+  isValid: Ember.computed 'name', -> !!(@get('name') || "").trim()
 
 `export default Event`

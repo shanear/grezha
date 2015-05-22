@@ -55,6 +55,13 @@ test "Add event from events page", ->
       "Add event button directs to new event form")
 
 
+test "Save event button is disabled when invalid", ->
+  visit("/events/new")
+  andThen =>
+    console.log(find("#save-event"))
+    ok(find("#save-event").is(":disabled"))
+
+
 test "Save event from event create page", ->
   visit("/events/new")
 

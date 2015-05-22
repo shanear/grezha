@@ -37,7 +37,10 @@
         {{/link-to}}
       </div>
 
-      <button id="save-event" {{action "createEvent"}}>
+      <button id="save-event"
+              class="btn btn-default"
+              {{action "createEvent"}}
+              {{bind-attr disabled="saveDisabled"}}>
         Create Event
       </button>
     {{/if}}

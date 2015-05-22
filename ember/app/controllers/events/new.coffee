@@ -2,11 +2,8 @@
 
 EventsNewController = Ember.ObjectController.extend
   isSaving: false
+  saveDisabled: Ember.computed.not('model.isValid')
   errors: []
-
-  reset: ->
-    @set('isSaving', false)
-    @set 'errors', []
 
   actions:
     createEvent: ->
