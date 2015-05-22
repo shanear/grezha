@@ -7,14 +7,11 @@ EventsNewController = Ember.ObjectController.extend
 
   actions:
     createEvent: ->
-      newEvent = @store.createRecord('event', @get('model'))
-
       @set('isSaving', true)
-      newEvent.save().then(
+      @get('model').save().then(
         (event)=>
           @transitionToRoute('events')
         ,(error)=>
-          @store.unloadRecord(newEvent)
           @set('isSaving', false)
           @set('errors', ["Something went wrong on the server, please try again later."]))
 
