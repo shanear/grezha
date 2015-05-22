@@ -17,6 +17,18 @@
     </div>
 
     <div class="form-group">
+      <label for="select-program">program:</label>
+      {{view 'select'
+        id="select-program"
+        class="form-control"
+        content=programs
+        optionValuePath="content.id"
+        optionLabelPath="content.name"
+        value=program
+        prompt="No Program"}}
+    </div>
+
+    <div class="form-group">
       <label for="where">where:</label>
       {{input type="text" id="where" class="form-control" value=location}}
     </div>

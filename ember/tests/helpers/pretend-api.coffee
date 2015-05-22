@@ -15,6 +15,7 @@ PretendApi = Ember.Object.extend({
   relationships: [],
   people: [],
   events: [],
+  programs: [],
   authToken: "",
   resetPasswordToken: "",
 
@@ -30,6 +31,7 @@ PretendApi = Ember.Object.extend({
     @setupPeopleEndpoints(server)
     @setupRelationshipEndpoints(server)
     @setupEventsEndpoints(server)
+    @setupProgramsEndpoints(server)
     @setupVehiclesEndpoints(server)
 
     server.unhandledRequest = (verb, path, request)->
@@ -277,6 +279,18 @@ PretendApi = Ember.Object.extend({
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({events: @get('events')})]
+
+  setupProgramsEndpoints: (server)->
+    server.post '/api/v2/programs', (req)=>
+      data = JSON.parse(req.requestBody)
+      @set('savedProgram', data["program"])
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({program: data["program"]})]
+    server.get '/api/v2/programs', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({programs: @get('programs')})]
 });
 
 `export default PretendApi`

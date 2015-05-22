@@ -58,8 +58,21 @@ test "Add event from events page", ->
 test "Save event button is disabled when invalid", ->
   visit("/events/new")
   andThen =>
-    console.log(find("#save-event"))
     ok(find("#save-event").is(":disabled"))
+
+
+test "Save event has list of programs to choose", ->
+  @api.set('programs', [
+    { id: 1, name: "Peter Dinklage's Movie Club" },
+    { id: 2, name: "Shane's Nerd Club for Nerds" }
+  ]);
+
+  visit("/events/new")
+  andThen =>
+    ok(!find("#select-program").val())
+    equal(find("#select-program option:eq(0)").text(), "No Program")
+    equal(find("#select-program option:eq(1)").text(), "Peter Dinklage's Movie Club")
+    equal(find("#select-program option:eq(2)").text(), "Shane's Nerd Club for Nerds")
 
 
 test "Save event from event create page", ->
