@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511145608) do
+ActiveRecord::Schema.define(version: 20150522154808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,14 @@ ActiveRecord::Schema.define(version: 20150511145608) do
   end
 
   add_index "people", ["remote_id"], name: "index_people_on_remote_id", unique: true, using: :btree
+
+  create_table "programs", force: true do |t|
+    t.integer  "organization_id",           null: false
+    t.string   "remote_id",       limit: 8, null: false
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", force: true do |t|
     t.string   "remote_id",         limit: 8, null: false

@@ -7,22 +7,6 @@ describe Api::V2::EventsController do
   describe "while logged in" do
     before { authorize_api(user) }
 
-    let(:client) {
-      FactoryGirl.create(:contact,
-        name: "Billy",
-        role: "client",
-        organization_id: organization.id
-      )
-    }
-
-    let(:other_client) {
-      FactoryGirl.create(:contact,
-        name: "Stan",
-        role: "client",
-        organization_id: organization.id + 1
-      )
-    }
-
     describe "POST #create" do
       it "creates a new event in user's organization with a remote id" do
         post :create, event: {

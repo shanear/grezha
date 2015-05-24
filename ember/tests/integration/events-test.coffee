@@ -46,6 +46,7 @@ test "Show events in time order with date", ->
     ok(contains(".event:first .location", "at Palace of Peter"),"Location Not Showing")
     ok(!contains(".event:last", "at"), "Location Showing")
 
+
 test "Add event from events page", ->
   visit("/events")
   click("#add-event")
