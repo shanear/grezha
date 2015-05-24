@@ -44,7 +44,6 @@ test "Show events in time order with date", ->
     ok(contains(".event:last  .name", "after party"))
     ok(contains(".event:last  .time", "10:00 pm"))
     ok(contains(".event:first .location", "at Palace of Peter"),"Location Not Showing")
-    console.log(find(".event:last").html())
     ok(!contains(".event:last", "at"), "Location Showing")
 
 test "Add event from events page", ->
