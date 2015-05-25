@@ -70,9 +70,30 @@ test "Save event has list of programs to choose", ->
   visit("/events/new")
   andThen =>
     ok(!find("#select-program").val())
-    equal(find("#select-program option:eq(0)").text(), "No Program")
+    equal(find("#select-program option:eq(0)").text(), "None")
     equal(find("#select-program option:eq(1)").text(), "Peter Dinklage's Movie Club")
     equal(find("#select-program option:eq(2)").text(), "Shane's Nerd Club for Nerds")
+    equal(find("#select-program option:eq(3)").text(), "New Program")
+
+
+test "Create new program when creating event", ->
+  visit("/events/new")
+  fillIn("#event-name", "Hand dancing")
+
+  andThen -> equal(find("#program-name").length, 0,
+    "Program name field only appears if new program is selected")
+
+  fillIn("#select-program","new")
+  fillIn("#program-name", "Hand dancing choir")
+  click("#save-event")
+
+  andThen =>
+    newProgram = @api.get("savedProgram")
+    ok(newProgram, "creating event should create new program")
+    equal(newProgram.name, "Hand dancing choir"
+      "Program name should match the filled in value")
+    equal(@api.get("savedEvent").program_id, newProgram.id,
+      "Event should be part of newly created program")
 
 
 test "Save event from event create page", ->

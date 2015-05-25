@@ -21,12 +21,18 @@
       {{view 'select'
         id="select-program"
         class="form-control"
-        content=programs
+        content=programOptions
         optionValuePath="content.id"
         optionLabelPath="content.name"
-        value=program
-        prompt="No Program"}}
+        value=selectedProgram
+        prompt="None"}}
     </div>
+
+    {{#if isCreatingProgram}}
+      <div class="form-group">
+          {{input type="text" id="program-name" class="form-control" value=programName}}
+      </div>
+    {{/if}}
 
     <div class="form-group">
       <label for="where">where:</label>

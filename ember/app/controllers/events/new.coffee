@@ -5,11 +5,29 @@ EventsNewController = Ember.ObjectController.extend
   saveDisabled: Ember.computed.not('model.isValid')
   programs: []
   errors: []
+  selectedProgram: null
+  programName: ""
+
+  newProgramOption: [Ember.Object.create({id: 'new', name: 'New Program'})]
+  programOptions: Ember.computed.union('programs', 'newProgramOption')
+  isCreatingProgram: Ember.computed 'selectedProgram', ->
+    @get('selectedProgram') == 'new'
+
+  saveProgram: ->
+    if(@get('isCreatingProgram'))
+      program = @store.createRecord('program', {name: @get('programName')})
+      @set("model.program", program)
+      program.save()
+    else
+      Ember.RSVP.resolve()
 
   actions:
     createEvent: ->
       @set('isSaving', true)
-      @get('model').save().then(
+
+      @saveProgram().then(=>
+        @get('model').save()
+      ).then(
         (event)=>
           @transitionToRoute('events')
         ,(error)=>
