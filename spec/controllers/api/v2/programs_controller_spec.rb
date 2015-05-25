@@ -8,31 +8,45 @@ describe Api::V2::ProgramsController do
       organization_id: organization.id)
   }
 
+  let(:program) {
+    FactoryGirl.create(:program,
+      name: "Moving Club",
+      organization_id: organization.id
+    )
+  }
+
+  let(:other_program) {
+    FactoryGirl.create(:program,
+      name: "Anti-Moving Club",
+      organization_id: organization.id + 1
+    )
+  }
 
   describe "while logged in" do
     before { authorize_api(user) }
 
     describe "GET #index" do
-      let(:program) {
-        FactoryGirl.create(:program,
-          name: "Moving Club",
-          organization_id: organization.id
-        )
-      }
-
-      let(:other_program) {
-        FactoryGirl.create(:program,
-          name: "Anti-Moving Club",
-          organization_id: organization.id + 1
-        )
-      }
-
       it "gets programs for the user's organization" do
         [program, other_program]
         get :index, format: :json
 
         expect(json["programs"].length).to be(1)
         expect(json["programs"].first["name"]).to eq("Moving Club")
+      end
+    end
+
+    describe "GET #show" do
+      before { [program, other_program] }
+
+      it "returns program data" do
+        get :show, id: program.id, format: :json
+        expect(json["program"]["name"]).to eq("Moving Club")
+      end
+
+      it "fails if program not in organization" do
+        expect {
+          get :show, id: other_program.id, format: :json
+        }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
