@@ -20,6 +20,9 @@
           {{#if event.location }}
             <span class="location">at {{event.location}}</span>
           {{/if}}
+          {{#if event.program }}
+            <span class="program">{{event.program.name}}</span>
+          {{/if}}
         </li>
       {{/each}}
       </ul>

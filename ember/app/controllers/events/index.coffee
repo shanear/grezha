@@ -3,7 +3,7 @@
 EventsIndexController = Ember.ArrayController.extend
   eventSorting: ['startsAt']
   sortedEvents: Ember.computed.sort('model', 'eventSorting')
-  eventsByDate: Ember.computed('@each', ->
+  eventsByDate: Ember.computed('@each.startsAt', ->
     eventsByDate = {}
     @get('sortedEvents').forEach((eventObj)->
       date = moment(eventObj.get('startsAt')).startOf('day')
@@ -11,15 +11,8 @@ EventsIndexController = Ember.ArrayController.extend
     )
     eventsByDate
   )
-  eventDays: Ember.computed('eventsByDate', ->
-      eventsBD = @get('eventsByDate')
-      x = Ember.keys(@get('eventsByDate')).map((date)->
-          {
-            date: date
-            events: eventsBD[date]
-          }
-        )
-      x
-    )
+  eventDays: Ember.computed 'eventsByDate', ->
+    Ember.keys(@get('eventsByDate')).map (date)=>
+      { date: date, events: @get('eventsByDate')[date] }
 
 `export default EventsIndexController`

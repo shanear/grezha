@@ -111,6 +111,7 @@ test "Create new program when creating event", ->
 
 
 test "Save event from event create page", ->
+  @api.set('programs', [{ id: 1, name: "Great birthdays" }])
   visit("/events/new")
 
   fillIn("#event-name","Micah's Birthday")
@@ -122,6 +123,7 @@ test "Save event from event create page", ->
   fillIn(".selected-am-pm","am")
   fillIn("#where","Houston, Texas")
   fillIn("#notes","The day that will be remembered by all but forgotten by one")
+  fillIn("#select-program","1")
 
   click("#save-event")
 
@@ -131,6 +133,7 @@ test "Save event from event create page", ->
     ok(/2015-01-19T..:15/.test(newEvent.starts_at))
     equal(newEvent.location, "Houston, Texas")
     equal(newEvent.notes, "The day that will be remembered by all but forgotten by one")
+    equal(newEvent.program_id, "1")
 
 
 test "Date defaults to start of the current hour", ->
