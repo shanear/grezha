@@ -2,7 +2,6 @@
 
 EventsNewController = Ember.ObjectController.extend
   isSaving: false
-  saveDisabled: Ember.computed.not('model.isValid')
   programs: []
   errors: []
   selectedProgram: null
@@ -22,6 +21,9 @@ EventsNewController = Ember.ObjectController.extend
       @get('selectedProgram').save()
     else
       Ember.RSVP.resolve()
+
+  saveDisabled: Ember.computed 'model.isValid', 'selectedProgram', 'newProgramName', ->
+    !@get('model.isValid') || (@get('selectedProgram.isNew') && !@get('newProgramName'))
 
   actions:
     createEvent: ->

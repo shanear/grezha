@@ -61,6 +61,17 @@ test "Save event button is disabled when invalid", ->
     ok(find("#save-event").is(":disabled"))
 
 
+test "Save event button is disabled when new program is invalid", ->
+  visit("/events/new")
+  fillIn("#event-name", "You dont want to miss this")
+  andThen ->
+    newProgramOption = find("#select-program option:last").val()
+    fillIn("#select-program", newProgramOption)
+
+  andThen =>
+    ok(find("#save-event").is(":disabled"))
+
+
 test "Save event has list of programs to choose", ->
   @api.set('programs', [
     { id: 1, name: "Peter Dinklage's Movie Club" },
@@ -73,7 +84,7 @@ test "Save event has list of programs to choose", ->
     equal(find("#select-program option:eq(0)").text(), "None")
     equal(find("#select-program option:eq(1)").text(), "Peter Dinklage's Movie Club")
     equal(find("#select-program option:eq(2)").text(), "Shane's Nerd Club for Nerds")
-    equal(find("#select-program option:eq(3)").text(), "New Program")
+    equal(find("#select-program option:eq(3)").text(), "Add a program")
 
 
 test "Create new program when creating event", ->
@@ -83,7 +94,10 @@ test "Create new program when creating event", ->
   andThen -> equal(find("#program-name").length, 0,
     "Program name field only appears if new program is selected")
 
-  fillIn("#select-program","new")
+  andThen ->
+    newProgramOption = find("#select-program option:last").val()
+    fillIn("#select-program", newProgramOption)
+
   fillIn("#program-name", "Hand dancing choir")
   click("#save-event")
 

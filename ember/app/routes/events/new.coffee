@@ -28,7 +28,7 @@ EventsNewRoute = BaseRoute.extend AuthenticatedRouteMixin,
     @controller.set('programs', model.programs)
     @controller.set('model', model.newEvent)
     @controller.set('newProgram',
-      @store.createRecord('program', { name: 'Create New Program' })
+      @store.createRecord('program', { name: 'Add a program' })
     )
 
 
