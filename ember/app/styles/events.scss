@@ -20,8 +20,11 @@ a#add-event {
 
   .event {
     border-bottom: 1px solid $light-bulgarian-green;
-    padding-top: $usual-buffer / 2;
-    padding-bottom: $usual-buffer / 2;
+    padding: ($usual-buffer / 2) $usual-buffer;
+
+    &:hover {
+      background-color: $light-bulgarian-green;
+    }
 
     .time {
       font-weight: bold;
@@ -40,13 +43,13 @@ a#add-event {
 }
 
 #events-list {
-  @extend .col-md-8;
+  @extend .col-sm-10;
 }
 
 
 #new-event {
   @include panel;
-  @extend .col-md-8;
+  @extend .col-md-10;
 }
 
 #event-form {
