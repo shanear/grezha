@@ -24,6 +24,17 @@ describe Api::V2::EventsController do
         expect(new_event.starts_at).to eq(DateTime.new(2015, 7, 4, 18, 20))
         expect(new_event.notes).to eq("probably not a good idea. sugar is bad.")
       end
+
+      it "uses program remote id to connect" do
+        program = FactoryGirl.create("program", {organization_id: organization.id})
+
+        post :create, event: {
+          name: "Ice Cream for Dinner",
+          program_id: program.remote_id
+        }
+
+        expect(Event.last.program).to eq(program)
+      end
     end
   end
 end

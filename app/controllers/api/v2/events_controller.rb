@@ -25,6 +25,12 @@ class Api::V2::EventsController < Api::BaseController
 
   def create_event_params
     params[:event][:remote_id] = params[:event][:id]
-    params.required(:event).permit(:remote_id, :name, :starts_at, :location, :notes)
+
+    if remote_id?(params[:event][:program_id])
+      program = Program.where(remote_id: params[:event][:program_id]).first
+      params[:event][:program_id] = program.id
+    end
+
+    params.required(:event).permit(:remote_id, :program_id, :name, :starts_at, :location, :notes)
   end
 end
