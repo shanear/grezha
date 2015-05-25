@@ -6,18 +6,20 @@ EventsNewController = Ember.ObjectController.extend
   programs: []
   errors: []
   selectedProgram: null
-  programName: ""
+  newProgram: null
+  newProgramName: ""
 
-  newProgramOption: [Ember.Object.create({id: 'new', name: 'New Program'})]
-  programOptions: Ember.computed.union('programs', 'newProgramOption')
-  isCreatingProgram: Ember.computed 'selectedProgram', ->
-    @get('selectedProgram') == 'new'
+  programOptions: Ember.computed.sort 'programs', (a, b)->
+    return 1 if(a.get('isNew') && !b.get('isNew'))
+    return -1 if(b.get('isNew') && !a.get('isNew'))
+    return 0
 
   saveProgram: ->
-    if(@get('isCreatingProgram'))
-      program = @store.createRecord('program', {name: @get('programName')})
-      @set("model.program", program)
-      program.save()
+    @set('program', @get('selectedProgram'))
+
+    if @get('selectedProgram.isNew')
+      @set('selectedProgram.name', @get('newProgramName'))
+      @get('selectedProgram').save()
     else
       Ember.RSVP.resolve()
 
@@ -25,14 +27,11 @@ EventsNewController = Ember.ObjectController.extend
     createEvent: ->
       @set('isSaving', true)
 
-      @saveProgram().then(=>
-        @get('model').save()
-      ).then(
-        (event)=>
-          @transitionToRoute('events')
-        ,(error)=>
-          @set('isSaving', false)
-          @set('errors', ["Something went wrong on the server, please try again later."]))
+      saveEvent = @saveProgram().then => @get('model').save()
+      saveEvent.then => @transitionToRoute('events')
+      saveEvent.catch =>
+        @set('isSaving', false)
+        @set('errors', ["Something went wrong on the server, please try again later."])
 
 
 `export default EventsNewController`

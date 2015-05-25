@@ -24,13 +24,13 @@
         content=programOptions
         optionValuePath="content.id"
         optionLabelPath="content.name"
-        value=selectedProgram
+        selection=selectedProgram
         prompt="None"}}
     </div>
 
-    {{#if isCreatingProgram}}
+    {{#if selectedProgram.isNew}}
       <div class="form-group">
-          {{input type="text" id="program-name" class="form-control" value=programName}}
+        {{input type="text" id="program-name" class="form-control" value=newProgramName}}
       </div>
     {{/if}}
 
