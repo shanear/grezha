@@ -44,9 +44,8 @@ describe Api::V2::ProgramsController do
       end
 
       it "fails if program not in organization" do
-        expect {
-          get :show, id: other_program.id, format: :json
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        get :show, id: other_program.id, format: :json
+        expect(response.status).to_not eq(200)
       end
     end
 
