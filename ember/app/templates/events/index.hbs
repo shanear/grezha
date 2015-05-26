@@ -12,17 +12,19 @@
   <div id="events-list">
     {{#each eventDay in eventDays}}
       <h4 class="event-date">{{format-day eventDay.date}}</h4>
-      <ul>
+      <ul class="list-unstyled">
       {{#each event in eventDay.events }}
-        <li class="event list-unstyled">
-          <span class="time">{{format-time event.startsAt}}</span>
-          <span class="name">{{event.name}}</span>
-          {{#if event.location }}
-            <span class="location">at {{event.location}}</span>
-          {{/if}}
-          {{#if event.program }}
-            <span class="program">{{event.program.name}}</span>
-          {{/if}}
+        <li class="event">
+          {{#link-to 'event' event}}
+            <span class="time">{{format-time event.startsAt}}</span>
+            <span class="name">{{event.name}}</span>
+            {{#if event.location }}
+              <span class="location">at {{event.location}}</span>
+            {{/if}}
+            {{#if event.program }}
+              <span class="program">{{event.program.name}}</span>
+            {{/if}}
+          {{/link-to}}
         </li>
       {{/each}}
       </ul>

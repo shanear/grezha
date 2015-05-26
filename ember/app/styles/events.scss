@@ -18,11 +18,13 @@ a#add-event {
     margin-bottom: $usual-buffer / 2;
   }
 
-  .event {
+  .event a {
+    display: block;
     border-bottom: 1px solid $light-bulgarian-green;
     padding: ($usual-buffer / 2) $usual-buffer;
 
     &:hover {
+      color: $dark-grey;
       background-color: $light-bulgarian-green;
     }
 
@@ -62,3 +64,28 @@ a#add-event {
     @extend .btn-default;
   }
 }
+
+.event-details {
+  @include panel;
+  margin-top: $usual-buffer * 2;
+
+  .date, .location {
+    font-size: 120%;
+    color: $med-grey;
+  }
+
+  .program {
+    font-size: 120%;
+    color: $bulgarian-green;
+  }
+
+  .notes {
+    margin-top: $usual-buffer * 2;
+  }
+
+  .links {
+    a { color: $med-grey; }
+    margin-top: $usual-buffer * 2;
+  }
+}
+

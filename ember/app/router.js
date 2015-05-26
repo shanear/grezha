@@ -34,6 +34,9 @@ Router.map(function() {
 
     this.resource('events', function() {
       this.route('new');
+      this.resource('event', { path: "/:event_id" }, function(){
+        this.route('edit');
+      });
     });
 
     this.resource('birthdays');

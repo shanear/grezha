@@ -47,6 +47,14 @@ test "Show events in time order with date", ->
     ok(!contains(".event:last", "at"), "Location Showing")
 
 
+test "Clicking on event takes you to event page", ->
+  @api.set('events', [{id: "abc890", name: "Crafting 101"}])
+
+  visit("/events")
+  click(".event a")
+  andThen -> equal(currentURL(), "/events/abc890", "Clicking an event takes to it")
+
+
 test "Add event from events page", ->
   visit("/events")
   click("#add-event")
