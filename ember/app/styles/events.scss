@@ -48,13 +48,14 @@ a#add-event {
   @extend .col-sm-10;
 }
 
-
-#new-event {
+.event-action {
   @include panel;
-  @extend .col-md-10;
+  @extend .row;
 }
 
 #event-form {
+  @extend .col-sm-10;
+
   #event-name {
     font-size: 120%;
   }

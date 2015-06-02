@@ -1,0 +1,46 @@
+<div class="form-group">
+  {{enriched-textfield
+    id="event-name"
+    class="form-control"
+    value=name
+    placeholder="Untitled event"
+    autofocus=true}}
+</div>
+
+<div class="form-group">
+  <label for="when">when:</label>
+  {{date-field id="starts-at" date=startsAt includeTime=true}}
+</div>
+
+<div class="form-group">
+  <label for="select-program">program:</label>
+  {{view 'select'
+    id="select-program"
+    class="form-control"
+    content=programOptions
+    optionValuePath="content.id"
+    optionLabelPath="content.name"
+    selection=selectedProgram
+    prompt="None"}}
+</div>
+
+{{#if selectedProgram.isNew}}
+  <div class="form-group">
+    {{input type="text"
+            id="program-name"
+            class="form-control"
+            placeholder="New program name"
+            value=newProgramName}}
+  </div>
+{{/if}}
+
+<div class="form-group">
+  <label for="where">where:</label>
+  {{input type="text" id="where" class="form-control" value=location}}
+</div>
+
+<div class="form-group">
+  <label for="where">notes:</label>
+  {{textarea id="notes" class="form-control" value=notes rows="10"}}
+</div>
+

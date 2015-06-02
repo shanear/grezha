@@ -156,3 +156,47 @@ test "Date defaults to start of the current hour", ->
     equal(find(".selected-hours").val(), "03")
     equal(find(".selected-minutes").val(), "00")
     equal(find(".selected-am-pm").val(), "pm")
+
+
+test "Edit event", ->
+  @api.set('programs', [{ id: 200, name: "Steins Events" }])
+  @api.set('events', [{
+      id: 912,
+      program_id: 200,
+      name: "Steinsfest",
+      starts_at: moment('2015-Jan-29', 'YYYY-MMM-DD').startOf('day').add(14, 'hours'),
+      location: "Steins Restaurant",
+      notes: "This is an all day event with amazing challenges."
+  }])
+
+  visit("/events/912")
+  click("#edit-event")
+  andThen ->
+    equal(find("#event-name").val(), "Steinsfest")
+    equal(find("#where").val(), "Steins Restaurant")
+    equal(find(".selected-year").val(), "2015")
+    equal(find(".selected-month").val(), "1")
+    equal(find(".selected-day").val(), "29")
+    equal(find(".selected-hours").val(), "02")
+    equal(find(".selected-minutes").val(), "00")
+    equal(find("#select-program").val(), "200")
+    equal(find("#notes").val(), "This is an all day event with amazing challenges.")
+
+  fillIn("#event-name","Extreme Steinsfest")
+  fillIn(".selected-month","5")
+  fillIn(".selected-day","9")
+  fillIn(".selected-year","2015")
+  fillIn(".selected-hours","01")
+  fillIn(".selected-minutes","15")
+  fillIn(".selected-am-pm","pm")
+  fillIn("#where","Steins")
+  fillIn("#notes","More extreme challenges")
+  click("#save-event")
+
+  andThen =>
+    newEvent = @api.get("savedEvent")
+    equal(newEvent.name, "Extreme Steinsfest")
+    ok(/2015-05-09T..:15/.test(newEvent.starts_at))
+    equal(newEvent.location, "Steins")
+    equal(newEvent.notes, "More extreme challenges")
+    equal(newEvent.program_id, "200")

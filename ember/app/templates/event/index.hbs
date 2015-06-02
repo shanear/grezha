@@ -1,0 +1,37 @@
+<div class="event-details">
+  <div class="control-bar">
+    <div class="options">
+      {{#link-to 'event.edit' model id='edit-event'}}
+        <i class="icon-pencil"></i>
+        Edit
+      {{/link-to}}
+    </div>
+  </div>
+
+  <h2>{{name}}</h2>
+
+  <div class="date">{{format-day startsAt}} {{format-time startsAt}}</div>
+  {{#if location}}
+    <div class="location">
+      at {{location}}
+    </div>
+  {{/if}}
+  {{#if program}}
+    <div class="program">
+      {{program.name}}
+    </div>
+  {{/if}}
+
+  {{#if notes}}
+    <div class="notes">
+      {{break-lines notes}}
+    </div>
+  {{/if}}
+
+  <div class="links">
+    <a href="#/events">
+      Back to Events
+    </a>
+  </div>
+</div>
+

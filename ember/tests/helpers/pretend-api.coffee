@@ -279,6 +279,26 @@ PretendApi = Ember.Object.extend({
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({events: @get('events')})]
+    server.get '/api/v2/events/:id', (req)=>
+      events = Ember.A(@get('events'))
+      foundEvent = events.findBy('id', parseInt(req.params.id))
+      if foundEvent
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({event: foundEvent})]
+      else
+        return [404, {}, ""]
+    server.put '/api/v2/events/:id', (req)=>
+      events = Ember.A(@get('events'))
+      foundEvent = events.findBy('id', parseInt(req.params.id))
+      if foundEvent
+        data = JSON.parse(req.requestBody)
+        @set('savedEvent', data.event)
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({event: foundEvent})]
+      else
+        return [404, {}, ""]
 
   setupProgramsEndpoints: (server)->
     server.post '/api/v2/programs', (req)=>
@@ -291,6 +311,15 @@ PretendApi = Ember.Object.extend({
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({programs: @get('programs')})]
+    server.get '/api/v2/programs/:id', (req)=>
+      programs = Ember.A(@get('programs'))
+      program = programs.findBy('id', parseInt(req.params.id))
+      if program
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({program: program})]
+      else
+        return [404, {}, ""]
 });
 
 `export default PretendApi`

@@ -1,6 +1,6 @@
 <div class="event-action">
   <form id="event-form">
-    <h2>Add Event</h2>
+    <h2>Edit Event</h2>
 
     {{partial "event/form"}}
 
@@ -17,9 +17,9 @@
 
       <button id="save-event"
               class="btn btn-default"
-              {{action "createEvent"}}
+              {{action "saveEvent"}}
               {{bind-attr disabled="saveDisabled"}}>
-        Create Event
+        Save Event
       </button>
     {{/if}}
   </form>
