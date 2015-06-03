@@ -16,8 +16,25 @@ test "Navigation link takes you to the Events page", ->
   visit("/")
   click("#events-link")
   andThen ->
-    equal(currentURL(), "/events",
+    equal(currentURL(), "/events/all/upcoming",
       "Events tab directs to events page")
+
+
+test "Filters events by program slug", ->
+  @api.set('events', [
+    { id: 1, name: "after party", program_id: 1 },
+    { id: 2, name: "main event", program_id: 2 }
+  ]);
+
+  @api.set('programs', [
+    { id: 1, name: "The Parties"},
+    { id: 2, name: "Big Events"}
+  ]);
+
+  visit("/events/big-events/upcoming")
+  andThen ->
+    ok(find(".event").length, 1)
+    ok(contains(".event .name", "main event"))
 
 
 test "Show events in time order with date", ->

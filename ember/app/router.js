@@ -33,6 +33,8 @@ Router.map(function() {
     });
 
     this.resource('events', function() {
+      this.route('all', { path: '/' });
+      this.route('index', { path: "/:program_slug/upcoming" });
       this.route('new');
       this.resource('event', { path: "/:event_id" }, function(){
         this.route('edit');

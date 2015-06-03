@@ -288,6 +288,15 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({event: foundEvent})]
       else
         return [404, {}, ""]
+    server.get '/api/v2/events/:id', (req)=>
+      events = Ember.A(@get('events'))
+      foundEvent = events.findBy('id', parseInt(req.params.id))
+      if foundEvent
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({event: foundEvent})]
+      else
+        return [404, {}, ""]
     server.put '/api/v2/events/:id', (req)=>
       events = Ember.A(@get('events'))
       foundEvent = events.findBy('id', parseInt(req.params.id))

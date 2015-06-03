@@ -2,6 +2,7 @@
 `import AuthenticatedRouteMixin from 'simple-auth/mixins/authenticated-route-mixin'`
 
 EventsRoute = BaseRoute.extend AuthenticatedRouteMixin,
-  model: (params)-> @get('store').find('event')
+  model: (params)->
+    @get('store').find('program')
 
 `export default EventsRoute`
