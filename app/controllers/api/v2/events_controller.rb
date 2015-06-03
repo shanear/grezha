@@ -13,14 +13,36 @@ class Api::V2::EventsController < Api::BaseController
     end
   end
 
+  def update
+    @event = find_event(params[:id])
+
+    if @event.update_attributes(create_event_params.except(:remote_id))
+      render json: @event
+    else
+      render json: { errors: @event.errors }, status: 422
+    end
+  end
+
   def index
     respond_with events
+  end
+
+  def show
+    respond_with find_event (params[:id])
   end
 
   private
 
   def events
     Event.where(organization_id: current_user.organization_id)
+  end
+
+  def find_event(id)
+    if remote_id?(id)
+      events.where(remote_id: id).first!
+    else
+      events.find(id)
+    end
   end
 
   def create_event_params

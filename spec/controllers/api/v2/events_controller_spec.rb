@@ -7,6 +7,20 @@ describe Api::V2::EventsController do
   describe "while logged in" do
     before { authorize_api(user) }
 
+    let(:event) {
+      FactoryGirl.create(:event,
+        name: "My Birthday",
+        organization_id: organization.id
+      )
+    }
+
+    let(:other_event) {
+      FactoryGirl.create(:event,
+        name: "Regins's Birthday",
+        organization_id: organization.id + 1
+      )
+    }
+
     describe "POST #create" do
       it "creates a new event in user's organization with a remote id" do
         post :create, event: {
@@ -34,6 +48,36 @@ describe Api::V2::EventsController do
         }
 
         expect(Event.last.program).to eq(program)
+      end
+    end
+
+    describe "PUT #edit" do
+      it "updates event" do
+        put :update, id: event.id, event: { name: "My Birthday Bash" }, format: :json
+        expect(response.status).to eq(200)
+
+        event.reload
+        expect(event.name).to eq("My Birthday Bash")
+      end
+
+      it "fails if contact not in organization" do
+        put :update, id: other_event.id, event: { name: "Regins's Birhtday (updated: more fun)" }, format: :json
+        expect(response.status).to_not eq(200)
+
+        other_event.reload
+        expect(other_event.name).to eq("Regins's Birthday")
+      end
+    end
+
+    describe "GET #show" do
+      it "returns event" do
+        get :show, id: event.id, format: :json
+        expect(json["event"]["name"]).to eq("My Birthday")
+      end
+
+      it "fails if event not in organization" do
+        get :show, id: other_event.id, format: :json
+        expect(response.status).to_not eq(200)
       end
     end
   end
