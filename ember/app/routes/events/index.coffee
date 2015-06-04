@@ -3,10 +3,10 @@
 
 FilteredEventsRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
-    Ember.RSVP.hash({
-      events: @get('store').find('event')
+    {
+      events: @get('store').all('event')
       programFilter: @get('store').all('program').findBy('slug', params.program_slug)
-    });
+    }
 
   setupController: (controller, model)->
     @controller.set('events', model.events)

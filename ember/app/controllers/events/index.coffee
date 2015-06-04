@@ -4,13 +4,14 @@ EventsIndexController = Ember.ArrayController.extend
   programFilter: null
   events: []
 
-  filteredEvents: Ember.computed.filter 'events', (event)->
-    !@get('programFilter') || event.get('program.id') == @get('programFilter.id')
+  filteredEvents: Ember.computed 'events', 'programFilter', (event)->
+    @get('events').filter (event)=>
+      !@get('programFilter') || event.get('program.id') == @get('programFilter.id')
 
   eventSorting: ['startsAt']
   sortedEvents: Ember.computed.sort('filteredEvents', 'eventSorting')
 
-  eventsByDate: Ember.computed('@each.startsAt', ->
+  eventsByDate: Ember.computed('sortedEvents.@each.startsAt', ->
     eventsByDate = {}
     @get('sortedEvents').forEach((eventObj)->
       date = moment(eventObj.get('startsAt')).startOf('day')

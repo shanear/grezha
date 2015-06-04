@@ -3,6 +3,9 @@
 
 EventsRoute = BaseRoute.extend AuthenticatedRouteMixin,
   model: (params)->
-    @get('store').find('program')
+    Ember.RSVP.hash({
+      events: @get('store').find('event')
+      programs: @get('store').find('program')
+    })
 
 `export default EventsRoute`
