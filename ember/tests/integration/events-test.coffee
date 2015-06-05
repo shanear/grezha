@@ -37,6 +37,20 @@ test "Filters events by program slug", ->
     ok(contains(".event .name", "main event"))
 
 
+test "Selecting a program filters events", ->
+  @api.set('programs', [
+    { id: 1, name: "Chess Club"},
+    { id: 2, name: "Chaz Club"}
+  ]);
+
+  visit("/events")
+  andThen ->
+    ok(find("#select-program option").length, 3)
+
+  fillIn("#select-program", "chaz-club")
+  andThen -> equal(currentURL(), "/events/chaz-club/upcoming")
+
+
 test "Show events in time order with date", ->
   @api.set('events', [
     {

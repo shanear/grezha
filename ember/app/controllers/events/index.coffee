@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
 
 EventsIndexController = Ember.ArrayController.extend
+  selectProgramFilter: null
   programFilter: null
   events: []
 
@@ -23,5 +24,11 @@ EventsIndexController = Ember.ArrayController.extend
   eventDays: Ember.computed 'eventsByDate', ->
     Ember.keys(@get('eventsByDate')).map (date)=>
       { date: date, events: @get('eventsByDate')[date] }
+
+  onSelectProgramFitler: (->
+    @transitionToRoute('events', @get('selectProgramFilter.slug'))
+    @set('selectProgramFilter', null)
+  ).observes('selectProgramFilter')
+
 
 `export default EventsIndexController`

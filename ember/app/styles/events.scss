@@ -6,7 +6,41 @@ a#add-event {
 
 #events-header {
   @include panel;
-  h2 { margin-bottom: 0; }
+  @include clearfix;
+
+  margin-top: 1em;
+
+  h2 {
+    float: left;
+    font-size: 18pt;
+    margin-bottom: 0;
+
+    @media screen and (max-width: $break-medium) {
+      float: none;
+      margin-bottom: $usual-buffer;
+    }
+
+    .program-name { color: $bulgarian-green; }
+  }
+
+  #select-program {
+    margin-right: $usual-buffer;
+    float: right;
+
+    @media screen and (max-width: $break-medium) {
+      float: left;
+      width: 60%;
+    }
+  }
+
+  .controls {
+    @include clearfix;
+    float: right;
+
+    @media screen and (max-width: $break-medium) {
+      float: none;
+    }
+  }
 }
 
 #events {
@@ -16,6 +50,10 @@ a#add-event {
   .event-date {
     margin-top: $usual-buffer * 1.5;
     margin-bottom: $usual-buffer / 2;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   .event a {

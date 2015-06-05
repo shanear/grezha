@@ -1,9 +1,29 @@
 <div id="events-header">
-  {{#link-to 'events.new' id="add-event"}}
-    Add event
-  {{/link-to}}
+  <h2>
+    <span class="program-name">
+      {{#if programFilter}}
+        {{programFilter.name}}
+      {{else}}
+        All
+      {{/if}}
+    </span>
+    Upcoming Events
+  </h2>
 
-  <h2>Upcoming Events</h2>
+  <div class="controls">
+    {{#link-to 'events.new' id="add-event"}}
+      Add event
+    {{/link-to}}
+
+    {{view 'select'
+      id="select-program"
+      class="form-control"
+      content=programs
+      optionValuePath="content.slug"
+      optionLabelPath="content.name"
+      selection=selectProgramFilter
+      prompt="Filter by program..."}}
+  </div>
 </div>
 
 <div id="events">
