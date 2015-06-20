@@ -25,10 +25,17 @@ EventsIndexController = Ember.ArrayController.extend
     Ember.keys(@get('eventsByDate')).map (date)=>
       { date: date, events: @get('eventsByDate')[date] }
 
-  onSelectProgramFitler: (->
+  onSelectProgramFitler: Ember.observer 'selectProgramFilter', ->
     @transitionToRoute('events', @get('selectProgramFilter.slug'))
     @set('selectProgramFilter', null)
-  ).observes('selectProgramFilter')
+
+  programFilterOptions: Ember.computed 'programs.[]', 'programFilter', ->
+    [Ember.Object.create({name: 'All Programs', slug: 'all'})]
+      .concat(@get('programs').content)
+      .filter (program)=> program.get('id') != @get('programFilter.id')
+
+
+
 
 
 `export default EventsIndexController`
