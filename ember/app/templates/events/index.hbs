@@ -7,13 +7,40 @@
         All
       {{/if}}
     </span>
-    Upcoming Events
+
+    {{#if isViewingPast}}
+      Past Events
+    {{else}}
+      Upcoming Events
+    {{/if}}
   </h2>
 
   <div class="controls">
     {{#link-to 'events.new' id="add-event"}}
       Add event
     {{/link-to}}
+
+    <a id="change-filter" {{action 'toggleFilter'}}>
+      {{#if isChangingFilter}}
+        Cancel Change Filter
+      {{else}}
+        Change Filter
+      {{/if}}
+    </a>
+  </div>
+</div>
+
+{{#if isChangingFilter}}
+  <div id="events-filter">
+    {{#if isViewingPast}}
+      {{#link-to 'events' programFilterSlug 'upcoming' id="filter-status"}}
+        View Upcoming Events
+      {{/link-to}}
+    {{else}}
+      {{#link-to 'events' programFilterSlug 'past' id="filter-status"}}
+        Past Events
+      {{/link-to}}
+    {{/if}}
 
     {{view 'select'
       id="select-program"
@@ -24,7 +51,7 @@
       selection=selectProgramFilter
       prompt="Filter by program..."}}
   </div>
-</div>
+{{/if}}
 
 <div id="events">
   {{outlet}}

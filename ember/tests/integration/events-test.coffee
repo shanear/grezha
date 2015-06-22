@@ -22,8 +22,8 @@ test "Navigation link takes you to the Events page", ->
 
 test "Filters events by program slug", ->
   @api.set('events', [
-    { id: 1, name: "after party", program_id: 1 },
-    { id: 2, name: "main event", program_id: 2 }
+    { id: 1, name: "after party", program_id: 1, startsAt: moment().add(1, 'hours')},
+    { id: 2, name: "main event", program_id: 2, startsAt: moment().add(1, 'hours')}
   ]);
 
   @api.set('programs', [
@@ -37,6 +37,23 @@ test "Filters events by program slug", ->
     ok(contains(".event .name", "main event"))
 
 
+test "Shows past events", ->
+  @api.set('events', [
+    { id: 1, name: "the future", starts_at: moment().add(1, 'hours')},
+    { id: 2, name: "the soiled past", starts_at: moment().subtract(1, 'hours')}
+  ]);
+
+  visit("/events/all/upcoming")
+  andThen ->
+    ok(find(".event").length, 1)
+    ok(contains(".event .name", "the future"))
+
+  visit("/events/all/past")
+  andThen ->
+    ok(find(".event").length, 1)
+    ok(contains(".event .name", "the soiled past"))
+
+
 test "Selecting a program filters events", ->
   @api.set('programs', [
     { id: 1, name: "Chess Club"},
@@ -44,6 +61,7 @@ test "Selecting a program filters events", ->
   ]);
 
   visit("/events")
+  click("#change-filter")
   andThen ->
     ok(find("#select-program option").length, 3)
 
@@ -56,13 +74,13 @@ test "Show events in time order with date", ->
     {
       id: 1,
       name: "after party",
-      starts_at: moment('2015-Jan-29', 'YYYY-MMM-DD').startOf('day').add(22, 'hours'),
+      starts_at: moment('2020-Jan-29', 'YYYY-MMM-DD').startOf('day').add(22, 'hours'),
       location: null
     },
     {
       id: 2,
       name: "main event",
-      starts_at: moment('2015-Jan-29', 'YYYY-MMM-DD').startOf('day').add(18, 'hours'),
+      starts_at: moment('2020-Jan-29', 'YYYY-MMM-DD').startOf('day').add(18, 'hours'),
       location: "Palace of Peter"
     }
   ]);
@@ -79,7 +97,7 @@ test "Show events in time order with date", ->
 
 
 test "Clicking on event takes you to event page", ->
-  @api.set('events', [{id: "abc890", name: "Crafting 101"}])
+  @api.set('events', [{id: "abc890", name: "Crafting 101", startsAt: moment().add(1, 'hours')}])
 
   visit("/events")
   click(".event a")
@@ -154,7 +172,7 @@ test "Save event from event create page", ->
   visit("/events/new")
 
   fillIn("#event-name","Micah's Birthday")
-  fillIn(".selected-month","1")
+  fillIn(".selected-month","12")
   fillIn(".selected-day","19")
   fillIn(".selected-year","2015")
   fillIn(".selected-hours","07")
@@ -163,16 +181,21 @@ test "Save event from event create page", ->
   fillIn("#where","Houston, Texas")
   fillIn("#notes","The day that will be remembered by all but forgotten by one")
   fillIn("#select-program","1")
+  andThen => console.log("SAVING")
 
   click("#save-event")
 
   andThen =>
     newEvent = @api.get("savedEvent")
     equal(newEvent.name, "Micah's Birthday")
-    ok(/2015-01-19T..:15/.test(newEvent.starts_at))
+    ok(/2015-12-19T..:15/.test(newEvent.starts_at))
     equal(newEvent.location, "Houston, Texas")
     equal(newEvent.notes, "The day that will be remembered by all but forgotten by one")
     equal(newEvent.program_id, "1")
+
+    equal(currentURL(), "/events/all/upcoming")
+    ok(find(".event").length, 1)
+    ok(contains(".event .name", "Micah's Birthday"))
 
 
 test "Date defaults to start of the current hour", ->

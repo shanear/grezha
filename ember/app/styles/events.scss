@@ -1,7 +1,8 @@
-a#add-event {
+a#add-event, a#change-filter, a#filter-status {
   @extend .btn;
   @extend .btn-default;
   float: right;
+  margin-left: $usual-buffer;
 }
 
 #events-header {
@@ -23,15 +24,6 @@ a#add-event {
     .program-name { color: $bulgarian-green; }
   }
 
-  #select-program {
-    margin-right: $usual-buffer;
-    float: right;
-
-    @media screen and (max-width: $break-medium) {
-      float: left;
-      width: 60%;
-    }
-  }
 
   .controls {
     @include clearfix;
@@ -39,6 +31,19 @@ a#add-event {
 
     @media screen and (max-width: $break-medium) {
       float: none;
+    }
+  }
+}
+
+#events-filter {
+  @include clearfix;
+
+  #select-program {
+    float: right;
+
+    @media screen and (max-width: $break-medium) {
+      float: left;
+      width: 60%;
     }
   }
 }

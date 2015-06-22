@@ -30,7 +30,8 @@ EventsNewController = Ember.ObjectController.extend
       @set('isSaving', true)
 
       saveEvent = @saveProgram().then => @get('model').save()
-      saveEvent.then => @transitionToRoute('events.all')
+      saveEvent.then =>
+        @transitionToRoute('events.all')
       saveEvent.catch =>
         @set('isSaving', false)
         @set('errors', ["Something went wrong on the server, please try again later."])

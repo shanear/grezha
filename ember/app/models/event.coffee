@@ -8,4 +8,8 @@ Event = DS.Model.extend
   program: DS.belongsTo('program', {async: true})
   isValid: Ember.computed 'name', -> !!(@get('name') || "").trim()
 
+  isUpcoming: Ember.computed 'startsAt', ->
+    moment(@get('startsAt')).isAfter()
+
+
 `export default Event`

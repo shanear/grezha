@@ -3,11 +3,17 @@
 EventsIndexController = Ember.ArrayController.extend
   selectProgramFilter: null
   programFilter: null
+  isChangingFilter: false
   events: []
 
-  filteredEvents: Ember.computed 'events', 'programFilter', (event)->
+  isViewingPast: Ember.computed 'status', -> @get('status') == 'past'
+  programFilterSlug: Ember.computed 'programFilter', -> @get('programFilter.slug') || 'all'
+
+  filteredEvents: Ember.computed 'events.@each.isUpcoming', 'programFilter', 'status', (event)->
     @get('events').filter (event)=>
-      !@get('programFilter') || event.get('program.id') == @get('programFilter.id')
+      (!@get('programFilter') || event.get('program.id') == @get('programFilter.id')) &&
+      ((@get('status') == 'past' && !event.get('isUpcoming')) ||
+       (@get('status') == 'upcoming' && event.get('isUpcoming')))
 
   eventSorting: ['startsAt']
   sortedEvents: Ember.computed.sort('filteredEvents', 'eventSorting')
@@ -26,13 +32,20 @@ EventsIndexController = Ember.ArrayController.extend
       { date: date, events: @get('eventsByDate')[date] }
 
   onSelectProgramFitler: Ember.observer 'selectProgramFilter', ->
-    @transitionToRoute('events', @get('selectProgramFilter.slug'))
-    @set('selectProgramFilter', null)
+    @transitionToRoute('events', {
+      programFilter: @get('programs').findBy('slug', @get('selectProgramFilter.slug'))
+      status: @get('status')
+    })
 
   programFilterOptions: Ember.computed 'programs.[]', 'programFilter', ->
+    return [] unless @get('programs')
+
     [Ember.Object.create({name: 'All Programs', slug: 'all'})]
       .concat(@get('programs').content)
       .filter (program)=> program.get('id') != @get('programFilter.id')
+
+  actions:
+    toggleFilter: -> @set("isChangingFilter", !@get("isChangingFilter"))
 
 
 

@@ -15,3 +15,11 @@ test 'isValid validates name', ->
 
   Ember.run => contact.set("name", null)
   equal(contact.get('isValid'), false, "isn't valid with undefined name")
+
+
+test 'isUpcoming', ->
+  contact = @subject({startsAt: moment().subtract(1, 'hours')})
+  equal(contact.get('isUpcoming'), false)
+
+  Ember.run => contact.set('startsAt', moment().add(1, 'hours'))
+  equal(contact.get('isUpcoming'), true)
