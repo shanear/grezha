@@ -5,6 +5,7 @@ AutocompleteFieldComponent = Ember.Component.extend
   highlightedIndex: -1
   isAutocompleting: false
   pinnedSuggestion: null
+  resetAfterSelect: false
   queryProperty: ""
   subtextProperty: ""
 
@@ -59,7 +60,7 @@ AutocompleteFieldComponent = Ember.Component.extend
         suggestion = null
       else
         selectedValue = suggestion.get(@get("queryProperty"))
-        @set("value", selectedValue)
+        @set("value", if @get('resetAfterSelect') then "" else selectedValue)
 
       @sendAction("onSelect", suggestion)
       @set("isAutocompleting", false)

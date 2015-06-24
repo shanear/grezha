@@ -1,6 +1,10 @@
-<div class="event-details">
+<div id="event-details-page">
   <div class="control-bar">
     <div class="options">
+      <a href="#/events">
+        Back to Events
+      </a>
+
       {{#link-to 'event.edit' model id='edit-event'}}
         <i class="icon-pencil"></i>
         Edit
@@ -10,28 +14,49 @@
 
   <h2>{{name}}</h2>
 
-  <div class="date">{{format-day startsAt}} {{format-time startsAt}}</div>
-  {{#if location}}
-    <div class="location">
-      at {{location}}
-    </div>
-  {{/if}}
-  {{#if program}}
-    <div class="program">
-      {{program.name}}
-    </div>
-  {{/if}}
+  <div class="event-details">
+    <div class="event-information">
+      <div class="date">{{format-day startsAt}} {{format-time startsAt}}</div>
+      {{#if location}}
+        <div class="location">
+          at {{location}}
+        </div>
+      {{/if}}
+      {{#if program}}
+        <div class="program">
+          {{program.name}}
+        </div>
+      {{/if}}
 
-  {{#if notes}}
-    <div class="notes">
-      {{break-lines notes}}
+      {{#if notes}}
+        <div class="notes">
+          {{break-lines notes}}
+        </div>
+      {{/if}}
     </div>
-  {{/if}}
 
-  <div class="links">
-    <a href="#/events">
-      Back to Events
-    </a>
+    <div class="event-registrations">
+      <h4>Registered Participants</h4>
+
+      <div class="form-group">
+        {{autocomplete-field
+            inputId="add-registration"
+            inputClass="form-control"
+            value=newRegistrationName
+            suggestions=contacts
+            queryProperty="name"
+            subtextProperty="role"
+            resetAfterSelect=true
+            placeholder="Register another participant"
+            onSelect="addRegistration"}}
+      </div>
+
+      <ul class="registration-list">
+        {{#each registration in sortedRegistrations}}
+          <li>{{registration.contact.name}}</li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </div>
 

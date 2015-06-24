@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 `import { test, moduleForModel } from 'ember-qunit'`
 
-moduleForModel('event', 'Event Model', needs: ['model:program'])
+moduleForModel('event', 'Event Model', needs: ['model:program', 'model:registration', 'model:contact'])
 
 test 'isValid validates name', ->
   contact = @subject({name: "Tony Danza"})

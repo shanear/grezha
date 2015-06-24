@@ -579,6 +579,8 @@ ul.connection_errors  {
     position: absolute;
     width: 100%;
     z-index: 3000;
+    border: 1px solid $med-grey;
+    border-top: 0px;
 
     &.active:hover {
       display: block;

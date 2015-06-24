@@ -181,7 +181,6 @@ test "Save event from event create page", ->
   fillIn("#where","Houston, Texas")
   fillIn("#notes","The day that will be remembered by all but forgotten by one")
   fillIn("#select-program","1")
-  andThen => console.log("SAVING")
 
   click("#save-event")
 

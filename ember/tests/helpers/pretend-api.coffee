@@ -12,6 +12,7 @@ PretendApi = Ember.Object.extend({
   users: [],
   vehicles: [],
   connections: [],
+  registrations: [],
   relationships: [],
   people: [],
   events: [],
@@ -33,6 +34,7 @@ PretendApi = Ember.Object.extend({
     @setupEventsEndpoints(server)
     @setupProgramsEndpoints(server)
     @setupVehiclesEndpoints(server)
+    @setupRegistrationEndpoints(server)
 
     server.unhandledRequest = (verb, path, request)->
       console.warn("The API was hit with an unrecognized path:");
@@ -320,6 +322,22 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({program: program})]
       else
         return [404, {}, ""]
+
+
+  setupRegistrationEndpoints: (server) ->
+    server.get '/api/v2/registrations', =>
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({registrations: @get('registrations')})]
+
+    server.post '/api/v2/registrations', (req) =>
+      data = JSON.parse(req.requestBody)
+      @set('savedRegistration', data.registration)
+      @get('registration')
+      return [200,
+        {"Content-Type": "application/json"},
+        JSON.stringify({registration: data.registration})]
+
 });
 
 `export default PretendApi`

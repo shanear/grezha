@@ -53,6 +53,7 @@ Daughters::Application.routes.draw do
       resources :users, except: [:new, :edit, :update]
       resources :people, except: [:new, :edit]
       resources :relationships, except: [:new, :edit]
+      resources :registrations, except: [:new, :edit, :show]
       resources :vehicles, except: [:new, :edit]
       resources :events, except: [:new, :edit]
       resources :programs, except: [:new, :edit]

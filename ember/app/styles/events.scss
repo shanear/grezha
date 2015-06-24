@@ -110,9 +110,13 @@ a#add-event, a#change-filter, a#filter-status {
   }
 }
 
-.event-details {
+#event-details-page {
   @include panel;
   margin-top: $usual-buffer * 2;
+
+  h2 {
+    margin-bottom: 0px;
+  }
 
   .date, .location {
     font-size: 120%;
@@ -125,12 +129,35 @@ a#add-event, a#change-filter, a#filter-status {
   }
 
   .notes {
-    margin-top: $usual-buffer * 2;
+    margin-top: $usual-buffer;
   }
 
   .links {
     a { color: $med-grey; }
     margin-top: $usual-buffer * 2;
+  }
+
+  .event-details {
+    @extend .row;
+
+    .event-information, .event-registrations {
+      margin-top: $usual-buffer;
+      @extend .col-md-6;
+    }
+
+    .event-registrations {
+      h4 { margin-top: 0px; margin-bottom: $usual-buffer; }
+      ul.registration-list {
+        @extend .list-unstyled;
+
+        li {
+          padding: $usual-buffer / 2;
+          border-bottom: 1px solid #e1e1e1;
+
+          &:last-child { border: none; }
+        }
+      }
+    }
   }
 }
 

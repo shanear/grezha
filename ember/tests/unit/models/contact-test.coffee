@@ -2,7 +2,7 @@
 `import { test, moduleForModel } from 'ember-qunit'`
 
 moduleForModel('contact', 'Contact Model'
-  needs: ['model:connection', 'model:user', 'model:relationship', 'model:person']
+  needs: ['model:connection', 'model:user', 'model:relationship', 'model:person', 'model:registration', 'model:event']
   setup: ->
     stop()
     Ember.run =>
@@ -23,8 +23,7 @@ moduleForModel('contact', 'Contact Model'
 test "createdAt", ->
   now = new Date()
   timekeeper.freeze(now)
-  equal(@contact.get("createdAt"), now,
-    "defaults to now")
+  equal(@contact.get("createdAt"), now, "defaults to now")
 
 
 test 'isValid validates name', ->
