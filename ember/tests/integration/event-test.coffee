@@ -40,3 +40,18 @@ test "Adds registration", ->
     savedRegistration = @api.get('savedRegistration')
     equal(savedRegistration.event_id, 1)
     equal(savedRegistration.contact_id, 4)
+
+
+test "Doesn't add duplicate registrations", ->
+  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('contacts', [{id: 4, name: "Shaggy"}])
+
+  visit("/events/1")
+  fillIn("#add-registration", "Shag")
+  click(".suggestions.active a")
+
+  fillIn("#add-registration", "Shag")
+  click(".suggestions.active a")
+
+  andThen =>
+    equal(find(".registration-list li").length, 1)

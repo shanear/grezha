@@ -7,6 +7,8 @@ EventIndexController = Ember.ObjectController.extend
 
   actions:
     addRegistration: (contact)->
+      return if @get("registrations").find((r)-> r.get('contact.id') == contact.get('id'))
+
       newRegistration = @store.createRecord('registration', {
         event: @get('model')
         contact: contact
