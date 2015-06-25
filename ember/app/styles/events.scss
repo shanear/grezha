@@ -146,6 +146,11 @@ a#add-event, a#change-filter, a#filter-status {
     }
 
     .event-registrations {
+      .no-registrations {
+        text-align: center;
+        color: $med-grey;
+      }
+
       .delete-registration,
       .confirm-delete-registration,
       .cancel-delete-registration {

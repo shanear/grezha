@@ -47,13 +47,17 @@
             queryProperty="name"
             subtextProperty="role"
             resetAfterSelect=true
-            placeholder="Register another participant"
+            placeholder="Add registration"
             onSelect="addRegistration"}}
       </div>
 
       <ul class="registration-list">
         {{#each registration in sortedRegistrations}}
           {{event-registration registration=registration}}
+        {{else}}
+          <li class="no-registrations">
+            Nobody's registered for this event.
+          </li>
         {{/each}}
       </ul>
     </div>
