@@ -55,3 +55,16 @@ test "Doesn't add duplicate registrations", ->
 
   andThen =>
     equal(find(".registration-list li").length, 1)
+
+
+test "Doesn't add registration if server errors on create", ->
+  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('contacts', [{id: 4, name: "Shaggy"}])
+  @api.get('errors')['registrations.create'] = true
+
+  visit("/events/1")
+  fillIn("#add-registration", "Shag")
+  click(".suggestions.active a")
+
+  andThen =>
+    equal(find(".registration-list li").length, 0)

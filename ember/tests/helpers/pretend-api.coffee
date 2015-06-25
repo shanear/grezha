@@ -3,6 +3,7 @@
 
 PretendApi = Ember.Object.extend({
   online: true,
+  errors: {},
   contacts: [],
   savedVehicle: null,
   savedContact: null,
@@ -331,9 +332,10 @@ PretendApi = Ember.Object.extend({
         JSON.stringify({registrations: @get('registrations')})]
 
     server.post '/api/v2/registrations', (req) =>
+      return [500, {}, ""] if @get('errors')['registrations.create']
+
       data = JSON.parse(req.requestBody)
       @set('savedRegistration', data.registration)
-      @get('registration')
       return [200,
         {"Content-Type": "application/json"},
         JSON.stringify({registration: data.registration})]

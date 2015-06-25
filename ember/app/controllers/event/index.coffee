@@ -14,7 +14,7 @@ EventIndexController = Ember.ObjectController.extend
         contact: contact
       })
 
-      newRegistration.save()
+      newRegistration.save().catch => newRegistration.deleteRecord()
 
 `export default EventIndexController`
 
