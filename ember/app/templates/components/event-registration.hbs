@@ -1,0 +1,12 @@
+{{registration.contact.name}}
+
+{{#if isBeingDeleted}}
+  <a class="confirm-delete-registration" {{action "confirmDeleteRegistration"}}>
+    Remove
+  </a>
+  <a class="cancel-delete-registration" {{action "cancelDeleteRegistration"}}>
+    Cancel
+  </a>
+{{else}}
+  <a class="icon-cancel delete-registration" {{action "deleteRegistration"}}></a>
+{{/if}}
