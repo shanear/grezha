@@ -53,7 +53,7 @@
 
       <ul class="registration-list">
         {{#each registration in sortedRegistrations}}
-          <li>{{registration.contact.name}}</li>
+          {{event-registration registration=registration}}
         {{/each}}
       </ul>
     </div>

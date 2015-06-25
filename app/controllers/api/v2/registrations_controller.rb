@@ -16,6 +16,13 @@ class Api::V2::RegistrationsController < Api::BaseController
     end
   end
 
+  def destroy
+    @registration = find_registration(params[:id])
+    @registration.destroy
+
+    respond_with json: {}
+  end
+
   private
 
   def registrations

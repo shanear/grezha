@@ -2,6 +2,11 @@
 
 EventIndexController = Ember.ObjectController.extend
   contacts: []
+
+  # Workaround for https://github.com/emberjs/data/issues/2666
+  # Remove when fixed...
+  registrations: Ember.computed.filterBy('model.registrations', 'isDeleted', false)
+
   sortedRegistrationsBy: ['createdAt:desc']
   sortedRegistrations: Ember.computed.sort('registrations', 'sortedRegistrationsBy')
 

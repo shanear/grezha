@@ -142,10 +142,20 @@ a#add-event, a#change-filter, a#filter-status {
 
     .event-information, .event-registrations {
       margin-top: $usual-buffer;
-      @extend .col-md-6;
+      @extend .col-sm-6;
     }
 
     .event-registrations {
+      .delete-registration,
+      .confirm-delete-registration,
+      .cancel-delete-registration {
+        float: right;
+        padding-left: $usual-buffer;
+        color: $light-grey;
+      }
+
+      .confirm-delete-registration { color: $bulgarian-green; }
+
       h4 { margin-top: 0px; margin-bottom: $usual-buffer; }
       ul.registration-list {
         @extend .list-unstyled;

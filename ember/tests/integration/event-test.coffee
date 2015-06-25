@@ -68,3 +68,20 @@ test "Doesn't add registration if server errors on create", ->
 
   andThen =>
     equal(find(".registration-list li").length, 0)
+
+
+test "Deletes a registration", ->
+  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('contacts', [{id: 4, name: "Shaggy"}])
+  @api.set('registrations', [{id: 7, event_id: 1, contact_id: 4}])
+
+  visit("/events/1")
+  andThen =>
+    equal(find('.registration-list .confirm-delete-registration').length, 0,
+      "The confirm delete button shouldn't appear until delete is clicked")
+
+  click(".registration-list .delete-registration")
+  click(".registration-list .confirm-delete-registration")
+  andThen =>
+    equal(@api.get('deletedRegistrationId'), 7,
+      "Clicking confirm delete should send a delete request to the api")

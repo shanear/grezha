@@ -10,6 +10,7 @@ PretendApi = Ember.Object.extend({
   deletedContactId: null,
   deletedConnectionId: null,
   deletedRelationshipId: null,
+  deletedRegistrationId: null,
   users: [],
   vehicles: [],
   connections: [],
@@ -340,6 +341,9 @@ PretendApi = Ember.Object.extend({
         {"Content-Type": "application/json"},
         JSON.stringify({registration: data.registration})]
 
+    server.delete '/api/v2/registrations/:id', (req)=>
+      @set('deletedRegistrationId', req.params.id)
+      return [200, {"Content-Type": "application/json"}, "{}"]
 });
 
 `export default PretendApi`
