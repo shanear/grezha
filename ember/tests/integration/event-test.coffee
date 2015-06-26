@@ -67,7 +67,7 @@ test "Doesn't add registration if server errors on create", ->
   click(".suggestions.active a")
 
   andThen =>
-    equal(find(".registration-list li").length, 0)
+    equal(find(".registration-list li.no-registrations").length, 1)
 
 
 test "Deletes a registration", ->
