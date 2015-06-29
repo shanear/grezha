@@ -50,13 +50,15 @@ describe Api::V2::ParticipationsController do
         post :create, participation: {
           id: "ABC123",
           event_id: event.remote_id,
-          contact_id: client.remote_id
+          contact_id: client.remote_id,
+          registered_at: Time.now
         }
 
 
         client.participations.reload
         expect(client.participations[0].remote_id).to eq("ABC123")
         expect(client.participations[0].event).to eq(event)
+        expect(client.participations[0].registered_at).to_not eq(nil)
 
         event.participations.reload
         expect(event.participations[0].contact).to eq(client)

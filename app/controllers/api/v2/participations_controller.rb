@@ -50,6 +50,6 @@ class Api::V2::ParticipationsController < Api::BaseController
       params[:participation][:event_id] = event.id
     end
 
-    params.required(:participation).permit(:remote_id, :contact_id, :event_id)
+    params.required(:participation).permit(:remote_id, :contact_id, :event_id, :registered_at)
   end
 end

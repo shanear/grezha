@@ -7,7 +7,7 @@ EventIndexController = Ember.ObjectController.extend
   # Remove when fixed...
   participations: Ember.computed.filterBy('model.participations', 'isDeleted', false)
 
-  sortedRegistrationsBy: ['createdAt:desc']
+  sortedRegistrationsBy: ['registeredAt:desc']
   sortedRegistrations: Ember.computed.sort('participations', 'sortedRegistrationsBy')
 
   actions:
@@ -17,6 +17,7 @@ EventIndexController = Ember.ObjectController.extend
       newRegistration = @store.createRecord('participation', {
         event: @get('model')
         contact: contact
+        registeredAt: new Date()
       })
 
       newRegistration.save().catch => newRegistration.deleteRecord()
