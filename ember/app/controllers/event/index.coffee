@@ -5,16 +5,16 @@ EventIndexController = Ember.ObjectController.extend
 
   # Workaround for https://github.com/emberjs/data/issues/2666
   # Remove when fixed...
-  registrations: Ember.computed.filterBy('model.registrations', 'isDeleted', false)
+  participations: Ember.computed.filterBy('model.participations', 'isDeleted', false)
 
   sortedRegistrationsBy: ['createdAt:desc']
-  sortedRegistrations: Ember.computed.sort('registrations', 'sortedRegistrationsBy')
+  sortedRegistrations: Ember.computed.sort('participations', 'sortedRegistrationsBy')
 
   actions:
     addRegistration: (contact)->
-      return if @get("registrations").find((r)-> r.get('contact.id') == contact.get('id'))
+      return if @get("participations").find((r)-> r.get('contact.id') == contact.get('id'))
 
-      newRegistration = @store.createRecord('registration', {
+      newRegistration = @store.createRecord('participation', {
         event: @get('model')
         contact: contact
       })

@@ -14,7 +14,7 @@ Contact = DS.Model.extend
   )
   connections: DS.hasMany('connection', async: true)
   relationships: DS.hasMany('relationship', async: true)
-  registrations: DS.hasMany('registration', async: true)
+  participations: DS.hasMany('participation', async: true)
   user: DS.belongsTo('user', async: true)
   errors: []
 

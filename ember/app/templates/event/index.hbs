@@ -52,8 +52,8 @@
       </div>
 
       <ul class="registration-list">
-        {{#each registration in sortedRegistrations}}
-          {{event-registration registration=registration}}
+        {{#each participation in sortedRegistrations}}
+          {{event-registration participation=participation}}
         {{else}}
           <li class="no-registrations">
             Nobody's registered for this event.

@@ -12,13 +12,13 @@ module "Event page integration test",
     Ember.run(@app, @app.destroy)
 
 test "Shows list of registrations", ->
-  @api.set('events', [{ id: 1, name: "Fishin", registration_ids: [1, 2]}])
+  @api.set('events', [{ id: 1, name: "Fishin", participation_ids: [1, 2]}])
   @api.set('contacts', [
     {id: 4, name: "Henry Stinkins"},
     {id: 5, name: "Donny Dinkins"},
     {id: 6, name: "Stanley Stumpins"},
   ]);
-  @api.set('registrations', [
+  @api.set('participations', [
     {id: 1, event_id: 1, contact_id: 4},
     {id:  2, event_id: 1, contact_id: 6}
   ])
@@ -37,9 +37,9 @@ test "Adds registration", ->
   fillIn("#add-registration", "Shag")
   click(".suggestions.active a")
   andThen =>
-    savedRegistration = @api.get('savedRegistration')
-    equal(savedRegistration.event_id, 1)
-    equal(savedRegistration.contact_id, 4)
+    savedParticipation = @api.get('savedParticipation')
+    equal(savedParticipation.event_id, 1)
+    equal(savedParticipation.contact_id, 4)
 
 
 test "Doesn't add duplicate registrations", ->
@@ -60,7 +60,7 @@ test "Doesn't add duplicate registrations", ->
 test "Doesn't add registration if server errors on create", ->
   @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
-  @api.get('errors')['registrations.create'] = true
+  @api.get('errors')['participations.create'] = true
 
   visit("/events/1")
   fillIn("#add-registration", "Shag")
@@ -73,7 +73,7 @@ test "Doesn't add registration if server errors on create", ->
 test "Deletes a registration", ->
   @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
-  @api.set('registrations', [{id: 7, event_id: 1, contact_id: 4}])
+  @api.set('participations', [{id: 7, event_id: 1, contact_id: 4}])
 
   visit("/events/1")
   andThen =>
@@ -83,5 +83,5 @@ test "Deletes a registration", ->
   click(".registration-list .delete-registration")
   click(".registration-list .confirm-delete-registration")
   andThen =>
-    equal(@api.get('deletedRegistrationId'), 7,
-      "Clicking confirm delete should send a delete request to the api")
+    equal(@api.get('deletedParticipationId'), 7,
+      "Clicking confirm delete should send a delete participation request to the api")

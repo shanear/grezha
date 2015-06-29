@@ -1,4 +1,4 @@
-class RegistrationSerializer < ActiveModel::Serializer
+class ParticipationSerializer < ActiveModel::Serializer
   attributes :id, :contact_id, :event_id
 
   def id

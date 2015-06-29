@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V2::RegistrationsController do
+describe Api::V2::ParticipationsController do
   let(:organization) { Organization.create!(name: "Lil Org") }
   let(:user) { FactoryGirl.create(:user, name: "Shophie", organization_id: organization.id) }
 
@@ -37,8 +37,8 @@ describe Api::V2::RegistrationsController do
       )
     }
 
-    let(:registration) {
-      FactoryGirl.create(:registration, {
+    let(:participation) {
+      FactoryGirl.create(:participation, {
         contact: client,
         event: event,
         organization_id: client.organization_id
@@ -46,24 +46,24 @@ describe Api::V2::RegistrationsController do
     }
 
     describe "POST #create" do
-      it "creates a new registration for contact to event" do
-        post :create, registration: {
+      it "creates a new participation for contact to event" do
+        post :create, participation: {
           id: "ABC123",
           event_id: event.remote_id,
           contact_id: client.remote_id
         }
 
 
-        client.registrations.reload
-        expect(client.registrations[0].remote_id).to eq("ABC123")
-        expect(client.registrations[0].event).to eq(event)
+        client.participations.reload
+        expect(client.participations[0].remote_id).to eq("ABC123")
+        expect(client.participations[0].event).to eq(event)
 
-        event.registrations.reload
-        expect(event.registrations[0].contact).to eq(client)
+        event.participations.reload
+        expect(event.participations[0].contact).to eq(client)
       end
 
       it "fails if event is not part of organization" do
-        post :create, registration: {
+        post :create, participation: {
           event_id: other_event.remote_id,
           contact_id: client.remote_id
         }
@@ -72,7 +72,7 @@ describe Api::V2::RegistrationsController do
       end
 
       it "fails if contact is not part of organization" do
-        post :create, registration: {
+        post :create, participation: {
           event_id: event.remote_id,
           contact_id: other_client.remote_id
         }
@@ -82,12 +82,12 @@ describe Api::V2::RegistrationsController do
     end
 
     describe "GET #index" do
-      before { registration }
+      before { participation }
 
       it "returns program data" do
-        get :index, id: registration.id, format: :json
-        expect(json["registrations"][0]["event_id"]).to eq(event.remote_id)
-        expect(json["registrations"][0]["contact_id"]).to eq(client.remote_id)
+        get :index, id: participation.id, format: :json
+        expect(json["participations"][0]["event_id"]).to eq(event.remote_id)
+        expect(json["participations"][0]["contact_id"]).to eq(client.remote_id)
       end
     end
   end

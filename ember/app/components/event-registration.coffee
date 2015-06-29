@@ -4,17 +4,17 @@
 
 EventRegistrationComponent = Ember.Component.extend
   tagName: 'li'
-  registration: {}
+  participation: {}
   isBeingDeleted: false
 
   setup: Ember.on 'init', ->
     @set('isBeingDeleted', false)
 
   actions:
-    deleteRegistration: (registration)-> @set("isBeingDeleted", true)
+    deleteRegistration: (participation)-> @set("isBeingDeleted", true)
     cancelDeleteRegistration: -> @set('isBeingDeleted', false)
     confirmDeleteRegistration: ->
-      @get('registration').destroyRecord()
+      @get('participation').destroyRecord()
 
 
 

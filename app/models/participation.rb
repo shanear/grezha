@@ -1,4 +1,4 @@
-class Registration < ActiveRecord::Base
+class Participation < ActiveRecord::Base
   include RemoteSynced
 
 	belongs_to :contact

@@ -23,7 +23,7 @@ class Contact < ActiveRecord::Base
 
   has_many :connections, dependent: :destroy
   has_many :relationships, dependent: :destroy
-  has_many :registrations, dependent: :destroy
+  has_many :participations, dependent: :destroy
   belongs_to :user
 
   has_attached_file :picture,

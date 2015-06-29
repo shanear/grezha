@@ -10,11 +10,11 @@ PretendApi = Ember.Object.extend({
   deletedContactId: null,
   deletedConnectionId: null,
   deletedRelationshipId: null,
-  deletedRegistrationId: null,
+  deletedParticipationId: null,
   users: [],
   vehicles: [],
   connections: [],
-  registrations: [],
+  participations: [],
   relationships: [],
   people: [],
   events: [],
@@ -36,7 +36,7 @@ PretendApi = Ember.Object.extend({
     @setupEventsEndpoints(server)
     @setupProgramsEndpoints(server)
     @setupVehiclesEndpoints(server)
-    @setupRegistrationEndpoints(server)
+    @setupParticipationsEndpoints(server)
 
     server.unhandledRequest = (verb, path, request)->
       console.warn("The API was hit with an unrecognized path:");
@@ -326,23 +326,23 @@ PretendApi = Ember.Object.extend({
         return [404, {}, ""]
 
 
-  setupRegistrationEndpoints: (server) ->
-    server.get '/api/v2/registrations', =>
+  setupParticipationsEndpoints: (server) ->
+    server.get '/api/v2/participations', =>
       return [200,
         {"Content-Type": "application/json"},
-        JSON.stringify({registrations: @get('registrations')})]
+        JSON.stringify({participations: @get('participations')})]
 
-    server.post '/api/v2/registrations', (req) =>
-      return [500, {}, ""] if @get('errors')['registrations.create']
+    server.post '/api/v2/participations', (req) =>
+      return [500, {}, ""] if @get('errors')['participations.create']
 
       data = JSON.parse(req.requestBody)
-      @set('savedRegistration', data.registration)
+      @set('savedParticipation', data.participation)
       return [200,
         {"Content-Type": "application/json"},
-        JSON.stringify({registration: data.registration})]
+        JSON.stringify({participation: data.participation})]
 
-    server.delete '/api/v2/registrations/:id', (req)=>
-      @set('deletedRegistrationId', req.params.id)
+    server.delete '/api/v2/participations/:id', (req)=>
+      @set('deletedParticipationId', req.params.id)
       return [200, {"Content-Type": "application/json"}, "{}"]
 });
 
