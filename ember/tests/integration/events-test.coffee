@@ -37,6 +37,23 @@ test "Filters events by program slug", ->
     ok(contains(".event .name", "main event"))
 
 
+test "Shows past unlogged events", ->
+  @api.set('events', [
+    { id: 1, name: "not logged", starts_at: moment().subtract(1, 'hours') }
+    { id: 2, name: "logged and loaded", logged_at: moment(), starts_at: moment().subtract(2, 'hours') }
+  ]);
+
+  visit("/events/all/unlogged")
+  andThen ->
+    ok(find(".event").length, 1)
+    console.log(find('.event:eq(0) .name').html())
+    ok(contains(".event .name", "not logged"), "unlogged event appears in unlogged list")
+
+  visit("/events/all/past")
+  andThen ->
+    ok(contains(".event:eq(0) .name", "logged and loaded"), "logged event appears in past")
+    ok(contains(".event:eq(1) .name", "not logged"), "unlogged event appears in past")
+
 test "Shows past events", ->
   @api.set('events', [
     { id: 1, name: "the future", starts_at: moment().add(1, 'hours')},

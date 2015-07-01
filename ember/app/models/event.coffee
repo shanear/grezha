@@ -5,6 +5,8 @@ Event = DS.Model.extend
   startsAt: DS.attr('date')
   location: DS.attr('string')
   notes: DS.attr('string')
+  loggedAt: DS.attr('date')
+
   program: DS.belongsTo('program', {async: true})
   participations: DS.hasMany('participations', async: true)
 
@@ -12,6 +14,8 @@ Event = DS.Model.extend
 
   isUpcoming: Ember.computed 'startsAt', ->
     moment(@get('startsAt')).isAfter()
+
+  isLogged: Ember.computed.notEmpty('loggedAt')
 
 
 `export default Event`

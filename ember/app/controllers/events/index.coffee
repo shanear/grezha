@@ -13,7 +13,8 @@ EventsIndexController = Ember.ArrayController.extend
     @get('events').filter (event)=>
       (!@get('programFilter') || event.get('program.id') == @get('programFilter.id')) &&
       ((@get('status') == 'past' && !event.get('isUpcoming')) ||
-       (@get('status') == 'upcoming' && event.get('isUpcoming')))
+       (@get('status') == 'upcoming' && event.get('isUpcoming')) ||
+       (@get('status') == 'unlogged' && !event.get('isLogged')))
 
   eventSorting: ['startsAt']
   sortedEvents: Ember.computed.sort('filteredEvents', 'eventSorting')

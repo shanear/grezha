@@ -23,3 +23,11 @@ test 'isUpcoming', ->
 
   Ember.run => contact.set('startsAt', moment().add(1, 'hours'))
   equal(contact.get('isUpcoming'), true)
+
+
+test 'isLogged', ->
+  contact = @subject({loggedAt: null})
+  equal(contact.get('isLogged'), false)
+
+  Ember.run => contact.set('loggedAt', moment())
+  equal(contact.get('isLogged'), true)
