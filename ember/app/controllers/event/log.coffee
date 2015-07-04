@@ -2,6 +2,7 @@
 
 EventLogController = Ember.ObjectController.extend
   contacts: []
+  isSaving: false
 
   # Workaround for https://github.com/emberjs/data/issues/2666
   # Remove when fixed...
@@ -14,12 +15,17 @@ EventLogController = Ember.ObjectController.extend
   unconfirmedRegistrations: Ember.computed.filterBy('registrations', 'confirmed', false)
   additionalParticipants: Ember.computed.filterBy('sortedParticipations', 'isRegistered', false)
 
+  reset: -> @set("isSaving", false)
+
   actions:
     saveLog: ->
+      @set('isSaving', true)
       savedParticipations = @get('confirmedParticipations').map (participation)->
         participation.set("confirmedAt", new Date())
         participation.save()
-      @get('model').save()
+      @set('model.loggedAt', new Date())
+      @get('model').save().then =>
+        @transitionToRoute('event', @get('model'))
 
     everybodyAttended: ->
       @get('registrations').forEach (participation)->

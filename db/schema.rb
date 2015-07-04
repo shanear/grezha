@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629152857) do
+ActiveRecord::Schema.define(version: 20150704212857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20150629152857) do
   add_index "contacts", ["remote_id"], name: "index_contacts_on_remote_id", unique: true, using: :btree
 
   create_table "events", force: true do |t|
-    t.integer  "organization_id",           null: false
-    t.string   "remote_id",       limit: 8, null: false
+    t.integer  "organization_id",                null: false
+    t.string   "remote_id",            limit: 8, null: false
     t.string   "name"
     t.datetime "starts_at"
     t.string   "location"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 20150629152857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "program_id"
+    t.datetime "logged_at"
+    t.text     "log_notes"
+    t.integer  "other_attendee_count"
   end
 
   create_table "organizations", force: true do |t|
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20150629152857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "registered_at"
+    t.datetime "confirmed_at"
   end
 
   create_table "people", force: true do |t|

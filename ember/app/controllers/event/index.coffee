@@ -10,6 +10,13 @@ EventIndexController = Ember.ObjectController.extend
   sortedRegistrationsBy: ['registeredAt:desc']
   sortedRegistrations: Ember.computed.sort('participations', 'sortedRegistrationsBy')
 
+  sortParticipationsBy: ['name:desc']
+  sortedParticipations: Ember.computed.sort('participations', 'sortParticipationsBy')
+  confirmedParticipations: Ember.computed.filterBy('sortedParticipations', 'isConfirmed', true)
+
+  totalAttendeeCount: Ember.computed 'model.otherAttendeeCount', 'confirmedParticipations.[]', ->
+    @get('confirmedParticipations.length') + (@get('model.otherAttendeeCount') || 0)
+
   actions:
     addRegistration: (contact)->
       return if @get("participations").find((r)-> r.get('contact.id') == contact.get('id'))

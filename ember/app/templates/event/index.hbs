@@ -35,32 +35,68 @@
       {{/if}}
     </div>
 
-    <div class="event-registrations">
-      <h3>Registered Participants</h3>
+    {{#if isLogged}}
+      <div class="event-log">
+        <h3>Event Log</h3>
+        <p id="log-notes">
+          {{#if logNotes}}
+            {{logNotes}}
+          {{else}}
+            This event has happened.
+          {{/if}}
+        </p>
 
-      <div class="form-group">
-        {{autocomplete-field
-            inputId="add-registration"
-            inputClass="form-control"
-            value=newRegistrationName
-            suggestions=contacts
-            queryProperty="name"
-            subtextProperty="role"
-            resetAfterSelect=true
-            placeholder="Add registration"
-            onSelect="addRegistration"}}
-      </div>
+        <h3>Attendees (<span id="total-attendee-count">{{totalAttendeeCount}}</span>)</h3>
+        <ul class="attendees">
+          {{#each participation in confirmedParticipations}}
+            <li class="attendee">
+              {{participation.contact.name}}
+            </li>
+          {{/each}}
 
-      <ul class="registration-list">
-        {{#each participation in sortedRegistrations}}
-          {{event-registration participation=participation}}
-        {{else}}
-          <li class="no-registrations">
-            Nobody's registered for this event.
+          <li>
+            {{#if confirmedParticipations}}
+              {{#if otherAttendeeCount}}
+                and {{otherAttendeeCount}} other attendees
+              {{/if}}
+            {{else}}
+              {{#if otherAttendeeCount}}
+                {{otherAttendeeCount}} unnamed attendees
+              {{else}}
+                no recorded attendees.
+              {{/if}}
+            {{/if}}
           </li>
-        {{/each}}
-      </ul>
-    </div>
+        </ul>
+      </div>
+    {{else}}
+      <div class="event-registrations">
+        <h3>Registered Participants</h3>
+
+        <div class="form-group">
+          {{autocomplete-field
+              inputId="add-registration"
+              inputClass="form-control"
+              value=newRegistrationName
+              suggestions=contacts
+              queryProperty="name"
+              subtextProperty="role"
+              resetAfterSelect=true
+              placeholder="Add registration"
+              onSelect="addRegistration"}}
+        </div>
+
+        <ul class="registration-list">
+          {{#each participation in sortedRegistrations}}
+            {{event-registration participation=participation}}
+          {{else}}
+            <li class="no-registrations">
+              Nobody's registered for this event.
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
   </div>
 </div>
 

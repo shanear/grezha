@@ -65,6 +65,8 @@ test "Saving log notes & other attendees", ->
       "logged event should save log notes")
     equal(savedEvent.other_attendee_count, "123",
       "logged event should save other attendee count")
+    equal(currentURL(), "/events/1",
+      "transitions to event page after logging finished")
 
 
 test "'Everybody attended' button selects all registered attendees", ->

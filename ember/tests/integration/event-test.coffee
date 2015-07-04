@@ -89,3 +89,28 @@ test "Deletes a registration", ->
   andThen =>
     equal(@api.get('deletedParticipationId'), 7,
       "Clicking confirm delete should send a delete participation request to the api")
+
+
+test "Shows logged event fields", ->
+  @api.set('events', [{
+    id: 1,
+    name: "pool time",
+    starts_at: moment().subtract(1, 'hours'),
+    logged_at: moment(),
+    log_notes: "cigarettes, diving boards, melancholy.",
+    other_attendee_count: 12
+  }]);
+  @api.set('contacts', [{id: 4, name: "Bill Murray"}])
+  @api.set('participations', [{id: 7, event_id: 1, contact_id: 4, confirmed_at: moment()}])
+
+  visit("/events/1")
+  andThen =>
+    ok(contains("#log-notes", "cigarettes, diving boards, melancholy."),
+      "logged event page should contain log notes")
+    ok(contains(".attendees li", "Bill Murray"),
+      "logged event lists attendees")
+
+    ok(contains(".attendees li:last", "12 other attendees"),
+      "logged event lists number of other attendees")
+    ok(contains("#total-attendee-count", "13"),
+      "logged event lists number of total attendees")

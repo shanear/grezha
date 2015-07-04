@@ -8,5 +8,6 @@ Participation = DS.Model.extend
 
   confirmed: false
   isRegistered: Ember.computed.notEmpty('registeredAt')
+  isConfirmed: Ember.computed.notEmpty('confirmedAt')
 
 `export default Participation`

@@ -1,9 +1,15 @@
 <div id="log-event-page">
   <div class="control-bar">
     <div class="options">
-      <button class="btn btn-default" id="save-log" {{action "saveLog"}}>
-        Finished Logging
-      </button>
+      {{#if isSaving}}
+        <div class="spin-button">
+          <i class="icon-loading animate-spin"></i>
+        </div>
+      {{else}}
+        <button class="btn btn-default" id="save-log" {{action "saveLog"}}>
+          Finished Logging
+        </button>
+      {{/if}}
     </div>
   </div>
 

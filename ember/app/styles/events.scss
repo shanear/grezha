@@ -150,7 +150,7 @@ a#add-event, a#change-filter, a#filter-status {
     @extend .row;
   }
 
-  .event-information, .event-registrations {
+  .event-information, .event-registrations, .event-log {
     margin-top: $usual-buffer;
     @extend .col-sm-6;
   }
@@ -172,16 +172,26 @@ a#add-event, a#change-filter, a#filter-status {
     .confirm-delete-registration { color: $bulgarian-green; }
 
     h4 { margin-top: 0px; margin-bottom: $usual-buffer; }
-    ul.registration-list {
-      @extend .list-unstyled;
+  }
 
-      li {
-        padding: $usual-buffer / 2;
-        border-bottom: 1px solid #e1e1e1;
+  ul.registration-list, ul.attendees {
+    @extend .list-unstyled;
 
-        &:last-child { border: none; }
-      }
+    li {
+      padding: $usual-buffer / 2;
+      border-bottom: 1px solid #e1e1e1;
+
+      &:last-child { border: none; }
     }
+  }
+
+  #log-notes {
+    padding: 0 $usual-buffer / 2;
+    margin-bottom: $usual-buffer * 2;
+  }
+
+  .attendees {
+    margin-top: -($usual-buffer / 2);
   }
 }
 

@@ -16,7 +16,7 @@ class Api::V2::EventsController < Api::BaseController
   def update
     @event = find_event(params[:id])
 
-    if @event.update_attributes(create_event_params.except(:remote_id))
+    if @event.update_attributes(update_event_params)
       render json: @event
     else
       render json: { errors: @event.errors }, status: 422
@@ -45,7 +45,7 @@ class Api::V2::EventsController < Api::BaseController
     end
   end
 
-  def create_event_params
+  def event_params
     params[:event][:remote_id] = params[:event][:id]
 
     if remote_id?(params[:event][:program_id])
@@ -53,6 +53,14 @@ class Api::V2::EventsController < Api::BaseController
       params[:event][:program_id] = program.id
     end
 
-    params.required(:event).permit(:remote_id, :program_id, :name, :starts_at, :location, :notes)
+    params.required(:event)
+  end
+
+  def create_event_params
+    event_params.permit(:remote_id, :program_id, :name, :starts_at, :location, :notes)
+  end
+
+  def update_event_params
+    event_params.permit(:program_id, :name, :starts_at, :location, :notes, :log_notes, :other_attendee_count, :logged_at)
   end
 end

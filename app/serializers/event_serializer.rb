@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :id, :program_id, :name, :starts_at, :location, :notes
+  attributes :id, :program_id, :name, :starts_at, :location, :notes, :log_notes, :other_attendee_count, :logged_at
 
   def id
     object.remote_id

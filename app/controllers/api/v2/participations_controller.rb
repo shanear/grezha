@@ -16,6 +16,16 @@ class Api::V2::ParticipationsController < Api::BaseController
     end
   end
 
+  def update
+    @participation = find_participation(params[:id])
+
+    if @participation.update_attributes(update_participation_params)
+      render json: @participation
+    else
+      render json: { errors: @participation.errors }, status: 422
+    end
+  end
+
   def destroy
     @participation = find_participation(params[:id])
     @participation.destroy
@@ -37,7 +47,7 @@ class Api::V2::ParticipationsController < Api::BaseController
     end
   end
 
-  def create_participation_params
+  def participation_params
     params[:participation][:remote_id] = params[:participation][:id]
 
     if remote_id?(params[:participation][:contact_id])
@@ -50,6 +60,14 @@ class Api::V2::ParticipationsController < Api::BaseController
       params[:participation][:event_id] = event.id
     end
 
-    params.required(:participation).permit(:remote_id, :contact_id, :event_id, :registered_at)
+    params.required(:participation)
+  end
+
+  def create_participation_params
+    participation_params.permit(:remote_id, :contact_id, :event_id, :registered_at)
+  end
+
+  def update_participation_params
+    participation_params.permit(:confirmed_at)
   end
 end
