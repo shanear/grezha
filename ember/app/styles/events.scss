@@ -215,7 +215,7 @@ a#add-event, a#change-filter, a#filter-status {
     &:hover { color: $bulgarian-green; }
   }
 
-  ul.registration-list {
+  ul.registration-list, ul.added-attendees-list {
     @extend .list-unstyled;
 
     li {
@@ -237,5 +237,19 @@ a#add-event, a#change-filter, a#filter-status {
 
   &:hover {
     color: $bulgarian-green;
+  }
+}
+
+.added-attendee {
+  cursor: pointer;
+  background-color: $light-bulgarian-green;
+  .icon-ok { color: $bulgarian-green; }
+  .icon-cancel { display: none; }
+
+  &:hover {
+    background-color: white;
+    color: $med-grey;
+    .icon-ok { display: none; }
+    .icon-cancel { display: inline; }
   }
 }

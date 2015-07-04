@@ -1,5 +1,5 @@
 class ParticipationSerializer < ActiveModel::Serializer
-  attributes :id, :contact_id, :event_id
+  attributes :id, :contact_id, :event_id, :registered_at
 
   def id
     object.remote_id

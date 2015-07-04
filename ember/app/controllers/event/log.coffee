@@ -6,10 +6,13 @@ EventLogController = Ember.ObjectController.extend
   # Workaround for https://github.com/emberjs/data/issues/2666
   # Remove when fixed...
   participations: Ember.computed.filterBy('model.participations', 'isDeleted', false)
-  sortedRegistrationsBy: ['name:desc']
-  sortedRegistrations: Ember.computed.sort('participations', 'sortedRegistrationsBy')
+  sortParticipationsBy: ['name:desc']
+  sortedParticipations: Ember.computed.sort('participations', 'sortParticipationsBy')
   confirmedParticipations: Ember.computed.filterBy('participations', 'confirmed', true)
-  unconfirmedRegistrations: Ember.computed.filterBy('sortedRegistrations', 'confirmed', false)
+
+  registrations: Ember.computed.filterBy('sortedParticipations', 'isRegistered', true)
+  unconfirmedRegistrations: Ember.computed.filterBy('registrations', 'confirmed', false)
+  additionalParticipants: Ember.computed.filterBy('sortedParticipations', 'isRegistered', false)
 
   actions:
     saveLog: ->
@@ -19,19 +22,17 @@ EventLogController = Ember.ObjectController.extend
       @get('model').save()
 
     everybodyAttended: ->
-      @get('sortedRegistrations').forEach (participation)->
+      @get('registrations').forEach (participation)->
         participation.set('confirmed', true)
 
-    addAttendee: (contact)->
+    addParticipant: (contact)->
       return if @get("participations").find((r)-> r.get('contact.id') == contact.get('id'))
 
-      newRegistration = @store.createRecord('participation', {
+      newParticipant = @store.createRecord('participation', {
         event: @get('model')
         contact: contact
-        registeredAt: new Date()
+        confirmed: true
       })
-
-      #newRegistration.save().catch => newRegistration.deleteRecord()
 
 `export default EventLogController`
 

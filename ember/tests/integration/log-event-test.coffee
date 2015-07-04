@@ -29,7 +29,7 @@ test "Confirming registered participatnts", ->
     { id: 1, name: "the big show", startsAt: moment().subtract(1, 'hours') }
   ]);
   @api.set('contacts', [{id: 4, name: "Bill Murray"}])
-  @api.set('participations', [{id: 7, event_id: 1, contact_id: 4}])
+  @api.set('participations', [{id: 7, event_id: 1, contact_id: 4, registered_at: moment()}])
 
   visit("events/1/log")
   andThen ->
@@ -73,8 +73,8 @@ test "'Everybody attended' button selects all registered attendees", ->
   ]);
   @api.set('contacts', [{id: 4, name: "Bill Murray"}, {id: 5, name: "Steve Buscemi"}])
   @api.set('participations', [
-    {id: 7, event_id: 1, contact_id: 4},
-    {id: 8, event_id: 1, contact_id: 5}
+    {id: 7, event_id: 1, contact_id: 4, registered_at: moment()},
+    {id: 8, event_id: 1, contact_id: 5, registered_at: moment()}
   ])
 
   visit("events/1/log")
@@ -99,12 +99,42 @@ test "Registered attendees is hidden when no registrations", ->
     ok(!exists("h4.other-attendees"), "should hide other attendees heading")
 
 
+test "Adding and saving additional attendees", ->
+  @api.set('events', [
+    { id: 1, name: "the big show", startsAt: moment().subtract(1, 'hours') }
+  ]);
+  @api.set('contacts', [{id: 4, name: "Bill Murray"}])
+
+  visit("events/1/log")
+  fillIn("#add-participant", "Bil")
+  click(".suggestions.active a")
+  andThen ->
+    equal(find(".added-attendee").length, 1,
+      "Adding a new attendee should add it to the list")
+
+  click("#save-log")
+  andThen =>
+    savedParticipation = @api.get('savedParticipation')
+    equal(savedParticipation.event_id, 1, "should save new participation event_id")
+    equal(savedParticipation.contact_id, 4, "should save new participation contact_id")
+    ok(savedParticipation.confirmed_at, "should set confirmed date of new attendees")
+
+
+test "Removing unregistered attendees", ->
+  @api.set('events', [
+    { id: 1, name: "the big show", startsAt: moment().subtract(1, 'hours') }
+  ]);
+  @api.set('contacts', [{id: 4, name: "Bill Murray"}])
+
+  visit("events/1/log")
+  fillIn("#add-participant", "Bil")
+  click(".suggestions.active a")
+  click(".added-attendee")
+  andThen ->
+    equal(find(".added-attendee").length, 0,
+      "Clicking an added attendee should remove it from the list")
+
+
 ###
-
-test "'Everybody attended' button is hidden when one registration", ->
-
-
-test "Adding and saving unregistered attendees", ->
-
 test "Event page shows log data", ->
 ###

@@ -12,7 +12,9 @@ module "Event page integration test",
     Ember.run(@app, @app.destroy)
 
 test "Shows list of registrations", ->
-  @api.set('events', [{ id: 1, name: "Fishin", participation_ids: [1, 2]}])
+  @api.set('events', [{
+    id: 1, name: "Fishin", participation_ids: [1, 2], starts_at: moment().add(1, 'hours')
+  }])
   @api.set('contacts', [
     {id: 4, name: "Henry Stinkins"},
     {id: 5, name: "Donny Dinkins"},
@@ -31,7 +33,7 @@ test "Shows list of registrations", ->
 
 test "Adds registration", ->
   @api.set('events', [
-    { id: 1, name: "Scooby Doo Mystery Meeting", startsAt: moment().add(1, 'hours') }
+    { id: 1, name: "Scooby Doo Mystery Meeting", starts_at: moment().add(1, 'hours') }
   ]);
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
 

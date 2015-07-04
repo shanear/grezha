@@ -38,6 +38,8 @@ PretendApi = Ember.Object.extend({
     @setupVehiclesEndpoints(server)
     @setupParticipationsEndpoints(server)
 
+    @set('errors', {})
+
     server.unhandledRequest = (verb, path, request)->
       console.warn("The API was hit with an unrecognized path:");
       console.warn("#{verb} #{path}");
