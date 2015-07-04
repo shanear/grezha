@@ -235,6 +235,7 @@ test "Edit event", ->
       program_id: 200,
       name: "Steinsfest",
       starts_at: moment('2015-Jan-29', 'YYYY-MMM-DD').startOf('day').add(14, 'hours'),
+      logged_at: moment(),
       location: "Steins Restaurant",
       notes: "This is an all day event with amazing challenges."
   }])

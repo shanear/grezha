@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'grezha-icons';
-  src: url('../font/grezha-icons.eot?6753015');
-  src: url('../font/grezha-icons.eot?6753015#iefix') format('embedded-opentype'),
-       url('../font/grezha-icons.woff?6753015') format('woff'),
-       url('../font/grezha-icons.ttf?6753015') format('truetype'),
-       url('../font/grezha-icons.svg?6753015#grezha-icons') format('svg');
+  src: url('../font/grezha-icons.eot?17637652');
+  src: url('../font/grezha-icons.eot?17637652#iefix') format('embedded-opentype'),
+       url('../font/grezha-icons.woff?17637652') format('woff'),
+       url('../font/grezha-icons.ttf?17637652') format('truetype'),
+       url('../font/grezha-icons.svg?17637652#grezha-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'grezha-icons';
-    src: url('../font/grezha-icons.svg?6753015#grezha-icons') format('svg');
+    src: url('../font/grezha-icons.svg?17637652#grezha-icons') format('svg');
   }
 }
 */
@@ -35,7 +35,7 @@
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+ 
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
  
@@ -45,6 +45,10 @@
  
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
  
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
@@ -58,3 +62,7 @@
 .icon-loading:before { content: '\e805'; } /* '' */
 .icon-cancel:before { content: '\e806'; } /* '' */
 .icon-plus:before { content: '\e807'; } /* '' */
+.icon-ok:before { content: '\e808'; } /* '' */
+.icon-minus:before { content: '\e809'; } /* '' */
+.icon-question:before { content: '\e80a'; } /* '' */
+.icon-bell:before { content: '\e80b'; } /* '' */

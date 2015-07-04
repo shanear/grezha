@@ -30,7 +30,9 @@ test "Shows list of registrations", ->
 
 
 test "Adds registration", ->
-  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('events', [
+    { id: 1, name: "Scooby Doo Mystery Meeting", startsAt: moment().add(1, 'hours') }
+  ]);
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
 
   visit("/events/1")
@@ -43,7 +45,7 @@ test "Adds registration", ->
 
 
 test "Doesn't add duplicate registrations", ->
-  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting", startsAt: moment().add(1, 'hours') }])
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
 
   visit("/events/1")
@@ -58,7 +60,7 @@ test "Doesn't add duplicate registrations", ->
 
 
 test "Doesn't add registration if server errors on create", ->
-  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting", startsAt: moment().add(1, 'hours') }])
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
   @api.get('errors')['participations.create'] = true
 
@@ -71,7 +73,7 @@ test "Doesn't add registration if server errors on create", ->
 
 
 test "Deletes a registration", ->
-  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting"}])
+  @api.set('events', [{ id: 1, name: "Scooby Doo Mystery Meeting", startsAt: moment().add(1, 'hours') }])
   @api.set('contacts', [{id: 4, name: "Shaggy"}])
   @api.set('participations', [{id: 7, event_id: 1, contact_id: 4}])
 

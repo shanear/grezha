@@ -13,9 +13,33 @@
       "src": "fontelico"
     },
     {
+      "uid": "3a230e539a4f3b904debd04c6c155034",
+      "css": "question",
+      "code": 59402,
+      "src": "entypo"
+    },
+    {
+      "uid": "2c5335c6e56b876139d7a58ab2f4b2fe",
+      "css": "bell",
+      "code": 59403,
+      "src": "entypo"
+    },
+    {
+      "uid": "43fl9m553j1z5937vfjz0lgolrlspxwl",
+      "css": "ok",
+      "code": 59400,
+      "src": "typicons"
+    },
+    {
       "uid": "1gf923f9wvaezxmfon515dglxa3drf0e",
       "css": "plus",
       "code": 59399,
+      "src": "typicons"
+    },
+    {
+      "uid": "qab5uvjyoc3uu4d2pvt8soshtgkuvpak",
+      "css": "minus",
+      "code": 59401,
       "src": "typicons"
     },
     {

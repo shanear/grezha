@@ -110,12 +110,21 @@ a#add-event, a#change-filter, a#filter-status {
   }
 }
 
-#event-details-page {
+#event-details-page, #log-event-page {
   @include panel;
   margin-top: $usual-buffer * 2;
 
   h2 {
     margin-bottom: 0px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  h4 {
+    color: $med-grey;
+    font-size: 18px;
   }
 
   .date, .location {
@@ -139,40 +148,94 @@ a#add-event, a#change-filter, a#filter-status {
 
   .event-details {
     @extend .row;
+  }
 
-    .event-information, .event-registrations {
-      margin-top: $usual-buffer;
-      @extend .col-sm-6;
+  .event-information, .event-registrations {
+    margin-top: $usual-buffer;
+    @extend .col-sm-6;
+  }
+
+  .event-registrations {
+    .no-registrations {
+      text-align: center;
+      color: $med-grey;
     }
 
-    .event-registrations {
-      .no-registrations {
-        text-align: center;
-        color: $med-grey;
-      }
+    .delete-registration,
+    .confirm-delete-registration,
+    .cancel-delete-registration {
+      float: right;
+      padding-left: $usual-buffer;
+      color: $light-grey;
+    }
 
-      .delete-registration,
-      .confirm-delete-registration,
-      .cancel-delete-registration {
-        float: right;
-        padding-left: $usual-buffer;
-        color: $light-grey;
-      }
+    .confirm-delete-registration { color: $bulgarian-green; }
 
-      .confirm-delete-registration { color: $bulgarian-green; }
+    h4 { margin-top: 0px; margin-bottom: $usual-buffer; }
+    ul.registration-list {
+      @extend .list-unstyled;
 
-      h4 { margin-top: 0px; margin-bottom: $usual-buffer; }
-      ul.registration-list {
-        @extend .list-unstyled;
+      li {
+        padding: $usual-buffer / 2;
+        border-bottom: 1px solid #e1e1e1;
 
-        li {
-          padding: $usual-buffer / 2;
-          border-bottom: 1px solid #e1e1e1;
-
-          &:last-child { border: none; }
-        }
+        &:last-child { border: none; }
       }
     }
   }
 }
 
+#log-event-page {
+  .event-information {
+    @extend .col-sm-12;
+  }
+}
+
+.event-log-notes {
+  @extend .col-sm-6;
+  margin-top: $usual-buffer;
+}
+
+#other-attendee-count {
+  display: inline-block;
+  width: 3.5em;
+}
+
+#save-log {
+  float: right;
+}
+
+.event-attendance {
+  @extend .col-sm-6;
+  margin-top: $usual-buffer;
+
+  .everybody-attended {
+    color: $med-grey;
+    float: right;
+    &:hover { color: $bulgarian-green; }
+  }
+
+  ul.registration-list {
+    @extend .list-unstyled;
+
+    li {
+      padding: $usual-buffer / 2;
+      border-bottom: 1px solid #e1e1e1;
+
+      &:last-child { border: none; }
+    }
+  }
+}
+
+.confirm-registration {
+  cursor: pointer;
+
+  &.is-confirmed {
+    background-color: $light-bulgarian-green;
+    .icon-ok { color: $bulgarian-green; }
+  }
+
+  &:hover {
+    color: $bulgarian-green;
+  }
+}

@@ -1,0 +1,73 @@
+<div id="log-event-page">
+  <div class="control-bar">
+    <div class="options">
+      <button class="btn btn-default" id="save-log" {{action "saveLog"}}>
+        Finished Logging
+      </button>
+    </div>
+  </div>
+
+  <h2>{{name}}</h2>
+
+  <div class="event-details">
+    <div class="event-information">
+      <div class="date">{{format-day startsAt}} {{format-time startsAt}}</div>
+      {{#if location}}
+        <div class="location">
+          at {{location}}
+        </div>
+      {{/if}}
+      {{#if program}}
+        <div class="program">
+          {{program.name}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="event-log-notes">
+      <h3>How'd it go?</h3>
+      {{textarea id="notes" class="form-control" value=notes rows="10"}}
+    </div>
+
+    <div class="event-attendance">
+      <a class="everybody-attended">
+        Everybody did!
+      </a>
+      <h3>Who attended?</h3>
+      <h4>Registered attendees</h4>
+      <ul class="registration-list">
+        {{#each participation in sortedRegistrations}}
+          {{confirm-registration participation=participation}}
+        {{else}}
+          <li class="no-registrations">
+            Nobody's registered for this event.
+          </li>
+        {{/each}}
+      </ul>
+
+      <h4>Other attendees</h4>
+      <div class="form-group">
+        {{autocomplete-field
+            inputId="add-registration"
+            inputClass="form-control"
+            value=newRegistrationName
+            suggestions=contacts
+            queryProperty="name"
+            subtextProperty="role"
+            resetAfterSelect=true
+            placeholder="Add attendee"
+            onSelect="addRegistration"}}
+      </div>
+      <div class="form-group">
+        and
+       {{input type="text"
+          id="other-attendee-count"
+          class="form-control"
+          placeholder="0"
+          value=otherAttendeeCount}}
+        other people.
+      </div>
+    </div>
+  </div>
+</div>
+

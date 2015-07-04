@@ -38,6 +38,7 @@ Router.map(function() {
       this.route('new');
       this.resource('event', { path: "/:event_id" }, function(){
         this.route('edit');
+        this.route('log');
       });
     });
 
