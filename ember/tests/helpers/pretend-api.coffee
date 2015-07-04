@@ -344,6 +344,19 @@ PretendApi = Ember.Object.extend({
     server.delete '/api/v2/participations/:id', (req)=>
       @set('deletedParticipationId', req.params.id)
       return [200, {"Content-Type": "application/json"}, "{}"]
+
+    server.put '/api/v2/participations/:id', (req)=>
+      participations = Ember.A(@get('participations'))
+      foundParticipation = participations.findBy('id', parseInt(req.params.id))
+      if foundParticipation
+        data = JSON.parse(req.requestBody)
+        console.log(data.participation)
+        @set('savedParticipation', data.participation)
+        return [200,
+          {"Content-Type": "application/json"},
+          JSON.stringify({participation: foundParticipation})]
+      else
+        return [404, {}, ""]
 });
 
 `export default PretendApi`

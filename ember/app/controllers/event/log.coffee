@@ -8,8 +8,17 @@ EventLogController = Ember.ObjectController.extend
   participations: Ember.computed.filterBy('model.participations', 'isDeleted', false)
   sortedRegistrationsBy: ['name:desc']
   sortedRegistrations: Ember.computed.sort('participations', 'sortedRegistrationsBy')
+  confirmedParticipations: Ember.computed.filterBy('model.participations', 'confirmed', true)
 
   actions:
+    saveLog: ->
+      savedParticipations = @get('confirmedParticipations').map (participation)->
+        participation.set("confirmedAt", new Date())
+        participation.save()
+
+      @get('model').save()
+
+
     addAttendee: (contact)->
       return if @get("participations").find((r)-> r.get('contact.id') == contact.get('id'))
 

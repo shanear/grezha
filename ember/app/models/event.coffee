@@ -6,6 +6,8 @@ Event = DS.Model.extend
   location: DS.attr('string')
   notes: DS.attr('string')
   loggedAt: DS.attr('date')
+  logNotes: DS.attr('string')
+  otherAttendeeCount: DS.attr('number')
 
   program: DS.belongsTo('program', {async: true})
   participations: DS.hasMany('participations', async: true)
