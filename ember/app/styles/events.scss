@@ -209,7 +209,7 @@ a#add-event, a#change-filter, a#filter-status {
   @extend .col-sm-6;
   margin-top: $usual-buffer;
 
-  .everybody-attended {
+  #everybody-attended {
     color: $med-grey;
     float: right;
     &:hover { color: $bulgarian-green; }

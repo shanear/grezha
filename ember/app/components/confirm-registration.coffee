@@ -9,8 +9,8 @@ ConfirmRegistrationComponent = Ember.Component.extend
   participation: {}
   isConfirmed: Ember.computed.alias('participation.confirmed')
 
-#  setup: Ember.on 'init', ->
-#    @set('isBeingDeleted', false)
+  setup: Ember.on 'init', ->
+    @set('participation.confirmed', false)
 
   click: ->
     @get('participation').set('confirmed', !@get('participation.confirmed'))

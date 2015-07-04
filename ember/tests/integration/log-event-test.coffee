@@ -66,12 +66,45 @@ test "Saving log notes & other attendees", ->
     equal(savedEvent.other_attendee_count, "123",
       "logged event should save other attendee count")
 
-###
+
+test "'Everybody attended' button selects all registered attendees", ->
+  @api.set('events', [
+    { id: 1, name: "the big show", startsAt: moment().subtract(1, 'hours') }
+  ]);
+  @api.set('contacts', [{id: 4, name: "Bill Murray"}, {id: 5, name: "Steve Buscemi"}])
+  @api.set('participations', [
+    {id: 7, event_id: 1, contact_id: 4},
+    {id: 8, event_id: 1, contact_id: 5}
+  ])
+
+  visit("events/1/log")
+  click("#everybody-attended")
+
+  andThen ->
+    equal(find(".confirm-registration.is-confirmed").length, 2,
+      "registrations should all be confirmed when clicking everybody")
+    ok(!exists("#everybody-attended"),
+      "Everybody button disappears when everybody is marked as attended")
+
+
 test "Registered attendees is hidden when no registrations", ->
+  @api.set('events', [
+    { id: 1, name: "the not so big show", startsAt: moment().subtract(1, 'hours') }
+  ]);
+
+  visit("events/1/log")
+  andThen =>
+    ok(!exists("h4.registered-attendees"), "should hide registrations heading")
+    ok(!exists(".registration-list"), "should hide registration list")
+    ok(!exists("h4.other-attendees"), "should hide other attendees heading")
+
+
+###
 
 test "'Everybody attended' button is hidden when one registration", ->
 
-test "'Everybody attended' button selects all registered attendees", ->
 
 test "Adding and saving unregistered attendees", ->
+
+test "Event page shows log data", ->
 ###

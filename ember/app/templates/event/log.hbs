@@ -30,22 +30,25 @@
     </div>
 
     <div class="event-attendance">
-      <a class="everybody-attended">
-        Everybody did!
-      </a>
-      <h3>Who attended?</h3>
-      <h4>Registered attendees</h4>
-      <ul class="registration-list">
-        {{#each participation in sortedRegistrations}}
-          {{confirm-registration participation=participation}}
-        {{else}}
-          <li class="no-registrations">
-            Nobody's registered for this event.
-          </li>
-        {{/each}}
-      </ul>
+      {{#if unconfirmedRegistrations}}
+        <a id="everybody-attended" {{action 'everybodyAttended'}}>
+          Everybody!
+        </a>
+      {{/if}}
 
-      <h4>Other attendees</h4>
+      <h3>Who attended?</h3>
+      {{#if sortedRegistrations}}
+        <h4 class="registered-attendees">Registered attendees</h4>
+        <ul class="registration-list">
+          {{#each participation in sortedRegistrations}}
+            {{confirm-registration participation=participation}}
+          {{/each}}
+        </ul>
+      {{/if}}
+
+      {{#if sortedRegistrations}}
+        <h4 class="other-attendees">Other attendees</h4>
+      {{/if}}
       <div class="form-group">
         {{autocomplete-field
             inputId="add-registration"
