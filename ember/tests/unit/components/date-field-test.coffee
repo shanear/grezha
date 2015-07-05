@@ -68,6 +68,23 @@ test "Setting time sets date & time", ->
   equal(date.getMinutes(), 40, "Minute set wrong")
 
 
+test "Setting time to 12 am works", ->
+  dateField = @subject(includeTime: true)
+
+  Ember.run ->
+    dateField.set("selectedYear", 1929)
+    dateField.set("selectedMonth", 1)
+    dateField.set("selectedDay", 15)
+    dateField.set("selectedHour", "12")
+    dateField.set("selectedMinute", "00")
+    dateField.set("selectedAmPm", "am")
+
+  date = dateField.get('date')
+
+  equal(date.getHours(), 0, "Hour set wrong")
+  equal(date.getMinutes(), 0, "Minute set wrong")
+
+
 test "Setting year to nil still preserves month and day", ->
   dateField = @subject()
 

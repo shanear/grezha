@@ -46,7 +46,6 @@ test "Shows past unlogged events", ->
   visit("/events/all/unlogged")
   andThen ->
     ok(find(".event").length, 1)
-    console.log(find('.event:eq(0) .name').html())
     ok(contains(".event .name", "not logged"), "unlogged event appears in unlogged list")
 
   visit("/events/all/past")

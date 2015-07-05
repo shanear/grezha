@@ -15,8 +15,6 @@ EventLogController = Ember.ObjectController.extend
   unconfirmedRegistrations: Ember.computed.filterBy('registrations', 'confirmed', false)
   additionalParticipants: Ember.computed.filterBy('sortedParticipations', 'isRegistered', false)
 
-  reset: -> @set("isSaving", false)
-
   actions:
     saveLog: ->
       @set('isSaving', true)

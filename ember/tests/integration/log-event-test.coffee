@@ -60,7 +60,6 @@ test "Saving log notes & other attendees", ->
   click("#save-log")
   andThen =>
     savedEvent = @api.get('savedEvent')
-    console.log(savedEvent)
     equal(savedEvent.log_notes, "my brain is exploding",
       "logged event should save log notes")
     equal(savedEvent.other_attendee_count, "123",

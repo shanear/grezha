@@ -53,7 +53,7 @@ DateFieldComponent = Ember.Component.extend
         @get('selectedYear') || this.nullYear,
         @get('selectedMonth') - 1,
         @get('selectedDay'),
-        @get('selectedHourOfDay') || 1,
+        @get('selectedHourOfDay') || 0,
         @get('selectedMinute') || 0
       )
   ).property("selectedMonth", "selectedYear", "selectedDay", "selectedHourOfDay", "selectedMinute")

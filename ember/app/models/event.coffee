@@ -19,7 +19,7 @@ Event = DS.Model.extend
 
   isLogged: Ember.computed.notEmpty('loggedAt')
   needsLog: Ember.computed 'isLogged', 'isUpcoming', ->
-    !@get('isLogged') && !@get('isUpcoming')
+    !@get('isLogged') && !@get('isUpcoming') && !@get('isNew')
 
 
 `export default Event`

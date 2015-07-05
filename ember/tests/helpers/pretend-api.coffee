@@ -352,7 +352,6 @@ PretendApi = Ember.Object.extend({
       foundParticipation = participations.findBy('id', parseInt(req.params.id))
       if foundParticipation
         data = JSON.parse(req.requestBody)
-        console.log(data.participation)
         @set('savedParticipation', data.participation)
         return [200,
           {"Content-Type": "application/json"},

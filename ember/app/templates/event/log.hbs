@@ -7,7 +7,7 @@
         </div>
       {{else}}
         <button class="btn btn-default" id="save-log" {{action "saveLog"}}>
-          Finished Logging
+          Finish Log
         </button>
       {{/if}}
     </div>
@@ -32,7 +32,9 @@
 
     <div class="event-log-notes">
       <h3>How'd it go?</h3>
-      {{textarea id="log-notes" class="form-control" value=logNotes rows="10"}}
+      <div class="form-group">
+        {{textarea id="log-notes" class="form-control" value=logNotes rows="10"}}
+      </div>
     </div>
 
     <div class="event-attendance">
