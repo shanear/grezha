@@ -465,6 +465,7 @@ ul.connection_errors  {
   margin-top: $usual-buffer * 2;
 
   .body {
+    padding-top: $usual-buffer;
     padding-left: 80px + $usual-buffer;
   }
 
@@ -478,21 +479,47 @@ ul.connection_errors  {
       color: #999;
       font-size: 110%;
     }
+  }
+}
 
-    .date {
-      background-color: $light-bulgarian-green;
-      border-radius: $usual-buffer;
-      padding: $usual-buffer;
+ul#contact-events {
+  @extend .list-unstyled;
 
-      .day {
-        font-size: 120%;
-        text-align: center;
-      }
+  .event {
+    margin: $usual-buffer;
+    margin-top: $usual-buffer * 2;
+    @include clearfix;
+  }
 
-      .year {
-        font-size: 80%;
-        text-align: center;
-      }
+  .body {
+    padding-top: $usual-buffer;
+    padding-left: 80px + $usual-buffer;
+  }
+
+  .registration {
+    font-weight: bold;
+  }
+
+  .date {
+    float: left;
+    width: 80px;
+  }
+}
+
+.connection, .event {
+  .date {
+    background-color: $light-bulgarian-green;
+    border-radius: $usual-buffer;
+    padding: $usual-buffer;
+
+    .day {
+      font-size: 120%;
+      text-align: center;
+    }
+
+    .year {
+      font-size: 80%;
+      text-align: center;
     }
   }
 }

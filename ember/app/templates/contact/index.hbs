@@ -119,6 +119,36 @@
     {{/each}}
   </div>
 
+  {{#toggled-feature name='events'}}
+    {{#if participations}}
+      <div class="section-header">
+        <div class="right">
+        </div>
+
+        <div class="left">
+          <h4>Events ({{participations.length}})</h4>
+        </div>
+      </div>
+
+      <ul id="contact-events">
+        {{#each participation in sortedParticipations}}
+          <li class="event">
+            <div class="date">
+              <div class="day">{{format-short-date participation.event.startsAt}}</div>
+              <div class="year">{{format-year participation.event.startsAt}}</div>
+            </div>
+            <div class="body">
+              {{#if participation.isRegistered}}{{#if participation.event.isUpcoming}}
+                <span class="registration">Registered for:</span>
+              {{/if}}{{/if}}
+              <span class="name">{{participation.event.name}}</span>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  {{/toggled-feature}}
+
   <div class="connections">
     <div class="section-header">
       <div class="right">

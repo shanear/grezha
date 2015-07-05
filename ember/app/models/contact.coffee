@@ -50,6 +50,13 @@ Contact = DS.Model.extend
       sortAscending: false
   ).property('connections.@each')
 
+  sortedParticipations: (->
+    Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
+      content: @get('participations')
+      sortProperties: ['event.startsAt']
+      sortAscending: false
+  ).property('participations.@each')
+
   daysUntilBirthday: (->
     return null unless @get('birthday')?
 

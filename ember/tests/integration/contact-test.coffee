@@ -210,3 +210,40 @@ test "deletes a relationship", ->
   andThen =>
     ok(contains("#relationships", "no relationships"))
     equal(@api.get('deletedRelationshipId'), 1000)
+
+
+test "doesn't show events if no participations", ->
+  @api.set('contacts', [{id: 8, name: "Steve Buscemi"}])
+  visit("/clients/8")
+  andThen -> ok(!exists("#contact-events"), "should hide events pane if no participations")
+
+
+test "shows events", ->
+  @api.set('contacts', [{id: 4, name: "Bill Murray"}])
+  @api.set('events', [{
+    id: 1,
+    name: "rushmore",
+    starts_at: moment().subtract(2, 'hours'),
+  }, {
+    id: 2,
+    name: "new movie",
+    starts_at: moment().add(2, 'hours'),
+  }])
+  @api.set('participations', [
+    {id: 7, event_id: 1, contact_id: 4, confirmed_at: moment()},
+    {id: 8, event_id: 2, contact_id: 4, registered_at: moment()}
+  ])
+
+  visit("/clients/4")
+  andThen =>
+    console.log(find("#contact-events").html())
+    ok(contains(".event:eq(0)", "Registered for:"),
+      "Should label registered events")
+    ok(contains(".event:eq(0) .name", "new movie"),
+      "Should show more recent/upcoming events first")
+    ok(contains(".event:eq(1) .name", "rushmore"),
+      "Should show less recent events last")
+
+###
+test "hides connections for volunteers"
+###

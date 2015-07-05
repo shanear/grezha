@@ -134,8 +134,3 @@ test "Removing unregistered attendees", ->
   andThen ->
     equal(find(".added-attendee").length, 0,
       "Clicking an added attendee should remove it from the list")
-
-
-###
-test "Event page shows log data", ->
-###

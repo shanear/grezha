@@ -16,7 +16,8 @@ AuthenticatedRoute = BaseRoute.extend
       setContacts,
       setEvents,
       @store.find('connection'),
-      @store.find('user')
+      @store.find('user'),
+      @store.find('participation')
     ])
 
 `export default AuthenticatedRoute`
