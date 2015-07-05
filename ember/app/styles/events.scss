@@ -81,6 +81,10 @@ a#add-event, a#change-filter, a#filter-status {
       color: $med-grey;
     }
 
+    .unlogged {
+      color: $bulgarian-red;
+    }
+
     .program {
       color: $bulgarian-green;
       float: right;

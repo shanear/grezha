@@ -2,11 +2,12 @@
 `import config from '../config/environment'`
 
 AuthenticatedController = Ember.Controller.extend
-  needs: ['contacts']
+  needs: ['contacts', 'events']
   environment: config.environment
   isProduction: (config.environment == 'production')
   adminURL: EmberENV.adminURL
   allContacts: Ember.computed.alias('controllers.contacts.all')
+  unloggedEvents: Ember.computed.alias('controllers.events.unloggedEvents')
   isMenuShowing: false
 
   allClients: (->

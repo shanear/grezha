@@ -64,7 +64,7 @@ class Api::V2::ParticipationsController < Api::BaseController
   end
 
   def create_participation_params
-    participation_params.permit(:remote_id, :contact_id, :event_id, :registered_at)
+    participation_params.permit(:remote_id, :contact_id, :event_id, :registered_at, :confirmed_at)
   end
 
   def update_participation_params

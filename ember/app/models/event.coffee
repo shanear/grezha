@@ -18,6 +18,8 @@ Event = DS.Model.extend
     moment(@get('startsAt')).isAfter()
 
   isLogged: Ember.computed.notEmpty('loggedAt')
+  needsLog: Ember.computed 'isLogged', 'isUpcoming', ->
+    !@get('isLogged') && !@get('isUpcoming')
 
 
 `export default Event`

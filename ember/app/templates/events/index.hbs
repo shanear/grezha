@@ -12,7 +12,11 @@
       {{#if isViewingPast}}
         Past Events
       {{else}}
-        Upcoming Events
+        {{#if isViewingUnlogged}}
+          Unlogged Events
+        {{else}}
+          Upcoming Events
+        {{/if}}
       {{/if}}
     </div>
   </h2>
@@ -36,9 +40,15 @@
           Upcoming Events
         {{/link-to}}
       {{else}}
-        {{#link-to 'events' programFilterSlug 'past' id="filter-status"}}
-          Past Events
-        {{/link-to}}
+        {{#if isViewingUnlogged}}
+          {{#link-to 'events' programFilterSlug 'upcoming' id="filter-status"}}
+            Upcoming Events
+          {{/link-to}}
+        {{else}}
+          {{#link-to 'events' programFilterSlug 'past' id="filter-status"}}
+            Past Events
+          {{/link-to}}
+        {{/if}}
       {{/if}}
 
       {{view 'select'
@@ -68,6 +78,9 @@
             <span class="name">{{event.name}}</span>
             {{#if event.location }}
               <span class="location">at {{event.location}}</span>
+            {{/if}}
+            {{#if event.needsLog}}
+              <span class="unlogged">( <i class="icon-bell"></i> Unlogged )</span>
             {{/if}}
             {{#if event.program }}
               <span class="program">{{event.program.name}}</span>

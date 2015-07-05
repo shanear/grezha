@@ -8,5 +8,6 @@ EventLogRoute = BaseRoute.extend AuthenticatedRouteMixin,
   setupController: (controller, model)->
     controller.set('contacts', @get('store').all('contact'))
     controller.set('model', model)
+    controller.set('isSaving', false)
 
 `export default EventLogRoute`

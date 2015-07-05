@@ -110,6 +110,9 @@ header {
           display: inline-block;
         }
 
+        .unlogged-notification { color: $bulgarian-red; }
+        a:hover .unlogged-notification { color: $bulgarian-green; }
+
         @media screen and (max-width: $break-medium) {
           display: block;
 
@@ -161,7 +164,6 @@ header {
         > div {
           padding-left: 1em;
           float: left;
-
         }
 
         @media screen and (max-width: $break-medium) {
