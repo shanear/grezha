@@ -43,6 +43,8 @@ Contact = DS.Model.extend
       return false
     return true
 
+  hideConnections: Ember.computed 'role', -> @get('role') == 'volunteer'
+
   sortedConnections: (->
     Ember.ArrayProxy.createWithMixins Ember.SortableMixin,
       content: @get('connections')

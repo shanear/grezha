@@ -149,49 +149,51 @@
     {{/if}}
   {{/toggled-feature}}
 
-  <div class="connections">
-    <div class="section-header">
-      <div class="right">
-        {{#if addingConnection}}
-          <button id="cancel-add-connection"
-                class="btn btn-link"
-                {{action "cancelNewConnection"}}>
-            Cancel
-          </button>
-        {{else}}
-          <button id="add-connection" class="btn btn-default"
-             {{action "newConnection"}}>
-            Add
-          </button>
-        {{/if}}
+  {{#unless hideConnections}}
+    <div class="connections">
+      <div class="section-header">
+        <div class="right">
+          {{#if addingConnection}}
+            <button id="cancel-add-connection"
+                  class="btn btn-link"
+                  {{action "cancelNewConnection"}}>
+              Cancel
+            </button>
+          {{else}}
+            <button id="add-connection" class="btn btn-default"
+               {{action "newConnection"}}>
+              Add
+            </button>
+          {{/if}}
+        </div>
+
+        <div class="left">
+          <h4>
+            <a {{action "filterMode" null}}>
+              Connections
+              ({{connections.length}})
+            </a>
+          </h4>
+
+          {{#each mode in connectionModes}}
+            {{connection-mode
+                mode=mode
+                contact=model
+                selected=filterByMode
+                onSelect="filterMode"}}
+          {{/each}}
+        </div>
       </div>
 
-      <div class="left">
-        <h4>
-          <a {{action "filterMode" null}}>
-            Connections
-            ({{connections.length}})
-          </a>
-        </h4>
+      {{new-connection enabled=addingConnection contact=model store=store}}
 
-        {{#each mode in connectionModes}}
-          {{connection-mode
-              mode=mode
-              contact=model
-              selected=filterByMode
-              onSelect="filterMode"}}
-        {{/each}}
-      </div>
+      {{#each connection in connectionsToShow}}
+        {{connection-panel connection=connection}}
+      {{else}}
+        <p> There are no connections for this person. </p>
+      {{/each}}
     </div>
-
-    {{new-connection enabled=addingConnection contact=model store=store}}
-
-    {{#each connection in connectionsToShow}}
-      {{connection-panel connection=connection}}
-    {{else}}
-      <p> There are no connections for this person. </p>
-    {{/each}}
-  </div>
+  {{/unless}}
 
 </div>
 
