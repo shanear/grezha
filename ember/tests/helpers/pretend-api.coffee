@@ -305,6 +305,9 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({event: foundEvent})]
       else
         return [404, {}, ""]
+    server.delete '/api/v2/events/:id', (req)=>
+      @set('deletedEventId', req.params.id)
+      return [200, {"Content-Type": "application/json"}, "{}"]
 
   setupProgramsEndpoints: (server)->
     server.post '/api/v2/programs', (req)=>
@@ -326,7 +329,6 @@ PretendApi = Ember.Object.extend({
           JSON.stringify({program: program})]
       else
         return [404, {}, ""]
-
 
   setupParticipationsEndpoints: (server) ->
     server.get '/api/v2/participations', =>

@@ -119,7 +119,7 @@ a#add-event, a#change-filter, a#filter-status {
   margin-top: $usual-buffer * 2;
 
   h2 {
-    margin-bottom: 0px;
+    margin-bottom: $usual-buffer;
   }
 
   h3 {

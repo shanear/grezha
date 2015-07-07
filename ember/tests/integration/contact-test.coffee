@@ -243,7 +243,3 @@ test "shows events", ->
       "Should show more recent/upcoming events first")
     ok(contains(".event:eq(1) .name", "rushmore"),
       "Should show less recent events last")
-
-###
-test "hides connections for volunteers"
-###

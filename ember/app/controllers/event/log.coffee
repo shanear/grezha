@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
+`import HasConfirmation from 'grezha/mixins/has-confirmation'`
 
-EventLogController = Ember.ObjectController.extend
+EventLogController = Ember.ObjectController.extend HasConfirmation,
   contacts: []
   isSaving: false
 
@@ -15,7 +16,24 @@ EventLogController = Ember.ObjectController.extend
   unconfirmedRegistrations: Ember.computed.filterBy('registrations', 'confirmed', false)
   additionalParticipants: Ember.computed.filterBy('sortedParticipations', 'isRegistered', false)
 
+  confirmDeleteEvent: ->
+    @transitionToRoute('events', {
+      programFilter: null,
+      status: (if @get('model.isUpcoming') then 'upcoming' else 'past')
+    })
+    @get('model.participations').forEach (p)-> p.deleteRecord();
+    @get('model').deleteRecord()
+    @get('model').save()
+
   actions:
+    deleteEvent: ->
+      @set 'confirmation',
+        heading: "Are you sure?"
+        content: "Are you sure you want to delete this event? It will be gone forever!"
+        show: true
+        button: "Delete"
+        action: => @confirmDeleteEvent()
+
     saveLog: ->
       @set('isSaving', true)
       savedParticipations = @get('confirmedParticipations').map (participation)->

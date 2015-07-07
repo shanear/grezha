@@ -1,14 +1,23 @@
 <div id="event-details-page">
   <div class="control-bar">
     <div class="options">
-      {{#link-to 'event.edit' model id='edit-event'}}
-        <i class="icon-pencil"></i>
-        Edit
-      {{/link-to}}
+      {{#if apiConnection.online}}
+        {{#link-to 'event.edit' model id='edit-event'}}
+          <i class="icon-pencil"></i>
+          Edit
+        {{/link-to}}
+
+        <a href {{action "deleteEvent"}} id="delete-event">
+          <i class="icon-trash delete-contact"></i>
+          Delete
+        </a>
+      {{/if}}
     </div>
   </div>
 
   <h2>{{name}}</h2>
+
+  {{ partial "partials/confirmation" }}
 
   <div class="event-details">
     <div class="event-information">

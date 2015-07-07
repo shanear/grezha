@@ -114,3 +114,24 @@ test "Shows logged event fields", ->
       "logged event lists number of other attendees")
     ok(contains("#total-attendee-count", "13"),
       "logged event lists number of total attendees")
+
+
+test "Delete an event", ->
+  @api.set('events', [{
+    id: 1,
+    name: "pool time",
+    starts_at: moment().subtract(1, 'hours'),
+  }]);
+
+  visit("events/1")
+  click("#delete-event")
+  click("#confirmation .cancel")
+  andThen =>
+    ok(!@api.get('deletedEventId'), "clicking cancel shouldn't delete event")
+    ok(!exists("#confirmation"), "clicking cancel should remove the confirmation")
+
+  click("#delete-event")
+  click("#confirmation .confirm")
+  andThen =>
+    equal(@api.get('deletedEventId'), 1,
+     "clicking confirm should delete event")

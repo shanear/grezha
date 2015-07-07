@@ -6,6 +6,11 @@
           <i class="icon-loading animate-spin"></i>
         </div>
       {{else}}
+        <a href {{action "deleteEvent"}} id="delete-event">
+          <i class="icon-trash delete-contact"></i>
+          Delete
+        </a>
+
         <button class="btn btn-default" id="save-log" {{action "saveLog"}}>
           Finish Log
         </button>
@@ -14,6 +19,8 @@
   </div>
 
   <h2>{{name}}</h2>
+
+  {{ partial "partials/confirmation" }}
 
   <div class="event-details">
     <div class="event-information">

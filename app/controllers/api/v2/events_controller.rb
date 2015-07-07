@@ -31,6 +31,13 @@ class Api::V2::EventsController < Api::BaseController
     respond_with find_event (params[:id])
   end
 
+  def destroy
+    @event = find_event(params[:id])
+    @event.destroy
+
+    respond_with json: {}
+  end
+
   private
 
   def events
