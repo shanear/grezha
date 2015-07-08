@@ -2,9 +2,16 @@
   <div class="control-bar">
     <div class="options">
       {{#if apiConnection.online}}
+        {{#if isLogged}}
+          {{#link-to 'event.log' model id='modify-event-log'}}
+            <i class="icon-pencil"></i>
+            Modify Event Log
+          {{/link-to}}
+        {{/if}}
+
         {{#link-to 'event.edit' model id='edit-event'}}
           <i class="icon-pencil"></i>
-          Edit
+          Edit Details
         {{/link-to}}
 
         <a href {{action "deleteEvent"}} id="delete-event">

@@ -134,3 +134,59 @@ test "Removing unregistered attendees", ->
   andThen ->
     equal(find(".added-attendee").length, 0,
       "Clicking an added attendee should remove it from the list")
+
+
+test "Updating event log unconfirms registered participations", ->
+  ok("Change me")
+  @api.set('events', [{
+    id: 1,
+    name: "pool time",
+    starts_at: moment().subtract(1, 'hours'),
+    logged_at: moment(),
+  }]);
+  @api.set('contacts', [{id: 4, name: "Hope Solo"}])
+  @api.set('participations', [{id: 7, event_id: 1, contact_id: 4, confirmed_at: moment(), registered_at: moment()}])
+
+  visit("/events/1/log")
+  andThen ->
+    ok(exists(".confirm-registration.is-confirmed"),
+      "Should show confirmed registration when modifying logged event")
+    ok(!exists(".added-attendee"),
+      "Shouldn't show added attendee when none exist")
+
+  click(".confirm-registration")
+  click("#save-log")
+  andThen =>
+    ok(@api.get('savedParticipation'),
+      "unconfirming a confirmed registration should update it")
+    ok(!@api.get('savedParticipation').confirmed_at,
+      "unconfirming a confirmed registration should set confirmed at to null")
+
+
+test "Updating event log removes added participations", ->
+  @api.set('events', [{
+    id: 1,
+    name: "pool time",
+    starts_at: moment().subtract(1, 'hours'),
+    logged_at: moment(),
+  }]);
+  @api.set('contacts', [{id: 4, name: "Hope Solo"}])
+  @api.set('participations', [{id: 22, event_id: 1, contact_id: 4, confirmed_at: moment()}])
+
+  visit("/events/1/log")
+  andThen ->
+    ok(!exists(".confirm-registration.is-confirmed"),
+      "Shouldn't show registrations when none exist")
+    ok(exists(".added-attendee"),
+      "Should show added attendees when modifying logged event")
+
+  click(".added-attendee")
+
+  andThen ->
+    ok(!exists(".added-attendee"),
+      "Should remove added attendees after marking them for removal")
+
+  click("#save-log")
+  andThen =>
+    equal(@api.get('deletedParticipationId'), 22,
+      "removing an added participation should delete it")

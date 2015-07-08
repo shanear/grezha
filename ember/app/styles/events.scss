@@ -267,3 +267,7 @@ a#add-event, a#change-filter, a#filter-status {
     .icon-cancel { display: inline; }
   }
 }
+
+#save-log {
+  margin-left: $usual-buffer;
+}

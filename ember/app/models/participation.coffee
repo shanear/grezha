@@ -6,7 +6,8 @@ Participation = DS.Model.extend
   event: DS.belongsTo('event', async: true)
   contact: DS.belongsTo('contact', async: true)
 
-  confirmed: false
+  toDelete: false
+
   isRegistered: Ember.computed.notEmpty('registeredAt')
   isConfirmed: Ember.computed.notEmpty('confirmedAt')
 

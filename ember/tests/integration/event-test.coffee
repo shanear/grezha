@@ -135,3 +135,30 @@ test "Delete an event", ->
   andThen =>
     equal(@api.get('deletedEventId'), 1,
      "clicking confirm should delete event")
+
+
+test "Not able to modify log for unlogged components", ->
+  @api.set('events', [{
+    id: 1,
+    name: "pool time",
+    starts_at: moment().add(1, 'hours'),
+  }]);
+  visit("events/1")
+  andThen ->
+    ok(!exists("#modify-event-log"),
+      "Modify log button shouldn't show up on unlogged events")
+
+
+test "Able to modify log for logged events", ->
+  @api.set('events', [{
+    id: 1,
+    name: "pool time",
+    starts_at: moment().subtract(1, 'hours'),
+    logged_at: moment(),
+  }]);
+  visit("events/1")
+  click("#modify-event-log")
+  andThen ->
+    equal(currentURL(), "/events/1/log",
+      "Clicking modify log button should allow user to change log")
+

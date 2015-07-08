@@ -7,10 +7,11 @@ ConfirmRegistrationComponent = Ember.Component.extend
   classNames: 'confirm-registration'
   classNameBindings: ['isConfirmed']
   participation: {}
-  isConfirmed: Ember.computed.alias('participation.confirmed')
+  isConfirmed: Ember.computed.alias('participation.isConfirmed')
 
   click: ->
-    @get('participation').set('confirmed', !@get('participation.confirmed'))
+    @get('participation').set("confirmedAt",
+      if @get('participation.isConfirmed') then null else new Date())
 
 
 

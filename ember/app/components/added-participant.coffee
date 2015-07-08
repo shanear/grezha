@@ -8,7 +8,10 @@ AddedParticipantComponent = Ember.Component.extend
   participation: {}
 
   click: ->
-    @get('participation').deleteRecord();
+    if @get("participation.isNew")
+      @get('participation').deleteRecord();
+    else
+      @set('participation.toDelete', true)
 
 
 

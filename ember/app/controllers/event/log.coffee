@@ -8,12 +8,13 @@ EventLogController = Ember.ObjectController.extend HasConfirmation,
   # Workaround for https://github.com/emberjs/data/issues/2666
   # Remove when fixed...
   participations: Ember.computed.filterBy('model.participations', 'isDeleted', false)
+  activeParticipations: Ember.computed.filterBy('participations', 'toDelete', false)
   sortParticipationsBy: ['name:desc']
-  sortedParticipations: Ember.computed.sort('participations', 'sortParticipationsBy')
-  confirmedParticipations: Ember.computed.filterBy('participations', 'confirmed', true)
+  sortedParticipations: Ember.computed.sort('activeParticipations', 'sortParticipationsBy')
+  confirmedParticipations: Ember.computed.filterBy('sortedParticipations', 'isConfirmed', true)
 
   registrations: Ember.computed.filterBy('sortedParticipations', 'isRegistered', true)
-  unconfirmedRegistrations: Ember.computed.filterBy('registrations', 'confirmed', false)
+  unconfirmedRegistrations: Ember.computed.filterBy('registrations', 'isConfirmed', false)
   additionalParticipants: Ember.computed.filterBy('sortedParticipations', 'isRegistered', false)
 
   confirmDeleteEvent: ->
@@ -36,24 +37,26 @@ EventLogController = Ember.ObjectController.extend HasConfirmation,
 
     saveLog: ->
       @set('isSaving', true)
-      savedParticipations = @get('confirmedParticipations').map (participation)->
-        participation.set("confirmedAt", new Date())
-        participation.save()
+
+      @get('model.participations').map (participation)->
+        participation.deleteRecord() if participation.get("toDelete")
+        participation.save() if participation.get('isDirty')
+
       @set('model.loggedAt', new Date())
       @get('model').save().then =>
         @transitionToRoute('event', @get('model'))
 
     everybodyAttended: ->
       @get('registrations').forEach (participation)->
-        participation.set('confirmed', true)
+        participation.set("confirmedAt", new Date())
 
     addParticipant: (contact)->
-      return if @get("participations").find((r)-> r.get('contact.id') == contact.get('id'))
+      return if @get("activeParticipations").find((r)-> r.get('contact.id') == contact.get('id'))
 
       newParticipant = @store.createRecord('participation', {
         event: @get('model')
-        contact: contact
-        confirmed: true
+        contact: contact,
+        confirmedAt: new Date()
       })
 
 `export default EventLogController`
