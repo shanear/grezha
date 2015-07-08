@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704212857) do
+ActiveRecord::Schema.define(version: 20150708003846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150704212857) do
     t.string   "mode"
   end
 
+  add_index "connections", ["organization_id"], name: "index_connections_on_organization_id", using: :btree
   add_index "connections", ["remote_id"], name: "index_connections_on_remote_id", unique: true, using: :btree
 
   create_table "contacts", force: true do |t|
@@ -67,6 +68,8 @@ ActiveRecord::Schema.define(version: 20150704212857) do
     t.integer  "other_attendee_count"
   end
 
+  add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
+
   create_table "organizations", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -95,6 +98,7 @@ ActiveRecord::Schema.define(version: 20150704212857) do
     t.datetime "updated_at"
   end
 
+  add_index "people", ["organization_id"], name: "index_people_on_organization_id", using: :btree
   add_index "people", ["remote_id"], name: "index_people_on_remote_id", unique: true, using: :btree
 
   create_table "programs", force: true do |t|
@@ -118,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150704212857) do
     t.integer  "person_id"
   end
 
+  add_index "relationships", ["organization_id"], name: "index_relationships_on_organization_id", using: :btree
   add_index "relationships", ["remote_id"], name: "index_relationships_on_remote_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
@@ -135,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150704212857) do
     t.string   "authentication_token"
   end
 
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
+
   create_table "vehicles", force: true do |t|
     t.string   "license_plate"
     t.text     "notes"
@@ -145,6 +152,7 @@ ActiveRecord::Schema.define(version: 20150704212857) do
     t.integer  "organization_id"
   end
 
+  add_index "vehicles", ["organization_id"], name: "index_vehicles_on_organization_id", using: :btree
   add_index "vehicles", ["remote_id"], name: "index_vehicles_on_remote_id", unique: true, using: :btree
 
 end
