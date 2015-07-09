@@ -7,6 +7,7 @@ Contact = DS.Model.extend
   city: DS.attr('string')
   bio: DS.attr('string')
   birthday: DS.attr('date')
+  gender: DS.attr('string')
   phone: DS.attr('string')
   addedAt: DS.attr('date')
   createdAt: DS.attr('date',

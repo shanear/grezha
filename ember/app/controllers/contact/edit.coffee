@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
+`import ContactForm from 'grezha/mixins/contact-form'`
 
-ContactEditController = Ember.ObjectController.extend
+ContactEditController = Ember.ObjectController.extend ContactForm,
   errors: []
   assignableUsers: []
 

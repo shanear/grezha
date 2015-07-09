@@ -3,12 +3,19 @@
   {{input type="text" id="name" class="form-control" value=name}}
 </div>
 
-{{#toggled-feature name='addedOn'}}
-  <div class="form-group">
-    <label for="added-on">added on:</label>
-    {{date-field id="added-on" date=addedAt}}
+<div class="row">
+  <div class="form-group col-sm-6">
+    <label for="birthday">birthday:</label>
+    {{date-field id="birthday" date=birthday requireYear=false}}
   </div>
-{{/toggled-feature}}
+
+  {{#toggled-feature name='addedOn'}}
+    <div class="form-group col-sm-6">
+      <label for="added-on">added on:</label>
+      {{date-field id="added-on" date=addedAt}}
+    </div>
+  {{/toggled-feature}}
+</div>
 
 {{#toggled-feature name='fieldOp'}}
   {{#if assignableUsers}}
@@ -26,14 +33,34 @@
   {{/if}}
 {{/toggled-feature}}
 
+{{#toggled-feature name='gender'}}
+  <div class="form-group">
+    <label for="select-gender">gender: </label>
+    <div class="row">
+      <div class="col-xs-4">
+        {{view "select"
+            id="select-gender"
+            class="form-control"
+            content=genderOptions
+            value=selectedGender
+            prompt="Select"}}
+      </div>
+      {{#if showOtherGender}}
+        <div class="col-xs-8">
+          {{input type="text"
+                  id="other-gender"
+                  class="form-control"
+                  value=otherGender
+                  placeholder="Enter gender"}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+{{/toggled-feature}}
+
 <div class="form-group">
   <label for="city">from city:</label>
   {{input type="text" id="city" class="form-control" value=city}}
-</div>
-
-<div class="form-group">
-  <label for="birthday">birthday:</label>
-  {{date-field id="birthday" date=birthday requireYear=false}}
 </div>
 
 <div class="form-group">

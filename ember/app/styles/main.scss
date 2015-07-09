@@ -12,6 +12,10 @@ input[type = "checkbox"] {
 
 select.form-control {
   width: auto;
+
+  &#select-gender {
+    width: 100%
+  }
 }
 
 .left { float: left; }

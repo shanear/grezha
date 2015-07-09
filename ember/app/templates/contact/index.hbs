@@ -38,6 +38,13 @@
       {{/toggled-feature}}
 
       <div class="attributes">
+        {{#toggled-feature name='gender'}}
+          <p id="gender">
+            <span class="field-label">gender</span>
+            {{#if gender}} {{gender}} {{else}} unknown {{/if}}
+          </p>
+        {{/toggled-feature}}
+
         <p id="contact-from">
           <span class="field-label">from</span>
           {{#if city}}

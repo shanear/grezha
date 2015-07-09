@@ -21,6 +21,21 @@ test "errors when when no name entered", ->
     findWithAssert(".errors")
 
 
+test "saves gender correctly", ->
+  @api.set('users', [{id: 1, name: "Kat", role: "admin"}])
+  visit("/clients/new")
+  andThen =>
+    console.log(find("#hello-world").html())
+  fillIn("#name", "James Franco")
+  fillIn("#select-gender", "Other")
+  fillIn("#other-gender", "Genderless")
+  fillIn("#field-op", 1)
+  click("#save-client")
+  andThen =>
+    newContact = @api.get("savedContact")
+    equal(newContact.gender, "genderless")
+
+
 test "saves correctly", ->
   @api.set('users', [{id: 1, name: "Kat", role: "admin"}])
   visit("/clients/new")

@@ -32,11 +32,13 @@ test "shows correctly formatted information for contact", ->
     added_at: "2015-01-22T18:48:31.142Z",
     city: "San Francisco",
     phone: "123-123-5555",
+    gender: "male",
     user_id: 1,
     bio: "Line one\nLine two"
   }])
   visit("/clients/1")
   andThen =>
+    ok(contains("#gender", "male"))
     ok(contains("#contact-name", "Suzie"))
     ok(contains("#contact-birthday", "March 2nd 1990"))
     ok(contains("#contact-user", "Kat"))
