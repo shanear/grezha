@@ -7,7 +7,7 @@ ApplicationRoute = Ember.Route.extend ApplicationRouteMixin,
       @transitionTo('/login')
 
     newRecord: ->
-      @transitionTo('contacts.new', {name: ""})
+      @transitionTo('contacts.new', "clients", {name: "", role: "client"})
 
     toggleSearch: ->
       @controller.set("isMenuShowing", false)

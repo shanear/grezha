@@ -9,4 +9,13 @@ EventsRoute = BaseRoute.extend AuthenticatedRouteMixin,
       participations: @get('store').find('participation')
     })
 
+  actions:
+    newRecord: ->
+      @transitionTo('events.new')
+
+    toggleSearch: ->
+      @transitionTo('contacts.index', 'clients')
+      @controllerFor('application').set('isSearchShowing', true)
+
+
 `export default EventsRoute`
