@@ -5,7 +5,7 @@ AuthenticatedRoute = BaseRoute.extend
   beforeModel: ->
     @transitionTo('login') unless @session.isAuthenticated
 
-  setupController: ->
+  model: ->
     setContacts = @store.find('contact').then (contacts)=>
       @controllerFor('contacts').set('all', contacts)
 
@@ -19,5 +19,6 @@ AuthenticatedRoute = BaseRoute.extend
       @store.find('user'),
       @store.find('participation')
     ])
+
 
 `export default AuthenticatedRoute`

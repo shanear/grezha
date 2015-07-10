@@ -43,7 +43,11 @@ select.form-control {
   font-size: 200%;
 }
 
-
+.loading-screen {
+  text-align: center;
+  padding-top: 10rem !important;
+  .icon-loading { font-size: 40pt; }
+}
 
 div#content {
   padding-top: $header-height;
