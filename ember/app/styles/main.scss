@@ -46,7 +46,14 @@ select.form-control {
 .loading-screen {
   text-align: center;
   padding-top: 10rem !important;
-  .icon-loading { font-size: 40pt; }
+  font-size: 18pt;
+  color: $med-grey;
+  vertical-align: middle;
+  span { vertical-align: text-bottom; }
+  .icon-loading {
+    vertical-align: top;
+    font-size: 22pt;
+  }
 }
 
 div#content {
