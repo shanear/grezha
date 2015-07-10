@@ -24,8 +24,6 @@ test "errors when when no name entered", ->
 test "saves gender correctly", ->
   @api.set('users', [{id: 1, name: "Kat", role: "admin"}])
   visit("/clients/new")
-  andThen =>
-    console.log(find("#hello-world").html())
   fillIn("#name", "James Franco")
   fillIn("#select-gender", "Other")
   fillIn("#other-gender", "Genderless")

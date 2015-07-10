@@ -238,7 +238,6 @@ test "shows events", ->
 
   visit("/clients/4")
   andThen =>
-    console.log(find("#contact-events").html())
     ok(contains(".event:eq(0)", "Registered for:"),
       "Should label registered events")
     ok(contains(".event:eq(0) .name", "new movie"),
