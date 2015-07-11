@@ -13,7 +13,7 @@ ContactsIndexController = Ember.Controller.extend
     @set("controllers.application.isSearchShowing", true);
 
   showClientDashboard: (->
-    @get('role') == 'client'
+    (@get('role') == 'client') && @get('allContacts.length') > 0
   ).property('role')
 
   unassignedContactCount: (->

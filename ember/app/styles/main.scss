@@ -282,6 +282,18 @@ h2, h3 {
   }
 }
 
+#no-contacts, #no-events {
+  margin-top: 10px;
+  font-size: 14pt;
+  text-align: center;
+
+  .btn {
+    margin-top: 10px;
+    display: block;
+    font-size: 14pt;
+  }
+}
+
 .options {
   float: right;
 

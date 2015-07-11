@@ -1,3 +1,12 @@
+{{#unless allContacts}}
+  <div id="no-contacts">
+    <b>Welcome!</b><br/>There are no {{pluralize role}} here.
+    {{#link-to 'contacts.new' "" class="btn btn-default add-client"}}
+      Add a {{role}}
+    {{/link-to}}
+  </div>
+{{/unless}}
+
 {{#if showClientDashboard}}
   <div class="dashboard">
     {{#toggled-feature name='fieldOp'}}

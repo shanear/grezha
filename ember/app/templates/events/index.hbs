@@ -51,21 +51,25 @@
         {{/if}}
       {{/if}}
 
-      {{view 'select'
-        id="select-program"
-        class="form-control"
-        content=programFilterOptions
-        optionValuePath="content.slug"
-        optionLabelPath="content.name"
-        selection=selectProgramFilter
-        prompt="Filter by program..."}}
+      {{#if programFilterOptions}}
+        {{view 'select'
+          id="select-program"
+          class="form-control"
+          content=programFilterOptions
+          optionValuePath="content.slug"
+          optionLabelPath="content.name"
+          selection=selectProgramFilter
+          prompt="Filter by program..."}}
+      {{/if}}
     {{/if}}
   </div>
 </div>
 
 
 <div id="events">
-  {{outlet}}
+  {{#unless eventDays}}
+    <div id="no-events"> There are no events here. </div>
+  {{/unless}}
 
   <div id="events-list">
     {{#each eventDay in eventDays}}

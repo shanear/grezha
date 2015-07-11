@@ -11,6 +11,21 @@ module 'Contacts page integration test',
   teardown: ->
     Ember.run(@app, @app.destroy)
 
+
+test "shows helper when no messages", ->
+  visit("/clients/")
+  andThen ->
+    ok(exists("#no-contacts"),
+      "Should show helper when no contacts")
+    ok(!exists(".dashboard"),
+      "Shouldn't show dashboard when no contacts")
+
+  click("#no-contacts .add-client")
+  andThen ->
+    ok(currentURL, "/clients/new",
+      "should have button to create new contact");
+
+
 test "shows number of clients assigned to each user", ->
   @api.set('users', [
     {id: 1, name: "Micheal Keaton", role: 'admin'}
@@ -35,6 +50,7 @@ test "shows number of clients assigned to each user", ->
       "should show unassigned contacts in report")
     ok(contains('#field-ops tr:last-child', "1"),
       "should show correct # of unassigned contacts in report")
+
 
 test "shows the number of connections in the dashboard", ->
   @api.set('contacts', [
