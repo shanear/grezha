@@ -8,17 +8,24 @@ ContactForm = Ember.Mixin.create
     return true if @get("gender") == "other"
     return !@get("genderOptions").contains(@get("gender").capitalize())
 
-  otherGender: Ember.computed "gender", (key, value)->
-    @set("gender", value.toLowerCase()) if value
-    return "" if @get("gender") == "other"
-    return (@get("gender") || "").capitalize()
-
-  selectedGender: Ember.computed "gender", (key, value)->
-    @set("gender", value && value.toLowerCase()) if (arguments.length > 1)
-    return if !@get("gender")
+  setSelectedGender: Ember.observer "gender", "showOtherGender", ->
     if @get("showOtherGender")
-      "Other"
+      @set("selectedGender", "Other")
     else
-      @get("gender").capitalize()
+      @set("selectedGender", (@get("gender") || "").capitalize())
+
+  setGender: Ember.observer "selectedGender", "otherGender", ->
+    if(!@get("showOtherGender"))
+      value = @get("selectedGender")
+      @set("gender", @get("selectedGender") && @get("selectedGender").toLowerCase())
+    else
+      @set("gender", (@get("otherGender") || "other").toLowerCase())
+
+  setOtherGender: Ember.observer "gender", ->
+    if @get("gender") == "other"
+      @set("otherGender", "")
+    else
+      @set("otherGender", (@get("gender") || "").capitalize())
+
 
 `export default ContactForm`

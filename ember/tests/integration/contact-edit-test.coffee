@@ -36,3 +36,13 @@ test "saves correctly", ->
     equal(savedContact.name, "Stinkins")
     equal(savedContact.user_id, "2")
     ok(/1900-03-02T..:00:00.000Z/.test(savedContact.birthday))
+
+
+test "Shows other gender in fill-in text field", ->
+  @api.set('contacts', [{id: 4, name: "Jenkins", gender: "transman"}])
+  visit("/clients/4/edit")
+  andThen =>
+    equal(find("#select-gender").val(), "Other",
+      "Other gender should be selected in edit form")
+    equal(find("#other-gender").val(), "Transman",
+      "Other gender should be prefilled in text field")
