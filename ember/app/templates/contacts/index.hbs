@@ -1,4 +1,4 @@
-{{#unless allContacts}}
+{{#unless contactsWithRole}}
   <div id="no-contacts">
     <b>Welcome!</b><br/>There are no {{pluralize role}} here.
     {{#link-to 'contacts.new' "" class="btn btn-default add-client"}}

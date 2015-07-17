@@ -12,7 +12,9 @@ module 'Contacts page integration test',
     Ember.run(@app, @app.destroy)
 
 
-test "shows helper when no messages", ->
+test "shows helper when no clients", ->
+  @api.set('contacts', [{id: 1, name: "Sue", role: 'volunteer'}]);
+
   visit("/clients/")
   andThen ->
     ok(exists("#no-contacts"),
@@ -54,7 +56,7 @@ test "shows number of clients assigned to each user", ->
 
 test "shows the number of connections in the dashboard", ->
   @api.set('contacts', [
-    {id: 3, name: "Ms McGrethory", connection_ids: [1, 2]}
+    {id: 3, name: "Ms McGrethory", connection_ids: [1, 2], role: 'client'}
     {id: 4, name: "Sukirti", connection_ids: [3, 4]}
   ])
 
