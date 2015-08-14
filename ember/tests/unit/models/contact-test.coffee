@@ -72,6 +72,28 @@ test 'isValid validates phone number', ->
     "is valid when with extension")
 
 
+test 'isValid validates email address', ->
+  Ember.run => @contact.set("email", "invalid")
+  equal(@contact.isValid(), false,
+    "is invalid when email doesn't have @")
+
+  Ember.run => @contact.set("email", "invalid@place")
+  equal(@contact.isValid(), false,
+    "is invalid when email doesn't have address following @")
+
+  Ember.run => @contact.set("email", "@place.com")
+  equal(@contact.isValid(), false,
+    "is valid when email doesn't have anything preceeding @")
+
+  Ember.run => @contact.set("email", "shane@grezha.com")
+  equal(@contact.isValid(), true,
+    "is valid when email is an email")
+
+  Ember.run => @contact.set("email", "")
+  equal(@contact.isValid(), true,
+    "is valid when email is empty")
+
+
 test 'isDuplicate', ->
   equal(@contact.isDuplicate(), false,
     "isn't true by default")

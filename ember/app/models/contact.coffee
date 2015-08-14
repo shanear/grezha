@@ -9,6 +9,7 @@ Contact = DS.Model.extend
   birthday: DS.attr('date')
   gender: DS.attr('string')
   phone: DS.attr('string')
+  email: DS.attr('string')
   addedAt: DS.attr('date')
   createdAt: DS.attr('date',
     defaultValue: -> new Date()
@@ -38,6 +39,10 @@ Contact = DS.Model.extend
 
     if @get('phone')? && @get('phone') isnt "" && @get('phone').match(/^\d+-?\d+-?\d+-?\d+:?\d+$/) == null
       errors.push 'Invalid phone number. Format: xxx-xxx-xxx:ext'
+
+    if @get('email')? && @get('email') isnt "" && @get('email').match(
+      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/) == null
+      errors.push "The email address you put in isn't right."
 
     @set('errors', errors);
     if @get('errors').length > 0

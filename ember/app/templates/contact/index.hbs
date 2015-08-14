@@ -85,6 +85,13 @@
             {{phone}}
           {{/if}}
         </p>
+
+        <p id="contact-email">
+          {{#if email}}
+          <span class="field-label">email</span>
+            {{linkify-emails email}}
+          {{/if}}
+        </p>
       </div>
     </div>
   </div>
