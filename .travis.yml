@@ -10,6 +10,7 @@ install:
 - npm install -g ember-cli@0.1.5
 - npm install -g bower@1.3.12
 - npm install -g phantomjs@1.9.12
+- npm install -g firebase-tools
 - cd ember && npm install && bower install && cd ..
 
 before_script:
@@ -22,6 +23,7 @@ script:
 
 before_deploy:
 - cd ember && ember build --outputPath=dist --environment=production && cd ..
+- firebase deploy --firebase 'grezha-staging' --token ${FIREBASE_TOKEN}
 
 deploy:
   - provider: divshot
