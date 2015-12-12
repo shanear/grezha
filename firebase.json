@@ -1,0 +1,9 @@
+{
+  "firebase": "grezha-staging",
+  "public": "ember/dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
