@@ -25,7 +25,7 @@ DateFieldComponent = Ember.Component.extend
     {id : 12, name : "Dec"}
   ]
 
-  years: [(new Date().getFullYear())..1950]
+  years: [(new Date().getFullYear() + 1)..1950]
   hours:
     [1..12].map (hours)-> zeroPad(hours, 2)
   minutes:

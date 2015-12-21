@@ -190,7 +190,7 @@ test "Save event from event create page", ->
   fillIn("#event-name","Micah's Birthday")
   fillIn(".selected-month","12")
   fillIn(".selected-day","19")
-  fillIn(".selected-year","2015")
+  fillIn(".selected-year","2016")
   fillIn(".selected-hours","07")
   fillIn(".selected-minutes","15")
   fillIn(".selected-am-pm","am")
@@ -203,7 +203,7 @@ test "Save event from event create page", ->
   andThen =>
     newEvent = @api.get("savedEvent")
     equal(newEvent.name, "Micah's Birthday")
-    ok(/2015-12-19T..:15/.test(newEvent.starts_at))
+    ok(/2016-12-19T..:15/.test(newEvent.starts_at))
     equal(newEvent.location, "Houston, Texas")
     equal(newEvent.notes, "The day that will be remembered by all but forgotten by one")
     equal(newEvent.program_id, "1")
