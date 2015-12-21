@@ -30,6 +30,8 @@ class Api::BaseController < ApplicationController
       /\Ahttps?:\/\/localhost:4200\z/,
       /\Ahttps?:\/\/staging.grezha.divshot.io\z/,
       /\Ahttps?:\/\/production.grezha.divshot.io\z/,
+      /\Ahttps?:\/\/grezha-staging.firebaseapp.com\z/,
+      /\Ahttps?:\/\/grezha.firebaseapp.com\z/,
       /\Ahttps?:\/\/app.grezha.org\z/,
       /\Ahttps?:\/\/www.grezha.org\z/,
       /\Ahttps?:\/\/grezha.org\z/
